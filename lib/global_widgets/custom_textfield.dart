@@ -33,15 +33,18 @@ class _CustommTextFieldState extends State<CustommTextField> {
           fillColor: Colors.white,
           filled: true,
           suffixIcon: widget.suffixIcon!=null ? Padding(
-            padding:  EdgeInsets.only(top: 2.8.h,bottom: 2.5.h,right: 3.w),
+            padding:  EdgeInsets.only(top: 2.h,bottom: 1.5.h,right: 3.w),
             child: SvgPicture.asset(widget.suffixIcon!,height: 2.h,),
           ) : null,
           //suffixIconColor: appColor,
           //iconColor: appColor,
-          prefixIcon: widget.prefixIcon!=null ? Padding(
-            padding:  EdgeInsets.only(left: 3.w,top: 2.8.h,bottom: 2.5.h,right: 2.w),
-            child: SvgPicture.asset(widget.prefixIcon!,height: 2.h,),
-          ) : null,
+          prefixIcon: widget.prefixIcon!=null ? Container(
+            height: 0.5.h,
+              width: 0.5.w,
+              child: Padding(
+                padding:  EdgeInsets.all(15.0),
+                child: SvgPicture.asset(widget.prefixIcon!,),
+              )) : null,
           contentPadding: EdgeInsets.only(left: 2.w,right: 2.w,bottom: 1.5.h),
           disabledBorder: InputBorder.none,
           //focusedBorder: InputBorder.none,

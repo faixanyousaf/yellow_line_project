@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
@@ -5,6 +6,10 @@ import 'package:yellowline/global_widgets/custom_button.dart';
 import 'package:yellowline/global_widgets/custom_textfield.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:yellowline/global_widgets/custom_google_button.dart';
+import 'package:flutter/src/gestures/tap.dart';
+import 'package:yellowline/view/screens/authentication/login_screen/login_screen.dart';
+import 'package:yellowline/view/screens/authentication/otp_screen/otp_screen.dart';
+
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -16,6 +21,7 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   int index = 1;
   TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   FocusNode focusNode = FocusNode();
 
   @override
@@ -30,7 +36,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
               padding: EdgeInsets.symmetric(horizontal: 6.w),
               child: Row(
                 children: [
-                  Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 2.h,),
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 2.h,)),
                   SizedBox(width: 3.w,),
                   Text(
                     'Create Account!',
@@ -45,7 +55,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             //SizedBox(height: 1.h,),
             Padding(
-              padding:EdgeInsets.symmetric(horizontal: 6.w),
+              padding:EdgeInsets.symmetric(horizontal: 8.w),
               child: Text(
                 'Enter the information to create an Account',
                 style: TextStyle(
@@ -129,41 +139,58 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 controller: emailController,
                 prefixIcon: 'assets/email.svg',
                 hintText: 'Email',
+                //suffixIcon: 'assets/eyes.svg',
               ),
             ),
             SizedBox(height: 2.h,),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 6.w),
-              child: Container(
-                height: 9.h,
-                //width: 98.w,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(17)
-                ),
-                child: IntlPhoneField(
-                  focusNode: focusNode,
-                  disableAutoFillHints: false,
-                  disableLengthCheck: false,
-                  showDropdownIcon: false,
-                  flagsButtonMargin: EdgeInsets.only(left: 4.w,top: 0.3.h),
-                  decoration: InputDecoration(
-                    hintText: 'Phone Number',
-                    hintStyle: TextStyle(fontSize: 10.sp,color: Color(0xff181F30)),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(17)),
-                    fillColor: Colors.white,
-                    filled: true,
-                    disabledBorder: InputBorder.none,
-                    //contentPadding: EdgeInsets.only(bottom: 2.h),
-                  ),
+              child: Row(
+                children: [
+                  Container(
+                    height: 6.2.h,
+                    width: 26.w,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(17)
+                    ),
+                    child: IntlPhoneField(
+                      controller: phoneController,
+                      focusNode: focusNode,
+                      disableAutoFillHints: false,
+                      disableLengthCheck: true,
+                      showDropdownIcon: false,
+                      //enabled: false,
+                      flagsButtonMargin: EdgeInsets.only(left: 3.w,top: 0.3.h),
 
-                  languageCode: "en",
-                  onChanged: (phone) {
-                    print(phone.completeNumber);
-                  },
-                  onCountryChanged: (country) {
-                    print('Country changed to: ' + country.name);
-                  },
-                ),
+                      decoration: InputDecoration(
+                        // hintText: 'Phone Number',
+                        // hintStyle: TextStyle(fontSize: 10.sp,color: Color(0xff181F30)),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(17)),
+                        fillColor: Colors.white,
+                        filled: true,
+                        disabledBorder: InputBorder.none,
+                        //contentPadding: EdgeInsets.only(bottom: 2.h),
+                      ),
+
+                      languageCode: "en",
+                      onChanged: (phone) {
+                        print(phone.completeNumber);
+                      },
+                      onCountryChanged: (country) {
+                        print('Country changed to: ' + country.name);
+                      },
+                    ),
+                  ),
+                  SizedBox(width: 2.w,),
+                  Expanded(
+                      child: Padding(
+                        padding:  EdgeInsets.only(top: 0.5.h),
+                        child: CustommTextField(
+                          hintText: 'Mobile Number',
+                          controller: phoneController,
+                        ),
+                      ))
+                ],
               ),
             ),
             SizedBox(height: 4.h,),
@@ -174,23 +201,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
               buttonColor: Color(0xffFFD542),
             ),
             SizedBox(height: 1.5.h,),
-            RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: 'Already have an account?',
-                      style: TextStyle(
-                        color: Colors.white
-                      )
+            Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Already have an account?',
+                    style: TextStyle(
+                      color: Colors.white
                     ),
-                    TextSpan(
-                        text: ' Sign In',
-                        style: TextStyle(
-                            color: Color(0xffFFD542),
-                        )
-                    )
-                  ]
-                )
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen(),));
+                    },
+                    child: Text(
+                      ' Sign In',
+                      style: TextStyle(
+                        color: Color(0xffFFD542),
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
             SizedBox(height: 3.h,),
             Padding(
@@ -220,6 +253,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
             )
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => OtpScreen(),));
+        },
       ),
     );
   }

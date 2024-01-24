@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
-import 'package:yellowline/global_widgets/custom_google_button.dart';
 import 'package:yellowline/global_widgets/custom_textfield.dart';
+import 'package:yellowline/view/screens/authentication/reset_password_screen/reset_password_screen.dart';
 
-class LogInScreen extends StatefulWidget {
-  const LogInScreen({Key? key}) : super(key: key);
+class CompleteProfileScreen extends StatefulWidget {
+  const CompleteProfileScreen({Key? key}) : super(key: key);
 
   @override
-  State<LogInScreen> createState() => _LogInScreenState();
+  State<CompleteProfileScreen> createState() => _CompleteProfileScreenState();
 }
 
-class _LogInScreenState extends State<LogInScreen> {
+class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
   int index = 1;
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +28,14 @@ class _LogInScreenState extends State<LogInScreen> {
               padding: EdgeInsets.symmetric(horizontal: 6.w),
               child: Row(
                 children: [
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 2.h,)),
+                  SizedBox(width: 3.w,),
                   Text(
-                    'Welcome Back!',
+                    'Complete Profile!',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 17.sp,
@@ -41,17 +47,56 @@ class _LogInScreenState extends State<LogInScreen> {
             ),
             //SizedBox(height: 1.h,),
             Padding(
-              padding:EdgeInsets.symmetric(horizontal: 6.w),
-              child: Text(
-                'Enter your credentials to continue',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 12.sp,
-                  //fontWeight: FontWeight.bold
-                ),
+              padding:EdgeInsets.symmetric(horizontal: 13.w),
+              child: Row(
+                children: [
+                  Text(
+                    'We need some more information to\ncomplete your profile',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12.sp,
+                      //fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ],
               ),
             ),
-            SizedBox(height: 4.h,),
+            SizedBox(height: 5.h,),
+            Container(
+              width: 30.w,
+              child: Stack(
+                children: [
+                  Center(
+                    child: Container(
+                      height: 17.h,
+                      width: 25.w,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle
+                      ),
+                      child: Center(
+                        child: Image(image: AssetImage('assets/profile.png'),height: 7.h,),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 5.w,
+                    right: 4.5.w,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Color(0xffFFD542),
+                        shape: BoxShape.circle
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(3),
+                        child: Icon(Icons.camera_alt,color: Colors.black,size: 1.7.h,),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(height: 2.h,),
             Container(
               // height: 4.h,
               width: 45.w,
@@ -71,7 +116,7 @@ class _LogInScreenState extends State<LogInScreen> {
                       });
                     },
                     child: Container(
-                      height: 3.9.h,
+                      height: 3.5.h,
                       width: 22.w,
                       decoration: BoxDecoration(
                           border: Border.all(width: 0.5,color: Colors.white),
@@ -80,7 +125,7 @@ class _LogInScreenState extends State<LogInScreen> {
                       ),
                       child: Center(
                         child: Text(
-                          'User',
+                          'Male',
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 10.sp
@@ -97,7 +142,7 @@ class _LogInScreenState extends State<LogInScreen> {
                       });
                     },
                     child: Container(
-                      height: 3.9.h,
+                      height: 3.5.h,
                       width: 22.2.w,
                       decoration: BoxDecoration(
                           border: Border.all(width: 0.5,color: Colors.white),
@@ -106,7 +151,7 @@ class _LogInScreenState extends State<LogInScreen> {
                       ),
                       child: Center(
                         child: Text(
-                          'Business',
+                          'Female',
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 10.sp
@@ -122,75 +167,36 @@ class _LogInScreenState extends State<LogInScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 6.w),
               child: CustommTextField(
-                controller: emailController,
-                prefixIcon: 'assets/email.svg',
-                hintText: 'Email',
+                controller: firstNameController,
+                prefixIcon: 'assets/name.svg',
+                hintText: 'First Name',
               ),
             ),
-            SizedBox(height: 2.h,),
+            SizedBox(height: 1.h,),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 6.w),
               child: CustommTextField(
-                controller: passwordController,
-                prefixIcon: 'assets/lock.svg',
-                suffixIcon: 'assets/eyes.svg',
-                hintText: 'Password',
+                controller: lastNameController,
+                prefixIcon: 'assets/name.svg',
+                hintText: 'Last Name',
               ),
             ),
-            SizedBox(height: 4.h,),
+            SizedBox(height: 12.h,),
             CustomButton(
-              text: 'Sign In',
+              text: 'Finish',
               borderColor: Colors.black,
               textColor: Colors.black,
               buttonColor: Color(0xffFFD542),
             ),
             SizedBox(height: 1.5.h,),
-            RichText(
-                text: TextSpan(
-                    children: [
-                      TextSpan(
-                          text: 'Already have an account?',
-                          style: TextStyle(
-                              color: Colors.white
-                          )
-                      ),
-                      TextSpan(
-                          text: ' Signup',
-                          style: TextStyle(
-                            color: Color(0xffFFD542),
-                          )
-                      )
-                    ]
-                )
-            ),
-            SizedBox(height: 3.h,),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 6.w),
-              child: Row(
-                children: [
-                  Container(height: 0.12.h,width: 30.w,color: Colors.white,),
-                  Text(
-                    '  Or Sign in with  ',
-                    style: TextStyle(
-                        color: Colors.white
-                    ),
-                  ),
-                  Container(height: 0.12.h,width: 30.w,color: Colors.white,),
-                ],
-              ),
-            ),
-            SizedBox(height: 3.h,),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 6.w),
-              child: CustomGoogleButton(image: 'assets/google.png',text: 'Signup with Google'),
-            ),
-            SizedBox(height: 2.h,),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 6.w),
-              child: CustomGoogleButton(image: 'assets/facebook.png',text: 'Signup with Facebook'),
-            )
+
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => ResetPasswordScreen(),));
+        },
       ),
     );
   }

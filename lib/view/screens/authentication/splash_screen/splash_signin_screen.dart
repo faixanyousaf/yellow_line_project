@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
-import 'package:yellowline/view/screens/signup_screen/signup_screen.dart';
+import 'package:yellowline/view/screens/authentication/signup_screen/signup_screen.dart';
+
 
 class SplashSignInScreen extends StatefulWidget {
   const SplashSignInScreen({Key? key}) : super(key: key);

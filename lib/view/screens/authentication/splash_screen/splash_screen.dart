@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:yellowline/view/screens/splash_screen/splash_signin_screen.dart';
+import 'package:yellowline/view/screens/authentication/splash_screen/splash_signin_screen.dart';
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
