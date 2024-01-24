@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
-import 'package:yellowline/global_widgets/custom_textfield.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:yellowline/global_widgets/custom_google_button.dart';
+import 'package:yellowline/global_widgets/custom_textfield.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+class LogInScreen extends StatefulWidget {
+  const LogInScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<LogInScreen> createState() => _LogInScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _LogInScreenState extends State<LogInScreen> {
   int index = 1;
   TextEditingController emailController = TextEditingController();
-  FocusNode focusNode = FocusNode();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +28,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
               padding: EdgeInsets.symmetric(horizontal: 6.w),
               child: Row(
                 children: [
-                  Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 2.h,),
-                  SizedBox(width: 3.w,),
                   Text(
-                    'Create Account!',
+                    'Welcome Back!',
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 17.sp,
-                      fontWeight: FontWeight.bold
+                        color: Colors.white,
+                        fontSize: 17.sp,
+                        fontWeight: FontWeight.bold
                     ),
                   )
                 ],
@@ -47,23 +43,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Padding(
               padding:EdgeInsets.symmetric(horizontal: 6.w),
               child: Text(
-                'Enter the information to create an Account',
+                'Enter your credentials to continue',
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12.sp,
-                    //fontWeight: FontWeight.bold
+                  color: Colors.white,
+                  fontSize: 12.sp,
+                  //fontWeight: FontWeight.bold
                 ),
               ),
             ),
             SizedBox(height: 4.h,),
             Container(
               // height: 4.h,
-               width: 45.w,
+              width: 45.w,
               padding: EdgeInsets.all(1),
               decoration: BoxDecoration(
-                border: Border.all(width: 0.5,color: Colors.white),
-                borderRadius: BorderRadius.circular(7),
-                color: Colors.white
+                  border: Border.all(width: 0.5,color: Colors.white),
+                  borderRadius: BorderRadius.circular(7),
+                  color: Colors.white
               ),
               child: Row(
                 children: [
@@ -86,8 +82,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: Text(
                           'User',
                           style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 10.sp
+                              color: Colors.black,
+                              fontSize: 10.sp
                           ),
                         ),
                       ),
@@ -134,41 +130,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
             SizedBox(height: 2.h,),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 6.w),
-              child: Container(
-                height: 9.h,
-                //width: 98.w,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(17)
-                ),
-                child: IntlPhoneField(
-                  focusNode: focusNode,
-                  disableAutoFillHints: false,
-                  disableLengthCheck: false,
-                  showDropdownIcon: false,
-                  flagsButtonMargin: EdgeInsets.only(left: 4.w,top: 0.3.h),
-                  decoration: InputDecoration(
-                    hintText: 'Phone Number',
-                    hintStyle: TextStyle(fontSize: 10.sp,color: Color(0xff181F30)),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(17)),
-                    fillColor: Colors.white,
-                    filled: true,
-                    disabledBorder: InputBorder.none,
-                    //contentPadding: EdgeInsets.only(bottom: 2.h),
-                  ),
-
-                  languageCode: "en",
-                  onChanged: (phone) {
-                    print(phone.completeNumber);
-                  },
-                  onCountryChanged: (country) {
-                    print('Country changed to: ' + country.name);
-                  },
-                ),
+              child: CustommTextField(
+                controller: passwordController,
+                prefixIcon: 'assets/lock.svg',
+                suffixIcon: 'assets/eyes.svg',
+                hintText: 'Password',
               ),
             ),
             SizedBox(height: 4.h,),
             CustomButton(
-              text: 'Next',
+              text: 'Sign In',
               borderColor: Colors.black,
               textColor: Colors.black,
               buttonColor: Color(0xffFFD542),
@@ -176,37 +147,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
             SizedBox(height: 1.5.h,),
             RichText(
                 text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: 'Already have an account?',
-                      style: TextStyle(
-                        color: Colors.white
-                      )
-                    ),
-                    TextSpan(
-                        text: ' Sign In',
-                        style: TextStyle(
+                    children: [
+                      TextSpan(
+                          text: 'Already have an account?',
+                          style: TextStyle(
+                              color: Colors.white
+                          )
+                      ),
+                      TextSpan(
+                          text: ' Signup',
+                          style: TextStyle(
                             color: Color(0xffFFD542),
-                        )
-                    )
-                  ]
+                          )
+                      )
+                    ]
                 )
             ),
             SizedBox(height: 3.h,),
             Padding(
-                padding: EdgeInsets.symmetric(horizontal: 6.w),
-            child: Row(
-              children: [
-                Container(height: 0.12.h,width: 30.w,color: Colors.white,),
-                Text(
-                  '  Or Sign in with  ',
-                  style: TextStyle(
-                    color: Colors.white
+              padding: EdgeInsets.symmetric(horizontal: 6.w),
+              child: Row(
+                children: [
+                  Container(height: 0.12.h,width: 30.w,color: Colors.white,),
+                  Text(
+                    '  Or Sign in with  ',
+                    style: TextStyle(
+                        color: Colors.white
+                    ),
                   ),
-                ),
-                Container(height: 0.12.h,width: 30.w,color: Colors.white,),
-              ],
-            ),
+                  Container(height: 0.12.h,width: 30.w,color: Colors.white,),
+                ],
+              ),
             ),
             SizedBox(height: 3.h,),
             Padding(

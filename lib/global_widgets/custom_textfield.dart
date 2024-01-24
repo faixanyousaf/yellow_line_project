@@ -29,19 +29,19 @@ class _CustommTextFieldState extends State<CustommTextField> {
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(17)),
           hintText: widget.hintText,
           labelStyle: TextStyle(fontSize: 10.sp,color: Colors.grey),
-          hintStyle: TextStyle(fontSize: 9.sp,color: Color(0xff181F30)),
+          hintStyle: TextStyle(fontSize: 10.sp,color: Color(0xff181F30)),
           fillColor: Colors.white,
           filled: true,
           suffixIcon: widget.suffixIcon!=null ? Padding(
             padding:  EdgeInsets.only(top: 2.8.h,bottom: 2.5.h,right: 3.w),
             child: SvgPicture.asset(widget.suffixIcon!,height: 2.h,),
-          ) : SizedBox(),
+          ) : null,
           //suffixIconColor: appColor,
           //iconColor: appColor,
-          prefixIcon:  Padding(
+          prefixIcon: widget.prefixIcon!=null ? Padding(
             padding:  EdgeInsets.only(left: 3.w,top: 2.8.h,bottom: 2.5.h,right: 2.w),
             child: SvgPicture.asset(widget.prefixIcon!,height: 2.h,),
-          ),
+          ) : null,
           contentPadding: EdgeInsets.only(left: 2.w,right: 2.w,bottom: 1.5.h),
           disabledBorder: InputBorder.none,
           //focusedBorder: InputBorder.none,
@@ -51,3 +51,5 @@ class _CustommTextFieldState extends State<CustommTextField> {
     );
   }
 }
+
+
