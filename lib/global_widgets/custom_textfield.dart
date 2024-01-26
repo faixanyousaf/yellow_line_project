@@ -45,7 +45,7 @@ class _CustommTextFieldState extends State<CustommTextField> {
                 padding:  EdgeInsets.all(15.0),
                 child: SvgPicture.asset(widget.prefixIcon!,),
               )) : null,
-          contentPadding: EdgeInsets.only(left: 2.w,right: 2.w,bottom: 1.5.h),
+          contentPadding: EdgeInsets.only(left: 3.w,right: 2.w,bottom: 1.5.h),
           disabledBorder: InputBorder.none,
           //focusedBorder: InputBorder.none,
           //enabledBorder: InputBorder.none
