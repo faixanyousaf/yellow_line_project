@@ -61,7 +61,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 5.h,),
+            SizedBox(height: 6.h,),
             Container(
               width: 30.w,
               child: Stack(
@@ -163,7 +163,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 4.h,),
+            SizedBox(height: 6.h,),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 6.w),
               child: CustommTextField(

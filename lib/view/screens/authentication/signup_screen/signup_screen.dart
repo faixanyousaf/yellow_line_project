@@ -65,7 +65,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 4.h,),
+            SizedBox(height: 5.h,),
             Container(
               // height: 4.h,
                width: 45.w,
@@ -132,7 +132,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 4.h,),
+            SizedBox(height: 5.h,),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 6.w),
               child: CustommTextField(
@@ -193,14 +193,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 4.h,),
+            SizedBox(height: 8.h,),
             CustomButton(
               text: 'Next',
               borderColor: Colors.black,
               textColor: Colors.black,
               buttonColor: Color(0xffFFD542),
             ),
-            SizedBox(height: 1.5.h,),
+            SizedBox(height: 2.h,),
             Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -225,7 +225,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 3.h,),
+            SizedBox(height: 4.h,),
             Padding(
                 padding: EdgeInsets.symmetric(horizontal: 6.w),
             child: Row(
@@ -241,12 +241,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ],
             ),
             ),
-            SizedBox(height: 3.h,),
+            SizedBox(height: 5.h,),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 6.w),
               child: CustomGoogleButton(image: 'assets/google.png',text: 'Signup with Google'),
             ),
-            SizedBox(height: 2.h,),
+            SizedBox(height: 2.5.h,),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 6.w),
               child: CustomGoogleButton(image: 'assets/facebook.png',text: 'Signup with Facebook'),

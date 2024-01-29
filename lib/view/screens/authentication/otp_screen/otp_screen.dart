@@ -56,7 +56,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 4.h,),
+            SizedBox(height: 8.h,),
             Padding(
               padding:  EdgeInsets.symmetric(horizontal: 6.w),
               child: PinCodeTextField(
@@ -129,14 +129,14 @@ class _OtpScreenState extends State<OtpScreen> {
                 },
               ),
             ),
-            SizedBox(height: 14.h,),
+            SizedBox(height: 16.h,),
             CustomButton(
               text: 'Verify',
               borderColor: Colors.black,
               textColor: Colors.black,
               buttonColor: Color(0xffFFD542),
             ),
-            SizedBox(height: 1.5.h,),
+            SizedBox(height: 2.h,),
             Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

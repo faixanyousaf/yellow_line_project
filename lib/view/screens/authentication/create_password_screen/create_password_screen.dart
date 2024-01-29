@@ -61,7 +61,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 10.h,),
+            SizedBox(height: 12.h,),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 6.w),
               child: CustommTextField(
@@ -81,14 +81,14 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                 hintText: 'Confirm your password',
               ),
             ),
-            SizedBox(height: 8.h,),
+            SizedBox(height: 10.h,),
             CustomButton(
               text: 'Create',
               borderColor: Colors.black,
               textColor: Colors.black,
               buttonColor: Color(0xffFFD542),
             ),
-            SizedBox(height: 1.5.h,),
+            SizedBox(height: 2.h,),
             Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

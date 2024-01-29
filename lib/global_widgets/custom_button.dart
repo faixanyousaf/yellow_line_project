@@ -18,7 +18,7 @@ class _CustomButtonState extends State<CustomButton> {
     return Padding(
       padding:  EdgeInsets.symmetric(horizontal: 6.w),
       child: Container(
-        height: 6.h,
+        height: 7.h,
         decoration: BoxDecoration(
           color: widget.buttonColor,
           //Color(0xffFFD542),

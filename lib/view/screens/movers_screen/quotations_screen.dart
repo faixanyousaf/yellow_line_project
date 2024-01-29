@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
+import '../RENTAL EQUIPMENTS/rental_screen.dart';
+
 class QuotationsScreen extends StatefulWidget {
   const QuotationsScreen({Key? key}) : super(key: key);
 
@@ -13,6 +15,11 @@ class _QuotationsScreenState extends State<QuotationsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => RentalEquipments(),));
+        },
+      ),
       appBar: AppBar(
         backgroundColor: Colors.black,
         elevation: 0,

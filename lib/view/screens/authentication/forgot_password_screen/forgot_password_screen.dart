@@ -25,7 +25,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 6.h,),
+            SizedBox(height: 7.h,),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 6.w),
               child: Row(
@@ -59,7 +59,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 4.h,),
+            SizedBox(height: 6.h,),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 6.w),
               child: Row(
