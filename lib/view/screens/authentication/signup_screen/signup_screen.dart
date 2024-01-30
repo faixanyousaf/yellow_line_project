@@ -55,7 +55,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             //SizedBox(height: 1.h,),
             Padding(
-              padding:EdgeInsets.symmetric(horizontal: 8.w),
+              padding:EdgeInsets.only(left: 6.w),
               child: Text(
                 'Enter the information to create an Account',
                 style: TextStyle(

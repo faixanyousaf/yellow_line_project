@@ -358,7 +358,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           HomeContainer(
                             image: 'assets/truck.png',
-                            text: 'Vehicle\nRecovery',
+                            text: 'assets/truck.png',
                           ),
                           //SizedBox(width: 2.6.w,),
                           HomeContainer(
