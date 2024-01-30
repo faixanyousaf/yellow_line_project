@@ -112,14 +112,24 @@ class _DropOffScreenState extends State<DropOffScreen> {
                         ),
                       ),
                       SizedBox(height: 1.h,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          dropContainer(image: 'assets/garage.png',text: 'Garage'),
-                          dropContainer(image: 'assets/service.png',text: 'Service\nStation'),
-                          dropContainer(image: 'assets/pump.png',text: 'Petrol\nPump'),
-                        ],
+                      Container(
+                        height: 7.h,
+                        child: ListView.builder(
+                          itemCount: 5,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) => Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                            child: dropContainer(image: 'assets/garage.png',text: 'Garage'),
+                          ),),
                       ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     dropContainer(image: 'assets/garage.png',text: 'Garage'),
+                      //     dropContainer(image: 'assets/service.png',text: 'Service\nStation'),
+                      //     dropContainer(image: 'assets/pump.png',text: 'Petrol\nPump'),
+                      //   ],
+                      // ),
                       SizedBox(height: 1.h,),
                       Text(
                         'Recovery Type',
@@ -129,63 +139,92 @@ class _DropOffScreenState extends State<DropOffScreen> {
                         ),
                       ),
                       SizedBox(height: 1.h,),
-                      Row(
-                        children: [
-                          Container(
+                      Container(
+                        height: 3.5.h,
+                        child:  ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 4,
+                          itemBuilder: (context, index) => Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                            child: Container(
                             height: 2.8.h,
-                            width: 22.w,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              border: Border.all(width: 0.7,color: Colors.white)
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Normal',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 8.sp
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 2.w,),
-                          Container(
-                            height: 2.8.h,
-                            width: 22.w,
+                            //width: 22.w,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30),
                                 border: Border.all(width: 0.7,color: Colors.white)
                             ),
                             child: Center(
-                              child: Text(
-                                'Sports',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 8.sp
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                                child: Text(
+                                  'Normal',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 8.sp
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          SizedBox(width: 2.w,),
-                          Container(
-                            height: 2.8.h,
-                            width: 22.w,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                border: Border.all(width: 0.7,color: Colors.white)
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Heavy',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 8.sp
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
+                          ),),
                       ),
+                      // Row(
+                      //   children: [
+                      //     Container(
+                      //       height: 2.8.h,
+                      //       width: 22.w,
+                      //       decoration: BoxDecoration(
+                      //         borderRadius: BorderRadius.circular(30),
+                      //         border: Border.all(width: 0.7,color: Colors.white)
+                      //       ),
+                      //       child: Center(
+                      //         child: Text(
+                      //           'Normal',
+                      //           style: TextStyle(
+                      //               color: Colors.white,
+                      //               fontSize: 8.sp
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     SizedBox(width: 2.w,),
+                      //     Container(
+                      //       height: 2.8.h,
+                      //       width: 22.w,
+                      //       decoration: BoxDecoration(
+                      //           borderRadius: BorderRadius.circular(30),
+                      //           border: Border.all(width: 0.7,color: Colors.white)
+                      //       ),
+                      //       child: Center(
+                      //         child: Text(
+                      //           'Sports',
+                      //           style: TextStyle(
+                      //               color: Colors.white,
+                      //               fontSize: 8.sp
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     SizedBox(width: 2.w,),
+                      //     Container(
+                      //       height: 2.8.h,
+                      //       width: 22.w,
+                      //       decoration: BoxDecoration(
+                      //           borderRadius: BorderRadius.circular(30),
+                      //           border: Border.all(width: 0.7,color: Colors.white)
+                      //       ),
+                      //       child: Center(
+                      //         child: Text(
+                      //           'Heavy',
+                      //           style: TextStyle(
+                      //               color: Colors.white,
+                      //               fontSize: 8.sp
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
                       SizedBox(height: 2.h,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

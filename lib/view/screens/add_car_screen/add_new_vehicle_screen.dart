@@ -164,72 +164,42 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 0.55.h,horizontal: 1.w),
                   child: Center(
-                    child: ListView(
+                    child: ListView.builder(
+                      itemCount: 3,
                       scrollDirection: Axis.horizontal,
-                      children: [
-                        Container(
-                          width: 25.w,
-                          height: 9.h,
-                          decoration: BoxDecoration(
-                            color: Color(0xffEDEDED),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'أبو ظبي',
-                                  style: TextStyle(
+                      itemBuilder: (context, index) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                        child: Container(
+                        width: 25.w,
+                        height: 9.h,
+                        decoration: BoxDecoration(
+                          color: Color(0xffEDEDED),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'أبو ظبي',
+                                style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 9.sp
-                                  ),
                                 ),
-                                SizedBox(height: 1.h,),
-                                Text(
-                                  'Abu Dhabi',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 9.sp
-                                  ),
-                                )
-                              ],
-                            ),
+                              ),
+                              SizedBox(height: 1.h,),
+                              Text(
+                                'Abu Dhabi',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 9.sp
+                                ),
+                              )
+                            ],
                           ),
                         ),
-                        SizedBox(width: 2.5.w,),
-                        Container(
-                          width: 25.w,
-                          height: 9.h,
-                          decoration: BoxDecoration(
-                            color: Color(0xffEDEDED),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'دبي',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 9.sp
-                                  ),
-                                ),
-                                SizedBox(height: 1.h,),
-                                Text(
-                                  'Duabi',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 9.sp
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                      ],
                     ),
+                      ),),
                   ),
                 ),
               ),

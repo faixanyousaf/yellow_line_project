@@ -52,15 +52,25 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
                         ),
                       ),
                       SizedBox(height: 1.h,),
-                      Row(
-                        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          dropContainer(textt: 'Reaching in',text: '10 mins'),
-                          SizedBox(width: 3.w,),
-                          dropContainer(textt: 'Distance',text: '9 km'),
-
-                        ],
+                      Container(
+                        height: 5.3.h,
+                        child: ListView.builder(
+                          itemCount: 5,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) => Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                            child: dropContainer(textt: 'Reaching in',text: '10 mins'),
+                          ),),
                       ),
+                      // Row(
+                      //   //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     dropContainer(textt: 'Reaching in',text: '10 mins'),
+                      //     SizedBox(width: 3.w,),
+                      //     dropContainer(textt: 'Distance',text: '9 km'),
+                      //
+                      //   ],
+                      // ),
 
                       SizedBox(height: 2.h,),
                       Row(

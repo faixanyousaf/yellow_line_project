@@ -114,15 +114,25 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
                         ),
                       ),
                       SizedBox(height: 1.h,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          dropContainer(textt: 'Time',text: '35 mins'),
-                          dropContainer(textt: 'Distance',text: '19 km'),
-                          dropContainer(textt: 'Price',text: '450 AED'),
-                          dropContainer(textt: 'Type',text: 'Normal'),
-                        ],
+                      Container(
+                        height: 5.5.h,
+                        child: ListView.builder(
+                          itemCount: 5,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) => Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                            child: dropContainer(textt: 'Time',text: '35 mins'),
+                          ),),
                       ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     dropContainer(textt: 'Time',text: '35 mins'),
+                      //     dropContainer(textt: 'Distance',text: '19 km'),
+                      //     dropContainer(textt: 'Price',text: '450 AED'),
+                      //     dropContainer(textt: 'Type',text: 'Normal'),
+                      //   ],
+                      // ),
                       SizedBox(height: 2.h,),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
