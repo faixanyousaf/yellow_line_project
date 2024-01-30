@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/home_container.dart';
+import 'package:yellowline/view/screens/home_page/drawer_screen.dart';
+import 'package:yellowline/view/screens/recovery_screens/drop_off_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,6 +16,12 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   int activePage = 0;
   final List<Widget> pages = [
+    // Padding(
+    //   padding:  EdgeInsets.symmetric(horizontal: 4.w,vertical: 4.h),
+    //   child: Image(image: AssetImage('assets/car.png'),height: 23.h,),
+    // ),
+    // Image(image: AssetImage('assets/car.png'),height: 28.h,),
+    // Image(image: AssetImage('assets/car.png'),height: 28.h,),
     Positioned(
       top: 13.h,
       left: 15.w,
@@ -65,6 +73,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
+      key: _scaffoldKey,
+      drawer: Drawer(
+        backgroundColor: Color(0xff181F30),
+        child: DrawerScreen(),
+      ),
       body: Container(
         height: 100.h,
         width: 100.w,
@@ -79,7 +92,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Image(image: AssetImage('assets/menu.png')),
+                      GestureDetector(
+                          onTap: () {
+                            _scaffoldKey.currentState!.openDrawer();
+                          },
+                          child: Image(image: AssetImage('assets/menu.png'))),
                       Row(
                         children: [
                           Image(image: AssetImage('assets/bells.png'),height: 5.h,),
@@ -122,10 +139,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   //SizedBox(height: 2.h,),
                   Container(
-                    height: 42.h,
+                    height: 40.h,
                     child: Stack(
                       children: [
-                        Image(image: AssetImage('assets/background.png'),fit: BoxFit.cover,),
                         PageView.builder(
                           controller: _pageController,
                           onPageChanged: (value) {
@@ -163,22 +179,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             )
                         )
-                        // Positioned(
-                        //   top: 13.h,
-                        //   left: 15.w,
-                        //   child: Container(
-                        //       child: Center(
-                        //         child: Column(
-                        //           mainAxisAlignment: MainAxisAlignment.center,
-                        //           children: [
-                        //             Image(image: AssetImage('assets/car.png'),height: 28.h,),
-                        //
-                        //           ],
-                        //         ),
-                        //       )
-                        //   ),
-                        // ),
-
                       ],
                     ),
                   )
@@ -278,6 +278,11 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => DropOffScreen(),));
+        },
       ),
     );
   }

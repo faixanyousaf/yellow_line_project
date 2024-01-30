@@ -12,6 +12,16 @@ class ApartmentDetailScreen extends StatefulWidget {
 }
 
 class _ApartmentDetailScreenState extends State<ApartmentDetailScreen> {
+  List<String>? list = [
+    'Sofa',
+    'Bed',
+    'Dining Table',
+    'Cupboards',
+    'Refrigerator',
+    'LED',
+    'Air Conditioner',
+    'Washing Machine'
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -243,6 +253,14 @@ class _ApartmentDetailScreenState extends State<ApartmentDetailScreen> {
               ),
             ),
             SizedBox(height: 1.h,),
+           // Container(
+           //   height: 40.h,
+           //   child: ListView.builder(
+           //     itemCount: list!.length,
+           //     itemBuilder: (context, index) {
+           //     return  itemContainer(item: list![index]);
+           //   },),
+           // ),
             itemContainer(item: 'Sofa'),
             itemContainer(item: 'Bed'),
             itemContainer(item: 'Dining Table'),

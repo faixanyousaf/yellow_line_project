@@ -14,9 +14,12 @@ class AddNewVehicleScreen extends StatefulWidget {
 class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
   TextEditingController codeController = TextEditingController();
   TextEditingController numberController = TextEditingController();
+  int indexx = 0;
+
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -35,34 +38,35 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
             padding:  EdgeInsets.only(right: 5.w),
             child: Row(
               children: [
-                Stack(
-                  children: [
-                    Image(image: AssetImage('assets/bells.png')),
-                    Positioned(
-                      top: 0,
-                      left: 1.5.w,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.red,
-                            shape: BoxShape.circle
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(3),
-                          child: Text(
-                            '1',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 6.sp
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                // Stack(
+                //   children: [
+                //     Image(image: AssetImage('assets/bells.png')),
+                //     Positioned(
+                //       top: 0,
+                //       left: 1.5.w,
+                //       child: Container(
+                //         decoration: BoxDecoration(
+                //             color: Colors.red,
+                //             shape: BoxShape.circle
+                //         ),
+                //         child: Padding(
+                //           padding: EdgeInsets.all(3),
+                //           child: Text(
+                //             '1',
+                //             style: TextStyle(
+                //                 color: Colors.white,
+                //                 fontSize: 6.sp
+                //             ),
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                Image(image: AssetImage('assets/bells.png')),
                 SizedBox(width: 3.w,),
                 Container(
-                  height: 4.h,
+                  height: 5.h,
                   width: 5.w,
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
@@ -165,40 +169,48 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                   padding: EdgeInsets.symmetric(vertical: 0.55.h,horizontal: 1.w),
                   child: Center(
                     child: ListView.builder(
-                      itemCount: 3,
+                      itemCount: 4,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) => Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                        child: Container(
-                        width: 25.w,
-                        height: 9.h,
-                        decoration: BoxDecoration(
-                          color: Color(0xffEDEDED),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'أبو ظبي',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 9.sp
-                                ),
-                              ),
-                              SizedBox(height: 1.h,),
-                              Text(
-                                'Abu Dhabi',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 9.sp
-                                ),
-                              )
-                            ],
+                        child: GestureDetector(
+                          onTap: () {
+                            indexx = index;
+                            setState(() {
+
+                            });
+                          },
+                          child: Container(
+                          width: 25.w,
+                          height: 9.h,
+                          decoration: BoxDecoration(
+                            color: indexx == index ? Color(0xffFFCC1B) : Color(0xffEDEDED),
+                            borderRadius: BorderRadius.circular(15),
                           ),
-                        ),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'أبو ظبي',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 9.sp
+                                  ),
+                                ),
+                                SizedBox(height: 1.h,),
+                                Text(
+                                  'Abu Dhabi',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 9.sp
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
                     ),
+                        ),
                       ),),
                   ),
                 ),

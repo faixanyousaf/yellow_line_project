@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/bottom_button.dart';
+import 'package:yellowline/global_widgets/custom_drop_conatiner.dart';
 import 'package:yellowline/view/screens/recovery_screens/recovery_confirmed_screen.dart';
 
 class BookingDetailScreen extends StatefulWidget {
@@ -117,11 +118,16 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
                       Container(
                         height: 5.5.h,
                         child: ListView.builder(
-                          itemCount: 5,
+                          itemCount: 4,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) => Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                            child: dropContainer(textt: 'Time',text: '35 mins'),
+                            child: CustomDropContainer(
+                              height: 5.4.h,
+                              width: 20.w,
+                              text: 'Time',
+                              texxt: '35 mins',
+                            ),
                           ),),
                       ),
                       // Row(
@@ -249,39 +255,5 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
       ),
     );
   }
-  Widget dropContainer({String? textt, String? text}){
-    return Container(
-      height: 5.4.h,
-      width: 20.w,
-      decoration: BoxDecoration(
-        color: Color(0xff424755),
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 1.w,vertical: 0.5.h),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              textt!,
-              maxLines: 2,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 8.sp
-              ),
-            ),
-            Text(
-              text!,
-              //maxLines: 2,
-              style: TextStyle(
-                  color: Color(0xffFFCC1B),
-                  fontSize: 8.sp
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
+
 }
