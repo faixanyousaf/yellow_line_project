@@ -22,7 +22,7 @@ class _CustomButtonState extends State<CustomButton> {
         decoration: BoxDecoration(
           color: widget.buttonColor,
           //Color(0xffFFD542),
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(18),
           border: Border.all(width: 0.8,color: widget.borderColor!)
         ),
         child: Center(

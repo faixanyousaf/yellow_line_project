@@ -14,11 +14,16 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color(0xff181F30),
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Color(0xff181F30),
         elevation: 0,
-        leading: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 5.w,),
+        //toolbarHeight: 9.h,
+        leading: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 5.w,)),
         title: Text(
           'My Vehicles',
           style: TextStyle(
@@ -27,51 +32,44 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
           ),
         ),
         actions: [
+          // Padding(
+          //   padding:  EdgeInsets.only(right: 5.w),
+          //   child: Row(
+          //     children: [
+          //       Image(image: AssetImage('assets/bells.png')),
+          //       SizedBox(width: 3.w,),
+          //       Container(
+          //         height: 4.h,
+          //         width: 5.w,
+          //         decoration: BoxDecoration(
+          //             shape: BoxShape.circle,
+          //             color: Colors.black,
+          //             border: Border.all(width: 0.6,color: Colors.white)
+          //         ),
+          //         child: Center(
+          //           child: Icon(Icons.person,color: Colors.white,size: 3.w,),
+          //         ),
+          //       )
+          //     ],
+          //   ),
+          // ),
+          Image(image: AssetImage('assets/bells.png')),
+          SizedBox(width: 3.w,),
           Padding(
-            padding:  EdgeInsets.only(right: 5.w),
-            child: Row(
-              children: [
-                Stack(
-                  children: [
-                    Image(image: AssetImage('assets/bells.png')),
-                    Positioned(
-                      top: 0,
-                      left: 1.5.w,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.red,
-                            shape: BoxShape.circle
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(3),
-                          child: Text(
-                            '1',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 6.sp
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(width: 3.w,),
-                Container(
-                  height: 4.h,
-                  width: 5.w,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.black,
-                      border: Border.all(width: 0.6,color: Colors.white)
-                  ),
-                  child: Center(
-                    child: Icon(Icons.person,color: Colors.white,size: 3.w,),
-                  ),
-                )
-              ],
+            padding:  EdgeInsets.only(right: 6.w),
+            child: Container(
+              height: 7.h,
+              width: 5.w,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.black,
+                  border: Border.all(width: 0.6,color: Colors.white)
+              ),
+              child: Center(
+                child: Icon(Icons.person,color: Colors.white,size: 3.w,),
+              ),
             ),
-          ),
+          )
 
         ],
       ),
@@ -94,7 +92,7 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
                       Text(
                         '18',
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Color(0xff181F30),
                           fontSize: 16.sp
                         ),
                       ),
@@ -104,7 +102,7 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
                       Text(
                         '66435',
                         style: TextStyle(
-                            color: Colors.black,
+                            color: Color(0xff181F30),
                             fontSize: 16.sp
                         ),
                       ),
@@ -129,7 +127,7 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
                       Text(
                         'AB',
                         style: TextStyle(
-                            color: Colors.black,
+                            color: Color(0xff181F30),
                             fontSize: 16.sp
                         ),
                       ),
@@ -139,7 +137,7 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
                       Text(
                         '66435',
                         style: TextStyle(
-                            color: Colors.black,
+                            color: Color(0xff181F30),
                             fontSize: 16.sp
                         ),
                       ),
@@ -148,12 +146,12 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 50.h,),
+            SizedBox(height: 53.h,),
             CustomButton(
               buttonColor: Color(0xffFFD542),
               borderColor: Color(0xffFFD542),
               text: 'Add New Vehicle',
-              textColor: Colors.black,
+              textColor: Color(0xff181F30),
             )
           ],
         ),

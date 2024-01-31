@@ -21,11 +21,15 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
   Widget build(BuildContext context) {
     
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color(0xff181F30),
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Color(0xff181F30),
         elevation: 0,
-        leading: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 5.w,),
+        leading: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 5.w,)),
         title: Text(
           'Add New Vehicles',
           style: TextStyle(
@@ -106,7 +110,7 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                           child: Text(
                             'Code',
                             style: TextStyle(
-                              color: Colors.black,
+                              color: Color(0xff181F30),
                               fontSize: 16.sp
                             ),
                           ),
@@ -120,7 +124,7 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                           child: Text(
                             'City',
                             style: TextStyle(
-                                color: Colors.black,
+                                color: Color(0xff181F30),
                                 fontSize: 16.sp
                             ),
                           ),
@@ -134,7 +138,7 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                           child: Text(
                             'Number',
                             style: TextStyle(
-                                color: Colors.black,
+                                color: Color(0xff181F30),
                                 fontSize: 16.sp
                             ),
                           ),
@@ -176,9 +180,7 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                         child: GestureDetector(
                           onTap: () {
                             indexx = index;
-                            setState(() {
-
-                            });
+                            setState(() {});
                           },
                           child: Container(
                           width: 25.w,
@@ -194,7 +196,7 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                                 Text(
                                   'أبو ظبي',
                                   style: TextStyle(
-                                      color: Colors.black,
+                                      color: Color(0xff181F30),
                                       fontSize: 9.sp
                                   ),
                                 ),
@@ -202,7 +204,7 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                                 Text(
                                   'Abu Dhabi',
                                   style: TextStyle(
-                                      color: Colors.black,
+                                      color: Color(0xff181F30),
                                       fontSize: 9.sp
                                   ),
                                 )
@@ -254,9 +256,9 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                 controller: numberController,
               ),
             ),
-            SizedBox(height: 30.h,),
+            SizedBox(height: 26.h,),
             CustomButton(
-              textColor: Colors.black,
+              textColor: Color(0xff181F30),
               text: 'Confirm',
               borderColor: Color(0xffFFCC1B),
               buttonColor: Color(0xffFFCC1B),

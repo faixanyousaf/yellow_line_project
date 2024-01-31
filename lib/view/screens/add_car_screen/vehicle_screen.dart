@@ -14,11 +14,15 @@ class _VehicleScreenState extends State<VehicleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color(0xff181F30),
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Color(0xff181F30),
         elevation: 0,
-        leading: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 5.w,),
+        leading: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 5.w,)),
         title: Text(
           'My Vehicles',
           style: TextStyle(
@@ -31,31 +35,7 @@ class _VehicleScreenState extends State<VehicleScreen> {
             padding:  EdgeInsets.only(right: 5.w),
             child: Row(
               children: [
-                Stack(
-                  children: [
-                    Image(image: AssetImage('assets/bells.png')),
-                    Positioned(
-                      top: 0,
-                      left: 1.5.w,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.red,
-                            shape: BoxShape.circle
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(3),
-                          child: Text(
-                            '1',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 6.sp
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                Image(image: AssetImage('assets/bells.png')),
                 SizedBox(width: 3.w,),
                 Container(
                   height: 4.h,
@@ -109,11 +89,11 @@ class _VehicleScreenState extends State<VehicleScreen> {
                     fontSize: 11.sp,
                 ),
               ),
-              SizedBox(height: 28.h,),
+              SizedBox(height: 25.h,),
               CustomButton(
                 borderColor: Color(0xffFFCC1B),
                 buttonColor: Color(0xffFFCC1B),
-                textColor: Colors.black,
+                textColor: Color(0xff181F30),
                 text: 'Add New Vehicle',
               )
             ],

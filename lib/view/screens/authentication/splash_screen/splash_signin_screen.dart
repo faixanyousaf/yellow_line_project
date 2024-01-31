@@ -15,7 +15,7 @@ class _SplashSignInScreenState extends State<SplashSignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color(0xff181F30),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -23,7 +23,7 @@ class _SplashSignInScreenState extends State<SplashSignInScreen> {
             Container(
               height: 55.h,
               decoration: BoxDecoration(
-                color: Colors.black,
+                color: Color(0xff181F30),
                 image: DecorationImage(image: AssetImage('assets/background.png'),fit: BoxFit.cover),
               ),
               child: Center(
@@ -34,24 +34,24 @@ class _SplashSignInScreenState extends State<SplashSignInScreen> {
               ),
             ),
             Image(image: AssetImage('assets/dot.png'),width: 15.w,),
-            SizedBox(height: 12.h,),
+            SizedBox(height: 8.h,),
             GestureDetector(
               onTap: () {
                Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen(),));
               },
               child: CustomButton(
                 text: 'Sign up as a User',
-                borderColor: Colors.black,
-                textColor: Colors.black,
+                borderColor: Color(0xffFFD542),
+                textColor: Color(0xff181F30),
                 buttonColor: Color(0xffFFD542),
               ),
             ),
-            SizedBox(height: 2.h,),
+            SizedBox(height: 2.5.h,),
             CustomButton(
               text: 'Sign up as a Business',
               borderColor: Color(0xffFFD542),
               textColor: Color(0xffFFD542),
-              buttonColor: Colors.black,
+              buttonColor: Color(0xff181F30),
             ),
 
           ],

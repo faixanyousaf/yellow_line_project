@@ -31,7 +31,7 @@ class _CustomGoogleButtonState extends State<CustomGoogleButton> {
               Text(
                 widget.text!,
                 style: TextStyle(
-                    color: Colors.black,
+                    color: Color(0xff181F30),
                     fontSize: 12.sp
                 ),
               ),

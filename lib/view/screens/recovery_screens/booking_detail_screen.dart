@@ -18,6 +18,7 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff181F30),
       body: Stack(
         children: [
           Column(
@@ -32,7 +33,11 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
           Positioned(
             top: 7.h,
             left: 3.w,
-            child: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 5.w,),),
+            child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 5.w,)),),
           Positioned(
             top: 11.h,
             left: 5.w,
@@ -40,7 +45,7 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
               height: 5.h,
               width: 44.w,
               decoration: BoxDecoration(
-                color: Colors.black,
+                color: Color(0xff181F30),
                 borderRadius: BorderRadius.circular(4),
               ),
               child: Center(
@@ -70,7 +75,7 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
               height: 5.h,
               width: 44.w,
               decoration: BoxDecoration(
-                color: Colors.black,
+                color: Color(0xff181F30),
                 borderRadius: BorderRadius.circular(4),
               ),
               child: Center(
@@ -98,49 +103,55 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
               child: Container(
                 width: 100.w,
                 decoration: BoxDecoration(
-                    color: Colors.black,
+                    color: Color(0xff181F30),
                     borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20))
                 ),
-                child: Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 5.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 2.h,),
-                      Text(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 2.h,),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 5.w),
+                      child: Text(
                         'Booking Details:',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 10.sp
                         ),
                       ),
-                      SizedBox(height: 1.h,),
-                      Container(
-                        height: 5.5.h,
-                        child: ListView.builder(
-                          itemCount: 4,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) => Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                            child: CustomDropContainer(
+                    ),
+                    SizedBox(height: 1.h,),
+                    Container(
+                      height: 5.5.h,
+                      child: ListView.builder(
+                        itemCount: 4,
+                        scrollDirection: Axis.horizontal,
+                        padding: EdgeInsets.symmetric(horizontal: 5.w),
+                        itemBuilder: (context, index) => Row(
+                          children: [
+                            CustomDropContainer(
                               height: 5.4.h,
                               width: 20.w,
                               text: 'Time',
                               texxt: '35 mins',
                             ),
-                          ),),
-                      ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: [
-                      //     dropContainer(textt: 'Time',text: '35 mins'),
-                      //     dropContainer(textt: 'Distance',text: '19 km'),
-                      //     dropContainer(textt: 'Price',text: '450 AED'),
-                      //     dropContainer(textt: 'Type',text: 'Normal'),
-                      //   ],
-                      // ),
-                      SizedBox(height: 2.h,),
-                      Row(
+                            SizedBox(width: 2.w,)
+                          ],
+                        ),),
+                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     dropContainer(textt: 'Time',text: '35 mins'),
+                    //     dropContainer(textt: 'Distance',text: '19 km'),
+                    //     dropContainer(textt: 'Price',text: '450 AED'),
+                    //     dropContainer(textt: 'Type',text: 'Normal'),
+                    //   ],
+                    // ),
+                    SizedBox(height: 2.h,),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 5.w),
+                      child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
@@ -222,27 +233,30 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 2.h,),
-                      Row(
+                    ),
+                    SizedBox(height: 2.h,),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 5.w),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CustomBottomButton(
                             text: 'Cancel',
-                            buttonColor: Colors.black,
+                            buttonColor: Color(0xff181F30),
                             textColor: Color(0xffFFCC1B),
                             borderColor: Color(0xffFFCC1B),
                           ),
                           CustomBottomButton(
                             text: 'Confirm',
                             buttonColor: Color(0xffFFCC1B),
-                            textColor: Colors.black,
-                            borderColor: Colors.black,
+                            textColor: Color(0xff181F30),
+                            borderColor: Color(0xffFFCC1B),
                           )
                         ],
                       ),
-                      SizedBox(width: 2.w,),
-                    ],
-                  ),
+                    ),
+                    SizedBox(height: 2.h,),
+                  ],
                 ),
               )
           )

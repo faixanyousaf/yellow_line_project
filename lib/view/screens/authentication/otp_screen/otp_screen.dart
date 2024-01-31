@@ -18,7 +18,8 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color(0xff181F30),
+      //Colors.black,
       body: SingleChildScrollView(
         child: Column(
           children: [

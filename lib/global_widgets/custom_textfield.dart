@@ -28,7 +28,7 @@ class _CustommTextFieldState extends State<CustommTextField> {
         decoration: InputDecoration(
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(17)),
           hintText: widget.hintText,
-          labelStyle: TextStyle(fontSize: 10.sp,color: Colors.grey),
+          //labelStyle: TextStyle(fontSize: 10.sp,color: Colors.grey),
           hintStyle: TextStyle(fontSize: 10.sp,color: Color(0xff181F30)),
           fillColor: Colors.white,
           filled: true,

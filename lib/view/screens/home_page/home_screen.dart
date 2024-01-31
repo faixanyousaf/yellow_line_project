@@ -3,6 +3,7 @@ import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/home_container.dart';
 import 'package:yellowline/view/screens/home_page/drawer_screen.dart';
 import 'package:yellowline/view/screens/recovery_screens/drop_off_screen.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -72,7 +73,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color(0xff181F30),
+      //Colors.black,
       key: _scaffoldKey,
       drawer: Drawer(
         backgroundColor: Color(0xff181F30),
@@ -83,9 +85,12 @@ class _HomeScreenState extends State<HomeScreen> {
         width: 100.w,
         child: Stack(
           children: [
-            Image(image: AssetImage('assets/background.png'),fit: BoxFit.cover,),
             Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 4.w),
+              padding:  EdgeInsets.only(top: 9.h),
+              child: Image(image: AssetImage('assets/background.png'),fit: BoxFit.cover,),
+            ),
+            Padding(
+              padding:  EdgeInsets.symmetric(horizontal: 5.w),
               child: Column(
                 children: [
                   SizedBox(height: 5.h,),
@@ -106,6 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               width: 9.w,
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
+                                  color: Colors.black,
                                   border: Border.all(color: Colors.white,width: 1)
                               ),
                               child: Icon(Icons.person,color: Colors.white,))
@@ -154,30 +160,24 @@ class _HomeScreenState extends State<HomeScreen> {
                             return pages[index% pages.length];
                           },),
                         Positioned(
-                            bottom: 0,
-                            left: 0,
-                            right: 0,
-                            height: 5.h,
-                            child: Container(
-                              color: Colors.transparent,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: List<Widget>.generate(pages.length, (index) => Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 2.w),
-                                  child: InkWell(
-                                    onTap: () {
-                                      _pageController.animateToPage(index, duration: Duration(milliseconds: 200), curve: Curves.easeIn);
-                                    },
-                                    child: CircleAvatar(
-                                      radius: 5,
-                                      backgroundColor:activePage == index?
-                                      Colors.green
-                                          :Colors.grey,
-                                    ),
-                                  ),
-                                ),),
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          height: 5.h,
+                          child: Center(
+                            child: SmoothPageIndicator(
+                              count: pages.length,
+                              controller: _pageController,
+                              effect: ExpandingDotsEffect(
+                                dotColor: Colors.white,
+                                dotHeight: 1.h,
+                                dotWidth: 2.w,
+                                activeDotColor: Colors.white,
+                                //strokeWidth: 5.w,
+                                expansionFactor: 1.1.w
                               ),
-                            )
+                            ),
+                          ),
                         )
                       ],
                     ),
@@ -193,64 +193,74 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.white,
                       borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20))
                   ),
-                  child: Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 6.w),
-                    child: Column(
-                      children: [
-                        SizedBox(height: 2.h,),
-                        Text(
-                          'Choose a Service',
-                          style: TextStyle(color: Colors.black,fontSize: 13.sp,fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 3.h,),
-                        Container(
-                          height: 20.h,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 3,
-                            itemBuilder: (context, index) {
-                            return Row(
-                              children: [
-                                Container(
-                                  height: 19.h,
-                                  width: 28.w,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.black
-                                  ),
-                                  child: Padding(
-                                    padding:  EdgeInsets.symmetric(horizontal: 3.w),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(height: 2.h,),
-                                        Container(
-                                          height: 6.h,
-                                          width: 12.w,
-                                          decoration: BoxDecoration(
+                  child: Column(
+                    children: [
+                      SizedBox(height: 2.h,),
+                      Text(
+                        'Choose a Service',
+                        style: TextStyle(color: Colors.black,fontSize: 13.sp,fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 3.h,),
+                      Container(
+                        height: 20.h,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 3,
+                          padding: EdgeInsets.symmetric(horizontal: 5.w),
+                          itemBuilder: (context, index) {
+                          return Row(
+                            children: [
+                              Container(
+                                height: 19.h,
+                                width: 28.w,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Color(0xff181F30),
+                                    //Colors.black
+                                ),
+                                child: Padding(
+                                  padding:  EdgeInsets.symmetric(horizontal: 3.w),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(height: 2.h,),
+                                      Container(
+                                        height: 6.h,
+                                        width: 12.w,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        child: Center(
+                                          child: Image(image: AssetImage('assets/truck.png'),),
+                                        ),
+                                      ),
+                                      SizedBox(height: 3.h,),
+                                      Expanded(
+                                        child: Text(
+                                          'Vehicle Movers',
+                                          maxLines: 3,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
                                             color: Colors.white,
-                                            borderRadius: BorderRadius.circular(10),
-                                          ),
-                                          child: Center(
-                                            child: Image(image: AssetImage('assets/truck.png'),),
+                                            fontSize: 11.sp,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
-                                        SizedBox(height: 3.h,),
-                                        Text(
-                                          'Vehicle\nMovers',
-                                          style: TextStyle(color: Colors.white,fontSize: 11.sp,),
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                SizedBox(width: 2.w,),
-                              ],
-                            );
-                          },),
-                        ),
-                        SizedBox(height: 4.h,),
-                        Container(
+                              ),
+                              SizedBox(width: 2.5.w,),
+                            ],
+                          );
+                        },),
+                      ),
+                      SizedBox(height: 4.h,),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5.w),
+                        child: Container(
                           height: 7.h,
                           decoration: BoxDecoration(
                               color: Color(0xffFFD542),
@@ -270,9 +280,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 3.h,),
-                      ],
-                    ),
+                      ),
+                      SizedBox(height: 3.h,),
+                    ],
                   ),
                 )
             )

@@ -14,16 +14,20 @@ class _QuotationsScreenState extends State<QuotationsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color(0xff181F30),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) => RentalEquipments(),));
         },
       ),
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Color(0xff181F30),
         elevation: 0,
-        leading: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 4.w,),
+        leading: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 4.w,)),
         title: Text(
           'Quotations',
           style: TextStyle(
@@ -55,14 +59,14 @@ class _QuotationsScreenState extends State<QuotationsScreen> {
                         Text(
                           'ABC Movers',
                           style: TextStyle(
-                              color: Colors.black,
+                              color: Color(0xff181F30),
                               fontSize: 10.sp
                           ),
                         ),
                         Text(
                           'AED 600',
                           style: TextStyle(
-                              color: Colors.black,
+                              color: Color(0xff181F30),
                               fontSize: 11.sp,
                               fontWeight: FontWeight.bold
                           ),
@@ -92,7 +96,7 @@ class _QuotationsScreenState extends State<QuotationsScreen> {
                               child: Text(
                                 'Reject',
                                 style: TextStyle(
-                                    color: Colors.black,
+                                    color: Color(0xff181F30),
                                     fontSize: 9.sp
                                 ),
                               ),
@@ -111,7 +115,7 @@ class _QuotationsScreenState extends State<QuotationsScreen> {
                               child: Text(
                                 'Accept & Pay',
                                 style: TextStyle(
-                                    color: Colors.black,
+                                    color: Color(0xff181F30),
                                     fontSize: 9.sp
                                 ),
                               ),

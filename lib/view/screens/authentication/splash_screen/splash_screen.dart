@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color(0xff181F30),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
             Container(
               height: 55.h,
               decoration: BoxDecoration(
-                color: Colors.black,
+                color: Color(0xff181F30),
                 image: DecorationImage(image: AssetImage('assets/background.png'),fit: BoxFit.cover),
               ),
               child: Center(

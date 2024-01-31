@@ -19,7 +19,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color(0xff181F30),
+      //Colors.black,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -84,8 +85,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             SizedBox(height: 8.h,),
             CustomButton(
               text: 'Reset',
-              borderColor: Colors.black,
-              textColor: Colors.black,
+              borderColor: Color(0xffFFD542),
+              textColor: Color(0xff181F30),
               buttonColor: Color(0xffFFD542),
             ),
             SizedBox(height: 1.5.h,),

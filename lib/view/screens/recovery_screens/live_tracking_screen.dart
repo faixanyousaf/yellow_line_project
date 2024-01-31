@@ -15,7 +15,7 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     // backgroundColor: Colors.black,
+      backgroundColor: Color(0xff181F30),
       body: Stack(
         children: [
           Column(
@@ -30,56 +30,66 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
           Positioned(
             top: 7.h,
             left: 3.w,
-            child: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 5.w,),),
+            child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 5.w,)),),
           Positioned(
               bottom: 0,
               child: Container(
                 width: 100.w,
                 decoration: BoxDecoration(
-                    color: Colors.black,
+                    color: Color(0xff181F30),
                     borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20))
                 ),
-                child: Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 5.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 2.h,),
-                      Text(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 2.h,),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 5.w),
+                      child: Text(
                         'Live Tracking:',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 10.sp
                         ),
                       ),
-                      SizedBox(height: 1.h,),
-                      Container(
-                        height: 5.3.h,
-                        child: ListView.builder(
-                          itemCount: 3,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) => Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                            child: CustomDropContainer(
+                    ),
+                    SizedBox(height: 1.h,),
+                    Container(
+                      height: 5.3.h,
+                      child: ListView.builder(
+                        itemCount: 3,
+                        scrollDirection: Axis.horizontal,
+                        padding: EdgeInsets.symmetric(horizontal: 5.w),
+                        itemBuilder: (context, index) => Row(
+                          children: [
+                            CustomDropContainer(
                               height: 5.2.h,
                               width: 28.w,
                               text: 'Reaching in',
                               texxt: '10 mins',
                             ),
-                          ),),
-                      ),
-                      // Row(
-                      //   //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: [
-                      //     dropContainer(textt: 'Reaching in',text: '10 mins'),
-                      //     SizedBox(width: 3.w,),
-                      //     dropContainer(textt: 'Distance',text: '9 km'),
-                      //
-                      //   ],
-                      // ),
+                            SizedBox(width: 3.w,)
+                          ],
+                        ),),
+                    ),
+                    // Row(
+                    //   //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     dropContainer(textt: 'Reaching in',text: '10 mins'),
+                    //     SizedBox(width: 3.w,),
+                    //     dropContainer(textt: 'Distance',text: '9 km'),
+                    //
+                    //   ],
+                    // ),
 
-                      SizedBox(height: 2.h,),
-                      Row(
+                    SizedBox(height: 2.h,),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 5.w),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CustomBottomButton(
@@ -91,14 +101,14 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
                           CustomBottomButton(
                             text: 'Call',
                             buttonColor: Color(0xffFFCC1B),
-                            textColor: Colors.black,
+                            textColor: Color(0xff181F30),
                             borderColor: Color(0xffFFCC1B),
                           )
                         ],
                       ),
-                      SizedBox(width: 2.h,),
-                    ],
-                  ),
+                    ),
+                    SizedBox(height: 2.h,),
+                  ],
                 ),
               )
           )

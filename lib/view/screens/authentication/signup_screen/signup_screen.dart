@@ -27,7 +27,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor:
+      //Colors.black,
+      Color(0xff181F30),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -96,7 +98,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: Text(
                           'User',
                           style: TextStyle(
-                            color: Colors.black,
+                            color: Color(0xff181F30),
                             fontSize: 10.sp
                           ),
                         ),
@@ -122,7 +124,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: Text(
                           'Business',
                           style: TextStyle(
-                              color: Colors.black,
+                              color: Color(0xff181F30),
                               fontSize: 10.sp
                           ),
                         ),
@@ -161,7 +163,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       showDropdownIcon: false,
                       //enabled: false,
                       flagsButtonMargin: EdgeInsets.only(left: 3.w,top: 0.3.h),
-
                       decoration: InputDecoration(
                         // hintText: 'Phone Number',
                         // hintStyle: TextStyle(fontSize: 10.sp,color: Color(0xff181F30)),
@@ -196,8 +197,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
             SizedBox(height: 8.h,),
             CustomButton(
               text: 'Next',
-              borderColor: Colors.black,
-              textColor: Colors.black,
+              borderColor: Color(0xffFFD542),
+              textColor: Color(0xff181F30),
               buttonColor: Color(0xffFFD542),
             ),
             SizedBox(height: 2.h,),

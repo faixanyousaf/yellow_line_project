@@ -25,16 +25,21 @@ class _ApartmentDetailScreenState extends State<ApartmentDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color(0xff181F30),
+      appBar: AppBar(
+        backgroundColor: Color(0xff181F30),
+        elevation: 0,
+        toolbarHeight: 3.h,
+        leading: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 4.w,)),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 7.h,),
-            Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 4.w),
-              child: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 4.w,),
-            ),
             SizedBox(height: 1.h,),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 5.w),
@@ -52,7 +57,7 @@ class _ApartmentDetailScreenState extends State<ApartmentDetailScreen> {
                         height: 4.h,
                         width: 90.w,
                         decoration: BoxDecoration(
-                          color: Colors.black,
+                          color: Color(0xff181F30),
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: Center(
@@ -85,7 +90,7 @@ class _ApartmentDetailScreenState extends State<ApartmentDetailScreen> {
                         height: 4.h,
                         width: 90.w,
                         decoration: BoxDecoration(
-                          color: Colors.black,
+                          color: Color(0xff181F30),
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: Center(
@@ -152,87 +157,119 @@ class _ApartmentDetailScreenState extends State<ApartmentDetailScreen> {
               height: 2.9.h,
               width: 100.w,
               child: Center(
-                child: ListView(
+                child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  children: [
-                    SizedBox(width: 5.w,),
-                    Container(
-                      height: 2.7.h,
-                      width: 20.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.black,
-                        border: Border.all(width: 0.6,color: Colors.white)
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Studio',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 7.5.sp
+                  itemCount: 7,
+                  padding: EdgeInsets.symmetric(horizontal: 5.w),
+                  itemBuilder: (context, index) {
+                  return Row(
+                    children: [
+                      Container(
+                        height: 2.7.h,
+                        //width: 20.w,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: Color(0xff181F30),
+                            border: Border.all(width: 0.6,color: Colors.white)
+                        ),
+                        child: Center(
+                          child: Padding(
+                            padding:  EdgeInsets.symmetric(horizontal: 5.w),
+                            child: Text(
+                              'Studio',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 7.5.sp
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(width: 3.w,),
-                    Container(
-                      height: 2.4.h,
-                      width: 20.w,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Colors.black,
-                          border: Border.all(width: 0.6,color: Colors.white)
-                      ),
-                      child: Center(
-                        child: Text(
-                          '1 Bedroom',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 7.5.sp
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 3.w,),
-                    Container(
-                      height: 2.4.h,
-                      width: 20.w,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Colors.black,
-                          border: Border.all(width: 0.6,color: Colors.white)
-                      ),
-                      child: Center(
-                        child: Text(
-                          '2 Bedroom',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 7.5.sp
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 3.w,),
-                    Container(
-                      height: 2.4.h,
-                      width: 20.w,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Colors.black,
-                          border: Border.all(width: 0.6,color: Colors.white)
-                      ),
-                      child: Center(
-                        child: Text(
-                          '3 Bedroom',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 7.5.sp
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+                      SizedBox(width: 3.w,)
+                    ],
+                  );
+                },)
+                // ListView(
+                //   scrollDirection: Axis.horizontal,
+                //   children: [
+                //     SizedBox(width: 5.w,),
+                //     Container(
+                //       height: 2.7.h,
+                //       width: 20.w,
+                //       decoration: BoxDecoration(
+                //         borderRadius: BorderRadius.circular(30),
+                //         color: Color(0xff181F30),
+                //         border: Border.all(width: 0.6,color: Colors.white)
+                //       ),
+                //       child: Center(
+                //         child: Text(
+                //           'Studio',
+                //           style: TextStyle(
+                //               color: Colors.white,
+                //               fontSize: 7.5.sp
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //     SizedBox(width: 3.w,),
+                //     Container(
+                //       height: 2.4.h,
+                //       width: 20.w,
+                //       decoration: BoxDecoration(
+                //           borderRadius: BorderRadius.circular(30),
+                //           color: Color(0xff181F30),
+                //           border: Border.all(width: 0.6,color: Colors.white)
+                //       ),
+                //       child: Center(
+                //         child: Text(
+                //           '1 Bedroom',
+                //           style: TextStyle(
+                //               color: Colors.white,
+                //               fontSize: 7.5.sp
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //     SizedBox(width: 3.w,),
+                //     Container(
+                //       height: 2.4.h,
+                //       width: 20.w,
+                //       decoration: BoxDecoration(
+                //           borderRadius: BorderRadius.circular(30),
+                //           color: Color(0xff181F30),
+                //           border: Border.all(width: 0.6,color: Colors.white)
+                //       ),
+                //       child: Center(
+                //         child: Text(
+                //           '2 Bedroom',
+                //           style: TextStyle(
+                //               color: Colors.white,
+                //               fontSize: 7.5.sp
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //     SizedBox(width: 3.w,),
+                //     Container(
+                //       height: 2.4.h,
+                //       width: 20.w,
+                //       decoration: BoxDecoration(
+                //           borderRadius: BorderRadius.circular(30),
+                //           color: Color(0xff181F30),
+                //           border: Border.all(width: 0.6,color: Colors.white)
+                //       ),
+                //       child: Center(
+                //         child: Text(
+                //           '3 Bedroom',
+                //           style: TextStyle(
+                //               color: Colors.white,
+                //               fontSize: 7.5.sp
+                //           ),
+                //         ),
+                //       ),
+                //     )
+                //   ],
+                // ),
               ),
             ),
             SizedBox(height: 1.h,),
@@ -277,7 +314,7 @@ class _ApartmentDetailScreenState extends State<ApartmentDetailScreen> {
                     width: 25.w,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
-                        color: Colors.black,
+                        color: Color(0xff181F30),
                         border: Border.all(width: 0.7,color: Colors.white)
                     ),
                     child: Center(
@@ -319,7 +356,7 @@ class _ApartmentDetailScreenState extends State<ApartmentDetailScreen> {
                     width: 27.w,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
-                        color: Colors.black,
+                        color: Color(0xff181F30),
                         border: Border.all(width: 0.7,color: Colors.white)
                     ),
                     child: Center(
@@ -353,61 +390,86 @@ class _ApartmentDetailScreenState extends State<ApartmentDetailScreen> {
             SizedBox(height: 2.h,),
             Container(
               height: 9.h,
-              child: ListView(
+              child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                children: [
-                  SizedBox(width: 5.w,),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Container(
-                      width: 32.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Image(
-                        image: AssetImage('assets/soofy.png'),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 3.w,),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Container(
-                      width: 32.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Image(
-                        image: AssetImage('assets/washing.png'),
-                        fit: BoxFit.fill,
+                itemCount: 3,
+                padding: EdgeInsets.symmetric(horizontal: 5.w),
+                itemBuilder: (context, index) {
+                return Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                        width: 32.w,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Image(
+                          image: AssetImage('assets/soofy.png'),
+                          fit: BoxFit.fill,
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(width: 3.w,),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Container(
-                      width: 32.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Image(
-                        image: AssetImage('assets/soofy.png'),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                    SizedBox(width: 3.w,),
+                  ],
+                );
+              },)
+              // ListView(
+              //   scrollDirection: Axis.horizontal,
+              //   children: [
+              //     SizedBox(width: 5.w,),
+              //     ClipRRect(
+              //       borderRadius: BorderRadius.circular(10),
+              //       child: Container(
+              //         width: 32.w,
+              //         decoration: BoxDecoration(
+              //           borderRadius: BorderRadius.circular(10),
+              //         ),
+              //         child: Image(
+              //           image: AssetImage('assets/soofy.png'),
+              //           fit: BoxFit.fill,
+              //         ),
+              //       ),
+              //     ),
+              //     SizedBox(width: 3.w,),
+              //     ClipRRect(
+              //       borderRadius: BorderRadius.circular(10),
+              //       child: Container(
+              //         width: 32.w,
+              //         decoration: BoxDecoration(
+              //           borderRadius: BorderRadius.circular(10),
+              //         ),
+              //         child: Image(
+              //           image: AssetImage('assets/washing.png'),
+              //           fit: BoxFit.fill,
+              //         ),
+              //       ),
+              //     ),
+              //     SizedBox(width: 3.w,),
+              //     ClipRRect(
+              //       borderRadius: BorderRadius.circular(10),
+              //       child: Container(
+              //         width: 32.w,
+              //         decoration: BoxDecoration(
+              //           borderRadius: BorderRadius.circular(10),
+              //         ),
+              //         child: Image(
+              //           image: AssetImage('assets/soofy.png'),
+              //           fit: BoxFit.fill,
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
             ),
             SizedBox(height: 3.h,),
             CustomButton(
               buttonColor: Color(0xffFFD542),
               borderColor: Color(0xffFFD542),
               text: 'Confirm',
-              textColor: Colors.black,
-            )
+              textColor: Color(0xff181F30),
+            ),
+            SizedBox(height: 2.h,)
           ],
         ),
       ),
@@ -432,7 +494,7 @@ class _ApartmentDetailScreenState extends State<ApartmentDetailScreen> {
                 width: 20.w,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
-                    color: Colors.black,
+                    color: Color(0xff181F30),
                     border: Border.all(width: 0.7,color: Colors.white)
                 ),
                 child: Center(

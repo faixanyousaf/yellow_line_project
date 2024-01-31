@@ -19,7 +19,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color(0xff181F30),
+      //Colors.black,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -127,7 +128,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                         child: Text(
                           'Male',
                           style: TextStyle(
-                              color: Colors.black,
+                              color: Color(0xff181F30),
                               fontSize: 10.sp
                           ),
                         ),
@@ -153,7 +154,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                         child: Text(
                           'Female',
                           style: TextStyle(
-                              color: Colors.black,
+                              color: Color(0xff181F30),
                               fontSize: 10.sp
                           ),
                         ),
@@ -184,8 +185,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
             SizedBox(height: 12.h,),
             CustomButton(
               text: 'Finish',
-              borderColor: Colors.black,
-              textColor: Colors.black,
+              borderColor: Color(0xffFFD542),
+              textColor: Color(0xff181F30),
               buttonColor: Color(0xffFFD542),
             ),
             SizedBox(height: 1.5.h,),

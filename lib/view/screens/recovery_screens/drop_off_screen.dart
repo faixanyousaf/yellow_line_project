@@ -15,6 +15,7 @@ class _DropOffScreenState extends State<DropOffScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff181F30),
       body: Container(
         height: 100.h,
         width: 100.w,
@@ -32,7 +33,11 @@ class _DropOffScreenState extends State<DropOffScreen> {
             Positioned(
               top: 7.h,
               left: 3.w,
-              child: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 5.w,),),
+              child: GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 5.w,)),),
             Positioned(
               top: 11.h,
               left: 5.w,
@@ -40,7 +45,8 @@ class _DropOffScreenState extends State<DropOffScreen> {
                 height: 5.h,
                 width: 44.w,
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  color: Color(0xff181F30),
+                  //Colors.black,
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Center(
@@ -70,7 +76,8 @@ class _DropOffScreenState extends State<DropOffScreen> {
                 height: 5.h,
                 width: 44.w,
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  color: Color(0xff181F30),
+                  //Colors.black,
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Center(
@@ -98,58 +105,66 @@ class _DropOffScreenState extends State<DropOffScreen> {
                 child: Container(
                   width: 100.w,
                   decoration: BoxDecoration(
-                    color: Colors.black,
+                    color: Color(0xff181F30),
                     borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20))
                   ),
-                  child: Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 5.w),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 2.h,),
-                        Text(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 2.h,),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5.w),
+                        child: Text(
                           'Drop-off Suggestions:',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 10.sp
                           ),
                         ),
-                        SizedBox(height: 1.h,),
-                        Container(
-                          height: 7.h,
-                          child: ListView.builder(
-                            itemCount: 5,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) => Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                              child: dropContainer(image: 'assets/garage.png',text: 'Garage'),
-                            ),),
-                        ),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //   children: [
-                        //     dropContainer(image: 'assets/garage.png',text: 'Garage'),
-                        //     dropContainer(image: 'assets/service.png',text: 'Service\nStation'),
-                        //     dropContainer(image: 'assets/pump.png',text: 'Petrol\nPump'),
-                        //   ],
-                        // ),
-                        SizedBox(height: 1.h,),
-                        Text(
+                      ),
+                      SizedBox(height: 1.h,),
+                      Container(
+                        height: 7.h,
+                        child: ListView.builder(
+                          itemCount: 5,
+                          scrollDirection: Axis.horizontal,
+                          padding: EdgeInsets.symmetric(horizontal: 5.w),
+                          itemBuilder: (context, index) => Row(
+                            children: [
+                              dropContainer(image: 'assets/garage.png',text: 'Garage'),
+                              SizedBox(width: 2.w,)
+                            ],
+                          ),),
+                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     dropContainer(image: 'assets/garage.png',text: 'Garage'),
+                      //     dropContainer(image: 'assets/service.png',text: 'Service\nStation'),
+                      //     dropContainer(image: 'assets/pump.png',text: 'Petrol\nPump'),
+                      //   ],
+                      // ),
+                      SizedBox(height: 1.h,),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5.w),
+                        child: Text(
                           'Recovery Type',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 10.sp
                           ),
                         ),
-                        SizedBox(height: 1.h,),
-                        Container(
-                          height: 3.5.h,
-                          child:  ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 6,
-                            itemBuilder: (context, index) => Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                              child: Container(
+                      ),
+                      SizedBox(height: 1.h,),
+                      Container(
+                        height: 3.5.h,
+                        child:  ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 6,
+                          padding: EdgeInsets.symmetric(horizontal: 5.w),
+                          itemBuilder: (context, index) => Row(
+                            children: [
+                              Container(
                               height: 2.8.h,
                               //width: 22.w,
                               decoration: BoxDecoration(
@@ -168,73 +183,78 @@ class _DropOffScreenState extends State<DropOffScreen> {
                                   ),
                                 ),
                               ),
-                          ),
-                            ),),
-                        ),
-                        // Row(
-                        //   children: [
-                        //     Container(
-                        //       height: 2.8.h,
-                        //       width: 22.w,
-                        //       decoration: BoxDecoration(
-                        //         borderRadius: BorderRadius.circular(30),
-                        //         border: Border.all(width: 0.7,color: Colors.white)
-                        //       ),
-                        //       child: Center(
-                        //         child: Text(
-                        //           'Normal',
-                        //           style: TextStyle(
-                        //               color: Colors.white,
-                        //               fontSize: 8.sp
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     ),
-                        //     SizedBox(width: 2.w,),
-                        //     Container(
-                        //       height: 2.8.h,
-                        //       width: 22.w,
-                        //       decoration: BoxDecoration(
-                        //           borderRadius: BorderRadius.circular(30),
-                        //           border: Border.all(width: 0.7,color: Colors.white)
-                        //       ),
-                        //       child: Center(
-                        //         child: Text(
-                        //           'Sports',
-                        //           style: TextStyle(
-                        //               color: Colors.white,
-                        //               fontSize: 8.sp
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     ),
-                        //     SizedBox(width: 2.w,),
-                        //     Container(
-                        //       height: 2.8.h,
-                        //       width: 22.w,
-                        //       decoration: BoxDecoration(
-                        //           borderRadius: BorderRadius.circular(30),
-                        //           border: Border.all(width: 0.7,color: Colors.white)
-                        //       ),
-                        //       child: Center(
-                        //         child: Text(
-                        //           'Heavy',
-                        //           style: TextStyle(
-                        //               color: Colors.white,
-                        //               fontSize: 8.sp
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
-                        SizedBox(height: 2.h,),
-                        Row(
+                              ),
+                              SizedBox(width: 2.3.w,)
+
+                            ],
+                          ),),
+                      ),
+                      // Row(
+                      //   children: [
+                      //     Container(
+                      //       height: 2.8.h,
+                      //       width: 22.w,
+                      //       decoration: BoxDecoration(
+                      //         borderRadius: BorderRadius.circular(30),
+                      //         border: Border.all(width: 0.7,color: Colors.white)
+                      //       ),
+                      //       child: Center(
+                      //         child: Text(
+                      //           'Normal',
+                      //           style: TextStyle(
+                      //               color: Colors.white,
+                      //               fontSize: 8.sp
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     SizedBox(width: 2.w,),
+                      //     Container(
+                      //       height: 2.8.h,
+                      //       width: 22.w,
+                      //       decoration: BoxDecoration(
+                      //           borderRadius: BorderRadius.circular(30),
+                      //           border: Border.all(width: 0.7,color: Colors.white)
+                      //       ),
+                      //       child: Center(
+                      //         child: Text(
+                      //           'Sports',
+                      //           style: TextStyle(
+                      //               color: Colors.white,
+                      //               fontSize: 8.sp
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     SizedBox(width: 2.w,),
+                      //     Container(
+                      //       height: 2.8.h,
+                      //       width: 22.w,
+                      //       decoration: BoxDecoration(
+                      //           borderRadius: BorderRadius.circular(30),
+                      //           border: Border.all(width: 0.7,color: Colors.white)
+                      //       ),
+                      //       child: Center(
+                      //         child: Text(
+                      //           'Heavy',
+                      //           style: TextStyle(
+                      //               color: Colors.white,
+                      //               fontSize: 8.sp
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+                      SizedBox(height: 2.h,),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5.w),
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CustomBottomButton(
                               text: 'Schedule',
-                              buttonColor: Colors.black,
+                              buttonColor: Color(0xff181F30),
                               textColor: Color(0xffFFCC1B),
                               borderColor: Color(0xffFFCC1B),
                             ),
@@ -246,9 +266,9 @@ class _DropOffScreenState extends State<DropOffScreen> {
                             )
                           ],
                         ),
-                        SizedBox(width: 2.w,),
-                      ],
-                    ),
+                      ),
+                      SizedBox(height: 2.h,),
+                    ],
                   ),
                 )
             )

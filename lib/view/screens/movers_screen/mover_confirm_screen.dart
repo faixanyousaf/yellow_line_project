@@ -14,7 +14,7 @@ class _MoverConfirmScreenState extends State<MoverConfirmScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color(0xff181F30),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -40,13 +40,13 @@ class _MoverConfirmScreenState extends State<MoverConfirmScreen> {
                     fontSize: 16.sp
                 ),
               ),
-              SizedBox(height: 32.h,),
+              SizedBox(height: 30.h,),
               CustomButton(
                 borderColor: Color(0xffFFCC1B),
                 buttonColor: Color(0xffFFCC1B),
-                textColor: Colors.black,
+                textColor: Color(0xff181F30),
                 text: 'Track',
-              )
+              ),
             ],
           ),
         ),

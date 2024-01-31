@@ -14,7 +14,7 @@ class _MoverWaitingScreenState extends State<MoverWaitingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color(0xff181F30),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -40,7 +40,7 @@ class _MoverWaitingScreenState extends State<MoverWaitingScreen> {
                     fontSize: 16.sp
                 ),
               ),
-              SizedBox(height: 32.h,),
+              SizedBox(height: 30.h,),
               CustomButton(
                 borderColor: Color(0xffFFCC1B),
                 buttonColor: Color(0xffFFCC1B),

@@ -14,7 +14,7 @@ class _RecoveryConfirmedScreenState extends State<RecoveryConfirmedScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color(0xff181F30),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -44,7 +44,7 @@ class _RecoveryConfirmedScreenState extends State<RecoveryConfirmedScreen> {
               CustomButton(
                 borderColor: Color(0xffFFCC1B),
                 buttonColor: Color(0xffFFCC1B),
-                textColor: Colors.black,
+                textColor: Color(0xff181F30),
                 text: 'Track',
               )
             ],
