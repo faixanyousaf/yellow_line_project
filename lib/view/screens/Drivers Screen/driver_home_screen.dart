@@ -227,12 +227,43 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Sales Statistics',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 10.sp
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Sales Statistics',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 10.sp
+                            ),
+                          ),
+                          Container(
+                            height: 3.h,
+                            //width: 22.w,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(6),
+                                border: Border.all(color: Colors.grey,width: 0.7)
+                            ),
+                            child: Center(
+                              child: Row(
+                                children: [
+                                  SizedBox(width: 1.w,),
+                                  Text(
+                                    'Feburary',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 10.sp
+                                    ),
+                                  ),
+                                  SizedBox(width: 1.w,),
+                                  Icon(Icons.keyboard_arrow_down,color: Colors.black,),
+                                  SizedBox(width: 1.w,),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       SizedBox(height: 1.h,),
                       Expanded(
