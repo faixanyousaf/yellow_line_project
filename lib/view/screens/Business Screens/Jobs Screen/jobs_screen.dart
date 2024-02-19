@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:yellowline/view/screens/Drivers%20Screen/add_driver_screen/add_driver_screen.dart';
+import 'package:yellowline/view/screens/Business%20Screens/Jobs%20Screen/active_screen.dart';
+import 'package:yellowline/view/screens/Drivers%20Screen/Authenticate%20Screens/driver_signin_screen.dart';
 
-import 'movers_screen.dart';
-
-class MyRequestMainScreen extends StatefulWidget {
-  const MyRequestMainScreen({Key? key}) : super(key: key);
+class JobsScreen extends StatefulWidget {
+  const JobsScreen({Key? key}) : super(key: key);
 
   @override
-  State<MyRequestMainScreen> createState() => _MyRequestMainScreenState();
+  State<JobsScreen> createState() => _JobsScreenState();
 }
 
-class _MyRequestMainScreenState extends State<MyRequestMainScreen>with SingleTickerProviderStateMixin {
+class _JobsScreenState extends State<JobsScreen> with SingleTickerProviderStateMixin {
+
   late TabController _controller;
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  //final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _controller = TabController(length: 3, vsync: this);
+    _controller = TabController(length: 4, vsync: this);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       backgroundColor: Color(0xff181F30),
       appBar: AppBar(
         backgroundColor: Color(0xff181F30),
@@ -31,16 +31,16 @@ class _MyRequestMainScreenState extends State<MyRequestMainScreen>with SingleTic
           padding:  EdgeInsets.symmetric(horizontal: 5.w),
           child: Icon(Icons.arrow_back_ios,color: Colors.white,size: 4.w,),
         ),
-        title: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 5.w),
-          child: Text(
-            'My Request',
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 12.sp
-            ),
+          title: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 5.w),
+            child: Text(
+            'My Jobs',
+        style: TextStyle(
+            color: Colors.white,
+        fontSize: 12.sp
+      ),
+      ),
           ),
-        ),
         leadingWidth: 2.w,
       ),
       body: Container(
@@ -58,27 +58,41 @@ class _MyRequestMainScreenState extends State<MyRequestMainScreen>with SingleTic
                 labelColor: Color(0xffFFCC1B),
                 indicatorWeight: 0.1.h,
                 indicatorSize: TabBarIndicatorSize.tab,
-
                 tabs: [
                   Padding(
                     padding: EdgeInsets.only(bottom: 0.8.h),
                     child: Text(
-                      'Recovery',
-                      style: TextStyle(color: Color(0xffFFCC1B),fontSize: 10.sp ),
+                      'Active',
+                      style: TextStyle(
+                          //color: Color(0xffFFCC1B),
+                          fontSize: 10.sp ),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(bottom: 0.8.h),
                     child: Text(
-                      'Movers',
-                      style: TextStyle(color: Color(0xffFFCC1B),fontSize: 10.sp ),
+                      'Completed',
+                      style: TextStyle(
+                          //color: Color(0xffFFCC1B),
+                          fontSize: 10.sp ),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(bottom: 0.8.h),
                     child: Text(
-                      'Rentals',
-                      style: TextStyle(color: Color(0xffFFCC1B),fontSize: 10.sp ),
+                      'Cancelled',
+                      style: TextStyle(
+                          //color: Color(0xffFFCC1B),
+                          fontSize: 10.sp ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 0.8.h),
+                    child: Text(
+                      'All',
+                      style: TextStyle(
+                          //color: Color(0xffFFCC1B),
+                          fontSize: 10.sp ),
                     ),
                   ),
                 ],
@@ -88,9 +102,10 @@ class _MyRequestMainScreenState extends State<MyRequestMainScreen>with SingleTic
             Expanded(
                 child: TabBarView(
                   controller: _controller,
-                  children: const [
+                  children:  [
+                    ActiveScreen(),
                     SizedBox(),
-                    MoversScreen(),
+                    SizedBox(),
                     SizedBox(),
                   ],
                 )
@@ -101,10 +116,9 @@ class _MyRequestMainScreenState extends State<MyRequestMainScreen>with SingleTic
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => AddDriverScreen(),));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => DriverLoginScreen(),));
         },
       ),
-
     );
   }
 }

@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 
-class MoversScreen extends StatefulWidget {
-  const MoversScreen({Key? key}) : super(key: key);
+class ActiveScreen extends StatefulWidget {
+  const ActiveScreen({Key? key}) : super(key: key);
 
   @override
-  State<MoversScreen> createState() => _MoversScreenState();
+  State<ActiveScreen> createState() => _ActiveScreenState();
 }
 
-class _MoversScreenState extends State<MoversScreen> {
+class _ActiveScreenState extends State<ActiveScreen> {
   @override
   Widget build(BuildContext context) {
     return  Container(
@@ -47,8 +47,8 @@ class _MoversScreenState extends State<MoversScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SizedBox(height:0.3.h,),
-                                Text('19 Jan, 2024',style: TextStyle(fontSize: 12.sp,fontWeight: FontWeight.w500,color: Colors.white)),
-                                Text('5 Quotations received',style: TextStyle(fontSize: 10.sp,color: Color(0xff13F01C))),
+                                 Text('19 Jan, 2024',style: TextStyle(fontSize: 12.sp,fontWeight: FontWeight.w500,color: Colors.white)),
+                                 Text('AED 2000',style: TextStyle(fontSize: 10.sp,color: Color(0xff13F01C))),
                                 SizedBox(height: 0.5.h,),
                                 Row(
                                   children: [

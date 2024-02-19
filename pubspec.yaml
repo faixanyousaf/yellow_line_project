@@ -41,6 +41,7 @@ dependencies:
   pin_code_fields: ^7.4.0
   dotted_border: ^2.1.0
   smooth_page_indicator: ^1.1.0
+  flutter_advanced_switch: ^3.0.1
 
 dev_dependencies:
   flutter_test:
