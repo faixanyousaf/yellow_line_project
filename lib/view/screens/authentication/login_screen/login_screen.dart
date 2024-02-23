@@ -60,76 +60,76 @@ class _LogInScreenState extends State<LogInScreen> {
               ),
             ),
             SizedBox(height: 4.h,),
-            Container(
-              // height: 4.h,
-              width: 45.w,
-              padding: EdgeInsets.all(1),
-              decoration: BoxDecoration(
-                  border: Border.all(width: 0.5,color: Colors.white),
-                  borderRadius: BorderRadius.circular(7),
-                  color: Colors.white
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        index = 1;
-                        setState(() {
-
-                        });
-                      },
-                      child: Container(
-                        height: 3.9.h,
-                        //width: 22.w,
-                        decoration: BoxDecoration(
-                            border: Border.all(width: 0.5,color: Colors.white),
-                            borderRadius: BorderRadius.circular(7),
-                            color: index == 1? Color(0xffFFD542):Colors.white
-                        ),
-                        child: Center(
-                          child: Text(
-                            'User',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 10.sp
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        index = 2;
-                        setState(() {
-
-                        });
-                      },
-                      child: Container(
-                        height: 3.9.h,
-                        //width: 22.2.w,
-                        decoration: BoxDecoration(
-                            border: Border.all(width: 0.5,color: Colors.white),
-                            borderRadius: BorderRadius.circular(7),
-                            color: index == 2? Color(0xffFFD542):Colors.white
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Business',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 10.sp
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
+            // Container(
+            //   // height: 4.h,
+            //   width: 45.w,
+            //   padding: EdgeInsets.all(1),
+            //   decoration: BoxDecoration(
+            //       border: Border.all(width: 0.5,color: Colors.white),
+            //       borderRadius: BorderRadius.circular(7),
+            //       color: Colors.white
+            //   ),
+            //   child: Row(
+            //     children: [
+            //       Expanded(
+            //         child: GestureDetector(
+            //           onTap: () {
+            //             index = 1;
+            //             setState(() {
+            //
+            //             });
+            //           },
+            //           child: Container(
+            //             height: 3.9.h,
+            //             //width: 22.w,
+            //             decoration: BoxDecoration(
+            //                 border: Border.all(width: 0.5,color: Colors.white),
+            //                 borderRadius: BorderRadius.circular(7),
+            //                 color: index == 1? Color(0xffFFD542):Colors.white
+            //             ),
+            //             child: Center(
+            //               child: Text(
+            //                 'User',
+            //                 style: TextStyle(
+            //                     color: Colors.black,
+            //                     fontSize: 10.sp
+            //                 ),
+            //               ),
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //       Expanded(
+            //         child: GestureDetector(
+            //           onTap: () {
+            //             index = 2;
+            //             setState(() {
+            //
+            //             });
+            //           },
+            //           child: Container(
+            //             height: 3.9.h,
+            //             //width: 22.2.w,
+            //             decoration: BoxDecoration(
+            //                 border: Border.all(width: 0.5,color: Colors.white),
+            //                 borderRadius: BorderRadius.circular(7),
+            //                 color: index == 2? Color(0xffFFD542):Colors.white
+            //             ),
+            //             child: Center(
+            //               child: Text(
+            //                 'Business',
+            //                 style: TextStyle(
+            //                     color: Colors.black,
+            //                     fontSize: 10.sp
+            //                 ),
+            //               ),
+            //             ),
+            //           ),
+            //         ),
+            //       )
+            //     ],
+            //   ),
+            // ),
             SizedBox(height: 4.h,),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 6.w),
