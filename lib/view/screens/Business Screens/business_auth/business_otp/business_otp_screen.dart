@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
-import 'package:yellowline/view/screens/authentication/reset_password_screen/reset_password_screen.dart';
+import 'package:yellowline/view/screens/Business%20Screens/Business%20Login/business_login_screen.dart';
+import 'package:yellowline/view/screens/Business%20Screens/business_auth/business_create_password/business_create_password.dart';
 
-class OttpScreen extends StatefulWidget {
-  const OttpScreen({Key? key}) : super(key: key);
+class BusinessOtpScreen extends StatefulWidget {
+  const BusinessOtpScreen({Key? key}) : super(key: key);
 
   @override
-  State<OttpScreen> createState() => _OttpScreenState();
+  State<BusinessOtpScreen> createState() => _BusinessOtpScreenState();
 }
 
-class _OttpScreenState extends State<OttpScreen> {
+class _BusinessOtpScreenState extends State<BusinessOtpScreen> {
   TextEditingController textEditingController = TextEditingController();
 
   @override
@@ -56,7 +57,7 @@ class _OttpScreenState extends State<OttpScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 4.h,),
+            SizedBox(height: 8.h,),
             Padding(
               padding:  EdgeInsets.symmetric(horizontal: 6.w),
               child: PinCodeTextField(
@@ -68,21 +69,7 @@ class _OttpScreenState extends State<OttpScreen> {
                   fontWeight: FontWeight.bold,
                 ),
                 length: 6,
-
-                // obscureText: true,
-                // obscuringCharacter: '*',
-                //  obscuringWidget: const FlutterLogo(
-                //    size: 24,
-                //  ),
-                //blinkWhenObscuring: true,
                 animationType: AnimationType.fade,
-                // validator: (v) {
-                //   if (v!.length < 3) {
-                //     return "I'm from validator";
-                //   } else {
-                //     return null;
-                //   }
-                // },
                 pinTheme: PinTheme(
                   shape: PinCodeFieldShape.box,
                   activeColor: Color(0xff8381E0),
@@ -95,30 +82,19 @@ class _OttpScreenState extends State<OttpScreen> {
                   activeFillColor: Colors.white,
                   inactiveFillColor: Colors.white,
                 ),
-                // cursorColor: Colors.black,
+
                 animationDuration: const Duration(milliseconds: 300),
                 enableActiveFill: true,
                 //errorAnimationController: errorController,
                 controller: textEditingController,
                 keyboardType: TextInputType.number,
-                // boxShadows: const [
-                //   BoxShadow(
-                //     offset: Offset(0, 1),
-                //     color: Colors.black12,
-                //     blurRadius: 10,
-                //   )
-                // ],
+
                 onCompleted: (v) {
                   debugPrint("Completed");
                 },
-                // onTap: () {
-                //   print("Pressed");
-                // },
+
                 onChanged: (value) {
-                  // debugPrint(value);
-                  // setState(() {
-                  //   currentText = value;
-                  // });
+
                   setState(() {});
                 },
                 beforeTextPaste: (text) {
@@ -129,10 +105,10 @@ class _OttpScreenState extends State<OttpScreen> {
                 },
               ),
             ),
-            SizedBox(height: 14.h,),
+            SizedBox(height: 16.h,),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ResetPasswordScreen(),));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => BusinessCreatePassword(),));
               },
               child: CustomButton(
                 text: 'Verify',
@@ -141,11 +117,35 @@ class _OttpScreenState extends State<OttpScreen> {
                 buttonColor: Color(0xffFFD542),
               ),
             ),
-            SizedBox(height: 1.5.h,),
-
+            SizedBox(height: 2.h,),
+            Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Already have an account?',
+                    style: TextStyle(
+                        color: Colors.white
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => BusinessLoginScreen(),));
+                    },
+                    child: Text(
+                      ' Sign In',
+                      style: TextStyle(
+                        color: Color(0xffFFD542),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),
+
     );
   }
 }

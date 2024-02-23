@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
+import 'package:yellowline/global_widgets/custom_google_button.dart';
 import 'package:yellowline/global_widgets/custom_textfield.dart';
-import 'package:yellowline/view/screens/Drivers%20Screen/driver_home_screen.dart';
+import 'package:yellowline/view/screens/Business%20Screens/Business%20Home%20Page/business_home_screen.dart';
 import 'package:yellowline/view/screens/authentication/forgot_password_screen/forgot_password_screen.dart';
+import 'package:yellowline/view/screens/authentication/signup_screen/signup_screen.dart';
 
-class DriverLoginScreen extends StatefulWidget {
-  const DriverLoginScreen({Key? key}) : super(key: key);
+class BusinessLoginScreen extends StatefulWidget {
+  const BusinessLoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<DriverLoginScreen> createState() => _DriverLoginScreenState();
+  State<BusinessLoginScreen> createState() => _BusinessLoginScreenState();
 }
 
-class _DriverLoginScreenState extends State<DriverLoginScreen> {
-  int index = 1;
+class _BusinessLoginScreenState extends State<BusinessLoginScreen> {
+  int index = 2;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -78,7 +80,7 @@ class _DriverLoginScreenState extends State<DriverLoginScreen> {
                         });
                       },
                       child: Container(
-                        height: 3.7.h,
+                        height: 3.9.h,
                         //width: 22.w,
                         decoration: BoxDecoration(
                             border: Border.all(width: 0.5,color: Colors.white),
@@ -106,7 +108,7 @@ class _DriverLoginScreenState extends State<DriverLoginScreen> {
                         });
                       },
                       child: Container(
-                        height: 3.7.h,
+                        height: 3.9.h,
                         //width: 22.2.w,
                         decoration: BoxDecoration(
                             border: Border.all(width: 0.5,color: Colors.white),
@@ -169,21 +171,70 @@ class _DriverLoginScreenState extends State<DriverLoginScreen> {
               ),
             ),
             SizedBox(height: 4.h,),
-            CustomButton(
-              text: 'Sign In',
-              borderColor: Colors.black,
-              textColor: Colors.black,
-              buttonColor: Color(0xffFFD542),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => BusinessHomeScreen(),));
+              },
+              child: CustomButton(
+                text: 'Sign In',
+                borderColor: Colors.black,
+                textColor: Colors.black,
+                buttonColor: Color(0xffFFD542),
+              ),
             ),
             SizedBox(height: 1.5.h,),
-
+            Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Do not have an account?',
+                    style: TextStyle(
+                        color: Colors.white
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen(),));
+                    },
+                    child: Text(
+                      ' Signup',
+                      style: TextStyle(
+                        color: Color(0xffFFD542),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(height: 3.h,),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 6.w),
+              child: Row(
+                children: [
+                  Container(height: 0.12.h,width: 38.w,color: Colors.white,),
+                  Text(
+                    '  OR  ',
+                    style: TextStyle(
+                        color: Colors.white
+                    ),
+                  ),
+                  Container(height: 0.12.h,width: 39.w,color: Colors.white,),
+                ],
+              ),
+            ),
+            SizedBox(height: 3.h,),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 6.w),
+              child: CustomGoogleButton(image: 'assets/google.png',text: 'Signup with Google'),
+            ),
+            SizedBox(height: 2.h,),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 6.w),
+              child: CustomGoogleButton(image: 'assets/facebook.png',text: 'Signup with Facebook'),
+            )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => DriverHomeScreen(),));
-        },
       ),
     );
   }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/view/screens/Drivers%20Screen/add_driver_screen/add_driver_screen.dart';
+import 'package:yellowline/view/screens/add_car_screen/vehicle_list_screen.dart';
+import 'package:yellowline/view/screens/add_car_screen/vehicle_screen.dart';
 
 import 'movers_screen.dart';
 
@@ -58,27 +60,32 @@ class _MyRequestMainScreenState extends State<MyRequestMainScreen>with SingleTic
                 labelColor: Color(0xffFFCC1B),
                 indicatorWeight: 0.1.h,
                 indicatorSize: TabBarIndicatorSize.tab,
-
                 tabs: [
                   Padding(
                     padding: EdgeInsets.only(bottom: 0.8.h),
                     child: Text(
                       'Recovery',
-                      style: TextStyle(color: Color(0xffFFCC1B),fontSize: 10.sp ),
+                      style: TextStyle(
+                          //color: Color(0xffFFCC1B),
+                          fontSize: 10.sp ),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(bottom: 0.8.h),
                     child: Text(
                       'Movers',
-                      style: TextStyle(color: Color(0xffFFCC1B),fontSize: 10.sp ),
+                      style: TextStyle(
+                          //color: Color(0xffFFCC1B),
+                          fontSize: 10.sp ),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(bottom: 0.8.h),
                     child: Text(
                       'Rentals',
-                      style: TextStyle(color: Color(0xffFFCC1B),fontSize: 10.sp ),
+                      style: TextStyle(
+                          //color: Color(0xffFFCC1B),
+                          fontSize: 10.sp ),
                     ),
                   ),
                 ],
@@ -101,7 +108,7 @@ class _MyRequestMainScreenState extends State<MyRequestMainScreen>with SingleTic
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => AddDriverScreen(),));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleScreen(),));
         },
       ),
 

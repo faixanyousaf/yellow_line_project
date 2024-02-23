@@ -168,7 +168,7 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
                           Container(
                             // height: 4.h,
                             width: 45.w,
-                            padding: EdgeInsets.all(1),
+                            padding: EdgeInsets.all(2),
                             decoration: BoxDecoration(
                                 border: Border.all(width: 0.5,color: Colors.white),
                                 borderRadius: BorderRadius.circular(7),
@@ -176,53 +176,57 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
                             ),
                             child: Row(
                               children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    index = 1;
-                                    setState(() {
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      index = 1;
+                                      setState(() {
 
-                                    });
-                                  },
-                                  child: Container(
-                                    height: 3.2.h,
-                                    width: 22.w,
-                                    decoration: BoxDecoration(
-                                        border: Border.all(width: 0.5,color: Colors.white),
-                                        borderRadius: BorderRadius.circular(7),
-                                        color: index == 1? Color(0xffFFD542):Colors.white
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        'Cash',
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 9.sp
+                                      });
+                                    },
+                                    child: Container(
+                                      height: 3.2.h,
+                                      //width: 22.w,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(width: 0.5,color: Colors.white),
+                                          borderRadius: BorderRadius.circular(7),
+                                          color: index == 1? Color(0xffFFD542):Colors.white
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          'Cash',
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 9.sp
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
                                 ),
-                                GestureDetector(
-                                  onTap: () {
-                                    index = 2;
-                                    setState(() {
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      index = 2;
+                                      setState(() {
 
-                                    });
-                                  },
-                                  child: Container(
-                                    height: 3.2.h,
-                                    width: 22.2.w,
-                                    decoration: BoxDecoration(
-                                        border: Border.all(width: 0.5,color: Colors.white),
-                                        borderRadius: BorderRadius.circular(7),
-                                        color: index == 2? Color(0xffFFD542):Colors.white
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        'Card',
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 9.sp
+                                      });
+                                    },
+                                    child: Container(
+                                      height: 3.2.h,
+                                      //width: 22.2.w,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(width: 0.5,color: Colors.white),
+                                          borderRadius: BorderRadius.circular(7),
+                                          color: index == 2? Color(0xffFFD542):Colors.white
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          'Card',
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 9.sp
+                                          ),
                                         ),
                                       ),
                                     ),

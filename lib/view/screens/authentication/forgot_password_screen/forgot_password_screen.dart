@@ -112,11 +112,16 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               ),
             ),
             SizedBox(height: 14.h,),
-            CustomButton(
-              text: 'Next',
-              borderColor: Colors.black,
-              textColor: Colors.black,
-              buttonColor: Color(0xffFFD542),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => OttpScreen(),));
+              },
+              child: CustomButton(
+                text: 'Next',
+                borderColor: Colors.black,
+                textColor: Colors.black,
+                buttonColor: Color(0xffFFD542),
+              ),
             ),
             SizedBox(height: 1.5.h,),
 
@@ -125,7 +130,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => OttpScreen(),));
+          //Navigator.push(context, MaterialPageRoute(builder: (context) => OttpScreen(),));
         },
       ),
     );

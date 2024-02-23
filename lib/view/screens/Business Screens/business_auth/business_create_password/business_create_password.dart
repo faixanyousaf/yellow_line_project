@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
 import 'package:yellowline/global_widgets/custom_textfield.dart';
-import 'package:yellowline/view/screens/authentication/complete_profile_screen/complete_profile_screen.dart';
-import 'package:yellowline/view/screens/authentication/login_screen/login_screen.dart';
+import 'package:yellowline/view/screens/Business%20Screens/Business%20Login/business_login_screen.dart';
 
-class CreatePasswordScreen extends StatefulWidget {
-  const CreatePasswordScreen({Key? key}) : super(key: key);
+class BusinessCreatePassword extends StatefulWidget {
+  const BusinessCreatePassword({Key? key}) : super(key: key);
 
   @override
-  State<CreatePasswordScreen> createState() => _CreatePasswordScreenState();
+  State<BusinessCreatePassword> createState() => _BusinessCreatePasswordState();
 }
 
-class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
+class _BusinessCreatePasswordState extends State<BusinessCreatePassword> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController conformPasswordController = TextEditingController();
 
@@ -85,7 +84,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
             SizedBox(height: 10.h,),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => CompleteProfileScreen(),));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => BusinessLoginScreen(),));
               },
               child: CustomButton(
                 text: 'Create',
@@ -107,7 +106,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen(),));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => BusinessLoginScreen(),));
                     },
                     child: Text(
                       ' Sign In',
@@ -122,11 +121,6 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
             SizedBox(height: 3.h,),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          //Navigator.push(context, MaterialPageRoute(builder: (context) => CompleteProfileScreen(),));
-        },
       ),
     );
   }

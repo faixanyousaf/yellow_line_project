@@ -205,11 +205,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
                 SizedBox(height: 8.h,),
-                CustomButton(
-                  text: 'Next',
-                  borderColor: Color(0xffFFD542),
-                  textColor: Color(0xff181F30),
-                  buttonColor: Color(0xffFFD542),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => OtpScreen(),));
+                  },
+                  child: CustomButton(
+                    text: 'Next',
+                    borderColor: Color(0xffFFD542),
+                    textColor: Color(0xff181F30),
+                    buttonColor: Color(0xffFFD542),
+                  ),
                 ),
                 SizedBox(height: 2.h,),
                 Center(
@@ -271,7 +276,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => OtpScreen(),));
+          //Navigator.push(context, MaterialPageRoute(builder: (context) => OtpScreen(),));
         },
       ),
     );

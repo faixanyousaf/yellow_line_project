@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
 import 'package:yellowline/global_widgets/custom_textfield.dart';
+import 'package:yellowline/view/screens/authentication/login_screen/login_screen.dart';
 import 'package:yellowline/view/screens/authentication/reset_password_screen/reset_password_screen.dart';
 
 class CompleteProfileScreen extends StatefulWidget {
@@ -109,53 +110,57 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
               ),
               child: Row(
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      index = 1;
-                      setState(() {
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        index = 1;
+                        setState(() {
 
-                      });
-                    },
-                    child: Container(
-                      height: 3.5.h,
-                      width: 22.w,
-                      decoration: BoxDecoration(
-                          border: Border.all(width: 0.5,color: Colors.white),
-                          borderRadius: BorderRadius.circular(7),
-                          color: index == 1? Color(0xffFFD542):Colors.white
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Male',
-                          style: TextStyle(
-                              color: Color(0xff181F30),
-                              fontSize: 10.sp
+                        });
+                      },
+                      child: Container(
+                        height: 3.5.h,
+                        //width: 22.w,
+                        decoration: BoxDecoration(
+                            border: Border.all(width: 0.5,color: Colors.white),
+                            borderRadius: BorderRadius.circular(7),
+                            color: index == 1? Color(0xffFFD542):Colors.white
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Male',
+                            style: TextStyle(
+                                color: Color(0xff181F30),
+                                fontSize: 10.sp
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      index = 2;
-                      setState(() {
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        index = 2;
+                        setState(() {
 
-                      });
-                    },
-                    child: Container(
-                      height: 3.5.h,
-                      width: 22.2.w,
-                      decoration: BoxDecoration(
-                          border: Border.all(width: 0.5,color: Colors.white),
-                          borderRadius: BorderRadius.circular(7),
-                          color: index == 2? Color(0xffFFD542):Colors.white
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Female',
-                          style: TextStyle(
-                              color: Color(0xff181F30),
-                              fontSize: 10.sp
+                        });
+                      },
+                      child: Container(
+                        height: 3.5.h,
+                        //width: 22.2.w,
+                        decoration: BoxDecoration(
+                            border: Border.all(width: 0.5,color: Colors.white),
+                            borderRadius: BorderRadius.circular(7),
+                            color: index == 2? Color(0xffFFD542):Colors.white
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Female',
+                            style: TextStyle(
+                                color: Color(0xff181F30),
+                                fontSize: 10.sp
+                            ),
                           ),
                         ),
                       ),
@@ -183,11 +188,16 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
               ),
             ),
             SizedBox(height: 12.h,),
-            CustomButton(
-              text: 'Finish',
-              borderColor: Color(0xffFFD542),
-              textColor: Color(0xff181F30),
-              buttonColor: Color(0xffFFD542),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen(),));
+              },
+              child: CustomButton(
+                text: 'Finish',
+                borderColor: Color(0xffFFD542),
+                textColor: Color(0xff181F30),
+                buttonColor: Color(0xffFFD542),
+              ),
             ),
             SizedBox(height: 1.5.h,),
 
@@ -196,7 +206,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => ResetPasswordScreen(),));
+          //Navigator.push(context, MaterialPageRoute(builder: (context) => ResetPasswordScreen(),));
         },
       ),
     );

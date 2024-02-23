@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
 import 'package:yellowline/global_widgets/custom_textfield.dart';
+import 'package:yellowline/view/screens/authentication/login_screen/login_screen.dart';
 import 'package:yellowline/view/screens/home_page/home_page.dart';
 import 'package:yellowline/view/screens/home_page/home_screen.dart';
 
@@ -83,11 +84,16 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               ),
             ),
             SizedBox(height: 8.h,),
-            CustomButton(
-              text: 'Reset',
-              borderColor: Color(0xffFFD542),
-              textColor: Color(0xff181F30),
-              buttonColor: Color(0xffFFD542),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen(),));
+              },
+              child: CustomButton(
+                text: 'Reset',
+                borderColor: Color(0xffFFD542),
+                textColor: Color(0xff181F30),
+                buttonColor: Color(0xffFFD542),
+              ),
             ),
             SizedBox(height: 1.5.h,),
 

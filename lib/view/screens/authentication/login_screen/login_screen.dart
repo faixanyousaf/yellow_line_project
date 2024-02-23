@@ -5,6 +5,7 @@ import 'package:yellowline/global_widgets/custom_google_button.dart';
 import 'package:yellowline/global_widgets/custom_textfield.dart';
 import 'package:yellowline/view/screens/authentication/forgot_password_screen/forgot_password_screen.dart';
 import 'package:yellowline/view/screens/authentication/signup_screen/signup_screen.dart';
+import 'package:yellowline/view/screens/home_page/home_screen.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({Key? key}) : super(key: key);
@@ -70,53 +71,57 @@ class _LogInScreenState extends State<LogInScreen> {
               ),
               child: Row(
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      index = 1;
-                      setState(() {
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        index = 1;
+                        setState(() {
 
-                      });
-                    },
-                    child: Container(
-                      height: 3.9.h,
-                      width: 22.w,
-                      decoration: BoxDecoration(
-                          border: Border.all(width: 0.5,color: Colors.white),
-                          borderRadius: BorderRadius.circular(7),
-                          color: index == 1? Color(0xffFFD542):Colors.white
-                      ),
-                      child: Center(
-                        child: Text(
-                          'User',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 10.sp
+                        });
+                      },
+                      child: Container(
+                        height: 3.9.h,
+                        //width: 22.w,
+                        decoration: BoxDecoration(
+                            border: Border.all(width: 0.5,color: Colors.white),
+                            borderRadius: BorderRadius.circular(7),
+                            color: index == 1? Color(0xffFFD542):Colors.white
+                        ),
+                        child: Center(
+                          child: Text(
+                            'User',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 10.sp
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      index = 2;
-                      setState(() {
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        index = 2;
+                        setState(() {
 
-                      });
-                    },
-                    child: Container(
-                      height: 3.9.h,
-                      width: 22.2.w,
-                      decoration: BoxDecoration(
-                          border: Border.all(width: 0.5,color: Colors.white),
-                          borderRadius: BorderRadius.circular(7),
-                          color: index == 2? Color(0xffFFD542):Colors.white
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Business',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 10.sp
+                        });
+                      },
+                      child: Container(
+                        height: 3.9.h,
+                        //width: 22.2.w,
+                        decoration: BoxDecoration(
+                            border: Border.all(width: 0.5,color: Colors.white),
+                            borderRadius: BorderRadius.circular(7),
+                            color: index == 2? Color(0xffFFD542):Colors.white
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Business',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 10.sp
+                            ),
                           ),
                         ),
                       ),
@@ -166,11 +171,16 @@ class _LogInScreenState extends State<LogInScreen> {
               ),
             ),
             SizedBox(height: 4.h,),
-            CustomButton(
-              text: 'Sign In',
-              borderColor: Colors.black,
-              textColor: Colors.black,
-              buttonColor: Color(0xffFFD542),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(),));
+              },
+              child: CustomButton(
+                text: 'Sign In',
+                borderColor: Colors.black,
+                textColor: Colors.black,
+                buttonColor: Color(0xffFFD542),
+              ),
             ),
             SizedBox(height: 1.5.h,),
             Center(

@@ -4,7 +4,10 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
 import 'package:yellowline/global_widgets/custom_textfield.dart';
+import 'package:yellowline/view/screens/Business%20Screens/Business%20Login/business_login_screen.dart';
+import 'package:yellowline/view/screens/Business%20Screens/business_auth/business_otp/business_otp_screen.dart';
 import 'package:yellowline/view/screens/authentication/login_screen/login_screen.dart';
+import 'package:yellowline/view/screens/authentication/otp_screen/otp_screen.dart';
 
 class BusinessSignUpScreen extends StatefulWidget {
   const BusinessSignUpScreen({Key? key}) : super(key: key);
@@ -214,11 +217,16 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
           ),
         ),
         SizedBox(height: 4.h,),
-        CustomButton(
-          text: 'Next',
-          borderColor: Color(0xffFFD542),
-          textColor: Color(0xff181F30),
-          buttonColor: Color(0xffFFD542),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => BusinessOtpScreen(),));
+          },
+          child: CustomButton(
+            text: 'Next',
+            borderColor: Color(0xffFFD542),
+            textColor: Color(0xff181F30),
+            buttonColor: Color(0xffFFD542),
+          ),
         ),
         SizedBox(height: 2.h,),
         Center(
@@ -233,7 +241,7 @@ class _BusinessSignUpScreenState extends State<BusinessSignUpScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen(),));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => BusinessLoginScreen(),));
                 },
                 child: Text(
                   ' Sign In',

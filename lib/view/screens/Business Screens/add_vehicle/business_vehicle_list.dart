@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
-import 'package:yellowline/view/screens/add_car_screen/add_new_vehicle_screen.dart';
+import 'package:yellowline/view/screens/Business%20Screens/add_vehicle/business_add_vehicle.dart';
 
-class VehicleListScreen extends StatefulWidget {
-  const VehicleListScreen({Key? key}) : super(key: key);
+class BusinessVehicleListScreen extends StatefulWidget {
+  const BusinessVehicleListScreen({Key? key}) : super(key: key);
 
   @override
-  State<VehicleListScreen> createState() => _VehicleListScreenState();
+  State<BusinessVehicleListScreen> createState() => _BusinessVehicleListScreenState();
 }
 
-class _VehicleListScreenState extends State<VehicleListScreen> {
+class _BusinessVehicleListScreenState extends State<BusinessVehicleListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,8 +92,8 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
                       Text(
                         '18',
                         style: TextStyle(
-                          color: Color(0xff181F30),
-                          fontSize: 16.sp
+                            color: Color(0xff181F30),
+                            fontSize: 16.sp
                         ),
                       ),
                       SizedBox(width: 25.w,),
@@ -149,7 +149,7 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
             SizedBox(height: 53.h,),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => AddNewVehicleScreen(),));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => BusinessAddVehicleScreen(),));
               },
               child: CustomButton(
                 buttonColor: Color(0xffFFD542),

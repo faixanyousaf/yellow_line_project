@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:yellowline/view/screens/My%20Request/my_request_main_screen.dart';
 import 'package:yellowline/view/screens/home_page/drawer_screen.dart';
+import 'package:yellowline/view/screens/movers_screen/mover_waiting_screen.dart';
 
-class TrackingHomeScreen extends StatefulWidget {
-  const TrackingHomeScreen({Key? key}) : super(key: key);
+class RequestHomeScreen extends StatefulWidget {
+  const RequestHomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<TrackingHomeScreen> createState() => _TrackingHomeScreenState();
+  State<RequestHomeScreen> createState() => _RequestHomeScreenState();
 }
 
-class _TrackingHomeScreenState extends State<TrackingHomeScreen> {
+class _RequestHomeScreenState extends State<RequestHomeScreen> {
   final PageController _pageController = PageController(initialPage: 0);
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   int activePage = 0;
@@ -277,7 +277,7 @@ class _TrackingHomeScreenState extends State<TrackingHomeScreen> {
                                     Image(image: AssetImage('assets/act.png'),height: 3.h,),
                                     SizedBox(width: 4.w,),
                                     Text(
-                                      'Tracking',
+                                      'Request',
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 10.sp
@@ -300,7 +300,7 @@ class _TrackingHomeScreenState extends State<TrackingHomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => MyRequestMainScreen(),));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => MoverWaitingScreen(),));
         },
       ),
     );

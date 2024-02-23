@@ -69,21 +69,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   fontWeight: FontWeight.bold,
                 ),
                 length: 6,
-
-                // obscureText: true,
-                // obscuringCharacter: '*',
-                //  obscuringWidget: const FlutterLogo(
-                //    size: 24,
-                //  ),
-                //blinkWhenObscuring: true,
                 animationType: AnimationType.fade,
-                // validator: (v) {
-                //   if (v!.length < 3) {
-                //     return "I'm from validator";
-                //   } else {
-                //     return null;
-                //   }
-                // },
                 pinTheme: PinTheme(
                   shape: PinCodeFieldShape.box,
                   activeColor: Color(0xff8381E0),
@@ -96,30 +82,19 @@ class _OtpScreenState extends State<OtpScreen> {
                   activeFillColor: Colors.white,
                   inactiveFillColor: Colors.white,
                 ),
-                // cursorColor: Colors.black,
+
                 animationDuration: const Duration(milliseconds: 300),
                 enableActiveFill: true,
                 //errorAnimationController: errorController,
                 controller: textEditingController,
                 keyboardType: TextInputType.number,
-                // boxShadows: const [
-                //   BoxShadow(
-                //     offset: Offset(0, 1),
-                //     color: Colors.black12,
-                //     blurRadius: 10,
-                //   )
-                // ],
+
                 onCompleted: (v) {
                   debugPrint("Completed");
                 },
-                // onTap: () {
-                //   print("Pressed");
-                // },
+
                 onChanged: (value) {
-                  // debugPrint(value);
-                  // setState(() {
-                  //   currentText = value;
-                  // });
+
                   setState(() {});
                 },
                 beforeTextPaste: (text) {
@@ -131,11 +106,16 @@ class _OtpScreenState extends State<OtpScreen> {
               ),
             ),
             SizedBox(height: 16.h,),
-            CustomButton(
-              text: 'Verify',
-              borderColor: Colors.black,
-              textColor: Colors.black,
-              buttonColor: Color(0xffFFD542),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CreatePasswordScreen(),));
+              },
+              child: CustomButton(
+                text: 'Verify',
+                borderColor: Colors.black,
+                textColor: Colors.black,
+                buttonColor: Color(0xffFFD542),
+              ),
             ),
             SizedBox(height: 2.h,),
             Center(
@@ -167,7 +147,7 @@ class _OtpScreenState extends State<OtpScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => CreatePasswordScreen(),));
+          //Navigator.push(context, MaterialPageRoute(builder: (context) => CreatePasswordScreen(),));
         },
       ),
     );

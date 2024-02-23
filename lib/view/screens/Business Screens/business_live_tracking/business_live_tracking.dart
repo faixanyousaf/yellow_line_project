@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/bottom_button.dart';
 import 'package:yellowline/global_widgets/custom_drop_conatiner.dart';
-import 'package:yellowline/view/screens/add_car_screen/vehicle_screen.dart';
-import 'package:yellowline/view/screens/movers_screen/apartment_detail_screen.dart';
+import 'package:yellowline/view/screens/Business%20Screens/add_vehicle/business_vehicle_screen.dart';
 
-class LiveTrackingScreen extends StatefulWidget {
-  const LiveTrackingScreen({Key? key}) : super(key: key);
+class BusinessLiveTracking extends StatefulWidget {
+  const BusinessLiveTracking({Key? key}) : super(key: key);
 
   @override
-  State<LiveTrackingScreen> createState() => _LiveTrackingScreenState();
+  State<BusinessLiveTracking> createState() => _BusinessLiveTrackingState();
 }
 
-class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
+class _BusinessLiveTrackingState extends State<BusinessLiveTracking> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,11 +116,9 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => ApartmentDetailScreen(),));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => BusinessVehicleScreen(),));
         },
       ),
     );
   }
-
-
 }

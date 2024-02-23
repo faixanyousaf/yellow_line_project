@@ -2,26 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
 import 'package:yellowline/global_widgets/custom_textfield.dart';
-import 'package:yellowline/view/screens/movers_screen/apartment_detail_screen.dart';
-import 'package:yellowline/view/screens/recovery_screens/booking_detail_screen.dart';
-import 'package:yellowline/view/screens/recovery_screens/drop_off_screen.dart';
+import 'package:yellowline/view/screens/Business%20Screens/add_vehicle/business_vehicle_detail.dart';
 
-class AddNewVehicleScreen extends StatefulWidget {
-  const AddNewVehicleScreen({Key? key}) : super(key: key);
+class BusinessAddVehicleScreen extends StatefulWidget {
+  const BusinessAddVehicleScreen({Key? key}) : super(key: key);
 
   @override
-  State<AddNewVehicleScreen> createState() => _AddNewVehicleScreenState();
+  State<BusinessAddVehicleScreen> createState() => _BusinessAddVehicleScreenState();
 }
 
-class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
+class _BusinessAddVehicleScreenState extends State<BusinessAddVehicleScreen> {
   TextEditingController codeController = TextEditingController();
   TextEditingController numberController = TextEditingController();
   int indexx = 0;
 
-
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: Color(0xff181F30),
       appBar: AppBar(
@@ -112,8 +108,8 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                           child: Text(
                             'Code',
                             style: TextStyle(
-                              color: Color(0xff181F30),
-                              fontSize: 16.sp
+                                color: Color(0xff181F30),
+                                fontSize: 16.sp
                             ),
                           ),
                         ),
@@ -157,8 +153,8 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
               child: Text(
                 'Select City',
                 style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 10.sp
+                    color: Colors.white,
+                    fontSize: 10.sp
                 ),
               ),
             ),
@@ -185,35 +181,35 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                             setState(() {});
                           },
                           child: Container(
-                          width: 25.w,
-                          height: 9.h,
-                          decoration: BoxDecoration(
-                            color: indexx == index ? Color(0xffFFCC1B) : Color(0xffEDEDED),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'أبو ظبي',
-                                  style: TextStyle(
-                                      color: Color(0xff181F30),
-                                      fontSize: 9.sp
+                            width: 25.w,
+                            height: 9.h,
+                            decoration: BoxDecoration(
+                              color: indexx == index ? Color(0xffFFCC1B) : Color(0xffEDEDED),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'أبو ظبي',
+                                    style: TextStyle(
+                                        color: Color(0xff181F30),
+                                        fontSize: 9.sp
+                                    ),
                                   ),
-                                ),
-                                SizedBox(height: 1.h,),
-                                Text(
-                                  'Abu Dhabi',
-                                  style: TextStyle(
-                                      color: Color(0xff181F30),
-                                      fontSize: 9.sp
-                                  ),
-                                )
-                              ],
+                                  SizedBox(height: 1.h,),
+                                  Text(
+                                    'Abu Dhabi',
+                                    style: TextStyle(
+                                        color: Color(0xff181F30),
+                                        fontSize: 9.sp
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
-                    ),
                         ),
                       ),),
                   ),
@@ -259,20 +255,25 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
               ),
             ),
             SizedBox(height: 26.h,),
-            CustomButton(
-              textColor: Color(0xff181F30),
-              text: 'Confirm',
-              borderColor: Color(0xffFFCC1B),
-              buttonColor: Color(0xffFFCC1B),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => BusinessVehicleDetail(),));
+              },
+              child: CustomButton(
+                textColor: Color(0xff181F30),
+                text: 'Next',
+                borderColor: Color(0xffFFCC1B),
+                buttonColor: Color(0xffFFCC1B),
+              ),
             )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => DropOffScreen(),));
-        },
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     Navigator.push(context, MaterialPageRoute(builder: (context) => DropOffScreen(),));
+      //   },
+      // ),
     );
   }
 }

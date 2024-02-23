@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/home_container.dart';
 import 'package:yellowline/view/screens/home_page/drawer_screen.dart';
+import 'package:yellowline/view/screens/home_page/tracking_home_screen.dart';
 import 'package:yellowline/view/screens/recovery_screens/drop_off_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -258,25 +259,30 @@ class _HomeScreenState extends State<HomeScreen> {
                         },),
                       ),
                       SizedBox(height: 4.h,),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 5.w),
-                        child: Container(
-                          height: 7.h,
-                          decoration: BoxDecoration(
-                              color: Color(0xffFFD542),
-                              borderRadius: BorderRadius.circular(20)
-                          ),
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image(image: AssetImage('assets/cars.png'),width: 8.w,),
-                                SizedBox(width: 7.w,),
-                                Text(
-                                  'Add a Car',
-                                  style: TextStyle(color: Colors.black,fontSize: 12.sp,),
-                                ),
-                              ],
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => TrackingHomeScreen(),));
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 5.w),
+                          child: Container(
+                            height: 7.h,
+                            decoration: BoxDecoration(
+                                color: Color(0xffFFD542),
+                                borderRadius: BorderRadius.circular(20)
+                            ),
+                            child: Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image(image: AssetImage('assets/cars.png'),width: 8.w,),
+                                  SizedBox(width: 7.w,),
+                                  Text(
+                                    'Add a Car',
+                                    style: TextStyle(color: Colors.black,fontSize: 12.sp,),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -291,7 +297,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => DropOffScreen(),));
+          //Navigator.push(context, MaterialPageRoute(builder: (context) => DropOffScreen(),));
         },
       ),
     );

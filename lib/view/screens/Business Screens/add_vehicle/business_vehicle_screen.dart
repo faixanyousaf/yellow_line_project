@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
-import 'package:yellowline/view/screens/add_car_screen/vehicle_list_screen.dart';
+import 'package:yellowline/view/screens/Business%20Screens/add_vehicle/business_vehicle_list.dart';
 
-class VehicleScreen extends StatefulWidget {
-  const VehicleScreen({Key? key}) : super(key: key);
+class BusinessVehicleScreen extends StatefulWidget {
+  const BusinessVehicleScreen({Key? key}) : super(key: key);
 
   @override
-  State<VehicleScreen> createState() => _VehicleScreenState();
+  State<BusinessVehicleScreen> createState() => _BusinessVehicleScreenState();
 }
 
-class _VehicleScreenState extends State<VehicleScreen> {
+class _BusinessVehicleScreenState extends State<BusinessVehicleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,9 +41,9 @@ class _VehicleScreenState extends State<VehicleScreen> {
                   height: 4.h,
                   width: 5.w,
                   decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.black,
-                    border: Border.all(width: 0.6,color: Colors.white)
+                      shape: BoxShape.circle,
+                      color: Colors.black,
+                      border: Border.all(width: 0.6,color: Colors.white)
                   ),
                   child: Center(
                     child: Icon(Icons.person,color: Colors.white,size: 3.w,),
@@ -78,21 +78,21 @@ class _VehicleScreenState extends State<VehicleScreen> {
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.sp,
-                  fontWeight: FontWeight.bold
+                    fontWeight: FontWeight.bold
                 ),
               ),
               SizedBox(height: 0.5.h,),
               Text(
                 'Please click the below button to\n          add your vehicle',
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 11.sp,
+                  color: Colors.white,
+                  fontSize: 11.sp,
                 ),
               ),
               SizedBox(height: 25.h,),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleListScreen(),));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => BusinessVehicleListScreen(),));
                 },
                 child: CustomButton(
                   borderColor: Color(0xffFFCC1B),

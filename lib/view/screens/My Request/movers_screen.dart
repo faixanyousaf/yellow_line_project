@@ -22,7 +22,7 @@ class _MoversScreenState extends State<MoversScreen> {
         itemBuilder: (context, index) => Column(
           children: [
             Container(
-              height: 13.h,
+              //height: 13.h,
               width: 100.w,
               child: Stack(
                 children: [
@@ -64,7 +64,8 @@ class _MoversScreenState extends State<MoversScreen> {
                                     SizedBox(width: 2.w,),
                                     Text('Bahria Phase 7, Rawalpindi',style: TextStyle(fontSize: 8.sp,color: Colors.white)),
                                   ],
-                                )
+                                ),
+                                SizedBox(height: 1.3.h,)
                               ],
                             ),
                           ),
