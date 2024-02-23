@@ -208,7 +208,7 @@ class _UpdateDriverScreenState extends State<UpdateDriverScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 2.h,),
+            SizedBox(height: 3.h,),
             CustomButton(
               buttonColor: Color(0xffFFD542),
               borderColor: Color(0xffFFD542),
@@ -218,11 +218,11 @@ class _UpdateDriverScreenState extends State<UpdateDriverScreen> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleDetailScreen(),));
-        },
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleDetailScreen(),));
+      //   },
+      // ),
     );
   }
 
