@@ -1,20 +1,15 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
 import 'package:yellowline/global_widgets/custom_textfield.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:yellowline/global_widgets/custom_google_button.dart';
-import 'package:flutter/src/gestures/tap.dart';
-import 'package:yellowline/view/screens/authentication/business_signup_screen/business_signup_screen.dart';
 import 'package:yellowline/view/screens/authentication/login_screen/login_screen.dart';
 import 'package:yellowline/view/screens/authentication/otp_screen/otp_screen.dart';
 
 
 class SignUpScreen extends StatefulWidget {
-   int? id;
-   SignUpScreen({Key? key,this.id}) : super(key: key);
+   SignUpScreen({Key? key,}) : super(key: key);
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -26,15 +21,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController phoneController = TextEditingController();
   FocusNode focusNode = FocusNode();
 
-  @override
-  void initState() {
-    if(widget.id == 1){
-      index = 1;
-    } else if(widget.id == 2){
-      index = 2;
-    }
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -281,8 +267,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 )
               ],
             ),
-            // if(index == 2)
-            //   BusinessSignUpScreen()
           ],
         ),
       ),

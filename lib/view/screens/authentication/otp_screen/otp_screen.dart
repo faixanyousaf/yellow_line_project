@@ -145,11 +145,7 @@ class _OtpScreenState extends State<OtpScreen> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          //Navigator.push(context, MaterialPageRoute(builder: (context) => CreatePasswordScreen(),));
-        },
-      ),
+
     );
   }
 }

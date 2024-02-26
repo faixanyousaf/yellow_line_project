@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:yellowline/view/screens/Drivers%20Screen/add_driver_screen/add_driver_screen.dart';
-import 'package:yellowline/view/screens/add_car_screen/vehicle_list_screen.dart';
 import 'package:yellowline/view/screens/add_car_screen/vehicle_screen.dart';
 
 import 'movers_screen.dart';

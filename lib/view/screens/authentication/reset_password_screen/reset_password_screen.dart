@@ -3,7 +3,6 @@ import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
 import 'package:yellowline/global_widgets/custom_textfield.dart';
 import 'package:yellowline/view/screens/authentication/login_screen/login_screen.dart';
-import 'package:yellowline/view/screens/home_page/home_page.dart';
 import 'package:yellowline/view/screens/home_page/home_screen.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
@@ -100,11 +99,11 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(),));
-        },
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(),));
+      //   },
+      // ),
     );
   }
 }

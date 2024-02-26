@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import '../My Request/my_request_main_screen.dart';
-
 class RentalEquipments extends StatefulWidget {
   const RentalEquipments({Key? key}) : super(key: key);
 

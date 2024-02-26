@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
-import 'package:yellowline/view/screens/Business%20Screens/Business%20Home%20Page/business_home_screen.dart';
-import 'package:yellowline/view/screens/authentication/business_signup_screen/business_signup_screen.dart';
 
 class VehicleAddedScreen extends StatefulWidget {
   const VehicleAddedScreen({Key? key}) : super(key: key);
@@ -53,11 +51,7 @@ class _VehicleAddedScreenState extends State<VehicleAddedScreen> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => BusinessHomeScreen(),));
-        },
-      ),
+
     );
   }
 }

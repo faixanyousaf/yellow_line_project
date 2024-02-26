@@ -3,7 +3,6 @@ import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
 import 'package:yellowline/global_widgets/custom_textfield.dart';
 import 'package:yellowline/view/screens/authentication/login_screen/login_screen.dart';
-import 'package:yellowline/view/screens/authentication/reset_password_screen/reset_password_screen.dart';
 
 class CompleteProfileScreen extends StatefulWidget {
   const CompleteProfileScreen({Key? key}) : super(key: key);

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
-import 'package:yellowline/view/screens/movers_screen/mover_waiting_screen.dart';
 import 'package:yellowline/view/screens/movers_screen/request_home_screen.dart';
 
 class MoverConfirmScreen extends StatefulWidget {

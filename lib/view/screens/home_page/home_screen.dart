@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:yellowline/global_widgets/home_container.dart';
 import 'package:yellowline/view/screens/home_page/drawer_screen.dart';
 import 'package:yellowline/view/screens/home_page/tracking_home_screen.dart';
-import 'package:yellowline/view/screens/recovery_screens/drop_off_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeScreen extends StatefulWidget {

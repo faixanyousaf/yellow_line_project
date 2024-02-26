@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
 import 'package:yellowline/global_widgets/custom_textfield.dart';
-import 'package:yellowline/view/screens/movers_screen/apartment_detail_screen.dart';
-import 'package:yellowline/view/screens/recovery_screens/booking_detail_screen.dart';
 import 'package:yellowline/view/screens/recovery_screens/drop_off_screen.dart';
 
 class AddNewVehicleScreen extends StatefulWidget {

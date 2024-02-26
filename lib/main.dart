@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/view/screens/authentication/splash_screen/splash_screen.dart';
-import 'package:yellowline/view/screens/home_page/home_screen.dart';
+
 
 
 void main() {

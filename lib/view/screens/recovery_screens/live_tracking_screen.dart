@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/bottom_button.dart';
 import 'package:yellowline/global_widgets/custom_drop_conatiner.dart';
-import 'package:yellowline/view/screens/add_car_screen/vehicle_screen.dart';
 import 'package:yellowline/view/screens/movers_screen/apartment_detail_screen.dart';
 
 class LiveTrackingScreen extends StatefulWidget {
