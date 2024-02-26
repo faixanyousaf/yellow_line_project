@@ -19,6 +19,8 @@ class _BusinessLoginScreenState extends State<BusinessLoginScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -195,7 +197,7 @@ class _BusinessLoginScreenState extends State<BusinessLoginScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen(),));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen(id: 2),));
                     },
                     child: Text(
                       ' Signup',

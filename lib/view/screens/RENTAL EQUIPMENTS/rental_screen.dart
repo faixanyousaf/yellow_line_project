@@ -15,11 +15,11 @@ class _RentalEquipmentsState extends State<RentalEquipments> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => MyRequestMainScreen(),));
-        },
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: (){
+      //     Navigator.push(context, MaterialPageRoute(builder: (context) => MyRequestMainScreen(),));
+      //   },
+      // ),
       body: Container(
         height: 100.h,
         width: 100.w,

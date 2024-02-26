@@ -13,7 +13,8 @@ import 'package:yellowline/view/screens/authentication/otp_screen/otp_screen.dar
 
 
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+   int? id;
+   SignUpScreen({Key? key,this.id}) : super(key: key);
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -24,6 +25,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   FocusNode focusNode = FocusNode();
+
+  @override
+  void initState() {
+    if(widget.id == 1){
+      index = 1;
+    } else if(widget.id == 2){
+      index = 2;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,6 +124,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: GestureDetector(
                         onTap: () {
                           index = 2;
+                          //widget.id = 2;
                           setState(() {
 
                           });
@@ -142,7 +154,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
             ),
             SizedBox(height: 5.h,),
-            if(index == 1)
+            //if(index == 1)
             Column(
               children: [
                 Padding(
@@ -269,16 +281,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 )
               ],
             ),
-            if(index == 2)
-              BusinessSignUpScreen()
+            // if(index == 2)
+            //   BusinessSignUpScreen()
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          //Navigator.push(context, MaterialPageRoute(builder: (context) => OtpScreen(),));
-        },
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     //Navigator.push(context, MaterialPageRoute(builder: (context) => OtpScreen(),));
+      //   },
+      // ),
     );
   }
 }
