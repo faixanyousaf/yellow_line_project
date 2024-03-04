@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
+import '../Equipment to rent/equipment_screen.dart';
 import 'movers_screen.dart';
 
 class MyRequestMainScreen extends StatefulWidget {
@@ -23,6 +24,11 @@ class _MyRequestMainScreenState extends State<MyRequestMainScreen>with SingleTic
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => EquipmentScreen(),));
+          },
+        ),
       backgroundColor: Color(0xff181F30),
       appBar: AppBar(
         backgroundColor: Color(0xff181F30),
