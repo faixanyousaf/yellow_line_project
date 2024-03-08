@@ -1,0 +1,64 @@
+import 'dart:developer';
+import '../../core/core.dart';
+
+class YellowLineAPI {
+  YellowLineAPI();
+  final _http = HTTP.instance;
+
+  /// Authentication
+  Future<dynamic> signIn({required body}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.login;
+      log('url......$url', name: 'signIn | YellowLineAPI');
+      return await _http.iPost_raw_data(url, data: body);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> get_all_cities({required body}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.cities+'$body';
+      log('url......$url', name: 'signIn | YellowLineAPI');
+      return await _http.iGet(url);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> signup({required body}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.signup;
+      return await _http.iPost_form_data(url, data: body);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> get_all_drivers({required id}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.get_all_drivers + id;
+      log('url......$url', name: 'get_all_drivers | YellowLineAPI');
+      return await _http.iGet(url);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> delete_driver({String? id}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.delete_drivers + "$id";
+      var data = await _http.iDelete(
+        url,
+      );
+      return data;
+    } catch (e) {
+      rethrow;
+    }
+  }
+}

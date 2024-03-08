@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
 
+import '../../../helper/navigation/navigation_object.dart';
+
 class VehicleAddedScreen extends StatefulWidget {
   const VehicleAddedScreen({Key? key}) : super(key: key);
 
@@ -41,11 +43,18 @@ class _VehicleAddedScreenState extends State<VehicleAddedScreen> {
                 ),
               ),
               SizedBox(height: 32.h,),
-              CustomButton(
-                borderColor: Color(0xffFFCC1B),
-                buttonColor: Color(0xffFFCC1B),
-                textColor: Color(0xff181F30),
-                text: 'Ok',
+              InkWell(
+                onTap: (){
+                  navigationService.goBack();
+                  navigationService.goBack();
+                  navigationService.goBack();
+                },
+                child: CustomButton(
+                  borderColor: Color(0xffFFCC1B),
+                  buttonColor: Color(0xffFFCC1B),
+                  textColor: Color(0xff181F30),
+                  text: 'Ok',
+                ),
               )
             ],
           ),

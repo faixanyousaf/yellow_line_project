@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../helper/navigation/navigation_object.dart';
+import '../../../helper/navigation/router_path.dart';
+import '../../../helper/shared_prefs.dart';
+
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({Key? key}) : super(key: key);
 
@@ -65,7 +69,11 @@ class _DrawerScreenState extends State<DrawerScreen> {
           ),
         ),
         SizedBox(height: 4.h,),
-        customListTile(text: 'My Vehicle',image: 'assets/vehicle.png'),
+        InkWell(
+            onTap: (){
+              navigationService.navigateTo(RouterPath.Vehicle_List_Screen);
+            },
+            child: customListTile(text: 'My Vehicle',image: 'assets/vehicle.png')),
         Padding(
           padding:  EdgeInsets.symmetric(horizontal: 4.w),
           child: Row(
@@ -107,27 +115,34 @@ class _DrawerScreenState extends State<DrawerScreen> {
         customListTile(text: 'Business Account',image: 'assets/account.png'),
         customListTile(text: 'Delete Account',image: 'assets/delete.png'),
         SizedBox(height: 21.h,),
-        Container(
-          height: 4.h,
-          width: 30.w,
-          decoration: BoxDecoration(
-              color: Color(0xffFF3E3E),
-              borderRadius: BorderRadius.circular(10)
-          ),
-          child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image(image: AssetImage('assets/logout.png'),color: Colors.white,height: 2.h,),
-                SizedBox(width: 4.w,),
-                Text(
-                  'Logout',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 9.sp,
+        InkWell(
+          onTap: (){
+            SharedPrefs sf = SharedPrefs();
+            sf.clearCache();
+            navigationService.navigatePushReplace(RouterPath.loginRout);
+          },
+          child: Container(
+            height: 4.h,
+            width: 30.w,
+            decoration: BoxDecoration(
+                color: Color(0xffFF3E3E),
+                borderRadius: BorderRadius.circular(10)
+            ),
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image(image: AssetImage('assets/logout.png'),color: Colors.white,height: 2.h,),
+                  SizedBox(width: 4.w,),
+                  Text(
+                    'Logout',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 9.sp,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         )

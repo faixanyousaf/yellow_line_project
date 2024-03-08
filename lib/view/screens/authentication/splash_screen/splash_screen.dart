@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/view/screens/authentication/splash_screen/splash_signin_screen.dart';
 
+import '../../../../helper/navigation/navigation_object.dart';
+import '../../../../helper/navigation/router_path.dart';
+import '../../../../helper/shared_prefs.dart';
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -16,11 +20,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
+    get_sf_data();
     super.initState();
-    Timer(
-        Duration(seconds: 3), () {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => SplashSignInScreen(),));
-    });
+  }
+
+  get_sf_data() async {
+    SharedPrefs sf = SharedPrefs();
+    var data = await sf.getToken();
+    if (data != null) {
+      var as_login = await sf.getaslogin();
+      Timer(const Duration(seconds: 2), () {
+        navigationService.navigatePushReplace(RouterPath.Home_Screen);
+      });
+    } else {
+      Timer(const Duration(seconds: 3), () {
+        navigationService.navigatePushReplace(RouterPath.loginRout);
+      });
+    }
   }
 
   @override

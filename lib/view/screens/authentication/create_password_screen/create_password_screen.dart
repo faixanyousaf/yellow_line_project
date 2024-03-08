@@ -69,7 +69,20 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                 controller: passwordController,
                 prefixIcon: 'assets/password.svg',
                 hintText: 'Enter your password',
-                suffixIcon: 'assets/eyes.svg',
+                // suffixIcon: IconButton(
+                //   onPressed: () {
+                //     if (provider.isPasswordShow) {
+                //       provider.isPasswordShow = false;
+                //     } else {
+                //       provider.isPasswordShow = true;
+                //     }
+                //     setState(() {});
+                //   },
+                //   icon: const Icon(
+                //     Icons.remove_red_eye,
+                //     //color: provider.!isPasswordShow ? Colors.grey[500] : blueGrey,
+                //   ),
+                // ),
               ),
             ),
             SizedBox(height: 1.h,),
@@ -78,7 +91,20 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
               child: CustommTextField(
                 controller: conformPasswordController,
                 prefixIcon: 'assets/password.svg',
-                suffixIcon: 'assets/eyes.svg',
+                // suffixIcon: IconButton(
+                //   onPressed: () {
+                //     if (provider.isPasswordShow) {
+                //       provider.isPasswordShow = false;
+                //     } else {
+                //       provider.isPasswordShow = true;
+                //     }
+                //     setState(() {});
+                //   },
+                //   icon: const Icon(
+                //     Icons.remove_red_eye,
+                //     //color: provider.!isPasswordShow ? Colors.grey[500] : blueGrey,
+                //   ),
+                // ),
                 hintText: 'Confirm your password',
               ),
             ),

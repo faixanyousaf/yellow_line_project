@@ -5,6 +5,9 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:yellowline/view/screens/authentication/create_password_screen/create_password_screen.dart';
 import 'package:yellowline/view/screens/authentication/login_screen/login_screen.dart';
 
+import '../../../../helper/navigation/navigation_object.dart';
+import '../../../../helper/navigation/router_path.dart';
+
 class OtpScreen extends StatefulWidget {
   const OtpScreen({Key? key}) : super(key: key);
 
@@ -14,7 +17,7 @@ class OtpScreen extends StatefulWidget {
 
 class _OtpScreenState extends State<OtpScreen> {
   TextEditingController textEditingController = TextEditingController();
-
+bool isVisible = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,10 +108,29 @@ class _OtpScreenState extends State<OtpScreen> {
                 },
               ),
             ),
+            SizedBox(
+              height: 1.h,
+            ),
+            if(isVisible == true && textEditingController.text.isEmpty)
+              Align(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: 8.w),
+                  child: Text('Please set Otp',style: TextStyle(color: Colors.red,fontSize: 14),),
+                ),
+              ),
             SizedBox(height: 16.h,),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => CreatePasswordScreen(),));
+                if(textEditingController.text.isNotEmpty){
+                  navigationService.navigatePushReplace(RouterPath.loginRout);
+                }else{
+                  isVisible = true;
+                  setState(() {
+
+                  });
+                }
+                //Navigator.push(context, MaterialPageRoute(builder: (context) => CreatePasswordScreen(),));
               },
               child: CustomButton(
                 text: 'Verify',
