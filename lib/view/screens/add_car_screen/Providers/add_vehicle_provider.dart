@@ -7,6 +7,7 @@ import 'package:yellowline/view/screens/add_car_screen/Network%20Call/network_ca
 
 import '../../../../../helper/navigation/navigation_object.dart';
 import '../../../../../helper/navigation/router_path.dart';
+import '../Models/car_model.dart';
 
 
 class AddVehicleProvider extends ChangeNotifier {
@@ -33,21 +34,37 @@ class AddVehicleProvider extends ChangeNotifier {
     'Scooter',
     'Forklift',
   ];
-  List<String>? companyList = [
-    'Hyundai',
-    'Toyota',
-    'MG',
-    'Honda Atlas',
-    'Changan',
-    'PAK Suzuki',
-  ];
+  List<String> car_make_list = [];
+  List<String>? car_model_list = [];
   List<String>? chooseYearList = [
-    '1938',
-    '1944',
-    '1943',
-    '2010',
-    '2011',
+    '2023',
+    '2022',
+    '2021',
+    '2020',
+    '2019',
+    '2018',
+    '2017',
+    '2016',
+    '2015',
+    '2014',
+    '2013',
     '2012',
+    '2011',
+    '2010',
+    '2009',
+    '2008',
+    '2007',
+    '2006',
+    '2005',
+    '2004',
+    '2003',
+    '2002',
+    '2001',
+    '2000',
+    '1999',
+    '1998',
+    '1997',
+    '1996',
   ];
 
   File? drivingLicense;
@@ -125,5 +142,30 @@ class AddVehicleProvider extends ChangeNotifier {
 
   updateState() {
     notifyListeners();
+  }
+
+  Future get_make() async {
+    car_make_list = [];
+    loading = true;
+    updateState();
+    List<CarModel>? carModel = await dataProvider.get_make();
+    for (var i in carModel!) {
+      car_make_list.add(i.make!);
+    }
+    loading = false;
+    updateState();
+  }
+
+  Future get_make_model() async {
+    car_model_list = [];
+    loading = true;
+    updateState();
+    List<CarModel>? carModel =
+    await dataProvider.get_make_model(chooseCompanyName);
+    for (var i in carModel!) {
+      car_model_list!.add(i.model!);
+    }
+    loading = false;
+    updateState();
   }
 }

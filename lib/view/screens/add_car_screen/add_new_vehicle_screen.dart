@@ -12,21 +12,22 @@ class AddNewVehicleScreen extends StatefulWidget {
   const AddNewVehicleScreen({Key? key}) : super(key: key);
 
   @override
-  State<AddNewVehicleScreen> createState() =>
-      _AddNewVehicleScreenState();
+  State<AddNewVehicleScreen> createState() => _AddNewVehicleScreenState();
 }
 
 class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
+
   @override
   Widget build(BuildContext context) {
     final AddVehicleProvider provider =
-    Provider.of<AddVehicleProvider>(context);
+        Provider.of<AddVehicleProvider>(context);
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: DataLoading(
         isLoading: provider.loading,
+        use_opacity: false,
         child: Scaffold(
           backgroundColor: Color(0xff181F30),
           appBar: AppBar(
@@ -124,36 +125,45 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                         child: Center(
                           child: Row(
                             children: [
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 8.w),
-                                child: Text(provider.codeController.text.isEmpty  ?
-                                'Code':provider.codeController.text,overflow: TextOverflow.ellipsis,maxLines: 1,
+                              Expanded(
+                                child: Text(
+                                  provider.codeController.text.isEmpty
+                                      ? 'Code'
+                                      : provider.codeController.text,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      color: Color(0xff181F30), fontSize: 16.sp),
+                                      color: Color(0xff181F30),
+                                      fontSize: 16.sp),
                                 ),
                               ),
                               Container(
                                 width: 0.3.w,
                                 color: Color(0xffADADAD),
                               ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 8.w),
+                              Expanded(
                                 child: Text(
                                   'City',
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      color: Color(0xff181F30), fontSize: 16.sp),
+                                      color: Color(0xff181F30),
+                                      fontSize: 16.sp),
                                 ),
                               ),
                               Container(
                                 width: 0.3.w,
                                 color: Color(0xffADADAD),
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 8.w),
-                                child: Text(provider.numberController.text.isEmpty  ?
-                                'Number':'${provider.numberController.text}',
+                              Expanded(
+                                child: Text(
+                                  textAlign: TextAlign.center,
+                                  provider.numberController.text.isEmpty
+                                      ? 'Number'
+                                      : '${provider.numberController.text}',
                                   style: TextStyle(
-                                      color: Color(0xff181F30), fontSize: 16.sp),
+                                      color: Color(0xff181F30),
+                                      fontSize: 16.sp),
                                 ),
                               ),
                             ],
@@ -184,19 +194,20 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Padding(
-                        padding:
-                        EdgeInsets.symmetric(vertical: 0.55.h, horizontal: 1.w),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 0.55.h, horizontal: 1.w),
                         child: Center(
                           child: ListView.builder(
                             itemCount: provider.cityList!.length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) => Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4.0),
                               child: GestureDetector(
                                 onTap: () {
                                   provider.indexx = index;
                                   provider.selectCityName =
-                                  provider.cityList![index];
+                                      provider.cityList![index];
                                   setState(() {});
                                 },
                                 child: Container(
@@ -210,7 +221,8 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                                   ),
                                   child: Center(
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Text(
                                           'أبو ظبي',
@@ -256,7 +268,7 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                     child: CustommTextField(
                       hintText: 'Enter Code',
                       controller: provider.codeController,
-                      onChange: (v){
+                      onChange: (v) {
                         provider.codeController.text = v;
                         provider.updateState();
                       },
@@ -287,7 +299,7 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                     child: CustommTextField(
                       hintText: 'Enter Plate Number',
                       controller: provider.numberController,
-                      onChange: (v){
+                      onChange: (v) {
                         provider.numberController.text = v;
                         provider.updateState();
                       },
@@ -304,15 +316,13 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                     height: 26.h,
                   ),
                   GestureDetector(
-                    onTap: () async{
+                    onTap: () async {
                       // if(provider.formKey.currentState!.validate()){
                       //   await provider.add_vehicle_api();
                       // }
                       if (provider.formKey.currentState!.validate()) {
-                        navigationService
-                            .navigateTo(RouterPath.Vehicle_Detail);
+                        navigationService.navigateTo(RouterPath.Vehicle_Detail);
                       }
-
                     },
                     child: CustomButton(
                       textColor: Color(0xff181F30),

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -10,9 +9,9 @@ import '../../../global_widgets/data_loading.dart';
 import 'Providers/add_vehicle_provider.dart';
 
 class VehicleDetail extends StatefulWidget {
-
-  const  VehicleDetail({Key? key,})
-      : super(key: key);
+  const VehicleDetail({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<VehicleDetail> createState() => _BusinessVehicleDetailState();
@@ -20,11 +19,20 @@ class VehicleDetail extends StatefulWidget {
 
 class _BusinessVehicleDetailState extends State<VehicleDetail> {
   @override
+  void initState() {
+    final AddVehicleProvider provider =
+    Provider.of<AddVehicleProvider>(context, listen: false);
+    provider.get_make().then((value) {});
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final AddVehicleProvider provider =
-    Provider.of<AddVehicleProvider>(context);
+        Provider.of<AddVehicleProvider>(context);
     return DataLoading(
       isLoading: provider.loading,
+      use_opacity: false,
       child: Scaffold(
         backgroundColor: Color(0xff181F30),
         appBar: AppBar(
@@ -111,12 +119,13 @@ class _BusinessVehicleDetailState extends State<VehicleDetail> {
                                 ? 'Choose vehicle type'
                                 : '${provider.vehicleName}',
                             style:
-                            TextStyle(color: Colors.black, fontSize: 10.sp),
+                                TextStyle(color: Colors.black, fontSize: 10.sp),
                           ),
                           CustomDropdownButton2(
                             buttonDecoration: BoxDecoration(
                                 border: Border.all(color: Colors.white)),
-                            dropdownWidth: 31.w,
+                            dropdownWidth: 100.w,
+                            offset: Offset(0, -2.w),
                             icon: Icon(Icons.keyboard_arrow_down, size: 22),
                             hint: '',
                             dropdownItems: provider.vehiclesList!.map((value) {
@@ -130,24 +139,6 @@ class _BusinessVehicleDetailState extends State<VehicleDetail> {
                               print('$newValue');
                               provider.vehicleName = newValue;
                               setState(() {});
-                              // Navigator.of(context).push(MaterialPageRoute(
-                              //     builder: (c) => CancelOrderPage(
-                              //       comment: (v) async {
-                              //         print('object =${v}');
-                              //         DataProvider().cancel_order_api(
-                              //             comment: v, order_id: widget.Id);
-                              //         Navigator.of(context).pop(true);
-                              //       },
-                              //     ),
-                              //     fullscreenDialog: true));
-                              // showCancelOrderDialog(
-                              //   (v) async {
-                              //     print('object =${v}');
-                              //     await DataProvider().cancel_order_api(
-                              //         comment: v, order_id: widget.Id);
-                              //     Navigator.of(context).pop(true);
-                              //   },
-                              // );
                             },
                           ),
                         ],
@@ -156,14 +147,17 @@ class _BusinessVehicleDetailState extends State<VehicleDetail> {
                   ),
                 ),
               ),
-              if(provider.isVisible == true && provider.vehicleName == null)
+              if (provider.isVisible == true && provider.vehicleName == null)
                 SizedBox(
                   height: 1.h,
                 ),
-              if(provider.isVisible == true && provider.vehicleName == null)
+              if (provider.isVisible == true && provider.vehicleName == null)
                 Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 8.w),
-                  child: Text('No select vehicle type',style: TextStyle(color: Colors.red,fontSize: 14),),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
+                  child: Text(
+                    'No select vehicle type',
+                    style: TextStyle(color: Colors.red, fontSize: 14),
+                  ),
                 ),
               SizedBox(
                 height: 2.h,
@@ -197,15 +191,16 @@ class _BusinessVehicleDetailState extends State<VehicleDetail> {
                                 ? 'Choose company'
                                 : '${provider.chooseCompanyName}',
                             style:
-                            TextStyle(color: Colors.black, fontSize: 10.sp),
+                                TextStyle(color: Colors.black, fontSize: 10.sp),
                           ),
                           CustomDropdownButton2(
                             buttonDecoration: BoxDecoration(
                                 border: Border.all(color: Colors.white)),
-                            dropdownWidth: 31.w,
+                            dropdownWidth: 100.w,
+                            offset: Offset(0, -2.w),
                             icon: Icon(Icons.keyboard_arrow_down, size: 22),
                             hint: '',
-                            dropdownItems: provider.companyList!.map((value) {
+                            dropdownItems: provider.car_make_list.map((value) {
                               return DropdownMenuItem<String>(
                                 value: value,
                                 child: Text('$value',
@@ -213,9 +208,11 @@ class _BusinessVehicleDetailState extends State<VehicleDetail> {
                               );
                             }).toList(),
                             onChanged: (newValue) async {
+                              provider.modelName = null;
                               print('$newValue');
                               provider.chooseCompanyName = newValue;
-                              setState(() {});
+                              provider.updateState();
+                              provider.get_make_model();
                               // Navigator.of(context).push(MaterialPageRoute(
                               //     builder: (c) => CancelOrderPage(
                               //       comment: (v) async {
@@ -242,14 +239,19 @@ class _BusinessVehicleDetailState extends State<VehicleDetail> {
                   ),
                 ),
               ),
-              if(provider.isVisible == true && provider.chooseCompanyName == null)
+              if (provider.isVisible == true &&
+                  provider.chooseCompanyName == null)
                 SizedBox(
                   height: 1.h,
                 ),
-              if(provider.isVisible == true && provider.chooseCompanyName == null)
+              if (provider.isVisible == true &&
+                  provider.chooseCompanyName == null)
                 Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 8.w),
-                  child: Text('No select company',style: TextStyle(color: Colors.red,fontSize: 14),),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
+                  child: Text(
+                    'No select company',
+                    style: TextStyle(color: Colors.red, fontSize: 14),
+                  ),
                 ),
               SizedBox(
                 height: 2.h,
@@ -283,15 +285,17 @@ class _BusinessVehicleDetailState extends State<VehicleDetail> {
                                 ? 'Choose vehicle model'
                                 : '${provider.modelName}',
                             style:
-                            TextStyle(color: Colors.black, fontSize: 10.sp),
+                                TextStyle(color: Colors.black, fontSize: 10.sp),
                           ),
                           CustomDropdownButton2(
                             buttonDecoration: BoxDecoration(
                                 border: Border.all(color: Colors.white)),
-                            dropdownWidth: 31.w,
+                            dropdownWidth: 100.w,
+                            offset: Offset(0, -2.w),
                             icon: Icon(Icons.keyboard_arrow_down, size: 22),
                             hint: '',
-                            dropdownItems: provider.chooseYearList!.map((value) {
+                            dropdownItems:
+                                provider.car_model_list!.map((value) {
                               return DropdownMenuItem<String>(
                                 value: value,
                                 child: Text('$value',
@@ -328,14 +332,17 @@ class _BusinessVehicleDetailState extends State<VehicleDetail> {
                   ),
                 ),
               ),
-              if(provider.isVisible == true && provider.modelName == null)
+              if (provider.isVisible == true && provider.modelName == null)
                 SizedBox(
                   height: 1.h,
                 ),
-              if(provider.isVisible == true && provider.modelName == null)
+              if (provider.isVisible == true && provider.modelName == null)
                 Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 8.w),
-                  child: Text('No select vehicle model',style: TextStyle(color: Colors.red,fontSize: 14),),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
+                  child: Text(
+                    'No select vehicle model',
+                    style: TextStyle(color: Colors.red, fontSize: 14),
+                  ),
                 ),
               SizedBox(
                 height: 2.h,
@@ -369,15 +376,16 @@ class _BusinessVehicleDetailState extends State<VehicleDetail> {
                                 ? 'Choose Year'
                                 : '${provider.yearName}',
                             style:
-                            TextStyle(color: Colors.black, fontSize: 10.sp),
+                                TextStyle(color: Colors.black, fontSize: 10.sp),
                           ),
                           CustomDropdownButton2(
                             buttonDecoration: BoxDecoration(
                                 border: Border.all(color: Colors.white)),
-                            dropdownWidth: 31.w,
+                            dropdownWidth: 100.w,
                             icon: Icon(Icons.keyboard_arrow_down, size: 22),
                             hint: '',
-                            dropdownItems: provider.chooseYearList!.map((value) {
+                            dropdownItems:
+                                provider.chooseYearList!.map((value) {
                               return DropdownMenuItem<String>(
                                 value: value,
                                 child: Text('$value',
@@ -414,14 +422,17 @@ class _BusinessVehicleDetailState extends State<VehicleDetail> {
                   ),
                 ),
               ),
-              if(provider.isVisible == true && provider.yearName == null)
+              if (provider.isVisible == true && provider.yearName == null)
                 SizedBox(
                   height: 1.h,
                 ),
-              if(provider.isVisible == true && provider.yearName == null)
+              if (provider.isVisible == true && provider.yearName == null)
                 Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 8.w),
-                  child: Text('No select year',style: TextStyle(color: Colors.red,fontSize: 14),),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
+                  child: Text(
+                    'No select year',
+                    style: TextStyle(color: Colors.red, fontSize: 14),
+                  ),
                 ),
               SizedBox(
                 height: 2.h,
@@ -434,7 +445,12 @@ class _BusinessVehicleDetailState extends State<VehicleDetail> {
                 padding: EdgeInsets.symmetric(horizontal: 6.w),
                 child: Text(
                   'Registration card',
-                  style: TextStyle(color:provider.isVisible == true && provider.drivingLicense == null ? Colors.red : Colors.white, fontSize: 10.sp),
+                  style: TextStyle(
+                      color: provider.isVisible == true &&
+                              provider.drivingLicense == null
+                          ? Colors.red
+                          : Colors.white,
+                      fontSize: 10.sp),
                 ),
               ),
               SizedBox(
@@ -456,28 +472,28 @@ class _BusinessVehicleDetailState extends State<VehicleDetail> {
                     child: Center(
                       child: provider.drivingLicense != null
                           ? ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Container(
-                          height: 6.h,
-                          width: 12.w,
-                          child: Image.file(
-                            File(provider.drivingLicense!.path),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      )
+                              borderRadius: BorderRadius.circular(8),
+                              child: Container(
+                                height: 6.h,
+                                width: 12.w,
+                                child: Image.file(
+                                  File(provider.drivingLicense!.path),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            )
                           : Container(
-                        height: 5.h,
-                        width: 10.w,
-                        decoration: BoxDecoration(
-                            color: Color(0xffFFD542),
-                            shape: BoxShape.circle),
-                        child: Center(
-                            child: SvgPicture.asset(
-                              'assets/svgs/arro.svg',
-                              height: 2.3.h,
-                            )),
-                      ),
+                              height: 5.h,
+                              width: 10.w,
+                              decoration: BoxDecoration(
+                                  color: Color(0xffFFD542),
+                                  shape: BoxShape.circle),
+                              child: Center(
+                                  child: SvgPicture.asset(
+                                'assets/svgs/arro.svg',
+                                height: 2.3.h,
+                              )),
+                            ),
                     ),
                   ),
                 ),
@@ -497,19 +513,16 @@ class _BusinessVehicleDetailState extends State<VehicleDetail> {
               GestureDetector(
                 onTap: () async {
                   if (provider.vehicleName != null &&
-                      provider.chooseCompanyName!= null &&
-                      provider.yearName!= null &&
-                      provider.modelName!= null &&
+                      provider.chooseCompanyName != null &&
+                      provider.yearName != null &&
+                      provider.modelName != null &&
                       provider.drivingLicense != null) {
                     print('object1');
                     await provider.add_vehicle_api();
                   } else {
-
                     print('object');
                     provider.isVisible = true;
-                    setState(() {
-
-                    });
+                    setState(() {});
                   }
 
                   // Navigator.push(context, MaterialPageRoute(builder: (context) => BusinessVehicleAdded(),));

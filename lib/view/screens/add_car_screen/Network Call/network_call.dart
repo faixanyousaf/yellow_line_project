@@ -3,14 +3,15 @@ import 'dart:developer';
 import 'package:dio/dio.dart' as dio;
 import 'package:http/http.dart' as http;
 import '../../../../helper/shared_prefs.dart';
+import '../Models/car_model.dart';
 import '../Models/view_list_vehicle_model.dart';
+
 dynamic baseUrl = 'http://yellowline.codeels.pro/';
 const addNewDriverUrl = 'driver/create';
 const viewNewDriverUrl = 'driver/list/';
 const viewNewVehicleUrl = 'vehicle/add';
 
 class DataProvider {
-
   Future add_new_vehicle_api({required Map<String, dynamic> map}) async {
     print('objectofal ${map}');
     SharedPrefs sf = SharedPrefs();
@@ -18,11 +19,10 @@ class DataProvider {
     final response = await dio.Dio().post('$baseUrl$viewNewVehicleUrl',
         data: dio.FormData.fromMap(map),
         options: dio.Options(headers: {
-          'Authorization':
-          '${tocken}',
+          'Authorization': '${tocken}',
         }));
     var data = response.data;
-    print( ' the response is =${data}');
+    print(' the response is =${data}');
     return data;
   }
 
@@ -30,17 +30,44 @@ class DataProvider {
     SharedPrefs sf = SharedPrefs();
     var tocken = await sf.getToken();
     List<ViewAllVehicle>? vehicleModel = [];
-    final response =
-    await dio.Dio().get('http://yellowline.codeels.pro/vehicle/user/list/86',
-        options: dio.Options(headers: {
-          'Authorization':
-          '${tocken}'
-        }));
+    final response = await dio.Dio().get(
+        'http://yellowline.codeels.pro/vehicle/user/list/86',
+        options: dio.Options(headers: {'Authorization': '${tocken}'}));
     print("status code is ${response.data}");
     List data = response.data;
     for (var i in data) {
       vehicleModel.add(ViewAllVehicle.fromJson(i));
     }
     return vehicleModel;
+  }
+
+  Future get_make() async {
+    List<CarModel>? carModel = [];
+    final response = await dio.Dio().get(
+        'https://api.api-ninjas.com/v1/cars?year=2023&limit=100',
+        options: dio.Options(headers: {
+          'X-Api-Key': '3qjKnlH+K2PvEiNXbyhDng==UCwUS1lgr9hrMUo3'
+        }));
+    print("status code is ${response.data}");
+    List data = response.data;
+    for (var i in data) {
+      carModel.add(CarModel.fromJson(i));
+    }
+    return carModel;
+  }
+
+  Future get_make_model(name) async {
+    List<CarModel>? carModel = [];
+    final response = await dio.Dio().get(
+        'https://api.api-ninjas.com/v1/cars?year=2023&limit=100&make=$name',
+        options: dio.Options(headers: {
+          'X-Api-Key': '3qjKnlH+K2PvEiNXbyhDng==UCwUS1lgr9hrMUo3'
+        }));
+    print("status code is ${response.data}");
+    List data = response.data;
+    for (var i in data) {
+      carModel.add(CarModel.fromJson(i));
+    }
+    return carModel;
   }
 }

@@ -24,6 +24,36 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppleMusicUsageDescription</key>
+    <string>Your Music Library is used to update Alerts.</string>
+    <key>NSBluetoothAlwaysUsageDescription</key>
+    <string>Your bluetooth is used for directions.</string>
+    <key>NSBluetoothPeripheralUsageDescription</key>
+    <string>Your bluetooth is used for directions.</string>
+    <key>NSCalendarsUsageDescription</key>
+    <string>Your calendar is used to give precise date for messages.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Allow your camera is used to update your profile picture and also to add product images for creating itinerary and list.</string>
+    <key>NSContactsUsageDescription</key>
+    <string>Allow contact list to find other users on sarya app to connect and add as your friends in realtime. Your contact list will not upload on sarya app</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string> Allow your location is used to provide directions to the places to visit and search for destinations..</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string> Allow your location is used to provide directions to the places to visit and search for destinations.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string> Allow your location is used to provide directions to the places to visit and search for destinations..</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>sarya needs to access your device microphone to send audio messages.</string>
+    <key>NSMotionUsageDescription</key>
+    <string>sarya would like to access your motion.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Allow photo access to update profile picture and to add product images into itinerary and list creation.</string>
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>The app uses speech recognition for dictating messages.</string>
+    <key>NSCameraUsageDescription</key>
+    <string> Allow camera access to update profile picture and to add product images into itinerary and list creation.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string> sarya needs to access your device microphone to send audio messages.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

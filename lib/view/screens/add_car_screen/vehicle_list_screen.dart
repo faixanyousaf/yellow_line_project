@@ -16,11 +16,10 @@ class VehicleListScreen extends StatefulWidget {
 }
 
 class _BusinessVehicleListScreenState extends State<VehicleListScreen> {
-
   @override
   void initState() {
     var viewAllVehicleModel =
-    Provider.of<ViewVehicleProvider>(context, listen: false);
+        Provider.of<ViewVehicleProvider>(context, listen: false);
     viewAllVehicleModel.view_vehicle_api(context);
     super.initState();
   }
@@ -30,6 +29,7 @@ class _BusinessVehicleListScreenState extends State<VehicleListScreen> {
     var viewAllVehicleModel = Provider.of<ViewVehicleProvider>(context);
     return DataLoading(
       isLoading: viewAllVehicleModel.loading,
+      use_opacity: false,
       child: Scaffold(
         backgroundColor: Color(0xff181F30),
         appBar: AppBar(
@@ -40,7 +40,11 @@ class _BusinessVehicleListScreenState extends State<VehicleListScreen> {
               onTap: () {
                 Navigator.pop(context);
               },
-              child: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 5.w,)),
+              child: Icon(
+                Icons.arrow_back_ios_new_outlined,
+                color: Colors.white,
+                size: 5.w,
+              )),
           title: Text(
             'My Vehicles',
             style: TextStyle(
@@ -71,23 +75,27 @@ class _BusinessVehicleListScreenState extends State<VehicleListScreen> {
             //   ),
             // ),
             Image(image: AssetImage('assets/bells.png')),
-            SizedBox(width: 3.w,),
+            SizedBox(
+              width: 3.w,
+            ),
             Padding(
-              padding:  EdgeInsets.only(right: 6.w),
+              padding: EdgeInsets.only(right: 6.w),
               child: Container(
                 height: 7.h,
                 width: 5.w,
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.black,
-                    border: Border.all(width: 0.6,color: Colors.white)
-                ),
+                    border: Border.all(width: 0.6, color: Colors.white)),
                 child: Center(
-                  child: Icon(Icons.person,color: Colors.white,size: 3.w,),
+                  child: Icon(
+                    Icons.person,
+                    color: Colors.white,
+                    size: 3.w,
+                  ),
                 ),
               ),
             )
-
           ],
         ),
         body: Container(
@@ -95,13 +103,14 @@ class _BusinessVehicleListScreenState extends State<VehicleListScreen> {
           width: 100.w,
           child: Column(
             children: [
-              Expanded(child: ListView.builder(
+              Expanded(
+                  child: ListView.builder(
                 itemCount: viewAllVehicleModel.result!.length,
                 itemBuilder: (context, index) => Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 5.w,vertical: 1.h),
+                  padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 1.h),
                   child: Column(
                     children: [
-                      if(viewAllVehicleModel.result!=null)
+                      if (viewAllVehicleModel.result != null)
                         Container(
                           height: 9.h,
                           decoration: BoxDecoration(
@@ -111,23 +120,32 @@ class _BusinessVehicleListScreenState extends State<VehicleListScreen> {
                           child: Center(
                             child: Row(
                               children: [
-                                SizedBox(width: 8.w,),
+                                SizedBox(
+                                  width: 8.w,
+                                ),
                                 Text(
                                   '${viewAllVehicleModel.result![index].code}',
                                   style: TextStyle(
                                       color: Color(0xff181F30),
-                                      fontSize: 16.sp
-                                  ),
+                                      fontSize: 16.sp),
                                 ),
-                                SizedBox(width: 25.w,),
-                                Image(image: AssetImage('assets/abu_dhabi.png',),height: 7.5.h,),
-                                SizedBox(width: 10.w,),
+                                SizedBox(
+                                  width: 25.w,
+                                ),
+                                Image(
+                                  image: AssetImage(
+                                    'assets/abu_dhabi.png',
+                                  ),
+                                  height: 7.5.h,
+                                ),
+                                SizedBox(
+                                  width: 10.w,
+                                ),
                                 Text(
                                   '${viewAllVehicleModel.result![index].plateNumber}',
                                   style: TextStyle(
                                       color: Color(0xff181F30),
-                                      fontSize: 16.sp
-                                  ),
+                                      fontSize: 16.sp),
                                 ),
                               ],
                             ),
@@ -135,7 +153,8 @@ class _BusinessVehicleListScreenState extends State<VehicleListScreen> {
                         ),
                     ],
                   ),
-                ),)),
+                ),
+              )),
               // SizedBox(height: 2.h,),
               // Padding(
               //   padding:  EdgeInsets.symmetric(horizontal: 5.w),
@@ -209,10 +228,12 @@ class _BusinessVehicleListScreenState extends State<VehicleListScreen> {
               // SizedBox(height: 53.h,),
               GestureDetector(
                 onTap: () {
-                  navigationService.navigateTo(RouterPath.Add_New_Vehicle_Screen)!.then((value) {
-                    viewAllVehicleModel.loading=true;
+                  navigationService
+                      .navigateTo(RouterPath.Add_New_Vehicle_Screen)!
+                      .then((value) {
+                    viewAllVehicleModel.loading = true;
                     viewAllVehicleModel.updateState();
-                    viewAllVehicleModel.result=[];
+                    viewAllVehicleModel.result = [];
                     viewAllVehicleModel.view_vehicle_api(context);
                   });
                   // Navigator.push(context, MaterialPageRoute(builder: (context) => BusinessAddVehicleScreen(),));
@@ -224,7 +245,9 @@ class _BusinessVehicleListScreenState extends State<VehicleListScreen> {
                   textColor: Color(0xff181F30),
                 ),
               ),
-              SizedBox(height: 2.h,),
+              SizedBox(
+                height: 2.h,
+              ),
             ],
           ),
         ),
