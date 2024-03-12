@@ -56,20 +56,6 @@ class DataProvider {
     return vehicleModel;
   }
 
-  Future get_make() async {
-    List<CarModel>? carModel = [];
-    final response = await dio.Dio().get(
-        'https://api.api-ninjas.com/v1/cars?year=2023&limit=100',
-        options: dio.Options(headers: {
-          'X-Api-Key': '3qjKnlH+K2PvEiNXbyhDng==UCwUS1lgr9hrMUo3'
-        }));
-    print("status code is ${response.data}");
-    List data = response.data;
-    for (var i in data) {
-      carModel.add(CarModel.fromJson(i));
-    }
-    return carModel;
-  }
 
   Future get_make_model(name) async {
     List<CarModel>? carModel = [];
