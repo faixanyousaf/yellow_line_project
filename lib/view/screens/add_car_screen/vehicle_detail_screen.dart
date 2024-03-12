@@ -1,30 +1,39 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import '../../../../global_widgets/bottom_sheets_selection.dart';
 import '../../../../global_widgets/custom_button.dart';
 import '../../../../global_widgets/custom_drop_down.dart';
 import '../../../global_widgets/data_loading.dart';
 import 'Providers/add_vehicle_provider.dart';
 
 class VehicleDetail extends StatefulWidget {
-
-  const  VehicleDetail({Key? key,})
-      : super(key: key);
+  const VehicleDetail({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  State<VehicleDetail> createState() => _BusinessVehicleDetailState();
+  State<VehicleDetail> createState() => _VehicleDetailState();
 }
 
-class _BusinessVehicleDetailState extends State<VehicleDetail> {
+class _VehicleDetailState extends State<VehicleDetail> {
+  @override
+  void initState() {
+    final AddVehicleProvider provider =
+    Provider.of<AddVehicleProvider>(context, listen: false);
+    provider.get_make().then((value) {});
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final AddVehicleProvider provider =
     Provider.of<AddVehicleProvider>(context);
     return DataLoading(
       isLoading: provider.loading,
+      use_opacity: false,
       child: Scaffold(
         backgroundColor: Color(0xff181F30),
         appBar: AppBar(
@@ -94,76 +103,77 @@ class _BusinessVehicleDetailState extends State<VehicleDetail> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 6.w),
-                child: Container(
-                  height: 6.h,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 3.w),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            provider.vehicleName == null
-                                ? 'Choose vehicle type'
-                                : '${provider.vehicleName}',
-                            style:
-                            TextStyle(color: Colors.black, fontSize: 10.sp),
-                          ),
-                          CustomDropdownButton2(
-                            buttonDecoration: BoxDecoration(
-                                border: Border.all(color: Colors.white)),
-                            dropdownWidth: 31.w,
-                            icon: Icon(Icons.keyboard_arrow_down, size: 22),
-                            hint: '',
-                            dropdownItems: provider.vehiclesList!.map((value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text('$value',
-                                    style: TextStyle(fontSize: 14)),
-                              );
-                            }).toList(),
-                            onChanged: (newValue) async {
-                              print('$newValue');
-                              provider.vehicleName = newValue;
-                              setState(() {});
-                              // Navigator.of(context).push(MaterialPageRoute(
-                              //     builder: (c) => CancelOrderPage(
-                              //       comment: (v) async {
-                              //         print('object =${v}');
-                              //         DataProvider().cancel_order_api(
-                              //             comment: v, order_id: widget.Id);
-                              //         Navigator.of(context).pop(true);
-                              //       },
-                              //     ),
-                              //     fullscreenDialog: true));
-                              // showCancelOrderDialog(
-                              //   (v) async {
-                              //     print('object =${v}');
-                              //     await DataProvider().cancel_order_api(
-                              //         comment: v, order_id: widget.Id);
-                              //     Navigator.of(context).pop(true);
-                              //   },
-                              // );
-                            },
-                          ),
-                        ],
+                child: InkWell(
+                  onTap: () {
+                    listBottomSheet(
+                        context: context,
+                        add_new: () {},
+                        selected_values: (v) {
+                          provider.vehicleName = v[0];
+                          provider.updateState();
+                        },
+                        hide_add_new: true,
+                        pre_selected_all_values: [],
+                        all_values: provider.vehiclesList);
+                  },
+                  child: Container(
+                    height: 6.h,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 3.w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              provider.vehicleName == null
+                                  ? 'Choose vehicle type'
+                                  : '${provider.vehicleName}',
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 10.sp),
+                            ),
+                            Icon(Icons.keyboard_arrow_down, size: 22)
+                            // CustomDropdownButton2(
+                            //   buttonDecoration: BoxDecoration(
+                            //       border: Border.all(color: Colors.white)),
+                            //   dropdownWidth: 100.w,
+                            //   offset: Offset(0, -2.w),
+                            //   icon: Icon(Icons.keyboard_arrow_down, size: 22),
+                            //   hint: '',
+                            //   dropdownItems: provider.vehiclesList!.map((value) {
+                            //     return DropdownMenuItem<String>(
+                            //       value: value,
+                            //       child: Text('$value',
+                            //           style: TextStyle(fontSize: 14)),
+                            //     );
+                            //   }).toList(),
+                            //   onChanged: (newValue) async {
+                            //     print('$newValue');
+                            //     provider.vehicleName = newValue;
+                            //     setState(() {});
+                            //   },
+                            // ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-              if(provider.isVisible == true && provider.vehicleName == null)
+              if (provider.isVisible == true && provider.vehicleName == null)
                 SizedBox(
                   height: 1.h,
                 ),
-              if(provider.isVisible == true && provider.vehicleName == null)
+              if (provider.isVisible == true && provider.vehicleName == null)
                 Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 8.w),
-                  child: Text('No select vehicle type',style: TextStyle(color: Colors.red,fontSize: 14),),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
+                  child: Text(
+                    'No select vehicle type',
+                    style: TextStyle(color: Colors.red, fontSize: 14),
+                  ),
                 ),
               SizedBox(
                 height: 2.h,
@@ -180,76 +190,61 @@ class _BusinessVehicleDetailState extends State<VehicleDetail> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 6.w),
-                child: Container(
-                  height: 6.h,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 3.w),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            provider.chooseCompanyName == null
-                                ? 'Choose company'
-                                : '${provider.chooseCompanyName}',
-                            style:
-                            TextStyle(color: Colors.black, fontSize: 10.sp),
-                          ),
-                          CustomDropdownButton2(
-                            buttonDecoration: BoxDecoration(
-                                border: Border.all(color: Colors.white)),
-                            dropdownWidth: 31.w,
-                            icon: Icon(Icons.keyboard_arrow_down, size: 22),
-                            hint: '',
-                            dropdownItems: provider.companyList!.map((value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text('$value',
-                                    style: TextStyle(fontSize: 14)),
-                              );
-                            }).toList(),
-                            onChanged: (newValue) async {
-                              print('$newValue');
-                              provider.chooseCompanyName = newValue;
-                              setState(() {});
-                              // Navigator.of(context).push(MaterialPageRoute(
-                              //     builder: (c) => CancelOrderPage(
-                              //       comment: (v) async {
-                              //         print('object =${v}');
-                              //         DataProvider().cancel_order_api(
-                              //             comment: v, order_id: widget.Id);
-                              //         Navigator.of(context).pop(true);
-                              //       },
-                              //     ),
-                              //     fullscreenDialog: true));
-                              // showCancelOrderDialog(
-                              //   (v) async {
-                              //     print('object =${v}');
-                              //     await DataProvider().cancel_order_api(
-                              //         comment: v, order_id: widget.Id);
-                              //     Navigator.of(context).pop(true);
-                              //   },
-                              // );
-                            },
-                          ),
-                        ],
+                child: InkWell(
+                  onTap: () {
+                    listBottomSheet(
+                        context: context,
+                        add_new: () {},
+                        selected_values: (v) {
+                          provider.modelName = null;
+                          provider.chooseCompanyName = v[0];
+                          provider.updateState();
+                          provider.get_make_model();
+                        },
+                        hide_add_new: true,
+                        pre_selected_all_values: [],
+                        all_values: provider.car_make_list);
+                  },
+                  child: Container(
+                    height: 6.h,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 3.w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              provider.chooseCompanyName == null
+                                  ? 'Choose company'
+                                  : '${provider.chooseCompanyName}',
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 10.sp),
+                            ),
+                            Icon(Icons.keyboard_arrow_down, size: 22)
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-              if(provider.isVisible == true && provider.chooseCompanyName == null)
+              if (provider.isVisible == true &&
+                  provider.chooseCompanyName == null)
                 SizedBox(
                   height: 1.h,
                 ),
-              if(provider.isVisible == true && provider.chooseCompanyName == null)
+              if (provider.isVisible == true &&
+                  provider.chooseCompanyName == null)
                 Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 8.w),
-                  child: Text('No select company',style: TextStyle(color: Colors.red,fontSize: 14),),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
+                  child: Text(
+                    'No select company',
+                    style: TextStyle(color: Colors.red, fontSize: 14),
+                  ),
                 ),
               SizedBox(
                 height: 2.h,
@@ -266,76 +261,96 @@ class _BusinessVehicleDetailState extends State<VehicleDetail> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 6.w),
-                child: Container(
-                  height: 6.h,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 3.w),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            provider.modelName == null
-                                ? 'Choose vehicle model'
-                                : '${provider.modelName}',
-                            style:
-                            TextStyle(color: Colors.black, fontSize: 10.sp),
-                          ),
-                          CustomDropdownButton2(
-                            buttonDecoration: BoxDecoration(
-                                border: Border.all(color: Colors.white)),
-                            dropdownWidth: 31.w,
-                            icon: Icon(Icons.keyboard_arrow_down, size: 22),
-                            hint: '',
-                            dropdownItems: provider.chooseYearList!.map((value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text('$value',
-                                    style: TextStyle(fontSize: 14)),
-                              );
-                            }).toList(),
-                            onChanged: (newValue) async {
-                              print('$newValue');
-                              provider.modelName = newValue;
-                              setState(() {});
-                              // Navigator.of(context).push(MaterialPageRoute(
-                              //     builder: (c) => CancelOrderPage(
-                              //       comment: (v) async {
-                              //         print('object =${v}');
-                              //         DataProvider().cancel_order_api(
-                              //             comment: v, order_id: widget.Id);
-                              //         Navigator.of(context).pop(true);
-                              //       },
-                              //     ),
-                              //     fullscreenDialog: true));
-                              // showCancelOrderDialog(
-                              //   (v) async {
-                              //     print('object =${v}');
-                              //     await DataProvider().cancel_order_api(
-                              //         comment: v, order_id: widget.Id);
-                              //     Navigator.of(context).pop(true);
-                              //   },
-                              // );
-                            },
-                          ),
-                        ],
+                child: InkWell(
+                  onTap: (){
+                    listBottomSheet(
+                        context: context,
+                        add_new: () {},
+                        selected_values: (v) {
+                          provider.modelName = v[0];
+                          provider.updateState();
+                        },
+                        hide_add_new: true,
+                        pre_selected_all_values: [],
+                        all_values: provider.car_model_list);
+                  },
+                  child: Container(
+                    height: 6.h,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 3.w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              provider.modelName == null
+                                  ? 'Choose vehicle model'
+                                  : '${provider.modelName}',
+                              style:
+                              TextStyle(color: Colors.black, fontSize: 10.sp),
+                            ),
+                            Icon(Icons.keyboard_arrow_down, size: 22)
+                            // CustomDropdownButton2(
+                            //   buttonDecoration: BoxDecoration(
+                            //       border: Border.all(color: Colors.white)),
+                            //   dropdownWidth: 100.w,
+                            //   offset: Offset(0, -2.w),
+                            //   icon: Icon(Icons.keyboard_arrow_down, size: 22),
+                            //   hint: '',
+                            //   dropdownItems:
+                            //       provider.car_model_list!.map((value) {
+                            //     return DropdownMenuItem<String>(
+                            //       value: value,
+                            //       child: Text('$value',
+                            //           style: TextStyle(fontSize: 14)),
+                            //     );
+                            //   }).toList(),
+                            //   onChanged: (newValue) async {
+                            //     print('$newValue');
+                            //     provider.modelName = newValue;
+                            //     setState(() {});
+                            //     // Navigator.of(context).push(MaterialPageRoute(
+                            //     //     builder: (c) => CancelOrderPage(
+                            //     //       comment: (v) async {
+                            //     //         print('object =${v}');
+                            //     //         DataProvider().cancel_order_api(
+                            //     //             comment: v, order_id: widget.Id);
+                            //     //         Navigator.of(context).pop(true);
+                            //     //       },
+                            //     //     ),
+                            //     //     fullscreenDialog: true));
+                            //     // showCancelOrderDialog(
+                            //     //   (v) async {
+                            //     //     print('object =${v}');
+                            //     //     await DataProvider().cancel_order_api(
+                            //     //         comment: v, order_id: widget.Id);
+                            //     //     Navigator.of(context).pop(true);
+                            //     //   },
+                            //     // );
+                            //   },
+                            // ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-              if(provider.isVisible == true && provider.modelName == null)
+              if (provider.isVisible == true && provider.modelName == null)
                 SizedBox(
                   height: 1.h,
                 ),
-              if(provider.isVisible == true && provider.modelName == null)
+              if (provider.isVisible == true && provider.modelName == null)
                 Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 8.w),
-                  child: Text('No select vehicle model',style: TextStyle(color: Colors.red,fontSize: 14),),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
+                  child: Text(
+                    'No select vehicle model',
+                    style: TextStyle(color: Colors.red, fontSize: 14),
+                  ),
                 ),
               SizedBox(
                 height: 2.h,
@@ -352,76 +367,57 @@ class _BusinessVehicleDetailState extends State<VehicleDetail> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 6.w),
-                child: Container(
-                  height: 6.h,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 3.w),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            provider.yearName == null
-                                ? 'Choose Year'
-                                : '${provider.yearName}',
-                            style:
-                            TextStyle(color: Colors.black, fontSize: 10.sp),
-                          ),
-                          CustomDropdownButton2(
-                            buttonDecoration: BoxDecoration(
-                                border: Border.all(color: Colors.white)),
-                            dropdownWidth: 31.w,
-                            icon: Icon(Icons.keyboard_arrow_down, size: 22),
-                            hint: '',
-                            dropdownItems: provider.chooseYearList!.map((value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text('$value',
-                                    style: TextStyle(fontSize: 14)),
-                              );
-                            }).toList(),
-                            onChanged: (newValue) async {
-                              print('$newValue');
-                              provider.yearName = newValue;
-                              setState(() {});
-                              // Navigator.of(context).push(MaterialPageRoute(
-                              //     builder: (c) => CancelOrderPage(
-                              //       comment: (v) async {
-                              //         print('object =${v}');
-                              //         DataProvider().cancel_order_api(
-                              //             comment: v, order_id: widget.Id);
-                              //         Navigator.of(context).pop(true);
-                              //       },
-                              //     ),
-                              //     fullscreenDialog: true));
-                              // showCancelOrderDialog(
-                              //   (v) async {
-                              //     print('object =${v}');
-                              //     await DataProvider().cancel_order_api(
-                              //         comment: v, order_id: widget.Id);
-                              //     Navigator.of(context).pop(true);
-                              //   },
-                              // );
-                            },
-                          ),
-                        ],
+                child: InkWell(
+                  onTap: (){
+                    listBottomSheet(
+                        context: context,
+                        add_new: () {},
+                        selected_values: (v) {
+                          provider.yearName = v[0];
+                          provider.updateState();
+                        },
+                        hide_add_new: true,
+                        pre_selected_all_values: [],
+                        all_values: provider.chooseYearList);
+                  },
+                  child: Container(
+                    height: 6.h,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 3.w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              provider.yearName == null
+                                  ? 'Choose Year'
+                                  : '${provider.yearName}',
+                              style:
+                              TextStyle(color: Colors.black, fontSize: 10.sp),
+                            ),
+                            Icon(Icons.keyboard_arrow_down, size: 22)
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-              if(provider.isVisible == true && provider.yearName == null)
+              if (provider.isVisible == true && provider.yearName == null)
                 SizedBox(
                   height: 1.h,
                 ),
-              if(provider.isVisible == true && provider.yearName == null)
+              if (provider.isVisible == true && provider.yearName == null)
                 Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 8.w),
-                  child: Text('No select year',style: TextStyle(color: Colors.red,fontSize: 14),),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
+                  child: Text(
+                    'No select year',
+                    style: TextStyle(color: Colors.red, fontSize: 14),
+                  ),
                 ),
               SizedBox(
                 height: 2.h,
@@ -434,7 +430,12 @@ class _BusinessVehicleDetailState extends State<VehicleDetail> {
                 padding: EdgeInsets.symmetric(horizontal: 6.w),
                 child: Text(
                   'Registration card',
-                  style: TextStyle(color:provider.isVisible == true && provider.drivingLicense == null ? Colors.red : Colors.white, fontSize: 10.sp),
+                  style: TextStyle(
+                      color: provider.isVisible == true &&
+                          provider.drivingLicense == null
+                          ? Colors.red
+                          : Colors.white,
+                      fontSize: 10.sp),
                 ),
               ),
               SizedBox(
@@ -497,19 +498,16 @@ class _BusinessVehicleDetailState extends State<VehicleDetail> {
               GestureDetector(
                 onTap: () async {
                   if (provider.vehicleName != null &&
-                      provider.chooseCompanyName!= null &&
-                      provider.yearName!= null &&
-                      provider.modelName!= null &&
+                      provider.chooseCompanyName != null &&
+                      provider.yearName != null &&
+                      provider.modelName != null &&
                       provider.drivingLicense != null) {
                     print('object1');
                     await provider.add_vehicle_api();
                   } else {
-
                     print('object');
                     provider.isVisible = true;
-                    setState(() {
-
-                    });
+                    setState(() {});
                   }
 
                   // Navigator.push(context, MaterialPageRoute(builder: (context) => BusinessVehicleAdded(),));
