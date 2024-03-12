@@ -27,6 +27,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     final ForgetProvider provider = Provider.of<ForgetProvider>(context);
     return DataLoading(
       isLoading: provider.loading,
+      use_opacity: false,
       child: Scaffold(
         backgroundColor: Color(0xff181F30),
         //Colors.black,
@@ -35,7 +36,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             key: provider.formKey,
             child: Column(
               children: [
-                SizedBox(height: 7.h,),
+                SizedBox(
+                  height: 7.h,
+                ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 6.w),
                   child: Row(
@@ -44,22 +47,27 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           onTap: () {
                             Navigator.pop(context);
                           },
-                          child: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 2.h,)),
-                      SizedBox(width: 3.w,),
+                          child: Icon(
+                            Icons.arrow_back_ios_new_outlined,
+                            color: Colors.white,
+                            size: 2.h,
+                          )),
+                      SizedBox(
+                        width: 3.w,
+                      ),
                       Text(
                         'Forgot Password!',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 17.sp,
-                            fontWeight: FontWeight.bold
-                        ),
+                            fontWeight: FontWeight.bold),
                       )
                     ],
                   ),
                 ),
                 //SizedBox(height: 1.h,),
                 Padding(
-                  padding:EdgeInsets.symmetric(horizontal: 13.w),
+                  padding: EdgeInsets.symmetric(horizontal: 13.w),
                   child: Text(
                     'Enter your Phone Number to get OTP Verification Code',
                     style: TextStyle(
@@ -69,7 +77,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 6.h,),
+                SizedBox(
+                  height: 6.h,
+                ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 6.w),
                   child: CustommTextField(
@@ -77,7 +87,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     prefixIcon: 'assets/email.svg',
                     hintText: 'Email',
                     validator: (value) {
-                      bool? v= provider.validate_email_phone(value);
+                      bool? v = provider.validate_email_phone(value);
                       if (v == false) {
                         return 'Please enter email';
                       } else {
@@ -136,14 +146,20 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 //     ],
                 //   ),
                 // ),
-                SizedBox(height: 14.h,),
+                SizedBox(
+                  height: 3.h,
+                ),
                 GestureDetector(
-                  onTap: () async{
-                    if(provider.formKey.currentState!.validate()){
+                  onTap: () async {
+                    if (provider.formKey.currentState!.validate()) {
                       await provider.call_forget_api();
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => OttpScreen(email: provider.emailController.text),));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => OttpScreen(
+                                email: provider.emailController.text),
+                          ));
                     }
-
                   },
                   child: CustomButton(
                     text: 'Next',
@@ -152,13 +168,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     buttonColor: Color(0xffFFD542),
                   ),
                 ),
-                SizedBox(height: 1.5.h,),
-
+                SizedBox(
+                  height: 1.5.h,
+                ),
               ],
             ),
           ),
         ),
-
       ),
     );
   }

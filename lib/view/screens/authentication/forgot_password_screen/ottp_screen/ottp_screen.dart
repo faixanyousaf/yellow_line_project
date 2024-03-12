@@ -7,7 +7,7 @@ import '../reset_password_screen/reset_password_screen.dart';
 
 class OttpScreen extends StatefulWidget {
   String? email;
-   OttpScreen({Key? key,this.email}) : super(key: key);
+  OttpScreen({Key? key, this.email}) : super(key: key);
 
   @override
   State<OttpScreen> createState() => _OttpScreenState();
@@ -24,7 +24,9 @@ class _OttpScreenState extends State<OttpScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 6.h,),
+            SizedBox(
+              height: 6.h,
+            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 6.w),
               child: Row(
@@ -33,22 +35,27 @@ class _OttpScreenState extends State<OttpScreen> {
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 2.h,)),
-                  SizedBox(width: 3.w,),
+                      child: Icon(
+                        Icons.arrow_back_ios_new_outlined,
+                        color: Colors.white,
+                        size: 2.h,
+                      )),
+                  SizedBox(
+                    width: 3.w,
+                  ),
                   Text(
                     'Verify OTP',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 17.sp,
-                        fontWeight: FontWeight.bold
-                    ),
+                        fontWeight: FontWeight.bold),
                   )
                 ],
               ),
             ),
             //SizedBox(height: 1.h,),
             Padding(
-              padding:EdgeInsets.symmetric(horizontal: 13.w),
+              padding: EdgeInsets.symmetric(horizontal: 13.w),
               child: Text(
                 'Enter OTP verification code received at your ‘’+971 555066435’’',
                 style: TextStyle(
@@ -58,13 +65,15 @@ class _OttpScreenState extends State<OttpScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 4.h,),
+            SizedBox(
+              height: 4.h,
+            ),
             Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 6.w),
+              padding: EdgeInsets.symmetric(horizontal: 6.w),
               child: PinCodeTextField(
                 appContext: context,
                 hintCharacter: '-',
-                hintStyle: TextStyle(fontSize: 13.sp,color: Colors.black),
+                hintStyle: TextStyle(fontSize: 13.sp, color: Colors.black),
                 pastedTextStyle: TextStyle(
                   color: Color(0xff8381E0),
                   fontWeight: FontWeight.bold,
@@ -131,16 +140,21 @@ class _OttpScreenState extends State<OttpScreen> {
                 },
               ),
             ),
-            SizedBox(height: 14.h,),
+            SizedBox(
+              height: 4.h,
+            ),
             GestureDetector(
               onTap: () {
-                if(textEditingController.text.isNotEmpty){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ResetPasswordScreen(
-                    email: widget.email,
-                    sendOtp: textEditingController.text,
-                  ),));
+                if (textEditingController.text.isNotEmpty) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ResetPasswordScreen(
+                          email: widget.email,
+                          sendOtp: textEditingController.text,
+                        ),
+                      ));
                 }
-
               },
               child: CustomButton(
                 text: 'Verify',
@@ -149,8 +163,9 @@ class _OttpScreenState extends State<OttpScreen> {
                 buttonColor: Color(0xffFFD542),
               ),
             ),
-            SizedBox(height: 1.5.h,),
-
+            SizedBox(
+              height: 1.5.h,
+            ),
           ],
         ),
       ),

@@ -10,17 +10,27 @@ const resetPasswordUrl = 'auth/reset/users';
 Future forget_mail_send_api({required Map<String, dynamic> map}) async {
   SharedPrefs sf = SharedPrefs();
   var tocken = await sf.getToken();
-  final response = await http.get(Uri.parse('http://yellowline.codeels.pro/auth/code/users'));
-  var data = response.body;
-  print( ' the response is =${data}');
+  final response =
+      await dio.Dio().post('http://yellowline.codeels.pro/auth/code/users',
+          options: dio.Options(
+            headers: {'Content-Type': "application/x-www-form-urlencoded"},
+          ),
+          data: map);
+  var data = response.data;
+  print(' the response is =${data}');
   return data;
 }
 
 Future reset_password_api({required Map<String, dynamic> map}) async {
   SharedPrefs sf = SharedPrefs();
   var tocken = await sf.getToken();
-  final response = await http.get(Uri.parse('http://yellowline.codeels.pro/auth/reset/users'));
-  var data = response.body;
-  print( ' the response is =${data}');
+  final response =
+      await dio.Dio().post('http://yellowline.codeels.pro/auth/reset/users',
+          options: dio.Options(
+            headers: {'Content-Type': "application/x-www-form-urlencoded"},
+          ),
+          data: map);
+  var data = response.data;
+  print(' the response is =${data}');
   return data;
 }

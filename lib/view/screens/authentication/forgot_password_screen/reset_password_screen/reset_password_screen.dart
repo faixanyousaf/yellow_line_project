@@ -25,6 +25,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     final ResetPasswordProvider provider = Provider.of<ResetPasswordProvider>(context);
     return DataLoading(
       isLoading: provider.loading,
+      use_opacity: false,
       child: Scaffold(
         backgroundColor: Color(0xff181F30),
         //Colors.black,
