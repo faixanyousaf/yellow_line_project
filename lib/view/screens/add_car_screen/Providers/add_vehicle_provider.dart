@@ -36,6 +36,8 @@ class AddVehicleProvider extends ChangeNotifier {
   ];
   List<String> car_make_list = [];
   List<String>? car_model_list = [];
+  List<String> car_make_list = [];
+  List<String>? car_model_list = [];
   List<String>? chooseYearList = [
     '2023',
     '2022',

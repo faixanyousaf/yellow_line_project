@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
-import 'package:yellowline/view/screens/authentication/reset_password_screen/reset_password_screen.dart';
+
+import '../reset_password_screen/reset_password_screen.dart';
 
 class OttpScreen extends StatefulWidget {
-  const OttpScreen({Key? key}) : super(key: key);
+  String? email;
+   OttpScreen({Key? key,this.email}) : super(key: key);
 
   @override
   State<OttpScreen> createState() => _OttpScreenState();
@@ -67,7 +69,7 @@ class _OttpScreenState extends State<OttpScreen> {
                   color: Color(0xff8381E0),
                   fontWeight: FontWeight.bold,
                 ),
-                length: 6,
+                length: 4,
 
                 // obscureText: true,
                 // obscuringCharacter: '*',
@@ -132,7 +134,13 @@ class _OttpScreenState extends State<OttpScreen> {
             SizedBox(height: 14.h,),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ResetPasswordScreen(),));
+                if(textEditingController.text.isNotEmpty){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ResetPasswordScreen(
+                    email: widget.email,
+                    sendOtp: textEditingController.text,
+                  ),));
+                }
+
               },
               child: CustomButton(
                 text: 'Verify',
