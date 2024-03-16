@@ -14,8 +14,8 @@ class LoginProvider extends ChangeNotifier {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool? validate_email_phone(String? value) {
-    bool emailValid =
-    RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+    bool emailValid = RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(value!);
     return emailValid;
   }
@@ -29,14 +29,16 @@ class LoginProvider extends ChangeNotifier {
   }
 
   login_api(BuildContext? context) async {
-    if (formKey.currentState!.validate()){
+    if (formKey.currentState!.validate()) {
+      try {
         loading = true;
         updateState();
         Sign_In_Request request = Sign_In_Request(
             password: passwordController.text,
             email: emailController.text,
             account_type: '2');
-        var result = await AuthRepository.instance.signIn(body: request.toJson());
+        var result =
+            await AuthRepository.instance.signIn(body: request.toJson());
         LoginResponceModel responceModel = result as LoginResponceModel;
         print('${responceModel.toJson()}');
         SharedPrefs sf = SharedPrefs();
@@ -47,7 +49,11 @@ class LoginProvider extends ChangeNotifier {
         loading = false;
         updateState();
         navigationService.navigatePushReplace(RouterPath.Home_Screen);
+      } catch (e) {
+        loading = false;
+        updateState();
       }
+    }
 
     // if( v == true){
     //   if (index == 2) {
@@ -74,7 +80,6 @@ class LoginProvider extends ChangeNotifier {
     //     content: Text("Invalid Email",style: TextStyle(color: Colors.white)),
     //   ));
     // }
-
   }
 
   updateState() {

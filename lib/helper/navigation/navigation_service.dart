@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class NavigationService {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -39,14 +38,10 @@ class NavigationService {
   }
 
   goBack({dynamic value}) {
-    if(value != null)
-      {
-        return navigatorKey.currentState!.pop(value);
-
-      }else{
-
+    if (value != null) {
+      return navigatorKey.currentState!.pop(value);
+    } else {
       return navigatorKey.currentState!.pop();
-
     }
   }
 
@@ -62,10 +57,10 @@ class NavigationService {
     return navigatorKey.currentState!.canPop();
   }
 
-  pushAndRemoveUntil() {
-    // navigatorKey.currentState!.pushAndRemoveUntil(
-    //   MaterialPageRoute(builder: (BuildContext context) =>  const LoginScreen()),
-    //   ModalRoute.withName('/'),
-    // );
+  pushAndRemoveUntil(Widget widget) {
+    navigatorKey.currentState!.pushAndRemoveUntil(
+      MaterialPageRoute(builder: (BuildContext context) => widget),
+      ModalRoute.withName('/'),
+    );
   }
 }

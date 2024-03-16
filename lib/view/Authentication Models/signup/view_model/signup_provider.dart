@@ -62,32 +62,36 @@ class SingUpProvider extends ChangeNotifier {
     return emailValid;
   }
 
-  final formKey = GlobalKey<FormState>();
-  call_sign_up() async {
+  call_sign_up(GlobalKey<FormState> formKey) async {
     if (formKey.currentState!.validate()) {
       loading = true;
       updateState();
-      FormData data = FormData.fromMap({
-        'email': emailController.text,
-        'first_name': firstNameController.text,
-        'last_name': lastNameController.text,
-        'phone': phoneController.text,
-        'dial_code': country_code,
-        'password': passwordController.text,
-      });
-      var result = await AuthRepository.instance.signUp(body: data);
-      loading = false;
-      updateState();
-      LoginResponceModel responceModel = LoginResponceModel.fromJson(result);
-      print('${responceModel.toJson()}');
-      SharedPrefs sf = SharedPrefs();
-      sf.saveUser(responceModel.toJson());
-      sf.saveToken(responceModel.accessToken);
-      sf.saveaslogin('1');
-      sf.saveid(responceModel.user!.id.toString());
-      loading = false;
-      updateState();
-      navigationService.navigatePushReplace(RouterPath.Home_Screen);
+      try {
+        FormData data = FormData.fromMap({
+          'email': emailController.text,
+          'first_name': firstNameController.text,
+          'last_name': lastNameController.text,
+          'phone': phoneController.text,
+          'dial_code': country_code,
+          'password': passwordController.text,
+        });
+        var result = await AuthRepository.instance.signUp(body: data);
+        loading = false;
+        updateState();
+        LoginResponceModel responceModel = LoginResponceModel.fromJson(result);
+        print('${responceModel.toJson()}');
+        SharedPrefs sf = SharedPrefs();
+        sf.saveUser(responceModel.toJson());
+        sf.saveToken(responceModel.accessToken);
+        sf.saveaslogin('1');
+        sf.saveid(responceModel.user!.id.toString());
+        loading = false;
+        updateState();
+        navigationService.navigatePushReplace(RouterPath.Home_Screen);
+      } catch (e) {
+        loading = false;
+        updateState();
+      }
     }
   }
 }

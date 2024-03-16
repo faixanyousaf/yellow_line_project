@@ -1,5 +1,8 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+
+import '../../../../helper/navigation/navigation_object.dart';
 // import '../../../../gen_2/authentication/signin/models/error_response_model.dart';
 // import '../../../../gen_2/authentication/signin/view/login_screen.dart';
 // import '../../../../helper/show_snake_bar.dart';
@@ -43,8 +46,15 @@ class AuthInterceptors extends Interceptor {
           name: 'onError | AuthRepository');
       log('response.statusCode......${err.response?.data.toString()}',
           name: 'onError | AuthRepository');
-      //ErrorModel errorModel = ErrorModel.fromJson(err.response?.data);
-
+      var snackBar = SnackBar(
+        content: Text(
+          '${err.response?.data['message']}',
+          style: TextStyle(color: Colors.black),
+        ),
+        backgroundColor: Colors.white,
+      );
+      ScaffoldMessenger.of(navigationService.navigatorKey.currentState!.context)
+          .showSnackBar(snackBar);
       // if (errorModel.msg.toString().toLowerCase() == 'user not found!' ||
       //     errorModel.msg.toString().toLowerCase() == 'incorrect password' ||
       //     errorModel.msg.toString() == 'User is suspended!') {
