@@ -41,4 +41,20 @@ class AuthRepository {
       rethrow;
     }
   }
+
+  Future social_signUp({required body}) async {
+    try {
+      log('body......$body', name: 'signIn | AuthRepository');
+
+      var data = await _saryaAPI.social_signup(body: body);
+
+      log('data......$data', name: 'signIn | AuthRepository');
+
+      return data;
+    } catch (e) {
+      log('catch......${e.toString()}', name: 'signUn | AuthRepository');
+
+      rethrow;
+    }
+  }
 }

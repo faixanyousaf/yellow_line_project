@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:yellowline/view/screens/add_car_screen/vehicle_list_screen.dart';
 import 'package:yellowline/view/screens/authentication/login_screen/login_screen.dart';
-// import '../../view/screens/Business Screen/Business Authentication/Business Login/business_login_screen.dart';
-// import '../../view/screens/Business Screen/Business Authentication/business_otp/business_otp_screen.dart';
-// import '../../view/screens/Business Screen/Business Authentication/business_signup_screen/business_signup_screen.dart';
-// import '../../view/screens/Business Screen/Business Home Page/view/business_home_screen.dart';
-// import '../../view/screens/Business Screen/add vehicle and view vehicle/business_add_vehicle.dart';
-// import '../../view/screens/Business Screen/add vehicle and view vehicle/business_vehicle_added.dart';
-// import '../../view/screens/Business Screen/add vehicle and view vehicle/business_vehicle_detail.dart';
-// import '../../view/screens/Driver Screens/add_driver_screen/New Driver Add/view/add_new_driver.dart';
-// import '../../view/screens/Driver Screens/add_driver_screen/New Driver Add/view/driver_list_screen.dart';
-// import '../../view/screens/Driver Screens/add_driver_screen/driver_approvel_screen.dart';
-// import '../../view/screens/Driver Screens/driver_home_screen.dart';
 import '../../view/screens/add_car_screen/add_new_vehicle_screen.dart';
 import '../../view/screens/add_car_screen/vehicle_added_sceen.dart';
 import '../../view/screens/add_car_screen/vehicle_detail_screen.dart';
 import '../../view/screens/authentication/otp_screen/otp_screen.dart';
 import '../../view/screens/home_page/home_screen.dart';
+import '../../view/screens/recovery_screens/drop_off_screen.dart';
+import '../../view/screens/recovery_screens/recovery_confirmed_screen.dart';
 import 'router_path.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -31,25 +22,33 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => LogInScreen(),
       );
-      case RouterPath.Vehicle_List_Screen:
+    case RouterPath.Vehicle_List_Screen:
       return MaterialPageRoute(
         builder: (context) => VehicleListScreen(),
       );
-      case RouterPath.Add_New_Vehicle_Screen:
+    case RouterPath.Add_New_Vehicle_Screen:
       return MaterialPageRoute(
         builder: (context) => AddNewVehicleScreen(),
       );
-      case RouterPath.Vehicle_Added_Screen:
+    case RouterPath.Vehicle_Added_Screen:
       return MaterialPageRoute(
         builder: (context) => VehicleAddedScreen(),
       );
-      case RouterPath.Vehicle_Detail:
+    case RouterPath.Vehicle_Detail:
       return MaterialPageRoute(
         builder: (context) => VehicleDetail(),
       );
-      case RouterPath.Otp_Screen:
+    case RouterPath.Otp_Screen:
       return MaterialPageRoute(
         builder: (context) => OtpScreen(),
+      );
+    case RouterPath.add_request_screen_one:
+      return MaterialPageRoute(
+        builder: (context) => DropOffScreen(),
+      );
+      case RouterPath.complete_request_screen:
+      return MaterialPageRoute(
+        builder: (context) => RecoveryConfirmedScreen(),
       );
     // case RouterPath.business_home_Rout:
     //   return MaterialPageRoute(
@@ -84,9 +83,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     //     builder: (context) => BusinessVehicleAdded(),
     //   );
 
-
-
-      // case RouterPath.onboardRout:
+    // case RouterPath.onboardRout:
     //   return MaterialPageRoute(
     //     builder: (context) => OnBoardScreen(),
     //   );

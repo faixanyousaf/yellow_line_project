@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -24,36 +26,67 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLName</key>
+            <string>Bundle ID</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.googleusercontent.apps.876537161505-00feg181hqinbt5em1ppmjhv09bbrf9m</string>
+            </array>
+        </dict>
+    </array>
+    <key>GIDClientID</key>
+    <string>876537161505-00feg181hqinbt5em1ppmjhv09bbrf9m.apps.googleusercontent.com</string>
+    <key>GIDServerClientID</key>
+    <string>com.googleusercontent.apps.876537161505-00feg181hqinbt5em1ppmjhv09bbrf9m</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>comgooglemaps</string>
+        <string>baidumap</string>
+        <string>iosamap</string>
+        <string>waze</string>
+        <string>yandexmaps</string>
+        <string>yandexnavi</string>
+        <string>citymapper</string>
+        <string>mapswithme</string>
+        <string>osmandmaps</string>
+        <string>dgis</string>
+        <string>qqmap</string>
+        <string>here-location</string>
+        <string>tomtomgo</string>
+    </array>
 	<key>NSAppleMusicUsageDescription</key>
-    <string>Your Music Library is used to update Alerts.</string>
-    <key>NSBluetoothAlwaysUsageDescription</key>
-    <string>Your bluetooth is used for directions.</string>
-    <key>NSBluetoothPeripheralUsageDescription</key>
-    <string>Your bluetooth is used for directions.</string>
-    <key>NSCalendarsUsageDescription</key>
-    <string>Your calendar is used to give precise date for messages.</string>
-    <key>NSCameraUsageDescription</key>
-    <string>Allow your camera is used to update your profile picture and also to add product images for creating itinerary and list.</string>
-    <key>NSContactsUsageDescription</key>
-    <string>Allow contact list to find other users on sarya app to connect and add as your friends in realtime. Your contact list will not upload on sarya app</string>
-    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string> Allow your location is used to provide directions to the places to visit and search for destinations..</string>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string> Allow your location is used to provide directions to the places to visit and search for destinations.</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string> Allow your location is used to provide directions to the places to visit and search for destinations..</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>sarya needs to access your device microphone to send audio messages.</string>
-    <key>NSMotionUsageDescription</key>
-    <string>sarya would like to access your motion.</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>Allow photo access to update profile picture and to add product images into itinerary and list creation.</string>
-    <key>NSSpeechRecognitionUsageDescription</key>
-    <string>The app uses speech recognition for dictating messages.</string>
-    <key>NSCameraUsageDescription</key>
-    <string> Allow camera access to update profile picture and to add product images into itinerary and list creation.</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string> sarya needs to access your device microphone to send audio messages.</string>
+	<string>Your Music Library is used to update Alerts.</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Your bluetooth is used for directions.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Your bluetooth is used for directions.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Your calendar is used to give precise date for messages.</string>
+	<key>NSCameraUsageDescription</key>
+	<string> Allow camera access to update profile picture and to add product images into itinerary and list creation.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Allow contact list to find other users on sarya app to connect and add as your friends in realtime. Your contact list will not upload on sarya app</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string> Allow your location is used to provide directions to the places to visit and search for destinations..</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string> Allow your location is used to provide directions to the places to visit and search for destinations.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string> Allow your location is used to provide directions to the places to visit and search for destinations..</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string> sarya needs to access your device microphone to send audio messages.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>sarya would like to access your motion.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow photo access to update profile picture and to add product images into itinerary and list creation.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>The app uses speech recognition for dictating messages.</string>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -71,9 +104,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
 </dict>
 </plist>

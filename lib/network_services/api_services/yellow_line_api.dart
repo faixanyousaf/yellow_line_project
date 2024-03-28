@@ -20,7 +20,7 @@ class YellowLineAPI {
   Future<dynamic> get_all_cities({required body}) async {
     try {
       String url = '';
-      url = ApiRoutes.cities+'$body';
+      url = ApiRoutes.cities + '$body';
       log('url......$url', name: 'signIn | YellowLineAPI');
       return await _http.iGet(url);
     } catch (e) {
@@ -33,6 +33,46 @@ class YellowLineAPI {
       String url = '';
       url = ApiRoutes.signup;
       return await _http.iPost_form_data(url, data: body);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> social_signup({required body}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.socail_signup;
+      return await _http.iPost(url, data: body);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> calculate_fare({required body}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.get_fare;
+      return await _http.iPost_raw_data(url, data: body);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> charge_user({required body}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.charge_user;
+      return await _http.iPost_raw_data(url, data: body);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> update_charge_user({required body}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.update_charge_user;
+      return await _http.iPost_raw_data(url, data: body);
     } catch (e) {
       rethrow;
     }

@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
@@ -7,8 +9,6 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:yellowline/global_widgets/custom_google_button.dart';
 import 'package:yellowline/global_widgets/data_loading.dart';
 import 'package:yellowline/view/screens/authentication/login_screen/login_screen.dart';
-import 'package:yellowline/view/screens/authentication/otp_screen/otp_screen.dart';
-
 import '../../../Authentication Models/signup/view_model/signup_provider.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -20,8 +20,54 @@ class SignUpScreen extends StatefulWidget {
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
+const List<String> scopes = <String>[
+  'email',
+  'https://www.googleapis.com/auth/contacts.readonly',
+];
+
 class _SignUpScreenState extends State<SignUpScreen> {
   var formKey = GlobalKey<FormState>();
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+    clientId:
+        '876537161505-00feg181hqinbt5em1ppmjhv09bbrf9m.apps.googleusercontent.com',
+    scopes: scopes,
+  );
+
+  @override
+  void initState() {
+    SingUpProvider provider =
+        Provider.of<SingUpProvider>(context, listen: false);
+    _googleSignIn.onCurrentUserChanged
+        .listen((GoogleSignInAccount? account) async {
+      bool isAuthorized = account != null;
+      if (kIsWeb && account != null) {
+        isAuthorized = await _googleSignIn.canAccessScopes(scopes);
+      }
+      print('${account!.email}');
+      print('${account.id}');
+      print('${account.photoUrl}');
+      print('${account.displayName}');
+      Map<String, dynamic> map = {
+        'first_name': '${account.displayName}',
+        'last_name': '',
+        'email': '${account.email}',
+      };
+      provider.social_login(context: context, map: map);
+      _handleSignOut();
+    });
+    super.initState();
+  }
+
+  Future<void> _handleSignIn() async {
+    print('Clicked');
+    try {
+      await _googleSignIn.signIn();
+    } catch (error) {
+      print(error);
+    }
+  }
+
+  Future<void> _handleSignOut() => _googleSignIn.disconnect();
   @override
   void deactivate() {
     if (mounted) {
@@ -333,9 +379,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 6.w),
-                        child: CustomGoogleButton(
-                            image: 'assets/google.png',
-                            text: 'Signup with Google'),
+                        child: InkWell(
+                          onTap: () {
+                            _handleSignIn();
+                          },
+                          child: CustomGoogleButton(
+                              image: 'assets/google.png',
+                              text: 'Signup with Google'),
+                        ),
                       ),
                       SizedBox(
                         height: 2.5.h,

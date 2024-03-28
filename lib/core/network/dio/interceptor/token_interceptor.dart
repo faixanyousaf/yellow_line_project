@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import '../../../../helper/shared_prefs.dart';
 
 class TokenInterceptors extends Interceptor {
-  // ignore: prefer_typing_uninitialized_variables
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {

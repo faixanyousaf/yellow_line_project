@@ -94,4 +94,25 @@ class SingUpProvider extends ChangeNotifier {
       }
     }
   }
+
+  social_login({BuildContext? context, Map<String, dynamic>? map}) async {
+    try {
+      loading = true;
+      updateState();
+      var result = await AuthRepository.instance.social_signUp(body: map);
+      LoginResponceModel responceModel = LoginResponceModel.fromJson(result);
+      print('${responceModel.toJson()}');
+      SharedPrefs sf = SharedPrefs();
+      sf.saveUser(responceModel.toJson());
+      sf.saveToken(responceModel.accessToken);
+      sf.saveaslogin('1');
+      sf.saveid(responceModel.user!.id.toString());
+      loading = false;
+      updateState();
+      navigationService.navigatePushReplace(RouterPath.Home_Screen);
+    } catch (e) {
+      loading = false;
+      updateState();
+    }
+  }
 }

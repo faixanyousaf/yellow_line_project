@@ -8,7 +8,6 @@ import '../models/login_request.dart';
 
 class LoginProvider extends ChangeNotifier {
   bool loading = false;
-  //int index = 1;
   final formKey = GlobalKey<FormState>();
   bool isPasswordShow = false;
   TextEditingController emailController = TextEditingController();
@@ -54,32 +53,27 @@ class LoginProvider extends ChangeNotifier {
         updateState();
       }
     }
+  }
 
-    // if( v == true){
-    //   if (index == 2) {
-    //     loading = true;
-    //     updateState();
-    //     Sign_In_Request request = Sign_In_Request(
-    //         password: passwordController.text,
-    //         email: emailController.text,
-    //         account_type: '1');
-    //     var result = await AuthRepository.instance.signIn(body: request.toJson());
-    //     LoginResponceModel responceModel = result as LoginResponceModel;
-    //     print('${responceModel.toJson()}');
-    //     SharedPrefs sf = SharedPrefs();
-    //     sf.saveUser(responceModel.toJson());
-    //     sf.saveToken(responceModel.accessToken);
-    //     sf.saveaslogin('1');
-    //     sf.saveid(responceModel.user!.id.toString());
-    //     loading = false;
-    //     updateState();
-    //     navigationService.navigatePushReplace(RouterPath.business_home_Rout);
-    //   }
-    // }else{
-    //   ScaffoldMessenger.of(context!).showSnackBar(const SnackBar(
-    //     content: Text("Invalid Email",style: TextStyle(color: Colors.white)),
-    //   ));
-    // }
+  social_login({BuildContext? context, Map<String, dynamic>? map}) async {
+    try {
+      loading = true;
+      updateState();
+      var result = await AuthRepository.instance.social_signUp(body: map);
+      LoginResponceModel responceModel = LoginResponceModel.fromJson(result);
+      print('${responceModel.toJson()}');
+      SharedPrefs sf = SharedPrefs();
+      sf.saveUser(responceModel.toJson());
+      sf.saveToken(responceModel.accessToken);
+      sf.saveaslogin('1');
+      sf.saveid(responceModel.user!.id.toString());
+      loading = false;
+      updateState();
+      navigationService.navigatePushReplace(RouterPath.Home_Screen);
+    } catch (e) {
+      loading = false;
+      updateState();
+    }
   }
 
   updateState() {
