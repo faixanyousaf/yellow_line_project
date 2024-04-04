@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yellowline/view/screens/add_car_screen/vehicle_list_screen.dart';
 import 'package:yellowline/view/screens/authentication/login_screen/login_screen.dart';
+import '../../view/screens/My Request/view/my_request_main_screen.dart';
 import '../../view/screens/add_car_screen/add_new_vehicle_screen.dart';
 import '../../view/screens/add_car_screen/vehicle_added_sceen.dart';
 import '../../view/screens/add_car_screen/vehicle_detail_screen.dart';
@@ -46,9 +47,13 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => DropOffScreen(),
       );
-      case RouterPath.complete_request_screen:
+    case RouterPath.complete_request_screen:
       return MaterialPageRoute(
         builder: (context) => RecoveryConfirmedScreen(),
+      );
+    case RouterPath.request_view_screen:
+      return MaterialPageRoute(
+        builder: (context) => MyRequestMainScreen(),
       );
     // case RouterPath.business_home_Rout:
     //   return MaterialPageRoute(

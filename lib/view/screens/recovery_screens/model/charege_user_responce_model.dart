@@ -1,14 +1,20 @@
 class ChargeUserResponceModel {
+  String? piId;
+  String? clientSecret;
   Data? data;
 
-  ChargeUserResponceModel({this.data});
+  ChargeUserResponceModel({this.piId, this.clientSecret, this.data});
 
   ChargeUserResponceModel.fromJson(Map<String, dynamic> json) {
+    piId = json['pi_id'];
+    clientSecret = json['client_secret'];
     data = json['data'] != null ? new Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['pi_id'] = this.piId;
+    data['client_secret'] = this.clientSecret;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -17,24 +23,26 @@ class ChargeUserResponceModel {
 }
 
 class Data {
-  dynamic id;
+  int? id;
   dynamic amount;
   dynamic plateNumber;
+  dynamic pickUpLat;
+  dynamic pickUpLong;
+  dynamic dropLat;
+  dynamic dropLong;
   dynamic userId;
-  String? piId;
-  String? clientSecret;
-  dynamic paid;
-  String? updatedAt;
-  String? createdAt;
+  dynamic updatedAt;
+  dynamic createdAt;
 
   Data(
       {this.id,
         this.amount,
         this.plateNumber,
+        this.pickUpLat,
+        this.pickUpLong,
+        this.dropLat,
+        this.dropLong,
         this.userId,
-        this.piId,
-        this.clientSecret,
-        this.paid,
         this.updatedAt,
         this.createdAt});
 
@@ -42,10 +50,11 @@ class Data {
     id = json['id'];
     amount = json['amount'];
     plateNumber = json['plate_number'];
+    pickUpLat = json['pick_up_lat'];
+    pickUpLong = json['pick_up_long'];
+    dropLat = json['drop_lat'];
+    dropLong = json['drop_long'];
     userId = json['user_id'];
-    piId = json['pi_id'];
-    clientSecret = json['client_secret'];
-    paid = json['paid'];
     updatedAt = json['updatedAt'];
     createdAt = json['createdAt'];
   }
@@ -55,10 +64,11 @@ class Data {
     data['id'] = this.id;
     data['amount'] = this.amount;
     data['plate_number'] = this.plateNumber;
+    data['pick_up_lat'] = this.pickUpLat;
+    data['pick_up_long'] = this.pickUpLong;
+    data['drop_lat'] = this.dropLat;
+    data['drop_long'] = this.dropLong;
     data['user_id'] = this.userId;
-    data['pi_id'] = this.piId;
-    data['client_secret'] = this.clientSecret;
-    data['paid'] = this.paid;
     data['updatedAt'] = this.updatedAt;
     data['createdAt'] = this.createdAt;
     return data;

@@ -64,6 +64,8 @@ dependencies:
   flutter_stripe: ^10.1.1
   google_sign_in: ^6.2.1
   firebase_core: ^2.27.1
+  url_launcher: ^6.2.5
+  whatsapp_unilink: ^2.1.0
 
 #  places_api:
 #    path: packages/places_api

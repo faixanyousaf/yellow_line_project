@@ -4,6 +4,7 @@ import 'package:sizer/sizer.dart';
 import '../../../helper/navigation/navigation_object.dart';
 import '../../../helper/navigation/router_path.dart';
 import '../../../helper/shared_prefs.dart';
+import '../../Authentication Models/login/models/login_Responce_model.dart';
 import '../authentication/login_screen/login_screen.dart';
 
 class DrawerScreen extends StatefulWidget {
@@ -14,6 +15,20 @@ class DrawerScreen extends StatefulWidget {
 }
 
 class _DrawerScreenState extends State<DrawerScreen> {
+  @override
+  void initState() {
+    get_user_data();
+    super.initState();
+  }
+
+  LoginResponceModel? loginResponceModel;
+  get_user_data() async {
+    SharedPrefs sf = SharedPrefs();
+    var user = await sf.getUser();
+    loginResponceModel = LoginResponceModel.fromJson(user);
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -63,21 +78,23 @@ class _DrawerScreenState extends State<DrawerScreen> {
         SizedBox(
           height: 1.h,
         ),
-        Text(
-          'Faizan Yousaf',
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: 10.sp,
-              fontWeight: FontWeight.bold),
-        ),
-        //SizedBox(height: 1.h,),
-        Text(
-          'faizan@gmail.com',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 9.sp,
+        if (loginResponceModel != null)
+          Text(
+            '${loginResponceModel!.user!.first_name} ${loginResponceModel!.user!.last_name}',
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 10.sp,
+                fontWeight: FontWeight.bold),
           ),
-        ),
+        //SizedBox(height: 1.h,),
+        if (loginResponceModel != null)
+          Text(
+            '${loginResponceModel!.user!.email}',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 9.sp,
+            ),
+          ),
         SizedBox(
           height: 4.h,
         ),
@@ -87,44 +104,49 @@ class _DrawerScreenState extends State<DrawerScreen> {
             },
             child: customListTile(
                 text: 'My Vehicle', image: 'assets/vehicle.png')),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 4.w),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Container(
-                    height: 3.8.h,
-                    width: 7.4.w,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(7),
-                        color: Color(0xffFFCC1B)),
-                    child: Center(
-                      child: Image(
-                        image: AssetImage('assets/request.png'),
-                        height: 2.h,
+        InkWell(
+          onTap: (){
+           navigationService.navigateTo(RouterPath.request_view_screen);
+          },
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 4.w),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      height: 3.8.h,
+                      width: 7.4.w,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(7),
+                          color: Color(0xffFFCC1B)),
+                      child: Center(
+                        child: Image(
+                          image: AssetImage('assets/request.png'),
+                          height: 2.h,
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 6.w,
-                  ),
-                  Text(
-                    'My Request',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 10.sp,
+                    SizedBox(
+                      width: 6.w,
                     ),
-                  ),
-                ],
-              ),
-              Icon(
-                Icons.arrow_forward_ios_rounded,
-                size: 4.w,
-                color: Colors.white,
-              ),
-            ],
+                    Text(
+                      'My Request',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 10.sp,
+                      ),
+                    ),
+                  ],
+                ),
+                Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 4.w,
+                  color: Colors.white,
+                ),
+              ],
+            ),
           ),
         ),
         SizedBox(

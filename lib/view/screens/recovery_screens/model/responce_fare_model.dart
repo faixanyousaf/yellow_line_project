@@ -1,8 +1,8 @@
 class Responce_fare_model {
-  int? highestRate;
+  dynamic highestRate;
   String? recoveryTypeCharges;
-  double? distance;
-  double? totalCharges;
+  dynamic distance;
+  dynamic totalCharges;
 
   Responce_fare_model(
       {this.highestRate,

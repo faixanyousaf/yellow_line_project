@@ -58,6 +58,8 @@
         <string>qqmap</string>
         <string>here-location</string>
         <string>tomtomgo</string>
+        <string>sms</string>
+        <string>tel</string>
     </array>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>Your Music Library is used to update Alerts.</string>

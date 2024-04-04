@@ -14,6 +14,7 @@ import 'package:yellowline/view/screens/authentication/splash_screen/splash_scre
 import 'helper/navigation/router.dart' as routes;
 import 'helper/navigation/locator.dart';
 import 'helper/navigation/navigation_service.dart';
+import 'view/screens/My Request/view_model/view_request_provider.dart';
 import 'view/screens/recovery_screens/view_model/add_request_provider.dart';
 
 void main() async {
@@ -37,6 +38,7 @@ void main() async {
     ChangeNotifierProvider(create: (_) => ForgetProvider()),
     ChangeNotifierProvider(create: (_) => ResetPasswordProvider()),
     ChangeNotifierProvider(create: (_) => AddRequestProvider()),
+    ChangeNotifierProvider(create: (_) => ViewRequestProvider()),
   ], child: const MyApp()));
 }
 

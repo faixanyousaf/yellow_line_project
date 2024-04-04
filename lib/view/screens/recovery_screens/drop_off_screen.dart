@@ -158,13 +158,15 @@ class _DropOffScreenState extends State<DropOffScreen> {
   @override
   void deactivate() {
     final AddRequestProvider provider =
-    Provider.of<AddRequestProvider>(context,listen: false);
+        Provider.of<AddRequestProvider>(context, listen: false);
     provider.loading = false;
     provider.request_model = Request_Recovery_Model();
-    provider.chargeUserResponceModel=null;
-    provider.responce_fare_model=null;
+    provider.chargeUserResponceModel = null;
+    provider.responce_fare_model = null;
     provider.recovery_type_list = ['Normal', 'Sports', 'Heavy'];
     provider.selected_recovery_type = 'Normal';
+    provider.pickup_name = '';
+    provider.dropoff_name = '';
     super.deactivate();
   }
 
@@ -638,7 +640,8 @@ class _DropOffScreenState extends State<DropOffScreen> {
                                                 ),
                                                 InkWell(
                                                   onTap: () {
-                                                    provider.charge_user(context);
+                                                    provider
+                                                        .charge_user(context);
                                                   },
                                                   child: CustomBottomButton(
                                                     text: 'Confirm',
@@ -866,6 +869,8 @@ class _DropOffScreenState extends State<DropOffScreen> {
 
   void getLocationAddress(
       {required LatLng latLng, required bool? add_name}) async {
+    final AddRequestProvider provider =
+        Provider.of<AddRequestProvider>(context, listen: false);
     if (selected_destination == 1) {
       pickup_latLng = latLng;
     }
@@ -877,6 +882,12 @@ class _DropOffScreenState extends State<DropOffScreen> {
     List<Placemark> placemarks =
         await placemarkFromCoordinates(latLng.latitude, latLng.longitude);
     String name = '${placemarks[0].name ?? ''}';
+    if (selected_destination == 1) {
+      provider.pickup_name = name;
+    }
+    if (selected_destination == 2) {
+      provider.dropoff_name = name;
+    }
     if (selected_destination == 1) {
       markersList.remove('pickup_latLng');
       final markerId = MarkerId('pickup_latLng');

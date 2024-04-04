@@ -58,10 +58,40 @@ class YellowLineAPI {
     }
   }
 
+  Future<dynamic> get_view_request({required body}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.myrequests_by_status;
+      return await _http.iPost_raw_data(url, data: body);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<dynamic> charge_user({required body}) async {
     try {
       String url = '';
       url = ApiRoutes.charge_user;
+      return await _http.iPost_raw_data(url, data: body);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> update_payment_status({required body}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.update_payment_status;
+      return await _http.iPost_raw_data(url, data: body);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> update_location({required body}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.update_location;
       return await _http.iPost_raw_data(url, data: body);
     } catch (e) {
       rethrow;

@@ -5,6 +5,7 @@ import '../../../../helper/navigation/router_path.dart';
 import '../../../../helper/shared_prefs.dart';
 import '../../../../helper/stripe_payment_methods.dart';
 import '../../../../network_services/repository/user_repository/user_repo.dart';
+import '../model/UpdatePaymentRequest.dart';
 import '../model/charege_user_request_model.dart';
 import '../model/charege_user_responce_model.dart';
 import '../model/request_recovery_model.dart';
@@ -17,6 +18,8 @@ class AddRequestProvider extends ChangeNotifier {
   Responce_fare_model? responce_fare_model;
   List<String> recovery_type_list = ['Normal', 'Sports', 'Heavy'];
   String selected_recovery_type = 'Normal';
+  String? pickup_name = '';
+  String? dropoff_name = '';
 
   calculate_fare() async {
     loading = true;
@@ -30,13 +33,15 @@ class AddRequestProvider extends ChangeNotifier {
       "recoveryType": 3
     };
     try {
-      var data = await UserRepository.instance.calculate_fare(body: body);
+      var data = await UserRepository.instance
+          .calculate_fare(body: request_model.toJson());
       print('calculate_fare ...... $data');
       responce_fare_model =
           Responce_fare_model.fromJson(data as Map<String, dynamic>);
       loading = false;
       update_state();
     } catch (e) {
+      print('Exception ... $e');
       loading = false;
       update_state();
     }
@@ -51,15 +56,21 @@ class AddRequestProvider extends ChangeNotifier {
       var id = await sf.getid();
       ChargeUserRequestModel chargeUserRequestModel = ChargeUserRequestModel(
           amount: responce_fare_model!.totalCharges!.toInt(),
-          userId: int.parse(id),
-          plateNumber: 1097);
+          userId: id.toString(),
+          plateNumber: 1097,
+          dropLat: request_model.lat2,
+          dropLong: request_model.long2,
+          pickUpLat: request_model.lat1,
+          dropName: pickup_name,
+          pickupName: dropoff_name,
+          pickUpLong: request_model.long1);
       print('step1');
       var data = await UserRepository.instance
           .charge_user(body: chargeUserRequestModel.toJson());
       print('step2');
       chargeUserResponceModel = ChargeUserResponceModel.fromJson(data);
       print('step3');
-      loading = true;
+      loading = false;
       update_state();
       stripe_payment(context);
     } catch (e) {
@@ -72,11 +83,15 @@ class AddRequestProvider extends ChangeNotifier {
   stripe_payment(BuildContext context) {
     makePayment(
         transactionID: (v) {
-          navigationService.navigatePushReplace(RouterPath.complete_request_screen);
+          UpdatePaymentRequest request = UpdatePaymentRequest(
+              paid: 1, requestId: chargeUserResponceModel!.data!.id);
+          UserRepository.instance.update_payment_status(body: request.toJson());
+          navigationService
+              .navigatePushReplace(RouterPath.complete_request_screen);
         },
         context: context,
-        client_secret: chargeUserResponceModel!.data!.clientSecret!,
-        payment_intent_id: chargeUserResponceModel!.data!.piId!);
+        client_secret: chargeUserResponceModel!.clientSecret!,
+        payment_intent_id: chargeUserResponceModel!.piId!);
   }
 
   update_state() {
