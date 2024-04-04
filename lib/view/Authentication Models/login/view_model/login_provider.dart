@@ -60,6 +60,7 @@ class LoginProvider extends ChangeNotifier {
       loading = true;
       updateState();
       var result = await AuthRepository.instance.social_signUp(body: map);
+      print('result....$result');
       LoginResponceModel responceModel = LoginResponceModel.fromJson(result);
       print('${responceModel.toJson()}');
       SharedPrefs sf = SharedPrefs();
@@ -71,6 +72,7 @@ class LoginProvider extends ChangeNotifier {
       updateState();
       navigationService.navigatePushReplace(RouterPath.Home_Screen);
     } catch (e) {
+      print('Exception.....$e');
       loading = false;
       updateState();
     }

@@ -34,8 +34,8 @@ class _DataLoadingState extends State<DataLoading>
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SpinKitThreeInOut(
-                      color: Color(0xffFFCC1B),
+                    SpinKitDoubleBounce(
+                      color: Colors.grey,
                       size: 25.0,
                     )
                   ],

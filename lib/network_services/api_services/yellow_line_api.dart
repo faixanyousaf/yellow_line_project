@@ -108,6 +108,16 @@ class YellowLineAPI {
     }
   }
 
+  Future<dynamic> get_vehicle({required id}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.get_vehicle + id;
+      return await _http.iGet(url);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<dynamic> get_all_drivers({required id}) async {
     try {
       String url = '';

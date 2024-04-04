@@ -20,7 +20,11 @@ class LoginResponceModel {
     status = json['status'];
     phoneVerified = json['phone_verified'];
     emailVerified = json['email_verified'];
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    user = json['user'] != null
+        ? json['user'] is List
+            ? User.fromJson(json['user'][0])
+            : User.fromJson(json['user'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {

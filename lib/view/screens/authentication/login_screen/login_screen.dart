@@ -83,7 +83,7 @@ class _LogInScreenState extends State<LogInScreen> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 6.h,
+                    height: 8.h,
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 6.w),
@@ -355,12 +355,12 @@ class _LogInScreenState extends State<LogInScreen> {
                   SizedBox(
                     height: 2.h,
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 6.w),
-                    child: CustomGoogleButton(
-                        image: 'assets/facebook.png',
-                        text: 'Signup with Facebook'),
-                  )
+                  // Padding(
+                  //   padding: EdgeInsets.symmetric(horizontal: 6.w),
+                  //   child: CustomGoogleButton(
+                  //       image: 'assets/facebook.png',
+                  //       text: 'Signup with Facebook'),
+                  // )
                 ],
               ),
             ),

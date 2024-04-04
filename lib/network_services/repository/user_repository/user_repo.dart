@@ -89,4 +89,17 @@ class UserRepository {
       rethrow;
     }
   }
+
+  Future<dynamic> get_vehicle({required id}) async {
+    try {
+      log('body......$id', name: 'get_vehicle | AuthRepository');
+      var data = await _saryaAPI.get_vehicle(id: id);
+      log('data......$data', name: 'get_vehicle | AuthRepository');
+      return data;
+    } catch (e) {
+      log('catch error......${e.toString()}',
+          name: 'get_vehicle | AuthRepository');
+      rethrow;
+    }
+  }
 }

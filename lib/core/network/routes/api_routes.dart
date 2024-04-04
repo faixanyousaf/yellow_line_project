@@ -17,4 +17,5 @@ class ApiRoutes {
   static String update_charge_user = '${base_URL}user/update_payment_status';
   static String update_payment_status = '${base_URL}user/update_payment_status';
   static String update_location = '${base_URL}user/update_location';
+  static String get_vehicle = '${base_URL}vehicle/user/list/';
 }
