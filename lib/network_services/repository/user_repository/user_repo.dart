@@ -37,7 +37,6 @@ class UserRepository {
     }
   }
 
-
   Future<dynamic> charge_user({required body}) async {
     try {
       log('body......$body', name: 'calculate_fare | AuthRepository');

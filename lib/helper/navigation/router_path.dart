@@ -7,6 +7,7 @@ class RouterPath {
   static const String Vehicle_Added_Screen = "Vehicle Added Screen";
   static const String Vehicle_Detail = "Vehicle Detail";
   static const String Otp_Screen = "Otp Screen";
+  static const String UpdateUserProfileScreen = "UpdateUserProfileScreen";
 
   /// recovery
   static const String add_request_screen_one = "add request screen one";

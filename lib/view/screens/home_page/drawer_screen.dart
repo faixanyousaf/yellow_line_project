@@ -50,29 +50,41 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     color: Colors.white,
                     size: 4.w,
                   )),
-              Text(
-                'Edit',
-                style: TextStyle(fontSize: 10.sp, color: Color(0xffFFCC1B)),
-              )
             ],
           ),
         ),
         SizedBox(
           height: 2.h,
         ),
-        Container(
-          height: 11.h,
-          width: 22.w,
-          decoration: BoxDecoration(
-              color: Colors.black,
-              shape: BoxShape.circle,
-              border: Border.all(width: 0.8, color: Colors.white)),
-          child: Center(
-            child: Icon(
-              Icons.person,
-              size: 9.h,
-              color: Colors.white,
-            ),
+        InkWell(
+          onTap: () {
+            Navigator.pop(context);
+            navigationService.navigateTo(RouterPath.UpdateUserProfileScreen);
+          },
+          child: Container(
+            height: 11.h,
+            width: 22.w,
+            decoration: BoxDecoration(
+                color: Colors.black,
+                shape: BoxShape.circle,
+                border: Border.all(width: 0.8, color: Colors.white)),
+            child: loginResponceModel!.user!.profilePicture != null &&
+                    loginResponceModel!.user!.profilePicture
+                        .toString()
+                        .isNotEmpty
+                ? CircleAvatar(
+                    //radius: 30.0,
+                    backgroundColor: Colors.transparent,
+                    backgroundImage: NetworkImage(
+                        '${loginResponceModel!.user!.profilePicture}'),
+                  )
+                : Center(
+                    child: Icon(
+                      Icons.person,
+                      size: 9.h,
+                      color: Colors.white,
+                    ),
+                  ),
           ),
         ),
         SizedBox(
@@ -80,7 +92,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
         ),
         if (loginResponceModel != null)
           Text(
-            '${loginResponceModel!.user!.first_name} ${loginResponceModel!.user!.last_name}',
+            '${loginResponceModel!.user!.firstName} ${loginResponceModel!.user!.lastName}',
             style: TextStyle(
                 color: Colors.white,
                 fontSize: 10.sp,
@@ -105,8 +117,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
             child: customListTile(
                 text: 'My Vehicle', image: 'assets/vehicle.png')),
         InkWell(
-          onTap: (){
-           navigationService.navigateTo(RouterPath.request_view_screen);
+          onTap: () {
+            navigationService.navigateTo(RouterPath.request_view_screen);
           },
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 4.w),

@@ -42,6 +42,38 @@ class AuthRepository {
     }
   }
 
+  Future update_user_profile({required body}) async {
+    try {
+      log('body......$body', name: 'signIn | AuthRepository');
+
+      var data = await _saryaAPI.update_user_profile(body: body);
+
+      log('data......$data', name: 'signIn | AuthRepository');
+
+      return data;
+    } catch (e) {
+      log('catch......${e.toString()}', name: 'signUn | AuthRepository');
+
+      rethrow;
+    }
+  }
+
+  Future update_user_profile_picture({required body}) async {
+    try {
+      log('body......$body', name: 'signIn | AuthRepository');
+
+      var data = await _saryaAPI.update_user_profile_picture(body: body);
+
+      log('data......$data', name: 'signIn | AuthRepository');
+
+      return data;
+    } catch (e) {
+      log('catch......${e.toString()}', name: 'signUn | AuthRepository');
+
+      rethrow;
+    }
+  }
+
   Future social_signUp({required body}) async {
     try {
       log('body......$body', name: 'signIn | AuthRepository');

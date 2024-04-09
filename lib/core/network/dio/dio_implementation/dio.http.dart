@@ -19,10 +19,10 @@ class HTTP implements IHTTP {
   @override
   Future<dynamic> iDelete(String url,
       {Map<String, dynamic>? data,
-      Map<String, dynamic>? queryParameters}) async {
+        Map<String, dynamic>? queryParameters}) async {
     try {
       var res =
-          await _dio.delete(url, data: data, queryParameters: queryParameters);
+      await _dio.delete(url, data: data, queryParameters: queryParameters);
       var result = ApiResponse().response(res);
       return result;
     } catch (e) {
@@ -51,10 +51,10 @@ class HTTP implements IHTTP {
   @override
   Future<dynamic> iPost(String url,
       {Map<String, dynamic>? data,
-      Map<String, dynamic>? queryParameters}) async {
+        Map<String, dynamic>? queryParameters}) async {
     try {
       var res =
-          await _dio.post(url, data: data, queryParameters: queryParameters);
+      await _dio.post(url, data: data, queryParameters: queryParameters);
       var result = ApiResponse().response(res);
       return result;
     } catch (e) {
@@ -66,7 +66,7 @@ class HTTP implements IHTTP {
   @override
   Future<dynamic> iPost_raw_data(String url,
       {Map<String, dynamic>? data,
-      Map<String, dynamic>? queryParameters}) async {
+        Map<String, dynamic>? queryParameters}) async {
     try {
       var res = await _dio.post(url,
           options: Options(
@@ -100,9 +100,27 @@ class HTTP implements IHTTP {
   }
 
   @override
+  Future<dynamic> iPut_form_data(String url,
+      {dynamic data,
+        Map<String, dynamic>? queryParameters}) async {
+    try {
+      var res = await _dio.put(url,
+          options: Options(
+            headers: {'Content-Type': "application/x-www-form-urlencoded"},
+          ),
+          data: data);
+      var result = ApiResponse().response(res);
+      return result;
+    } catch (e) {
+      log('catch......${e.toString()}', name: 'iPost | AuthRepository');
+      rethrow;
+    }
+  }
+
+  @override
   Future<dynamic> iPut(String url,
       {Map<String, dynamic>? data,
-      Map<String, dynamic>? queryParameters}) async {
+        Map<String, dynamic>? queryParameters}) async {
     try {
       var res = await _dio.put(url,
           data: json.encode(data), queryParameters: queryParameters);
@@ -116,9 +134,9 @@ class HTTP implements IHTTP {
   @override
   Future iPTCH(String url,
       {Map<String, dynamic>? data,
-      Map<String, dynamic>? queryParameters}) async {
+        Map<String, dynamic>? queryParameters}) async {
     var res =
-        await _dio.patch(url, data: data, queryParameters: queryParameters);
+    await _dio.patch(url, data: data, queryParameters: queryParameters);
     var result = ApiResponse().response(res);
     return result;
   }

@@ -9,6 +9,7 @@ import '../../view/screens/authentication/otp_screen/otp_screen.dart';
 import '../../view/screens/home_page/home_screen.dart';
 import '../../view/screens/recovery_screens/drop_off_screen.dart';
 import '../../view/screens/recovery_screens/recovery_confirmed_screen.dart';
+import '../../view/screens/update_profile/view/update_user_profile.dart';
 import 'router_path.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -54,6 +55,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case RouterPath.request_view_screen:
       return MaterialPageRoute(
         builder: (context) => MyRequestMainScreen(),
+      );
+    case RouterPath.UpdateUserProfileScreen:
+      return MaterialPageRoute(
+        builder: (context) => UpdateUserProfileScreen(),
       );
     // case RouterPath.business_home_Rout:
     //   return MaterialPageRoute(

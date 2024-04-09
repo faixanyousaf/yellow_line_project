@@ -45,6 +45,7 @@ class LoginProvider extends ChangeNotifier {
         sf.saveToken(responceModel.accessToken);
         sf.saveaslogin('1');
         sf.saveid(responceModel.user!.id.toString());
+        sf.save_password(passwordController.text);
         loading = false;
         updateState();
         navigationService.navigatePushReplace(RouterPath.Home_Screen);

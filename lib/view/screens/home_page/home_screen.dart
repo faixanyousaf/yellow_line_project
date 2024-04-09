@@ -181,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       if (loginResponceModel != null)
                         Text(
-                          'Welcome, ${loginResponceModel!.user!.first_name} ${loginResponceModel!.user!.last_name}',
+                          'Welcome, ${loginResponceModel!.user!.firstName} ${loginResponceModel!.user!.lastName}',
                           style: TextStyle(color: Colors.white),
                         ),
                       Container(

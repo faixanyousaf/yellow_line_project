@@ -1,30 +1,17 @@
 class LoginResponceModel {
-  String? accessToken;
-  String? refreshToken;
-  String? status;
-  bool? phoneVerified;
-  bool? emailVerified;
+  dynamic accessToken;
+  dynamic refreshToken;
+  dynamic status;
   User? user;
 
   LoginResponceModel(
-      {this.accessToken,
-      this.refreshToken,
-      this.status,
-      this.phoneVerified,
-      this.emailVerified,
-      this.user});
+      {this.accessToken, this.refreshToken, this.status, this.user});
 
   LoginResponceModel.fromJson(Map<String, dynamic> json) {
     accessToken = json['access_token'];
     refreshToken = json['refresh_token'];
     status = json['status'];
-    phoneVerified = json['phone_verified'];
-    emailVerified = json['email_verified'];
-    user = json['user'] != null
-        ? json['user'] is List
-            ? User.fromJson(json['user'][0])
-            : User.fromJson(json['user'])
-        : null;
+    user = json['user'] != null ? new User.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -32,8 +19,6 @@ class LoginResponceModel {
     data['access_token'] = this.accessToken;
     data['refresh_token'] = this.refreshToken;
     data['status'] = this.status;
-    data['phone_verified'] = this.phoneVerified;
-    data['email_verified'] = this.emailVerified;
     if (this.user != null) {
       data['user'] = this.user!.toJson();
     }
@@ -42,54 +27,52 @@ class LoginResponceModel {
 }
 
 class User {
-  int? id;
-  int? accountType;
-  String? companyName;
-  String? companyType;
-  String? companyLogo;
-  String? companyLicense;
-  String? email;
-  String? dialCode;
-  String? phone;
-  String? password;
+  dynamic id;
+  dynamic firstName;
+  dynamic lastName;
+  dynamic accountType;
+  dynamic email;
+  dynamic dialCode;
+  dynamic phone;
+  dynamic password;
   dynamic verificationCode;
-  String? isVerified;
-  String? emailVerified;
-  String? phoneVerified;
-  String? createdAt;
-  String? updatedAt;
-  String? first_name;
-  String? last_name;
+  dynamic isVerified;
+  dynamic emailVerified;
+  dynamic phoneVerified;
+  dynamic isSocial;
+  dynamic lat;
+  dynamic lng;
+  dynamic profilePicture;
+  dynamic isLogin;
+  dynamic createdAt;
+  dynamic updatedAt;
 
   User(
       {this.id,
-      this.accountType,
-      this.companyName,
-      this.companyType,
-      this.companyLogo,
-      this.companyLicense,
-      this.email,
-      this.dialCode,
-      this.phone,
-      this.password,
-      this.verificationCode,
-      this.isVerified,
-      this.emailVerified,
-      this.phoneVerified,
-      this.createdAt,
-      this.updatedAt,
-      this.first_name,
-      this.last_name});
+        this.firstName,
+        this.lastName,
+        this.accountType,
+        this.email,
+        this.dialCode,
+        this.phone,
+        this.password,
+        this.verificationCode,
+        this.isVerified,
+        this.emailVerified,
+        this.phoneVerified,
+        this.isSocial,
+        this.lat,
+        this.lng,
+        this.profilePicture,
+        this.isLogin,
+        this.createdAt,
+        this.updatedAt});
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    first_name = json['first_name'];
-    last_name = json['last_name'];
+    firstName = json['first_name'];
+    lastName = json['last_name'];
     accountType = json['account_type'];
-    companyName = json['company_name'];
-    companyType = json['company_type'];
-    companyLogo = json['company_logo'];
-    companyLicense = json['company_license'];
     email = json['email'];
     dialCode = json['dial_code'];
     phone = json['phone'];
@@ -98,6 +81,11 @@ class User {
     isVerified = json['is_verified'];
     emailVerified = json['email_verified'];
     phoneVerified = json['phone_verified'];
+    isSocial = json['isSocial'];
+    lat = json['lat'];
+    lng = json['lng'];
+    profilePicture = json['profile_picture'];
+    isLogin = json['isLogin'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
   }
@@ -105,13 +93,9 @@ class User {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['first_name'] = this.first_name;
-    data['last_name'] = this.last_name;
+    data['first_name'] = this.firstName;
+    data['last_name'] = this.lastName;
     data['account_type'] = this.accountType;
-    data['company_name'] = this.companyName;
-    data['company_type'] = this.companyType;
-    data['company_logo'] = this.companyLogo;
-    data['company_license'] = this.companyLicense;
     data['email'] = this.email;
     data['dial_code'] = this.dialCode;
     data['phone'] = this.phone;
@@ -120,6 +104,11 @@ class User {
     data['is_verified'] = this.isVerified;
     data['email_verified'] = this.emailVerified;
     data['phone_verified'] = this.phoneVerified;
+    data['isSocial'] = this.isSocial;
+    data['lat'] = this.lat;
+    data['lng'] = this.lng;
+    data['profile_picture'] = this.profilePicture;
+    data['isLogin'] = this.isLogin;
     data['createdAt'] = this.createdAt;
     data['updatedAt'] = this.updatedAt;
     return data;

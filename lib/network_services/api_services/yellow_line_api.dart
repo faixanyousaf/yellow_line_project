@@ -38,6 +38,26 @@ class YellowLineAPI {
     }
   }
 
+  Future<dynamic> update_user_profile({required body}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.update_user_profile;
+      return await _http.iPut(url, data: body);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> update_user_profile_picture({required body}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.update_user_profile_picture;
+      return await _http.iPut_form_data(url, data: body);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<dynamic> social_signup({required body}) async {
     try {
       String url = '';

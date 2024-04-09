@@ -12,6 +12,7 @@ class SharedPrefs {
   final String _tokenKey = 'Save token';
   final String _user_id_Key = 'user id';
   final String _as_login_Key = 'login as a business or driver';
+  final String _password = '_password';
   // final String _itineraryIDKey = 'Save Key';
   // final String _destinationCountryKey = 'Destination Country Key';
   // final String _checkListKey = 'CheckListKey';
@@ -123,6 +124,16 @@ class SharedPrefs {
   Future<void> saveid(dynamic value) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString(_user_id_Key, value.toString());
+  }
+
+  Future get_password() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_password);
+  }
+
+  Future<void> save_password(dynamic value) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString(_password, value);
   }
 
 //
