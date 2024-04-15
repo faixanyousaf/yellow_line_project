@@ -335,11 +335,6 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
               ),
             ),
           ),
-          // floatingActionButton: FloatingActionButton(
-          //   onPressed: () {
-          //     Navigator.push(context, MaterialPageRoute(builder: (context) => DropOffScreen(),));
-          //   },
-          // ),
         ),
       ),
     );

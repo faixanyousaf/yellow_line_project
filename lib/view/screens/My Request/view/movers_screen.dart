@@ -84,7 +84,8 @@ class _MoversScreenState extends State<MoversScreen> {
                                       height: 1.5.h,
                                     ),
                                     Text(
-                                        '${dt.format(DateTime.parse("${provider.viewRequestModel[index].createdAt}"))}',
+                                      '',
+                                        //'${dt.format(DateTime.parse("${provider.viewRequestModel[index].createdAt}"))}',
                                         style: TextStyle(
                                             fontSize: 12.sp,
                                             fontWeight: FontWeight.w500,

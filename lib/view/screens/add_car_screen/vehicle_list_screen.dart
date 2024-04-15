@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import 'package:yellowline/view/screens/add_car_screen/vehicle_details.dart';
 import '../../../../../global_widgets/custom_button.dart';
 import '../../../global_widgets/data_loading.dart';
 import '../../../helper/navigation/navigation_object.dart';
@@ -106,52 +107,61 @@ class _BusinessVehicleListScreenState extends State<VehicleListScreen> {
               Expanded(
                   child: ListView.builder(
                 itemCount: viewAllVehicleModel.result!.length,
-                itemBuilder: (context, index) => Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 1.h),
-                  child: Column(
-                    children: [
-                      if (viewAllVehicleModel.result != null)
-                        Container(
-                          height: 9.h,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Center(
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 8.w,
-                                ),
-                                Text(
-                                  '${viewAllVehicleModel.result![index].code}',
-                                  style: TextStyle(
-                                      color: Color(0xff181F30),
-                                      fontSize: 16.sp),
-                                ),
-                                SizedBox(
-                                  width: 25.w,
-                                ),
-                                Image(
-                                  image: AssetImage(
-                                    'assets/abu_dhabi.png',
+                itemBuilder: (context, index) => InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (c) => VehicleDetails(
+                              vehicle: viewAllVehicleModel.result![index],
+                            )));
+                  },
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 5.w, vertical: 1.h),
+                    child: Column(
+                      children: [
+                        if (viewAllVehicleModel.result != null)
+                          Container(
+                            height: 9.h,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Center(
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: 8.w,
                                   ),
-                                  height: 7.5.h,
-                                ),
-                                SizedBox(
-                                  width: 10.w,
-                                ),
-                                Text(
-                                  '${viewAllVehicleModel.result![index].plateNumber}',
-                                  style: TextStyle(
-                                      color: Color(0xff181F30),
-                                      fontSize: 16.sp),
-                                ),
-                              ],
+                                  Text(
+                                    '${viewAllVehicleModel.result![index].code}',
+                                    style: TextStyle(
+                                        color: Color(0xff181F30),
+                                        fontSize: 16.sp),
+                                  ),
+                                  SizedBox(
+                                    width: 25.w,
+                                  ),
+                                  Image(
+                                    image: AssetImage(
+                                      'assets/abu_dhabi.png',
+                                    ),
+                                    height: 7.5.h,
+                                  ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  Text(
+                                    '${viewAllVehicleModel.result![index].plateNumber}',
+                                    style: TextStyle(
+                                        color: Color(0xff181F30),
+                                        fontSize: 16.sp),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               )),
