@@ -16,7 +16,7 @@ class ViewRequestProvider extends ChangeNotifier {
       SharedPrefs sf = SharedPrefs();
       var id = await sf.getid();
       List data = await UserRepository.instance
-          .get_view_request(body: {"user_id": id, "status": status});
+          .get_view_request(body: {"user_id": id, "request_status": status});
       print('get_view_request............${data}');
       for (var i in data) {
         viewRequestModel.add(ViewRequestModel.fromJson(i));

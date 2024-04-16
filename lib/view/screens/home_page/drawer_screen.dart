@@ -31,181 +31,191 @@ class _DrawerScreenState extends State<DrawerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
-        SizedBox(
-          height: 6.5.h,
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 3.w),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Icon(
-                    Icons.arrow_back_ios_new_outlined,
-                    color: Colors.white,
-                    size: 4.w,
-                  )),
-            ],
-          ),
-        ),
-        SizedBox(
-          height: 2.h,
-        ),
-        InkWell(
-          onTap: () {
-            Navigator.pop(context);
-            navigationService.navigateTo(RouterPath.UpdateUserProfileScreen);
-          },
-          child: Container(
-            height: 11.h,
-            width: 22.w,
-            decoration: BoxDecoration(
-                color: Colors.black,
-                shape: BoxShape.circle,
-                border: Border.all(width: 0.8, color: Colors.white)),
-            child: loginResponceModel!.user!.profilePicture != null &&
-                    loginResponceModel!.user!.profilePicture
-                        .toString()
-                        .isNotEmpty
-                ? CircleAvatar(
-                    //radius: 30.0,
-                    backgroundColor: Colors.transparent,
-                    backgroundImage: NetworkImage(
-                        '${loginResponceModel!.user!.profilePicture}'),
-                  )
-                : Center(
-                    child: Icon(
-                      Icons.person,
-                      size: 9.h,
-                      color: Colors.white,
-                    ),
-                  ),
-          ),
-        ),
-        SizedBox(
-          height: 1.h,
-        ),
-        if (loginResponceModel != null)
-          Text(
-            '${loginResponceModel!.user!.firstName} ${loginResponceModel!.user!.lastName}',
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 10.sp,
-                fontWeight: FontWeight.bold),
-          ),
-        //SizedBox(height: 1.h,),
-        if (loginResponceModel != null)
-          Text(
-            '${loginResponceModel!.user!.email}',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 9.sp,
+        Column(
+          children: [
+            SizedBox(
+              height: 6.5.h,
             ),
-          ),
-        SizedBox(
-          height: 4.h,
-        ),
-        InkWell(
-            onTap: () {
-              navigationService.navigateTo(RouterPath.Vehicle_List_Screen);
-            },
-            child: customListTile(
-                text: 'My Vehicle', image: 'assets/vehicle.png')),
-        InkWell(
-          onTap: () {
-            navigationService.navigateTo(RouterPath.request_view_screen);
-          },
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 4.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      height: 3.8.h,
-                      width: 7.4.w,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(7),
-                          color: Color(0xffFFCC1B)),
-                      child: Center(
-                        child: Image(
-                          image: AssetImage('assets/request.png'),
-                          height: 2.h,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 3.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.arrow_back_ios_new_outlined,
+                        color: Colors.white,
+                        size: 4.w,
+                      )),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 2.h,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+                navigationService
+                    .navigateTo(RouterPath.UpdateUserProfileScreen);
+              },
+              child: Container(
+                height: 11.h,
+                width: 22.w,
+                decoration: BoxDecoration(
+                    color: Colors.black,
+                    shape: BoxShape.circle,
+                    border: Border.all(width: 0.8, color: Colors.white)),
+                child: loginResponceModel!.user!.profilePicture != null &&
+                        loginResponceModel!.user!.profilePicture
+                            .toString()
+                            .isNotEmpty
+                    ? CircleAvatar(
+                        //radius: 30.0,
+                        backgroundColor: Colors.transparent,
+                        backgroundImage: NetworkImage(
+                            '${loginResponceModel!.user!.profilePicture}'),
+                      )
+                    : Center(
+                        child: Icon(
+                          Icons.person,
+                          size: 9.h,
+                          color: Colors.white,
                         ),
                       ),
+              ),
+            ),
+            SizedBox(
+              height: 1.h,
+            ),
+            if (loginResponceModel != null)
+              Text(
+                '${loginResponceModel!.user!.firstName} ${loginResponceModel!.user!.lastName}',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 10.sp,
+                    fontWeight: FontWeight.bold),
+              ),
+            //SizedBox(height: 1.h,),
+            if (loginResponceModel != null)
+              Text(
+                '${loginResponceModel!.user!.email}',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 9.sp,
+                ),
+              ),
+            SizedBox(
+              height: 4.h,
+            ),
+            InkWell(
+                onTap: () {
+                  navigationService.navigateTo(RouterPath.Vehicle_List_Screen);
+                },
+                child: customListTile(
+                    text: 'My Vehicle', image: 'assets/vehicle.png')),
+            InkWell(
+              onTap: () {
+                navigationService.navigateTo(RouterPath.request_view_screen);
+              },
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 4.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          height: 3.8.h,
+                          width: 7.4.w,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(7),
+                              color: Color(0xffFFCC1B)),
+                          child: Center(
+                            child: Image(
+                              image: AssetImage('assets/request.png'),
+                              height: 2.h,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 6.w,
+                        ),
+                        Text(
+                          'My Request',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 10.sp,
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      width: 6.w,
-                    ),
-                    Text(
-                      'My Request',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 10.sp,
-                      ),
+                    Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 4.w,
+                      color: Colors.white,
                     ),
                   ],
                 ),
-                Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  size: 4.w,
-                  color: Colors.white,
+              ),
+            ),
+            SizedBox(
+              height: 3.h,
+            ),
+            // customListTile(text: 'Notifications', image: 'assets/notification.png'),
+            // customListTile(text: 'Wallet', image: 'assets/wallet.png'),
+            // customListTile(text: 'Business Account', image: 'assets/account.png'),
+            // customListTile(text: 'Delete Account', image: 'assets/delete.png'),
+          ],
+        ),
+        Positioned(
+          child: InkWell(
+            onTap: () {
+              SharedPrefs sf = SharedPrefs();
+              sf.clearCache();
+              navigationService.pushAndRemoveUntil(LogInScreen());
+            },
+            child: Row(
+              children: [
+                SizedBox(width: 23.w,),
+                Container(
+                  height: 4.h,
+                  width: 30.w,
+                  decoration: BoxDecoration(
+                      color: Color(0xffFF3E3E),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image(
+                          image: AssetImage('assets/logout.png'),
+                          color: Colors.white,
+                          height: 2.h,
+                        ),
+                        SizedBox(
+                          width: 4.w,
+                        ),
+                        Text(
+                          'Logout',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 9.sp,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
-        ),
-        SizedBox(
-          height: 3.h,
-        ),
-        customListTile(text: 'Notifications', image: 'assets/notification.png'),
-        customListTile(text: 'Wallet', image: 'assets/wallet.png'),
-        customListTile(text: 'Business Account', image: 'assets/account.png'),
-        customListTile(text: 'Delete Account', image: 'assets/delete.png'),
-        SizedBox(
-          height: 21.h,
-        ),
-        InkWell(
-          onTap: () {
-            SharedPrefs sf = SharedPrefs();
-            sf.clearCache();
-            navigationService.pushAndRemoveUntil(LogInScreen());
-          },
-          child: Container(
-            height: 4.h,
-            width: 30.w,
-            decoration: BoxDecoration(
-                color: Color(0xffFF3E3E),
-                borderRadius: BorderRadius.circular(10)),
-            child: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image(
-                    image: AssetImage('assets/logout.png'),
-                    color: Colors.white,
-                    height: 2.h,
-                  ),
-                  SizedBox(
-                    width: 4.w,
-                  ),
-                  Text(
-                    'Logout',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 9.sp,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          bottom: 5.h,
         )
       ],
     );

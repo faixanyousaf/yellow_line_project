@@ -1,15 +1,13 @@
 import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
-
-import '../../../../global_widgets/custom_drop_conatiner.dart';
+import '../../../../../global_widgets/custom_drop_conatiner.dart';
 import '../../recovery_screens/view/asset_to_unit8list.dart';
 
 class ViewDestinationMap extends StatefulWidget {
@@ -30,28 +28,39 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
   LatLng? dropoff_latLng;
   void onMapCreated(GoogleMapController controller) async {
     _controller = controller;
-    add_poly_line();
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    add_poly_line(position);
   }
 
   LatLngBounds _bounds(Map<MarkerId, Marker> markers) {
     final positions = markers.entries
         .map(
           (marker) => LatLng(
-              marker.value.position.latitude, marker.value.position.longitude),
-        )
+          marker.value.position.latitude, marker.value.position.longitude),
+    )
         .toList();
     return _createBounds(positions);
   }
 
-  add_poly_line() async {
+  add_poly_line(Position position) async {
     List<LatLng> polylineCoordinates = [];
     PolylinePoints polylinePoints = PolylinePoints();
-    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+    PolylineResult result1 = await polylinePoints.getRouteBetweenCoordinates(
+        'AIzaSyAoknLjF2XNcjPDW25O5QOQFLgdVKc6GgU',
+        PointLatLng(position.latitude, position.longitude),
+        PointLatLng(pickup_latLng!.latitude, pickup_latLng!.longitude));
+    PolylineResult result2 = await polylinePoints.getRouteBetweenCoordinates(
         'AIzaSyAoknLjF2XNcjPDW25O5QOQFLgdVKc6GgU',
         PointLatLng(pickup_latLng!.latitude, pickup_latLng!.longitude),
         PointLatLng(dropoff_latLng!.latitude, dropoff_latLng!.longitude));
-    if (result.points.isNotEmpty) {
-      result.points.forEach((PointLatLng point) {
+    if (result1.points.isNotEmpty) {
+      result1.points.forEach((PointLatLng point) {
+        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+      });
+    }
+    if (result2.points.isNotEmpty) {
+      result2.points.forEach((PointLatLng point) {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
       });
     }
@@ -67,17 +76,17 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
         width: 4);
     polylines[id] = polyline;
     setState(() {});
-    add_Marker();
+    add_Marker(position);
   }
 
   LatLngBounds _createBounds(List<LatLng> positions) {
     final southwestLat = positions.map((p) => p.latitude).reduce(
-        (value, element) => value < element ? value : element); // smallest
+            (value, element) => value < element ? value : element); // smallest
     final southwestLon = positions
         .map((p) => p.longitude)
         .reduce((value, element) => value < element ? value : element);
     final northeastLat = positions.map((p) => p.latitude).reduce(
-        (value, element) => value > element ? value : element); // biggest
+            (value, element) => value > element ? value : element); // biggest
     final northeastLon = positions
         .map((p) => p.longitude)
         .reduce((value, element) => value > element ? value : element);
@@ -86,28 +95,46 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
         northeast: LatLng(northeastLat, northeastLon));
   }
 
-  add_Marker() async {
+  add_Marker(Position position) async {
     final Uint8List markerIcon1 =
-        await getBytesFromAsset('assets/location_marker.png', 100);
+    await getBytesFromAsset('assets/location_marker.png', 100);
     final Uint8List markerIcon2 =
-        await getBytesFromAsset('assets/location_marker2.png', 100);
+    await getBytesFromAsset('assets/location_marker2.png', 100);
+    final Uint8List markerIcon3 =
+    await getBytesFromAsset('assets/car_icon.png', 150);
+
+    ///1
+    markersList.remove('pickup_latLng');
     final markerId1 = MarkerId('pickup_latLng');
     final marker1 = Marker(
-      icon: BitmapDescriptor.fromBytes(markerIcon1),
+      icon: BitmapDescriptor.fromBytes(markerIcon3),
       markerId: MarkerId(UniqueKey().toString()),
       position: LatLng(pickup_latLng!.latitude, pickup_latLng!.longitude),
     );
     final iceGiants1 = {markerId1: marker1};
     markersList.addEntries(iceGiants1.entries);
     markersList.remove('dropoff_latLng');
-    final markerId = MarkerId('dropoff_latLng');
-    final marker = Marker(
-      icon: BitmapDescriptor.fromBytes(markerIcon2),
+
+    ///2
+    final markerId2 = MarkerId('dropoff_latLng');
+    final marker2 = Marker(
+      icon: BitmapDescriptor.fromBytes(markerIcon1),
       markerId: MarkerId(UniqueKey().toString()),
       position: LatLng(dropoff_latLng!.latitude, dropoff_latLng!.longitude),
     );
-    final iceGiants2 = {markerId: marker};
+    final iceGiants2 = {markerId2: marker2};
     markersList.addEntries(iceGiants2.entries);
+
+    ///3
+    markersList.remove('driver_coordinate');
+    final markerId3 = MarkerId('driver_coordinate');
+    final marker3 = Marker(
+      icon: BitmapDescriptor.fromBytes(markerIcon2),
+      markerId: MarkerId(UniqueKey().toString()),
+      position: LatLng(position.latitude, position.longitude),
+    );
+    final iceGiants3 = {markerId3: marker3};
+    markersList.addEntries(iceGiants3.entries);
     _controller!
         .animateCamera(CameraUpdate.newLatLngBounds(_bounds(markersList), 150));
     setState(() {});
@@ -137,7 +164,7 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
                   zoom: 15.7,
                 ),
                 cloudMapId:
-                    Platform.isIOS ? '9ade47e7d53ff36d' : '8cc3ed800b9e0615',
+                Platform.isIOS ? '9ade47e7d53ff36d' : '8cc3ed800b9e0615',
                 polylines: Set<Polyline>.of(polylines.values),
                 onMapCreated: (controller) {
                   //customInfoWindowController.googleMapController = controller;
@@ -152,9 +179,9 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
                   //customInfoWindowController.onCameraMove!();
                 },
                 myLocationButtonEnabled: false,
-                zoomControlsEnabled: true,
-                zoomGesturesEnabled: true,
-                myLocationEnabled: true,
+                zoomControlsEnabled: false,
+                zoomGesturesEnabled: false,
+                myLocationEnabled: false,
                 markers: Set<Marker>.of(markersList.values),
               ),
             ),
@@ -227,8 +254,8 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
                           ),
                         ),
                         InkWell(
-                          onTap: (){
-                             launchUrl(Uri.parse("tel://21213123123"));
+                          onTap: () {
+                            launchUrl(Uri.parse("tel://21213123123"));
                           },
                           child: Container(
                             height: 6.h,

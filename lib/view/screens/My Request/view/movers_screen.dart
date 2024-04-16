@@ -47,14 +47,18 @@ class _MoversScreenState extends State<MoversScreen> {
                   builder: (c) => ViewDestinationMap(
                         dropoff_latLng: LatLng(
                             double.parse(
-                                provider.viewRequestModel[index].dropLat),
+                                provider.viewRequestModel[index].dropLat ??
+                                    '0.0'),
                             double.parse(
-                                provider.viewRequestModel[index].dropLong)),
+                                provider.viewRequestModel[index].dropLong ??
+                                    '0.0')),
                         pickup_latLng: LatLng(
                             double.parse(
-                                provider.viewRequestModel[index].pickUpLat),
+                                provider.viewRequestModel[index].pickUpLat ??
+                                    '0.0'),
                             double.parse(
-                                provider.viewRequestModel[index].pickUpLong)),
+                                provider.viewRequestModel[index].pickUpLong ??
+                                    '0.0')),
                       )));
             },
             child: Column(
@@ -83,8 +87,7 @@ class _MoversScreenState extends State<MoversScreen> {
                                     SizedBox(
                                       height: 1.5.h,
                                     ),
-                                    Text(
-                                      '',
+                                    Text('',
                                         //'${dt.format(DateTime.parse("${provider.viewRequestModel[index].createdAt}"))}',
                                         style: TextStyle(
                                             fontSize: 12.sp,

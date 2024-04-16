@@ -28,16 +28,13 @@ class _MyRequestMainScreenState extends State<MyRequestMainScreen>
       appBar: AppBar(
         backgroundColor: Color(0xff181F30),
         leading: InkWell(
-          onTap: (){
+          onTap: () {
             Navigator.of(context).pop();
           },
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5.w),
-            child: Icon(
-              Icons.arrow_back_ios,
-              color: Colors.white,
-              size: 4.w,
-            ),
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+            size: 4.w,
           ),
         ),
         title: Padding(
@@ -48,7 +45,6 @@ class _MyRequestMainScreenState extends State<MyRequestMainScreen>
           ),
         ),
         centerTitle: false,
-        leadingWidth: 3.w,
       ),
       body: Container(
         height: 100.h,

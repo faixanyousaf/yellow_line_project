@@ -114,6 +114,84 @@ class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
                     ),
                   ),
                   SizedBox(
+                    height: 2.h,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 6.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Column(
+                          children: [
+                            SizedBox(
+                              height: 1.h,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                provider.company_logo();
+                              },
+                              child: Container(
+                                width: 30.w,
+                                child: Stack(
+                                  children: [
+                                    provider.logo == null
+                                        ? Center(
+                                            child: Container(
+                                              height: 11.h,
+                                              width: 25.w,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  shape: BoxShape.circle),
+                                              child: loginResponceModel!.user!
+                                                              .profilePicture !=
+                                                          null &&
+                                                      loginResponceModel!
+                                                          .user!.profilePicture
+                                                          .toString()
+                                                          .isNotEmpty
+                                                  ? CircleAvatar(
+                                                      backgroundImage: NetworkImage(
+                                                          '${loginResponceModel!.user!.profilePicture}'),
+                                                    )
+                                                  : Center(
+                                                      child: SvgPicture.asset(
+                                                        'assets/svgs/company_icon.svg',
+                                                        height: 4.5.h,
+                                                      ),
+                                                    ),
+                                            ),
+                                          )
+                                        : CircleAvatar(
+                                            backgroundImage:
+                                                FileImage(provider.logo!),
+                                            radius: 6.h),
+                                    Positioned(
+                                      bottom: 2.w,
+                                      right: 4.5.w,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            color: Color(0xffFFD542),
+                                            shape: BoxShape.circle),
+                                        child: Padding(
+                                          padding: EdgeInsets.all(3),
+                                          child: Icon(
+                                            Icons.camera_alt,
+                                            color: Colors.black,
+                                            size: 1.7.h,
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
                     height: 4.h,
                   ),
                   Padding(
@@ -241,154 +319,7 @@ class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 2.h,
-                  ),
-                  SizedBox(
-                    height: 2.h,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 6.w),
-                    child: Row(
-                      children: [
-                        Column(
-                          children: [
-                            Text(
-                              'Registration card',
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 10.sp),
-                            ),
-                            SizedBox(
-                              height: 1.h,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                provider.company_liceince();
-                              },
-                              child: Container(
-                                height: 12.h,
-                                width: 24.w,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: provider.liceince == null
-                                    ? Center(
-                                        child: Container(
-                                          height: 5.h,
-                                          width: 10.w,
-                                          decoration: const BoxDecoration(
-                                              color: Color(0xffFFD542),
-                                              shape: BoxShape.circle),
-                                          child: Center(
-                                              child: SvgPicture.asset(
-                                            'assets/svgs/arro.svg',
-                                            height: 2.3.h,
-                                          )),
-                                        ),
-                                      )
-                                    : ClipRRect(
-                                        borderRadius: BorderRadius.circular(20),
-                                        child: Image.file(
-                                          provider.liceince!,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                              ),
-                            ),
-                            if (provider.isVisible == true &&
-                                provider.liceince == null)
-                              SizedBox(
-                                height: 1.h,
-                              ),
-                            if (provider.isVisible == true &&
-                                provider.liceince == null)
-                              Text(
-                                'Upload image',
-                                style:
-                                    TextStyle(color: Colors.red, fontSize: 14),
-                              ),
-                          ],
-                        ),
-                        SizedBox(
-                          width: 23.w,
-                        ),
-                        Column(
-                          children: [
-                            Text(
-                              'Profile Picture',
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 10.sp),
-                            ),
-                            SizedBox(
-                              height: 1.h,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                provider.company_logo();
-                              },
-                              child: Container(
-                                width: 30.w,
-                                child: Stack(
-                                  children: [
-                                    provider.logo == null
-                                        ? Center(
-                                            child: Container(
-                                              height: 11.h,
-                                              width: 25.w,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  shape: BoxShape.circle),
-                                              child: loginResponceModel!.user!
-                                                              .profilePicture !=
-                                                          null &&
-                                                      loginResponceModel!
-                                                          .user!.profilePicture
-                                                          .toString()
-                                                          .isNotEmpty
-                                                  ? CircleAvatar(
-                                                      backgroundImage: NetworkImage(
-                                                          '${loginResponceModel!.user!.profilePicture}'),
-                                                    )
-                                                  : Center(
-                                                      child: SvgPicture.asset(
-                                                        'assets/svgs/company_icon.svg',
-                                                        height: 4.5.h,
-                                                      ),
-                                                    ),
-                                            ),
-                                          )
-                                        : CircleAvatar(
-                                            backgroundImage:
-                                                FileImage(provider.logo!),
-                                            radius: 6.h),
-                                    Positioned(
-                                      bottom: 2.w,
-                                      right: 4.5.w,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            color: Color(0xffFFD542),
-                                            shape: BoxShape.circle),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(3),
-                                          child: Icon(
-                                            Icons.camera_alt,
-                                            color: Colors.black,
-                                            size: 1.7.h,
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 4.h,
+                    height: 6.h,
                   ),
                   GestureDetector(
                     onTap: () {
