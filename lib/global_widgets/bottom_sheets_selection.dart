@@ -3,15 +3,18 @@ import 'package:flutter_svg/svg.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sizer/sizer.dart';
 
-Future listBottomSheet({
-  required BuildContext? context,
-  required Function()? add_new,
-  required Function(List<String>)? selected_values,
-  required List<String>? all_values,
-  required List<String>? pre_selected_all_values,
-  required bool hide_add_new,
-}) async {
+import 'custom_textfield.dart';
+
+Future listBottomSheet(
+    {required BuildContext? context,
+    required Function()? add_new,
+    required Function(List<String>)? selected_values,
+    required List<String>? all_values,
+    required List<String>? pre_selected_all_values,
+    required bool hide_add_new,
+    bool? disable_search = false}) async {
   List<String> list_selected_value = [...pre_selected_all_values!];
+  String search = '';
   await showMaterialModalBottomSheet(
     context: context!,
     backgroundColor: Color(0xffFFD542).withOpacity(0.2),
@@ -92,59 +95,141 @@ Future listBottomSheet({
                               color: Color(
                                 0xffDAF1F4,
                               )),
-                          child: ListView.builder(
-                              itemBuilder: (c, i) {
-                                return InkWell(
-                                  onTap: () {
-                                    if (list_selected_value
-                                        .contains('${all_values![i]}')) {
-                                      list_selected_value
-                                          .remove('${all_values![i]}');
-                                    } else {
-                                      list_selected_value = [];
-                                      list_selected_value
-                                          .add('${all_values![i]}');
-                                    }
+                          child: Column(
+                            children: [
+                              if (disable_search == false)
+                                SizedBox(
+                                  height: 2.h,
+                                ),
+                              if (disable_search == false)
+                                CustommTextField(
+                                  //controller: provider.emailController,
+                                  prefixIcon: 'assets/svgs/search.svg',
+                                  hintText: 'Search',
+                                  onChange: (v) {
+                                    search = v;
                                     setState(() {});
                                   },
-                                  child: Column(
-                                    children: [
-                                      SizedBox(
-                                        height: 3.h,
-                                      ),
-                                      Row(
-                                        children: [
-                                          list_selected_value.contains(
-                                              '${all_values![i]}')
-                                              ? SvgPicture.asset(
-                                              'assets/svgs/tick.svg')
-                                              : SvgPicture.asset(
-                                              'assets/svgs/tick_square_empty.svg'),
-                                          SizedBox(
-                                            width: 3.w,
+                                ),
+                              Expanded(
+                                child: ListView.builder(
+                                    itemBuilder: (c, i) {
+                                      if (search.isEmpty) {
+                                        return InkWell(
+                                          onTap: () {
+                                            if (all_values.length > 1) {
+                                              if (list_selected_value.contains(
+                                                  '${all_values![i]}')) {
+                                                list_selected_value.remove(
+                                                    '${all_values![i]}');
+                                              } else {
+                                                list_selected_value = [];
+                                                list_selected_value
+                                                    .add('${all_values![i]}');
+                                              }
+                                              setState(() {});
+                                            }
+                                          },
+                                          child: Column(
+                                            children: [
+                                              SizedBox(
+                                                height: 3.h,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  list_selected_value.contains(
+                                                          '${all_values![i]}')
+                                                      ? SvgPicture.asset(
+                                                          'assets/svgs/tick.svg')
+                                                      : SvgPicture.asset(
+                                                          'assets/svgs/tick_square_empty.svg'),
+                                                  SizedBox(
+                                                    width: 3.w,
+                                                  ),
+                                                  Text(
+                                                    '${all_values![i]}',
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontFamily: 'Aveni_Next',
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 2.h,
+                                              ),
+                                              Divider(
+                                                thickness: 1,
+                                                color:
+                                                    Colors.grey.withAlpha(100),
+                                              ),
+                                            ],
                                           ),
-                                          Text(
-                                            '${all_values![i]}',
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontFamily: 'Aveni_Next',
+                                        );
+                                      } else {
+                                        if (all_values![i]
+                                            .toString()
+                                            .toLowerCase()
+                                            .contains(search.toLowerCase())) {
+                                          return InkWell(
+                                            onTap: () {
+                                              if (list_selected_value.contains(
+                                                  '${all_values![i]}')) {
+                                                list_selected_value.remove(
+                                                    '${all_values![i]}');
+                                              } else {
+                                                list_selected_value = [];
+                                                list_selected_value
+                                                    .add('${all_values![i]}');
+                                              }
+                                              setState(() {});
+                                            },
+                                            child: Column(
+                                              children: [
+                                                SizedBox(
+                                                  height: 3.h,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    list_selected_value.contains(
+                                                            '${all_values![i]}')
+                                                        ? SvgPicture.asset(
+                                                            'assets/svgs/tick.svg')
+                                                        : SvgPicture.asset(
+                                                            'assets/svgs/tick_square_empty.svg'),
+                                                    SizedBox(
+                                                      width: 3.w,
+                                                    ),
+                                                    Text(
+                                                      '${all_values![i]}',
+                                                      style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontFamily:
+                                                            'Aveni_Next',
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 2.h,
+                                                ),
+                                                Divider(
+                                                  thickness: 1,
+                                                  color: Colors.grey
+                                                      .withAlpha(100),
+                                                ),
+                                              ],
                                             ),
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 2.h,
-                                      ),
-                                      Divider(
-                                        thickness: 1,
-                                        color: Colors.grey.withAlpha(100),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                              itemCount: all_values?.length ?? 0,
-                              padding: EdgeInsets.zero),
+                                          );
+                                        }
+                                      }
+                                      return SizedBox();
+                                    },
+                                    itemCount: all_values?.length ?? 0,
+                                    padding: EdgeInsets.zero),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -153,8 +238,8 @@ Future listBottomSheet({
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 7.w),
                         child: InkWell(
-                          onTap: (){
-                            if(list_selected_value.isNotEmpty){
+                          onTap: () {
+                            if (list_selected_value.isNotEmpty) {
                               selected_values!.call(list_selected_value);
                               Navigator.of(context).pop();
                             }

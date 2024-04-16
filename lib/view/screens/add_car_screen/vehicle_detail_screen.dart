@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../global_widgets/bottom_sheets_selection.dart';
 import '../../../../global_widgets/custom_button.dart';
-import '../../../../global_widgets/custom_drop_down.dart';
 import '../../../global_widgets/data_loading.dart';
 import 'Providers/add_vehicle_provider.dart';
 
@@ -22,15 +21,20 @@ class _VehicleDetailState extends State<VehicleDetail> {
   @override
   void initState() {
     final AddVehicleProvider provider =
-    Provider.of<AddVehicleProvider>(context, listen: false);
+        Provider.of<AddVehicleProvider>(context, listen: false);
     provider.get_make().then((value) {});
     super.initState();
   }
 
+  TextEditingController type_controller = TextEditingController();
+  TextEditingController make_controller = TextEditingController();
+  TextEditingController model_controller = TextEditingController();
+  TextEditingController year_controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final AddVehicleProvider provider =
-        Provider.of<AddVehicleProvider>(context);
+    Provider.of<AddVehicleProvider>(context);
     return DataLoading(
       isLoading: provider.loading,
       use_opacity: false,
@@ -55,34 +59,34 @@ class _VehicleDetailState extends State<VehicleDetail> {
               fontSize: 12.sp,
             ),
           ),
-          actions: [
-            Padding(
-              padding: EdgeInsets.only(right: 5.w),
-              child: Row(
-                children: [
-                  Image(image: AssetImage('assets/bells.png')),
-                  SizedBox(
-                    width: 3.w,
-                  ),
-                  Container(
-                    height: 5.h,
-                    width: 5.w,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.black,
-                        border: Border.all(width: 0.6, color: Colors.white)),
-                    child: Center(
-                      child: Icon(
-                        Icons.person,
-                        color: Colors.white,
-                        size: 3.w,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ],
+          // actions: [
+          //   Padding(
+          //     padding: EdgeInsets.only(right: 5.w),
+          //     child: Row(
+          //       children: [
+          //         Image(image: AssetImage('assets/bells.png')),
+          //         SizedBox(
+          //           width: 3.w,
+          //         ),
+          //         Container(
+          //           height: 5.h,
+          //           width: 5.w,
+          //           decoration: BoxDecoration(
+          //               shape: BoxShape.circle,
+          //               color: Colors.black,
+          //               border: Border.all(width: 0.6, color: Colors.white)),
+          //           child: Center(
+          //             child: Icon(
+          //               Icons.person,
+          //               color: Colors.white,
+          //               size: 3.w,
+          //             ),
+          //           ),
+          //         )
+          //       ],
+          //     ),
+          //   ),
+          // ],
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -94,7 +98,7 @@ class _VehicleDetailState extends State<VehicleDetail> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 6.w),
                 child: Text(
-                  'Type',
+                  'Type (optional)',
                   style: TextStyle(color: Colors.white, fontSize: 10.sp),
                 ),
               ),
@@ -103,85 +107,61 @@ class _VehicleDetailState extends State<VehicleDetail> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 6.w),
-                child: InkWell(
-                  onTap: () {
-                    listBottomSheet(
-                        context: context,
-                        add_new: () {},
-                        selected_values: (v) {
-                          provider.vehicleName = v[0];
-                          provider.updateState();
-                        },
-                        hide_add_new: true,
-                        pre_selected_all_values: [],
-                        all_values: provider.vehiclesList);
-                  },
-                  child: Container(
-                    height: 6.h,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 3.w),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              provider.vehicleName == null
-                                  ? 'Choose vehicle type'
-                                  : '${provider.vehicleName}',
-                              style: TextStyle(
-                                  color: Colors.black, fontSize: 10.sp),
+                child: Container(
+                  height: 6.h,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 3.w),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: TextFormField(
+                              controller: type_controller,
+                              onChanged: (v) {
+                                provider.vehicleName = v;
+                              },
+                              decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Choose vehicle type',
+                                  hintStyle: TextStyle(
+                                      color: Color(0xff181F30),
+                                      fontSize: 10.sp)),
                             ),
-                            Icon(Icons.keyboard_arrow_down, size: 22)
-                            // CustomDropdownButton2(
-                            //   buttonDecoration: BoxDecoration(
-                            //       border: Border.all(color: Colors.white)),
-                            //   dropdownWidth: 100.w,
-                            //   offset: Offset(0, -2.w),
-                            //   icon: Icon(Icons.keyboard_arrow_down, size: 22),
-                            //   hint: '',
-                            //   dropdownItems: provider.vehiclesList!.map((value) {
-                            //     return DropdownMenuItem<String>(
-                            //       value: value,
-                            //       child: Text('$value',
-                            //           style: TextStyle(fontSize: 14)),
-                            //     );
-                            //   }).toList(),
-                            //   onChanged: (newValue) async {
-                            //     print('$newValue');
-                            //     provider.vehicleName = newValue;
-                            //     setState(() {});
-                            //   },
-                            // ),
-                          ],
-                        ),
+                          ),
+                          InkWell(
+                            child: Icon(Icons.keyboard_arrow_down, size: 22),
+                            onTap: () {
+                              listBottomSheet(
+                                  context: context,
+                                  add_new: () {},
+                                  selected_values: (v) {
+                                    provider.vehicleName = v[0];
+                                    type_controller.text = v[0];
+                                    provider.updateState();
+                                  },
+                                  hide_add_new: true,
+                                  pre_selected_all_values: [],
+                                  all_values: provider.vehiclesList);
+                            },
+                          )
+                        ],
                       ),
                     ),
                   ),
                 ),
               ),
-              if (provider.isVisible == true && provider.vehicleName == null)
-                SizedBox(
-                  height: 1.h,
-                ),
-              if (provider.isVisible == true && provider.vehicleName == null)
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.w),
-                  child: Text(
-                    'No select vehicle type',
-                    style: TextStyle(color: Colors.red, fontSize: 14),
-                  ),
-                ),
               SizedBox(
                 height: 2.h,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 6.w),
                 child: Text(
-                  'Make',
+                  'Make (optional)',
                   style: TextStyle(color: Colors.white, fontSize: 10.sp),
                 ),
               ),
@@ -190,69 +170,69 @@ class _VehicleDetailState extends State<VehicleDetail> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 6.w),
-                child: InkWell(
-                  onTap: () {
-                    listBottomSheet(
-                        context: context,
-                        add_new: () {},
-                        selected_values: (v) {
-                          provider.modelName = null;
-                          provider.chooseCompanyName = v[0];
-                          provider.updateState();
-                          provider.get_make_model();
-                        },
-                        hide_add_new: true,
-                        pre_selected_all_values: [],
-                        all_values: provider.car_make_list);
-                  },
-                  child: Container(
-                    height: 6.h,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 3.w),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              provider.chooseCompanyName == null
-                                  ? 'Choose company'
-                                  : '${provider.chooseCompanyName}',
-                              style: TextStyle(
-                                  color: Colors.black, fontSize: 10.sp),
+                child: Container(
+                  height: 6.h,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 3.w),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: TextFormField(
+                              controller: make_controller,
+                              onChanged: (v) {
+                                provider.chooseCompanyName = v;
+                              },
+                              decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Choose company',
+                                  hintStyle: TextStyle(
+                                      color: Color(0xff181F30),
+                                      fontSize: 10.sp)),
                             ),
-                            Icon(Icons.keyboard_arrow_down, size: 22)
-                          ],
-                        ),
+                          ),
+                          // Text(
+                          //   provider.chooseCompanyName == null
+                          //       ? 'Choose company'
+                          //       : '${provider.chooseCompanyName}',
+                          //   style: TextStyle(
+                          //       color: Colors.black, fontSize: 10.sp),
+                          // ),
+                          InkWell(
+                              onTap: () {
+                                listBottomSheet(
+                                    context: context,
+                                    add_new: () {},
+                                    selected_values: (v) {
+                                      provider.modelName = null;
+                                      provider.chooseCompanyName = v[0];
+                                      make_controller.text = v[0];
+                                      provider.updateState();
+                                      provider.get_make_model();
+                                    },
+                                    hide_add_new: true,
+                                    pre_selected_all_values: [],
+                                    all_values: provider.car_make_list);
+                              },
+                              child: Icon(Icons.keyboard_arrow_down, size: 22))
+                        ],
                       ),
                     ),
                   ),
                 ),
               ),
-              if (provider.isVisible == true &&
-                  provider.chooseCompanyName == null)
-                SizedBox(
-                  height: 1.h,
-                ),
-              if (provider.isVisible == true &&
-                  provider.chooseCompanyName == null)
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.w),
-                  child: Text(
-                    'No select company',
-                    style: TextStyle(color: Colors.red, fontSize: 14),
-                  ),
-                ),
               SizedBox(
                 height: 2.h,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 6.w),
                 child: Text(
-                  'Model',
+                  'Model (optional)',
                   style: TextStyle(color: Colors.white, fontSize: 10.sp),
                 ),
               ),
@@ -261,104 +241,60 @@ class _VehicleDetailState extends State<VehicleDetail> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 6.w),
-                child: InkWell(
-                  onTap: (){
-                    listBottomSheet(
-                        context: context,
-                        add_new: () {},
-                        selected_values: (v) {
-                          provider.modelName = v[0];
-                          provider.updateState();
-                        },
-                        hide_add_new: true,
-                        pre_selected_all_values: [],
-                        all_values: provider.car_model_list);
-                  },
-                  child: Container(
-                    height: 6.h,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 3.w),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              provider.modelName == null
-                                  ? 'Choose vehicle model'
-                                  : '${provider.modelName}',
-                              style:
-                              TextStyle(color: Colors.black, fontSize: 10.sp),
+                child: Container(
+                  height: 6.h,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 3.w),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: TextFormField(
+                              controller: model_controller,
+                              onChanged: (v) {
+                                provider.modelName = v;
+                              },
+                              decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Choose vehicle model',
+                                  hintStyle: TextStyle(
+                                      color: Color(0xff181F30),
+                                      fontSize: 10.sp)),
                             ),
-                            Icon(Icons.keyboard_arrow_down, size: 22)
-                            // CustomDropdownButton2(
-                            //   buttonDecoration: BoxDecoration(
-                            //       border: Border.all(color: Colors.white)),
-                            //   dropdownWidth: 100.w,
-                            //   offset: Offset(0, -2.w),
-                            //   icon: Icon(Icons.keyboard_arrow_down, size: 22),
-                            //   hint: '',
-                            //   dropdownItems:
-                            //       provider.car_model_list!.map((value) {
-                            //     return DropdownMenuItem<String>(
-                            //       value: value,
-                            //       child: Text('$value',
-                            //           style: TextStyle(fontSize: 14)),
-                            //     );
-                            //   }).toList(),
-                            //   onChanged: (newValue) async {
-                            //     print('$newValue');
-                            //     provider.modelName = newValue;
-                            //     setState(() {});
-                            //     // Navigator.of(context).push(MaterialPageRoute(
-                            //     //     builder: (c) => CancelOrderPage(
-                            //     //       comment: (v) async {
-                            //     //         print('object =${v}');
-                            //     //         DataProvider().cancel_order_api(
-                            //     //             comment: v, order_id: widget.Id);
-                            //     //         Navigator.of(context).pop(true);
-                            //     //       },
-                            //     //     ),
-                            //     //     fullscreenDialog: true));
-                            //     // showCancelOrderDialog(
-                            //     //   (v) async {
-                            //     //     print('object =${v}');
-                            //     //     await DataProvider().cancel_order_api(
-                            //     //         comment: v, order_id: widget.Id);
-                            //     //     Navigator.of(context).pop(true);
-                            //     //   },
-                            //     // );
-                            //   },
-                            // ),
-                          ],
-                        ),
+                          ),
+                          InkWell(
+                              onTap: () {
+                                listBottomSheet(
+                                    context: context,
+                                    add_new: () {},
+                                    selected_values: (v) {
+                                      provider.modelName = v[0];
+                                      model_controller.text = v[0];
+                                      provider.updateState();
+                                    },
+                                    hide_add_new: true,
+                                    pre_selected_all_values: [],
+                                    all_values: provider.car_model_list);
+                              },
+                              child: Icon(Icons.keyboard_arrow_down, size: 22))
+                        ],
                       ),
                     ),
                   ),
                 ),
               ),
-              if (provider.isVisible == true && provider.modelName == null)
-                SizedBox(
-                  height: 1.h,
-                ),
-              if (provider.isVisible == true && provider.modelName == null)
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.w),
-                  child: Text(
-                    'No select vehicle model',
-                    style: TextStyle(color: Colors.red, fontSize: 14),
-                  ),
-                ),
               SizedBox(
                 height: 2.h,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 6.w),
                 child: Text(
-                  'Year',
+                  'Year (optional)',
                   style: TextStyle(color: Colors.white, fontSize: 10.sp),
                 ),
               ),
@@ -367,141 +303,60 @@ class _VehicleDetailState extends State<VehicleDetail> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 6.w),
-                child: InkWell(
-                  onTap: (){
-                    listBottomSheet(
-                        context: context,
-                        add_new: () {},
-                        selected_values: (v) {
-                          provider.yearName = v[0];
-                          provider.updateState();
-                        },
-                        hide_add_new: true,
-                        pre_selected_all_values: [],
-                        all_values: provider.chooseYearList);
-                  },
-                  child: Container(
-                    height: 6.h,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 3.w),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              provider.yearName == null
-                                  ? 'Choose Year'
-                                  : '${provider.yearName}',
-                              style:
-                              TextStyle(color: Colors.black, fontSize: 10.sp),
+                child: Container(
+                  height: 6.h,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 3.w),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: TextFormField(
+                              controller: year_controller,
+                              onChanged: (v) {
+                                provider.yearName = v;
+                              },
+                              decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Choose Year',
+                                  hintStyle: TextStyle(
+                                      color: Color(0xff181F30),
+                                      fontSize: 10.sp)),
                             ),
-                            Icon(Icons.keyboard_arrow_down, size: 22)
-                          ],
-                        ),
+                          ),
+                          InkWell(
+                            child: Icon(Icons.keyboard_arrow_down, size: 22),
+                            onTap: () {
+                              listBottomSheet(
+                                  context: context,
+                                  add_new: () {},
+                                  selected_values: (v) {
+                                    provider.yearName = v[0];
+                                    year_controller.text = v[0];
+                                    provider.updateState();
+                                  },
+                                  hide_add_new: true,
+                                  pre_selected_all_values: [],
+                                  all_values: provider.chooseYearList);
+                            },
+                          )
+                        ],
                       ),
                     ),
                   ),
                 ),
               ),
-              if (provider.isVisible == true && provider.yearName == null)
-                SizedBox(
-                  height: 1.h,
-                ),
-              if (provider.isVisible == true && provider.yearName == null)
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.w),
-                  child: Text(
-                    'No select year',
-                    style: TextStyle(color: Colors.red, fontSize: 14),
-                  ),
-                ),
               SizedBox(
-                height: 2.h,
-              ),
-              // typeContainer('Type', 'Choose vehicle type'),
-              // typeContainer('Make', 'Choose company'),
-              // typeContainer('Model', 'Choose vehicle model'),
-              // typeContainer('Year', 'Choose Year'),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 6.w),
-                child: Text(
-                  'Registration card',
-                  style: TextStyle(
-                      color: provider.isVisible == true &&
-                              provider.drivingLicense == null
-                          ? Colors.red
-                          : Colors.white,
-                      fontSize: 10.sp),
-                ),
-              ),
-              SizedBox(
-                height: 1.h,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 6.w),
-                child: InkWell(
-                  onTap: () {
-                    provider.uploadRegistrationFromGallery();
-                  },
-                  child: Container(
-                    height: 12.h,
-                    width: 24.w,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Center(
-                      child: provider.drivingLicense != null
-                          ? ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Container(
-                                height: 6.h,
-                                width: 12.w,
-                                child: Image.file(
-                                  File(provider.drivingLicense!.path),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            )
-                          : Container(
-                              height: 5.h,
-                              width: 10.w,
-                              decoration: BoxDecoration(
-                                  color: Color(0xffFFD542),
-                                  shape: BoxShape.circle),
-                              child: Center(
-                                  child: SvgPicture.asset(
-                                'assets/svgs/arro.svg',
-                                height: 2.3.h,
-                              )),
-                            ),
-                    ),
-                  ),
-                ),
-              ),
-              // if(provider.isVisible == true && provider.drivingLicense == null)
-              //   SizedBox(
-              //     height: 1.h,
-              //   ),
-              // if(provider.isVisible == true && provider.drivingLicense == null)
-              //   Padding(
-              //     padding:  EdgeInsets.symmetric(horizontal: 6.w),
-              //     child: Text('No select image',style: TextStyle(color: Colors.red,fontSize: 14),),
-              //   ),
-              SizedBox(
-                height: 14.h,
+                height: 30.h,
               ),
               GestureDetector(
                 onTap: () async {
-                  if (provider.vehicleName != null &&
-                      provider.chooseCompanyName != null &&
-                      provider.yearName != null &&
-                      provider.modelName != null &&
-                      provider.drivingLicense != null) {
+                  if (provider.drivingLicense != null) {
                     print('object1');
                     await provider.add_vehicle_api();
                   } else {
@@ -509,8 +364,6 @@ class _VehicleDetailState extends State<VehicleDetail> {
                     provider.isVisible = true;
                     setState(() {});
                   }
-
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) => BusinessVehicleAdded(),));
                 },
                 child: CustomButton(
                   buttonColor: Color(0xffFFD542),

@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/view/screens/add_car_screen/vehicle_details.dart';
@@ -53,51 +55,51 @@ class _BusinessVehicleListScreenState extends State<VehicleListScreen> {
               fontSize: 12.sp,
             ),
           ),
-          actions: [
-            // Padding(
-            //   padding:  EdgeInsets.only(right: 5.w),
-            //   child: Row(
-            //     children: [
-            //       Image(image: AssetImage('assets/bells.png')),
-            //       SizedBox(width: 3.w,),
-            //       Container(
-            //         height: 4.h,
-            //         width: 5.w,
-            //         decoration: BoxDecoration(
-            //             shape: BoxShape.circle,
-            //             color: Colors.black,
-            //             border: Border.all(width: 0.6,color: Colors.white)
-            //         ),
-            //         child: Center(
-            //           child: Icon(Icons.person,color: Colors.white,size: 3.w,),
-            //         ),
-            //       )
-            //     ],
-            //   ),
-            // ),
-            Image(image: AssetImage('assets/bells.png')),
-            SizedBox(
-              width: 3.w,
-            ),
-            Padding(
-              padding: EdgeInsets.only(right: 6.w),
-              child: Container(
-                height: 7.h,
-                width: 5.w,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.black,
-                    border: Border.all(width: 0.6, color: Colors.white)),
-                child: Center(
-                  child: Icon(
-                    Icons.person,
-                    color: Colors.white,
-                    size: 3.w,
-                  ),
-                ),
-              ),
-            )
-          ],
+          // actions: [
+          //   // Padding(
+          //   //   padding:  EdgeInsets.only(right: 5.w),
+          //   //   child: Row(
+          //   //     children: [
+          //   //       Image(image: AssetImage('assets/bells.png')),
+          //   //       SizedBox(width: 3.w,),
+          //   //       Container(
+          //   //         height: 4.h,
+          //   //         width: 5.w,
+          //   //         decoration: BoxDecoration(
+          //   //             shape: BoxShape.circle,
+          //   //             color: Colors.black,
+          //   //             border: Border.all(width: 0.6,color: Colors.white)
+          //   //         ),
+          //   //         child: Center(
+          //   //           child: Icon(Icons.person,color: Colors.white,size: 3.w,),
+          //   //         ),
+          //   //       )
+          //   //     ],
+          //   //   ),
+          //   // ),
+          //   Image(image: AssetImage('assets/bells.png')),
+          //   SizedBox(
+          //     width: 3.w,
+          //   ),
+          //   Padding(
+          //     padding: EdgeInsets.only(right: 6.w),
+          //     child: Container(
+          //       height: 7.h,
+          //       width: 5.w,
+          //       decoration: BoxDecoration(
+          //           shape: BoxShape.circle,
+          //           color: Colors.black,
+          //           border: Border.all(width: 0.6, color: Colors.white)),
+          //       child: Center(
+          //         child: Icon(
+          //           Icons.person,
+          //           color: Colors.white,
+          //           size: 3.w,
+          //         ),
+          //       ),
+          //     ),
+          //   )
+          // ],
         ),
         body: Container(
           height: 100.h,
@@ -129,32 +131,38 @@ class _BusinessVehicleListScreenState extends State<VehicleListScreen> {
                             child: Center(
                               child: Row(
                                 children: [
-                                  SizedBox(
-                                    width: 8.w,
-                                  ),
-                                  Text(
-                                    '${viewAllVehicleModel.result![index].code}',
-                                    style: TextStyle(
-                                        color: Color(0xff181F30),
-                                        fontSize: 16.sp),
-                                  ),
-                                  SizedBox(
-                                    width: 25.w,
-                                  ),
-                                  Image(
-                                    image: AssetImage(
-                                      'assets/abu_dhabi.png',
+                                  Expanded(
+                                    child: Center(
+                                      child: Text(
+                                        '${viewAllVehicleModel.result![index].code}',
+                                        style: TextStyle(
+                                            color: Color(0xff181F30),
+                                            fontSize: 14.sp),
+                                      ),
                                     ),
-                                    height: 7.5.h,
                                   ),
-                                  SizedBox(
-                                    width: 10.w,
+                                  Expanded(
+                                    child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: Image(
+                                          image: NetworkImage(
+                                            '${viewAllVehicleModel.result![index].cityLogo}',
+                                          ),
+                                          height: 7.5.h,
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                  Text(
-                                    '${viewAllVehicleModel.result![index].plateNumber}',
-                                    style: TextStyle(
-                                        color: Color(0xff181F30),
-                                        fontSize: 16.sp),
+                                  Expanded(
+                                    child: Center(
+                                      child: Text(
+                                        '${viewAllVehicleModel.result![index].plateNumber}',
+                                        style: TextStyle(
+                                            color: Color(0xff181F30),
+                                            fontSize: 14.sp),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -165,77 +173,6 @@ class _BusinessVehicleListScreenState extends State<VehicleListScreen> {
                   ),
                 ),
               )),
-              // SizedBox(height: 2.h,),
-              // Padding(
-              //   padding:  EdgeInsets.symmetric(horizontal: 5.w),
-              //   child: Container(
-              //     height: 9.h,
-              //     decoration: BoxDecoration(
-              //       color: Colors.white,
-              //       borderRadius: BorderRadius.circular(15),
-              //     ),
-              //     child: Center(
-              //       child: Row(
-              //         children: [
-              //           SizedBox(width: 8.w,),
-              //           Text(
-              //             '18',
-              //             style: TextStyle(
-              //                 color: Color(0xff181F30),
-              //                 fontSize: 16.sp
-              //             ),
-              //           ),
-              //           SizedBox(width: 25.w,),
-              //           Image(image: AssetImage('assets/abu_dhabi.png',),height: 7.5.h,),
-              //           SizedBox(width: 10.w,),
-              //           Text(
-              //             '66435',
-              //             style: TextStyle(
-              //                 color: Color(0xff181F30),
-              //                 fontSize: 16.sp
-              //             ),
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // SizedBox(height: 2.h,),
-              // Padding(
-              //   padding:  EdgeInsets.symmetric(horizontal: 5.w),
-              //   child: Container(
-              //     height: 9.h,
-              //     decoration: BoxDecoration(
-              //       color: Colors.white,
-              //       borderRadius: BorderRadius.circular(15),
-              //     ),
-              //     child: Center(
-              //       child: Row(
-              //         children: [
-              //           SizedBox(width: 8.w,),
-              //           Text(
-              //             'AB',
-              //             style: TextStyle(
-              //                 color: Color(0xff181F30),
-              //                 fontSize: 16.sp
-              //             ),
-              //           ),
-              //           SizedBox(width: 20.w,),
-              //           Image(image: AssetImage('assets/dubai.png'),width: 25.w,),
-              //           SizedBox(width: 3.w,),
-              //           Text(
-              //             '66435',
-              //             style: TextStyle(
-              //                 color: Color(0xff181F30),
-              //                 fontSize: 16.sp
-              //             ),
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // SizedBox(height: 53.h,),
               GestureDetector(
                 onTap: () {
                   navigationService
@@ -256,7 +193,7 @@ class _BusinessVehicleListScreenState extends State<VehicleListScreen> {
                 ),
               ),
               SizedBox(
-                height: 2.h,
+                height: 4.h,
               ),
             ],
           ),

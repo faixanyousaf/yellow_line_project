@@ -138,6 +138,28 @@ class YellowLineAPI {
     }
   }
 
+  Future<dynamic> get_recovery_type() async {
+    try {
+      String url = '';
+      url = 'https://yellowline.codeels.pro/admin/recoverytypes';
+      log('url......$url', name: 'add_drivers | YellowLineAPI');
+      return await _http.iGet(url);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> get_cites() async {
+    try {
+      String url = '';
+      url = ApiRoutes.get_cites;
+      log('url......$url', name: 'add_drivers | YellowLineAPI');
+      return await _http.iGet(url);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<dynamic> get_all_drivers({required id}) async {
     try {
       String url = '';

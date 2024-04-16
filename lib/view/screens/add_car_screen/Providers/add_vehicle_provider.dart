@@ -7,8 +7,11 @@ import 'package:yellowline/view/screens/add_car_screen/Network%20Call/network_ca
 
 import '../../../../../helper/navigation/navigation_object.dart';
 import '../../../../../helper/navigation/router_path.dart';
+import '../../../../helper/shared_prefs.dart';
+import '../../../../network_services/repository/user_repository/user_repo.dart';
 import '../Models/car_model.dart';
-
+import '../Models/city_model.dart';
+import '../Models/recovery_type_model.dart';
 
 class AddVehicleProvider extends ChangeNotifier {
   final formKey = GlobalKey<FormState>();
@@ -21,6 +24,9 @@ class AddVehicleProvider extends ChangeNotifier {
   String? modelName;
   String? yearName;
   String? selectCityName;
+
+  List<CityModel> cityModel = [];
+  List<RecoveryTypeModel> recovery_type_model = [];
 
   List<String>? cityList = [
     'Dubai',
@@ -36,6 +42,7 @@ class AddVehicleProvider extends ChangeNotifier {
   ];
   List<String> car_make_list = [];
   List<String>? car_model_list = [];
+
   List<String>? chooseYearList = [
     '2023',
     '2022',
@@ -68,9 +75,9 @@ class AddVehicleProvider extends ChangeNotifier {
   ];
 
   File? drivingLicense;
-
+  String? RecoveryTypeId = '';
+  int? RecoveryTypeIndex;
   final drivingLicensePicker = ImagePicker();
-
 
   Future uploadRegistrationFromGallery() async {
     final pickedFile = await drivingLicensePicker.pickImage(
@@ -82,57 +89,30 @@ class AddVehicleProvider extends ChangeNotifier {
     updateState();
   }
 
-
-
   TextEditingController codeController = TextEditingController();
   TextEditingController numberController = TextEditingController();
   int indexx = 0;
 
-
-  add_vehicle_api() async{
-    // if (formKey.currentState!.validate()){
-    //   // loading = true;
-    //   // updateState();
-    //   // var result = await dataProvider.add_new_vehicle_api(
-    //   //     map: {
-    //   //       'city' : '${selectCityName}',
-    //   //       'code' : '${codeController.text}',
-    //   //       'plate_number' : '${numberController.text}',
-    //   //       'type' : '${vehicleName}',
-    //   //       'make' : '${chooseCompanyName}',
-    //   //       'model' : '${modelName}',
-    //   //       'year' : '${yearName}',
-    //   //       'registration_card' : await dio.MultipartFile.fromFile(
-    //   //           drivingLicense!.path),
-    //   //       'city_logo' : await dio.MultipartFile.fromFile(
-    //   //           drivingLicense!.path),
-    //   //       'company_id' : '82',
-    //   //     }
-    //   // );
-    //   // print('object of all data ${result}');
-    //   // loading = false;
-    //   // updateState();
-    //   // navigationService.navigateTo(RouterPath.Business_Vehicle_Added);
-    //   // print('object of all data ${result}');
-    // }
+  add_vehicle_api() async {
+    SharedPrefs sf = SharedPrefs();
+    var id = await sf.getid();
     loading = true;
     updateState();
-    var result = await dataProvider.add_new_vehicle_api(
-        map: {
-          'city' : '${selectCityName}',
-          'code' : '${codeController.text}',
-          'plate_number' : '${numberController.text}',
-          'type' : '${vehicleName}',
-          'make' : '${chooseCompanyName}',
-          'model' : '${modelName}',
-          'year' : '${yearName}',
-          'registration_card' : await dio.MultipartFile.fromFile(
-              drivingLicense!.path),
-          'city_logo' : await dio.MultipartFile.fromFile(
-              drivingLicense!.path),
-          'company_id' : '86',
-        }
-    );
+    var result = await dataProvider.add_new_vehicle_api(map: {
+      'account_type': '2',
+      'city': '${selectCityName}',
+      'code': '${codeController.text}',
+      'plate_number': '${numberController.text}',
+      'type': '${vehicleName}',
+      'make': '${chooseCompanyName}',
+      'model': '${modelName}',
+      'year': '${yearName}',
+      'registration_card':
+          await dio.MultipartFile.fromFile(drivingLicense!.path),
+      'city_logo': cityModel[indexx].logoUrl,
+      'account_id': '$id',
+      'recovery_type': recovery_type_model[RecoveryTypeIndex!].id
+    });
     print('object of all data ${result}');
     loading = false;
     updateState();
@@ -161,11 +141,23 @@ class AddVehicleProvider extends ChangeNotifier {
     loading = true;
     updateState();
     List<CarModel>? carModel =
-    await dataProvider.get_make_model(chooseCompanyName);
+        await dataProvider.get_make_model(chooseCompanyName);
     for (var i in carModel!) {
       car_model_list!.add(i.model!);
     }
     loading = false;
     updateState();
+  }
+
+  Future get_cites() async {
+    var result = await UserRepository.instance.get_cites();
+    for (var i in result) {
+      cityModel.add(CityModel.fromJson(i));
+    }
+    updateState();
+    var recovery = await UserRepository.instance.get_recovery_type();
+    for (var i in recovery) {
+      recovery_type_model.add(RecoveryTypeModel.fromJson(i));
+    }
   }
 }

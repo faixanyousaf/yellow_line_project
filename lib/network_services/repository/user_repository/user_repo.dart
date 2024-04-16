@@ -101,4 +101,36 @@ class UserRepository {
       rethrow;
     }
   }
+
+  Future get_recovery_type() async {
+    try {
+      log('body......', name: 'add_vehicle | BusinessRepository');
+
+      var data = await _saryaAPI.get_recovery_type();
+
+      log('data......$data', name: 'add_vehicle | BusinessRepository');
+
+      return data;
+    } catch (e) {
+      log('catch error......${e.toString()}',
+          name: 'add_drivers | BusinessRepository');
+      rethrow;
+    }
+  }
+
+  Future get_cites() async {
+    try {
+      log('body......', name: 'add_vehicle | BusinessRepository');
+
+      var data = await _saryaAPI.get_cites();
+
+      log('data......$data', name: 'add_vehicle | BusinessRepository');
+
+      return data;
+    } catch (e) {
+      log('catch error......${e.toString()}',
+          name: 'add_drivers | BusinessRepository');
+      rethrow;
+    }
+  }
 }
