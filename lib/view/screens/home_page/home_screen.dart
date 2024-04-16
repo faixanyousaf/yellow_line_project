@@ -140,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 5.h,
+                    height: 7.h,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -150,32 +150,32 @@ class _HomeScreenState extends State<HomeScreen> {
                             _scaffoldKey.currentState!.openDrawer();
                           },
                           child: Image(image: AssetImage('assets/menu.png'))),
-                      Row(
-                        children: [
-                          Image(
-                            image: AssetImage('assets/bells.png'),
-                            height: 5.h,
-                          ),
-                          SizedBox(
-                            width: 2.w,
-                          ),
-                          Container(
-                              height: 9.h,
-                              width: 9.w,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.black,
-                                  border: Border.all(
-                                      color: Colors.white, width: 1)),
-                              child: Icon(
-                                Icons.person,
-                                color: Colors.white,
-                              ))
-                        ],
-                      )
+                      // Row(
+                      //   children: [
+                      //     Image(
+                      //       image: AssetImage('assets/bells.png'),
+                      //       height: 5.h,
+                      //     ),
+                      //     SizedBox(
+                      //       width: 2.w,
+                      //     ),
+                      //     Container(
+                      //         height: 9.h,
+                      //         width: 9.w,
+                      //         decoration: BoxDecoration(
+                      //             shape: BoxShape.circle,
+                      //             color: Colors.black,
+                      //             border: Border.all(
+                      //                 color: Colors.white, width: 1)),
+                      //         child: Icon(
+                      //           Icons.person,
+                      //           color: Colors.white,
+                      //         ))
+                      //   ],
+                      // )
                     ],
                   ),
-                  //SizedBox(height: 1.h,),
+                  SizedBox(height: 3.h,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -430,48 +430,48 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(
                         height: 4.h,
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => TrackingHomeScreen(),
-                              ));
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 5.w),
-                          child: Container(
-                            height: 7.h,
-                            decoration: BoxDecoration(
-                                color: Color(0xffFFD542),
-                                borderRadius: BorderRadius.circular(20)),
-                            child: Center(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image(
-                                    image: AssetImage('assets/cars.png'),
-                                    width: 8.w,
-                                  ),
-                                  SizedBox(
-                                    width: 7.w,
-                                  ),
-                                  Text(
-                                    'Add a Car',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 12.sp,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 3.h,
-                      ),
+                      // GestureDetector(
+                      //   onTap: () {
+                      //     Navigator.push(
+                      //         context,
+                      //         MaterialPageRoute(
+                      //           builder: (context) => TrackingHomeScreen(),
+                      //         ));
+                      //   },
+                      //   child: Padding(
+                      //     padding: EdgeInsets.symmetric(horizontal: 5.w),
+                      //     child: Container(
+                      //       height: 7.h,
+                      //       decoration: BoxDecoration(
+                      //           color: Color(0xffFFD542),
+                      //           borderRadius: BorderRadius.circular(20)),
+                      //       child: Center(
+                      //         child: Row(
+                      //           mainAxisAlignment: MainAxisAlignment.center,
+                      //           children: [
+                      //             Image(
+                      //               image: AssetImage('assets/cars.png'),
+                      //               width: 8.w,
+                      //             ),
+                      //             SizedBox(
+                      //               width: 7.w,
+                      //             ),
+                      //             Text(
+                      //               'Add a Car',
+                      //               style: TextStyle(
+                      //                 color: Colors.black,
+                      //                 fontSize: 12.sp,
+                      //               ),
+                      //             ),
+                      //           ],
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   height: 3.h,
+                      // ),
                     ],
                   ),
                 ))
