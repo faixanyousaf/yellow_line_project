@@ -79,13 +79,8 @@ class AddVehicleProvider extends ChangeNotifier {
   int? RecoveryTypeIndex;
   final drivingLicensePicker = ImagePicker();
 
-  Future uploadRegistrationFromGallery() async {
-    final pickedFile = await drivingLicensePicker.pickImage(
-      source: ImageSource.gallery,
-    );
-    if (pickedFile != null) {
-      drivingLicense = File(pickedFile.path);
-    }
+  Future uploadRegistrationFromGallery(File file) async {
+    drivingLicense=file;
     updateState();
   }
 

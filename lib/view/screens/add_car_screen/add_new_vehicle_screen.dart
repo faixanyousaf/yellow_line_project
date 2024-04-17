@@ -2,12 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mime/mime.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/data_loading.dart';
 import '../../../../global_widgets/custom_button.dart';
 import '../../../../global_widgets/custom_textfield.dart';
 import '../../../global_widgets/bottom_sheets_selection.dart';
+import '../../../global_widgets/file_picker_option.dart';
 import '../../../helper/navigation/navigation_object.dart';
 import '../../../helper/navigation/router_path.dart';
 import 'Providers/add_vehicle_provider.dart';
@@ -390,7 +392,11 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                     padding: EdgeInsets.symmetric(horizontal: 6.w),
                     child: InkWell(
                       onTap: () {
-                        provider.uploadRegistrationFromGallery();
+                        choose_file_option(
+                            file: (file) {
+                              provider.uploadRegistrationFromGallery(file);
+                            },
+                            context: context);
                       },
                       child: Container(
                         height: 12.h,
@@ -401,17 +407,30 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                         ),
                         child: Center(
                           child: provider.drivingLicense != null
-                              ? ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: Container(
-                                    height: 6.h,
-                                    width: 12.w,
-                                    child: Image.file(
-                                      File(provider.drivingLicense!.path),
-                                      fit: BoxFit.cover,
+                              ? Builder(builder: (context) {
+                                  String? mimeStr = lookupMimeType(
+                                      provider.drivingLicense!.path);
+                                  var fileType = mimeStr!.split('/');
+                                  print('${fileType[0]}');
+                                  return ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Container(
+                                      height: 6.h,
+                                      width: 12.w,
+                                      child: fileType[0] == 'image'
+                                          ? Image.file(
+                                              File(provider
+                                                  .drivingLicense!.path),
+                                              fit: BoxFit.cover,
+                                            )
+                                          : Icon(
+                                              Icons.file_copy,
+                                              color: Color(0xffFFD542),
+                                              size: 50,
+                                            ),
                                     ),
-                                  ),
-                                )
+                                  );
+                                })
                               : Container(
                                   height: 5.h,
                                   width: 10.w,

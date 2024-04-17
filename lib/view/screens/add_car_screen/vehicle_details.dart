@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-
+import '../../../../global_widgets/image_finder.dart';
+import '../../../global_widgets/data_loading.dart';
+import '../../../global_widgets/image_view_screen.dart';
 import 'Models/view_list_vehicle_model.dart';
 
 class VehicleDetails extends StatefulWidget {
@@ -12,6 +14,7 @@ class VehicleDetails extends StatefulWidget {
 }
 
 class _VehicleDetailsState extends State<VehicleDetails> {
+  bool load = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,187 +64,211 @@ class _VehicleDetailsState extends State<VehicleDetails> {
           )
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 5.w),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 2.h,
-              ),
-              Container(
-                height: 9.h,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
+      body: DataLoading(
+        isLoading: load,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 5.w),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 2.h,
                 ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 1.h),
-                  child: Center(
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            '${widget.vehicle!.code}',
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Color(0xff181F30), fontSize: 16.sp),
+                Container(
+                  height: 9.h,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 1.h),
+                    child: Center(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              '${widget.vehicle!.code}',
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Color(0xff181F30), fontSize: 16.sp),
+                            ),
                           ),
-                        ),
-                        Container(
-                          width: 0.3.w,
-                          color: Color(0xffADADAD),
-                        ),
-                        Expanded(
-                          child: Image.network('${widget.vehicle!.cityLogo}'),
-                        ),
-                        Container(
-                          width: 0.3.w,
-                          color: Color(0xffADADAD),
-                        ),
-                        Expanded(
-                          child: Text(
-                            textAlign: TextAlign.center,
-                            '${widget.vehicle!.plateNumber}',
-                            style: TextStyle(
-                                color: Color(0xff181F30), fontSize: 16.sp),
+                          Container(
+                            width: 0.3.w,
+                            color: Color(0xffADADAD),
                           ),
-                        ),
-                      ],
+                          Expanded(
+                            child: Image.network('${widget.vehicle!.cityLogo}'),
+                          ),
+                          Container(
+                            width: 0.3.w,
+                            color: Color(0xffADADAD),
+                          ),
+                          Expanded(
+                            child: Text(
+                              textAlign: TextAlign.center,
+                              '${widget.vehicle!.plateNumber}',
+                              style: TextStyle(
+                                  color: Color(0xff181F30), fontSize: 16.sp),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Code:',
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                  ),
-                  SizedBox(
-                    width: 1.w,
-                  ),
-                  Text(
-                    '${widget.vehicle!.code}',
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Plate Number:',
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                  ),
-                  SizedBox(
-                    width: 1.w,
-                  ),
-                  Text(
-                    '${widget.vehicle!.plateNumber}',
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Type:',
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                  ),
-                  SizedBox(
-                    width: 1.w,
-                  ),
-                  Text(
-                    '${widget.vehicle!.make}',
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Make:',
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                  ),
-                  SizedBox(
-                    width: 1.w,
-                  ),
-                  Text(
-                    '${widget.vehicle!.make}',
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Model:',
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                  ),
-                  SizedBox(
-                    width: 1.w,
-                  ),
-                  Text(
-                    '${widget.vehicle!.model}',
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Year:',
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                  ),
-                  SizedBox(
-                    width: 1.w,
-                  ),
-                  Text(
-                    '${widget.vehicle!.year}',
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Registration Card:',
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                  ),
-                  SizedBox(
-                    width: 3.w,
-                  ),
-                  SizedBox(
-                    height: 6.h,
-                    width: 12.w,
-                    child: Image.network(
-                      '${widget.vehicle!.registrationCard}',
+                SizedBox(
+                  height: 2.h,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Code:',
+                      style: TextStyle(color: Colors.white, fontSize: 14),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    SizedBox(
+                      width: 1.w,
+                    ),
+                    Text(
+                      '${widget.vehicle!.code}',
+                      style: TextStyle(color: Colors.white, fontSize: 14),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Plate Number:',
+                      style: TextStyle(color: Colors.white, fontSize: 14),
+                    ),
+                    SizedBox(
+                      width: 1.w,
+                    ),
+                    Text(
+                      '${widget.vehicle!.plateNumber}',
+                      style: TextStyle(color: Colors.white, fontSize: 14),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Type:',
+                      style: TextStyle(color: Colors.white, fontSize: 14),
+                    ),
+                    SizedBox(
+                      width: 1.w,
+                    ),
+                    Text(
+                      '${widget.vehicle!.make}',
+                      style: TextStyle(color: Colors.white, fontSize: 14),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Make:',
+                      style: TextStyle(color: Colors.white, fontSize: 14),
+                    ),
+                    SizedBox(
+                      width: 1.w,
+                    ),
+                    Text(
+                      '${widget.vehicle!.make}',
+                      style: TextStyle(color: Colors.white, fontSize: 14),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Model:',
+                      style: TextStyle(color: Colors.white, fontSize: 14),
+                    ),
+                    SizedBox(
+                      width: 1.w,
+                    ),
+                    Text(
+                      '${widget.vehicle!.model}',
+                      style: TextStyle(color: Colors.white, fontSize: 14),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Year:',
+                      style: TextStyle(color: Colors.white, fontSize: 14),
+                    ),
+                    SizedBox(
+                      width: 1.w,
+                    ),
+                    Text(
+                      '${widget.vehicle!.year}',
+                      style: TextStyle(color: Colors.white, fontSize: 14),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Registration Card:',
+                      style: TextStyle(color: Colors.white, fontSize: 14),
+                    ),
+                    SizedBox(
+                      width: 3.w,
+                    ),
+                    InkWell(
+                      onTap: () async {
+                        if (getType_of_url(
+                            '${widget.vehicle!.registrationCard}')) {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (c) => ImageView(
+                                imageV: [
+                                  '${widget.vehicle!.registrationCard}'
+                                ],
+                                slectedIndex: 0,
+                              )));
+                        } else {
+                          load = true;
+                          setState(() {});
+                          await launch_doc_URL(
+                              url: '${widget.vehicle!.registrationCard}');
+                          load = false;
+                          setState(() {});
+                        }
+                      },
+                      child: SizedBox(
+                        height: 6.h,
+                        width: 12.w,
+                        child: Image.network(
+                          '${widget.vehicle!.registrationCard}',
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
