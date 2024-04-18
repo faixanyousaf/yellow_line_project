@@ -49,8 +49,11 @@ choose_file_option(
             if (show_file_option == true)
               InkWell(
                 onTap: () async {
-                  FilePickerResult? result =
-                      await FilePicker.platform.pickFiles(allowMultiple: false);
+                  FilePickerResult? result =await FilePicker.platform.pickFiles(
+                    type: FileType.custom,
+                    allowMultiple: false,
+                    allowedExtensions: ['pdf'],
+                  );
                   if (result != null) {
                     file.call(File(result.files.first.path!));
                     Navigator.of(context).pop();

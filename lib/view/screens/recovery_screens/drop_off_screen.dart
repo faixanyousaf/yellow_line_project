@@ -202,20 +202,11 @@ class _DropOffScreenState extends State<DropOffScreen> {
                               zoom: 15.7,
                             ),
                             cloudMapId: Platform.isIOS
-                                ? '9ade47e7d53ff36d'
-                                : '8cc3ed800b9e0615',
+                                ? 'cdc202aae147cab1'
+                                : '36cc3485cd8467ed',
                             polylines: Set<Polyline>.of(polylines.values),
                             onMapCreated: (controller) {
-                              //customInfoWindowController.googleMapController = controller;
-                              // if (markers.isNotEmpty) {
-                              //   print('total markers = ${markers.length}');
-                              //   controller.animateCamera(CameraUpdate.newLatLngBounds(
-                              //       _bounds(markers), 50.0));
-                              // }
                               onMapCreated(controller);
-                            },
-                            onCameraMove: (position) {
-                              //customInfoWindowController.onCameraMove!();
                             },
                             myLocationButtonEnabled: false,
                             zoomControlsEnabled: true,

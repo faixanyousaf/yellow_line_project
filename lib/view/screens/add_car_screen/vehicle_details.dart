@@ -228,44 +228,61 @@ class _VehicleDetailsState extends State<VehicleDetails> {
                     ),
                   ],
                 ),
-                Row(
-                  children: [
-                    Text(
-                      'Registration Card:',
-                      style: TextStyle(color: Colors.white, fontSize: 14),
-                    ),
-                    SizedBox(
-                      width: 3.w,
-                    ),
-                    InkWell(
-                      onTap: () async {
-                        if (getType_of_url(
-                            '${widget.vehicle!.registrationCard}')) {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (c) => ImageView(
-                                imageV: [
-                                  '${widget.vehicle!.registrationCard}'
-                                ],
-                                slectedIndex: 0,
-                              )));
-                        } else {
-                          load = true;
-                          setState(() {});
-                          await launch_doc_URL(
-                              url: '${widget.vehicle!.registrationCard}');
-                          load = false;
-                          setState(() {});
-                        }
-                      },
-                      child: SizedBox(
-                        height: 6.h,
-                        width: 12.w,
+                SizedBox(
+                  height: 2.h,
+                ),
+                Text(
+                  'Registration card',
+                  style: TextStyle(
+                      color:  Colors.white,
+                      fontSize: 10.sp),
+                ),
+                SizedBox(
+                  height: 1.h,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 3.w),
+                  child: InkWell(
+                    onTap: () async{
+                      if (getType_of_url(
+                          '${widget.vehicle!.registrationCard}')) {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (c) => ImageView(
+                              imageV: [
+                                '${widget.vehicle!.registrationCard}'
+                              ],
+                              slectedIndex: 0,
+                            )));
+                      } else {
+                        load = true;
+                        setState(() {});
+                        await launch_doc_URL(
+                        url: '${widget.vehicle!.registrationCard}');
+                        load = false;
+                        setState(() {});
+                      }
+                    },
+                    child: Container(
+                      height: 12.h,
+                      width: 24.w,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Center(
                         child: Image.network(
                           '${widget.vehicle!.registrationCard}',
+                          errorBuilder: (a, b, c) {
+                            return Icon(
+                              Icons.file_copy,
+                              color: Color(0xffFFD542),
+                              size: 50,
+                            );
+                          },
                         ),
                       ),
                     ),
-                  ],
+                  ),
                 ),
               ],
             ),
