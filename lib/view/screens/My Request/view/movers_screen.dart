@@ -87,18 +87,26 @@ class _MoversScreenState extends State<MoversScreen> {
                                     SizedBox(
                                       height: 1.5.h,
                                     ),
-                                    Text('',
-                                        //'${dt.format(DateTime.parse("${provider.viewRequestModel[index].createdAt}"))}',
+                                    Text(
+                                        provider.viewRequestModel[index]
+                                                    .createdAt ==
+                                                null
+                                            ? ''
+                                            : '${dt.format(DateTime.parse("${provider.viewRequestModel[index].createdAt}"))}',
                                         style: TextStyle(
                                             fontSize: 12.sp,
                                             fontWeight: FontWeight.w500,
                                             color: Colors.white)),
-                                    // Text('5 Quotations received',
-                                    //     style: TextStyle(
-                                    //         fontSize: 10.sp,
-                                    //         color: Color(0xff13F01C))),
                                     SizedBox(
-                                      height: 1.5.h,
+                                      height: 0.5.h,
+                                    ),
+                                    Text(
+                                        'AED ${provider.viewRequestModel[index].amount}',
+                                        style: TextStyle(
+                                            fontSize: 10.sp,
+                                            color: Color(0xff13F01C))),
+                                    SizedBox(
+                                      height: 0.5.h,
                                     ),
                                     Row(
                                       children: [

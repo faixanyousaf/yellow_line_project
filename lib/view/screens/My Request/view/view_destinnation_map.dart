@@ -179,8 +179,6 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
                   //customInfoWindowController.onCameraMove!();
                 },
                 myLocationButtonEnabled: false,
-                zoomControlsEnabled: false,
-                zoomGesturesEnabled: false,
                 myLocationEnabled: false,
                 markers: Set<Marker>.of(markersList.values),
               ),
