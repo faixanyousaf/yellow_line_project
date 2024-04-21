@@ -45,6 +45,7 @@ class _MoversScreenState extends State<MoversScreen> {
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (c) => ViewDestinationMap(
+                        driverRequestModel: provider.viewRequestModel[index],
                         dropoff_latLng: LatLng(
                             double.parse(
                                 provider.viewRequestModel[index].dropLat ??
@@ -64,7 +65,6 @@ class _MoversScreenState extends State<MoversScreen> {
             child: Column(
               children: [
                 Container(
-                  //height: 13.h,
                   width: 100.w,
                   child: Stack(
                     children: [
@@ -88,20 +88,13 @@ class _MoversScreenState extends State<MoversScreen> {
                                       height: 1.5.h,
                                     ),
                                     Text(
-                                        provider.viewRequestModel[index]
-                                                    .createdAt ==
-                                                null
-                                            ? ''
-                                            : '${dt.format(DateTime.parse("${provider.viewRequestModel[index].createdAt}"))}',
+                                        '${dt.format(DateTime.parse("${provider.viewRequestModel[index].createdAt}"))}',
                                         style: TextStyle(
                                             fontSize: 12.sp,
                                             fontWeight: FontWeight.w500,
                                             color: Colors.white)),
-                                    SizedBox(
-                                      height: 0.5.h,
-                                    ),
                                     Text(
-                                        'AED ${provider.viewRequestModel[index].amount}',
+                                        'ID: ${provider.viewRequestModel[index].id} | AED${provider.viewRequestModel[index].amount}',
                                         style: TextStyle(
                                             fontSize: 10.sp,
                                             color: Color(0xff13F01C))),

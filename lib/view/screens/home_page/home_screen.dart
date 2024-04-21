@@ -13,6 +13,7 @@ import '../../../helper/shared_prefs.dart';
 import '../../../helper/stripe_payment_methods.dart';
 import '../../../network_services/repository/user_repository/user_repo.dart';
 import '../../Authentication Models/login/models/login_Responce_model.dart';
+import '../../Authentication Models/sos/sos_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -175,7 +176,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       // )
                     ],
                   ),
-                  SizedBox(height: 3.h,),
+                  SizedBox(
+                    height: 3.h,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -184,18 +187,24 @@ class _HomeScreenState extends State<HomeScreen> {
                           'Welcome, ${loginResponceModel!.user!.firstName} ${loginResponceModel!.user!.lastName}',
                           style: TextStyle(color: Colors.white),
                         ),
-                      Container(
-                        height: 4.h,
-                        width: 20.w,
-                        decoration: BoxDecoration(
-                          color: Color(0xffFC7C56),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'SOS',
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 13.sp),
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (c) => SosScreen()));
+                        },
+                        child: Container(
+                          height: 4.h,
+                          width: 20.w,
+                          decoration: BoxDecoration(
+                            color: Color(0xffFC7C56),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'SOS',
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 13.sp),
+                            ),
                           ),
                         ),
                       )

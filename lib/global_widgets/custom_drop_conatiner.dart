@@ -9,7 +9,9 @@ class CustomDropContainer extends StatefulWidget {
   String? texxt;
   double? height;
   double? width;
-   CustomDropContainer({Key? key,this.text,this.height,this.width,this.texxt}) : super(key: key);
+  CustomDropContainer(
+      {Key? key, this.text, this.height, this.width, this.texxt})
+      : super(key: key);
 
   @override
   State<CustomDropContainer> createState() => _CustomDropContainerState();
@@ -26,7 +28,7 @@ class _CustomDropContainerState extends State<CustomDropContainer> {
         borderRadius: BorderRadius.circular(5),
       ),
       child: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 1.w,vertical: 0.5.h),
+        padding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 0.5.h),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,18 +36,12 @@ class _CustomDropContainerState extends State<CustomDropContainer> {
             Text(
               widget.text!,
               maxLines: 2,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 8.sp
-              ),
+              style: TextStyle(color: Colors.white, fontSize: 10.sp),
             ),
             Text(
               widget.texxt!,
               //maxLines: 2,
-              style: TextStyle(
-                  color: Color(0xffFFCC1B),
-                  fontSize: 8.sp
-              ),
+              style: TextStyle(color: Color(0xffFFCC1B), fontSize: 10.sp),
             )
           ],
         ),

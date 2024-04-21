@@ -4,17 +4,28 @@ import 'package:flutter/services.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:map_launcher/map_launcher.dart';
 import 'package:sizer/sizer.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
+import 'package:yellowline/global_widgets/maps_sheet.dart';
+import 'package:yellowline/network_services/repository/user_repository/user_repo.dart';
+import '../../../../../global_widgets/asset_to_unit8list.dart';
 import '../../../../../global_widgets/custom_drop_conatiner.dart';
-import '../../recovery_screens/view/asset_to_unit8list.dart';
+import '../../../../global_widgets/cupertino_alert_dialog.dart';
+import '../../../../global_widgets/data_loading.dart';
+import '../model/view_request_model.dart';
 
 class ViewDestinationMap extends StatefulWidget {
   final LatLng pickup_latLng;
   final LatLng dropoff_latLng;
+  final ViewRequestModel driverRequestModel;
   const ViewDestinationMap(
-      {super.key, required this.pickup_latLng, required this.dropoff_latLng});
+      {super.key,
+      required this.pickup_latLng,
+      required this.dropoff_latLng,
+      required this.driverRequestModel});
 
   @override
   State<ViewDestinationMap> createState() => _ViewDestinationMapState();
@@ -37,8 +48,8 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
     final positions = markers.entries
         .map(
           (marker) => LatLng(
-          marker.value.position.latitude, marker.value.position.longitude),
-    )
+              marker.value.position.latitude, marker.value.position.longitude),
+        )
         .toList();
     return _createBounds(positions);
   }
@@ -81,12 +92,12 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
 
   LatLngBounds _createBounds(List<LatLng> positions) {
     final southwestLat = positions.map((p) => p.latitude).reduce(
-            (value, element) => value < element ? value : element); // smallest
+        (value, element) => value < element ? value : element); // smallest
     final southwestLon = positions
         .map((p) => p.longitude)
         .reduce((value, element) => value < element ? value : element);
     final northeastLat = positions.map((p) => p.latitude).reduce(
-            (value, element) => value > element ? value : element); // biggest
+        (value, element) => value > element ? value : element); // biggest
     final northeastLon = positions
         .map((p) => p.longitude)
         .reduce((value, element) => value > element ? value : element);
@@ -97,11 +108,11 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
 
   add_Marker(Position position) async {
     final Uint8List markerIcon1 =
-    await getBytesFromAsset('assets/location_marker.png', 100);
+        await getBytesFromAsset('assets/location_marker.png', 100);
     final Uint8List markerIcon2 =
-    await getBytesFromAsset('assets/location_marker2.png', 100);
+        await getBytesFromAsset('assets/location_marker2.png', 100);
     final Uint8List markerIcon3 =
-    await getBytesFromAsset('assets/car_icon.png', 150);
+        await getBytesFromAsset('assets/car_icon.png', 150);
 
     ///1
     markersList.remove('pickup_latLng');
@@ -144,151 +155,334 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
   void initState() {
     pickup_latLng = widget.pickup_latLng;
     dropoff_latLng = widget.dropoff_latLng;
+    if (widget.driverRequestModel.status == 4) {
+      panelHeightOpen = 42.h;
+    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      panelcontroller.animatePanelToPosition(1,
+          duration: Duration(milliseconds: 600));
+    });
     super.initState();
   }
 
+  get_current_location() async {
+    Position position = await requestLocation();
+    await _controller!
+        .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+      target: LatLng(position.latitude, position.longitude),
+      zoom: 15.7,
+    )));
+  }
+
+  Future<Position> requestLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    final position = await Geolocator.getCurrentPosition();
+    return position;
+  }
+
+  double panelHeightOpen = 37.h;
+  double panelHeightClosed = 6.h;
+  double fabHeight = 0;
+  final double initFabHeight = 50.h;
+  final PanelController panelcontroller = PanelController();
+  bool load = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        height: 100.h,
-        width: 100.w,
-        child: Stack(
-          children: [
-            Container(
-              height: 80.h,
-              width: 100.w,
-              child: GoogleMap(
-                initialCameraPosition: CameraPosition(
-                  target: LatLng(19.0760, 72.8777),
-                  zoom: 15.7,
-                ),
-                cloudMapId:
-                Platform.isIOS ? '9ade47e7d53ff36d' : '8cc3ed800b9e0615',
-                polylines: Set<Polyline>.of(polylines.values),
-                onMapCreated: (controller) {
-                  //customInfoWindowController.googleMapController = controller;
-                  // if (markers.isNotEmpty) {
-                  //   print('total markers = ${markers.length}');
-                  //   controller.animateCamera(CameraUpdate.newLatLngBounds(
-                  //       _bounds(markers), 50.0));
-                  // }
-                  onMapCreated(controller);
-                },
-                onCameraMove: (position) {
-                  //customInfoWindowController.onCameraMove!();
-                },
-                myLocationButtonEnabled: false,
-                myLocationEnabled: false,
-                markers: Set<Marker>.of(markersList.values),
-              ),
-            ),
-            Positioned(
-              bottom: 0,
-              child: Container(
-                height: 25.h,
+      body: DataLoading(
+        isLoading: load,
+        child: Container(
+          height: 100.h,
+          width: 100.w,
+          child: Stack(
+            children: [
+              Container(
+                height: 100.h,
                 width: 100.w,
-                padding: EdgeInsets.all(5.w),
-                decoration: BoxDecoration(
-                    color: Color(0xff181F30),
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20))),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Live Tracking:',
-                      style: TextStyle(fontSize: 11.sp, color: Colors.white),
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    Row(
-                      children: [
-                        CustomDropContainer(
-                          height: 5.4.h,
-                          width: 30.w,
-                          text: 'Reaching in',
-                          texxt: '10 min',
-                        ),
-                        SizedBox(
-                          width: 3.w,
-                        ),
-                        CustomDropContainer(
-                          height: 5.4.h,
-                          width: 30.w,
-                          text: 'Distance',
-                          texxt: '10 km',
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        InkWell(
-                          onTap: () async {
-                            final link = WhatsAppUnilink(
-                              phoneNumber: '+001-(555)1234567',
-                              text: "",
-                            );
-                            await launchUrl(link.asUri());
-                          },
-                          child: Container(
-                            height: 6.h,
-                            width: 40.w,
-                            child: Center(
-                              child: Text(
-                                'WhatsApp',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                            decoration: BoxDecoration(
-                                color: Color(0xff0CC243),
-                                borderRadius: BorderRadius.circular(20)),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            launchUrl(Uri.parse("tel://21213123123"));
-                          },
-                          child: Container(
-                            height: 6.h,
-                            width: 40.w,
-                            child: Center(
-                              child: Text(
-                                'Call',
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ),
-                            decoration: BoxDecoration(
-                                color: Color(0xffFFD542),
-                                borderRadius: BorderRadius.circular(20)),
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
+                child: GoogleMap(
+                  initialCameraPosition: CameraPosition(
+                    target: LatLng(19.0760, 72.8777),
+                    zoom: 15.7,
+                  ),
+                  cloudMapId:
+                      Platform.isIOS ? '9ade47e7d53ff36d' : '8cc3ed800b9e0615',
+                  polylines: Set<Polyline>.of(polylines.values),
+                  onMapCreated: (controller) {
+                    //customInfoWindowController.googleMapController = controller;
+                    // if (markers.isNotEmpty) {
+                    //   print('total markers = ${markers.length}');
+                    //   controller.animateCamera(CameraUpdate.newLatLngBounds(
+                    //       _bounds(markers), 50.0));
+                    // }
+                    onMapCreated(controller);
+                  },
+                  onCameraMove: (position) {
+                    //customInfoWindowController.onCameraMove!();
+                  },
+                  myLocationButtonEnabled: false,
+                  myLocationEnabled: false,
+                  markers: Set<Marker>.of(markersList.values),
                 ),
               ),
-            ),
-            Positioned(
-              top: 7.h,
-              left: 3.w,
-              child: GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Icon(
-                    Icons.arrow_back_ios_new_outlined,
-                    color: Color(0xffFFCC1B),
-                    size: 5.w,
+              Positioned(
+                  bottom: 10.h,
+                  right: 5.w,
+                  child: FloatingActionButton(
+                    onPressed: () {
+                      get_current_location();
+                    },
+                    child: Icon(Icons.my_location),
                   )),
-            ),
-          ],
+              SlidingUpPanel(
+                controller: panelcontroller,
+                maxHeight: panelHeightOpen,
+                minHeight: panelHeightClosed,
+                parallaxOffset: 1,
+                boxShadow: [],
+                panelBuilder: (sc) => Container(
+                  width: 100.w,
+                  padding: EdgeInsets.all(5.w),
+                  decoration: BoxDecoration(
+                      color: Color(0xff181F30),
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20))),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                              height: 0.5.h,
+                              width: 12.w,
+                              decoration: BoxDecoration(
+                                  color: Colors.blueGrey[100],
+                                  borderRadius: BorderRadius.circular(30))),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 3.h,
+                      ),
+                      Text(
+                        'Live Tracking:',
+                        style: TextStyle(fontSize: 11.sp, color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      Row(
+                        children: [
+                          CustomDropContainer(
+                            height: 5.4.h,
+                            width: 30.w,
+                            text: 'Reaching in',
+                            texxt: '10 min',
+                          ),
+                          SizedBox(
+                            width: 3.w,
+                          ),
+                          CustomDropContainer(
+                            height: 5.4.h,
+                            width: 30.w,
+                            text: 'Distance',
+                            texxt: '10 km',
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      Text(
+                        'Driver detail:',
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 3.0.h,
+                            backgroundColor: Colors.transparent,
+                            child: Container(
+                              child: Icon(
+                                Icons.person,
+                                size: 35,
+                              ),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 3.w,
+                          ),
+                          Text(
+                            '${widget.driverRequestModel.driverName}',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          Expanded(
+                            child: SizedBox(),
+                          ),
+                          InkWell(
+                            onTap: () async {
+                              final link = WhatsAppUnilink(
+                                phoneNumber:
+                                    '${widget.driverRequestModel.driverDialCode}${widget.driverRequestModel.driverMobile}',
+                                text: "",
+                              );
+                              await launchUrl(link.asUri());
+                            },
+                            child: SizedBox(
+                              child: Image.asset('assets/whats_app.png'),
+                              height: 4.h,
+                              width: 8.w,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 4.w,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              launchUrl(Uri.parse(
+                                  "tel://${widget.driverRequestModel.driverDialCode}${widget.driverRequestModel.driverMobile}"));
+                            },
+                            child: SizedBox(
+                              child: Image.asset('assets/call_icon.png'),
+                              height: 4.h,
+                              width: 8.w,
+                            ),
+                          ),
+                        ],
+                      ),
+                      // SizedBox(
+                      //   height: 2.h,
+                      // ),
+                      // Row(
+                      //   children: [
+                      //     Expanded(
+                      //       child: InkWell(
+                      //         onTap: () {
+                      //           MapsSheet.show(
+                      //             context: context,
+                      //             onMapTap: (map) {
+                      //               map.showMarker(
+                      //                 coords: Coords(
+                      //                     double.parse(widget
+                      //                         .driverRequestModel.pickUpLat),
+                      //                     double.parse(widget
+                      //                         .driverRequestModel.pickUpLong)),
+                      //                 title:
+                      //                     '${widget.driverRequestModel.pickupName}',
+                      //                 zoom: 15,
+                      //               );
+                      //             },
+                      //           );
+                      //         },
+                      //         child: Container(
+                      //           height: 6.h,
+                      //           child: Center(
+                      //             child: Text(
+                      //               'Pickup Location',
+                      //               style: TextStyle(color: Colors.black),
+                      //             ),
+                      //           ),
+                      //           decoration: BoxDecoration(
+                      //               color: Color(0xffFFD542),
+                      //               borderRadius: BorderRadius.circular(15)),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     SizedBox(
+                      //       width: 5.w,
+                      //     ),
+                      //     Expanded(
+                      //       child: InkWell(
+                      //         onTap: () {
+                      //           MapsSheet.show(
+                      //             context: context,
+                      //             onMapTap: (map) {
+                      //               map.showMarker(
+                      //                 coords: Coords(
+                      //                     double.parse(widget
+                      //                         .driverRequestModel.dropLat),
+                      //                     double.parse(widget
+                      //                         .driverRequestModel.dropLong)),
+                      //                 title:
+                      //                     '${widget.driverRequestModel.dropName}',
+                      //                 zoom: 15,
+                      //               );
+                      //             },
+                      //           );
+                      //         },
+                      //         child: Container(
+                      //           height: 6.h,
+                      //           child: Center(
+                      //             child: Text(
+                      //               'Drop-off Location',
+                      //               style: TextStyle(color: Colors.black),
+                      //             ),
+                      //           ),
+                      //           decoration: BoxDecoration(
+                      //               color: Color(0xffFFD542),
+                      //               borderRadius: BorderRadius.circular(15)),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                    ],
+                  ),
+                ),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(40.0),
+                    topRight: Radius.circular(40.0)),
+                onPanelSlide: (double pos) => setState(() {
+                  fabHeight = pos * (panelHeightOpen - panelHeightClosed) +
+                      initFabHeight;
+                }),
+              ),
+              Positioned(
+                top: 7.h,
+                left: 3.w,
+                child: GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      Icons.arrow_back_ios_new_outlined,
+                      color: Color(0xffFFCC1B),
+                      size: 5.w,
+                    )),
+              ),
+            ],
+          ),
         ),
       ),
     );

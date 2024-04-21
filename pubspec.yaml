@@ -73,6 +73,9 @@ dependencies:
   open_filex: ^4.4.0
   webview_flutter: ^2.0.4
   permission_handler: ^11.3.1
+  flutter_rating_bar: ^4.0.1
+  sliding_up_panel: ^2.0.0+1
+  map_launcher: ^2.5.0+1
 
 #  places_api:
 #    path: packages/places_api

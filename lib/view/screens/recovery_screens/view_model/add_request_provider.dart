@@ -8,6 +8,7 @@ import '../../../../network_services/repository/user_repository/user_repo.dart';
 import '../model/UpdatePaymentRequest.dart';
 import '../model/charege_user_request_model.dart';
 import '../model/charege_user_responce_model.dart';
+import '../model/recovery_type_model.dart';
 import '../model/request_recovery_model.dart';
 import '../model/responce_fare_model.dart';
 
@@ -16,7 +17,6 @@ class AddRequestProvider extends ChangeNotifier {
   Request_Recovery_Model request_model = Request_Recovery_Model();
   ChargeUserResponceModel? chargeUserResponceModel;
   Responce_fare_model? responce_fare_model;
-  List<String> recovery_type_list = ['Normal', 'Sports', 'Heavy'];
   String selected_recovery_type = 'Normal';
   String? pickup_name = '';
   String? dropoff_name = '';
@@ -24,14 +24,7 @@ class AddRequestProvider extends ChangeNotifier {
   calculate_fare() async {
     loading = true;
     update_state();
-    print('${request_model.toJson()}');
-    Map<String, dynamic> body = {
-      "lat1": "33.7300625",
-      "long1": "73.0769375",
-      "lat2": "33.72034609611864",
-      "long2": "73.05950383718141",
-      "recoveryType": 3
-    };
+    print('request_model ....${request_model.toJson()}');
     try {
       var data = await UserRepository.instance
           .calculate_fare(body: request_model.toJson());
@@ -96,5 +89,14 @@ class AddRequestProvider extends ChangeNotifier {
 
   update_state() {
     notifyListeners();
+  }
+
+  List<RecoveryTypeModel> recovery_type_model = [];
+  get_recovery_type() async {
+    var recovery = await UserRepository.instance.get_recovery_type();
+    for (var i in recovery) {
+      recovery_type_model.add(RecoveryTypeModel.fromJson(i));
+    }
+    update_state();
   }
 }

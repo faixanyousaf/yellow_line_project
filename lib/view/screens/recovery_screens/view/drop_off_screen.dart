@@ -11,12 +11,13 @@ import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/bottom_button.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 import 'package:yellowline/global_widgets/data_loading.dart';
-import 'package:yellowline/view/screens/recovery_screens/view/asset_to_unit8list.dart';
+import 'package:yellowline/global_widgets/asset_to_unit8list.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 
-import '../../../global_widgets/custom_drop_conatiner.dart';
-import 'model/request_recovery_model.dart';
-import 'view_model/add_request_provider.dart';
+import '../../../../global_widgets/custom_drop_conatiner.dart';
+import '../model/request_recovery_model.dart';
+import '../view_model/add_request_provider.dart';
+import 'nearbby_search.dart';
 
 class DropOffScreen extends StatefulWidget {
   const DropOffScreen({Key? key}) : super(key: key);
@@ -26,6 +27,7 @@ class DropOffScreen extends StatefulWidget {
 }
 
 class _DropOffScreenState extends State<DropOffScreen> {
+  List list_of_suggestion = ['Garage', 'Service Station', 'Petrol Pump'];
   TextEditingController controller_pickup = TextEditingController();
   TextEditingController controller_drop_off = TextEditingController();
   GoogleMapController? _controller;
@@ -97,7 +99,8 @@ class _DropOffScreenState extends State<DropOffScreen> {
     getLocationAddress(
         latLng: LatLng(place_detail.result.geometry!.location.lat,
             place_detail.result.geometry!.location.lng),
-        add_name: false);
+        add_name: false,
+        selected_name: name);
   }
 
   LatLngBounds _bounds(Map<MarkerId, Marker> markers) {
@@ -163,11 +166,18 @@ class _DropOffScreenState extends State<DropOffScreen> {
     provider.request_model = Request_Recovery_Model();
     provider.chargeUserResponceModel = null;
     provider.responce_fare_model = null;
-    provider.recovery_type_list = ['Normal', 'Sports', 'Heavy'];
     provider.selected_recovery_type = 'Normal';
     provider.pickup_name = '';
     provider.dropoff_name = '';
     super.deactivate();
+  }
+
+  @override
+  void initState() {
+    final AddRequestProvider provider =
+        Provider.of<AddRequestProvider>(context, listen: false);
+    provider.get_recovery_type();
+    super.initState();
   }
 
   @override
@@ -254,32 +264,56 @@ class _DropOffScreenState extends State<DropOffScreen> {
                                           Container(
                                             height: 7.h,
                                             child: ListView.builder(
-                                              itemCount: 5,
+                                              itemCount:
+                                                  list_of_suggestion.length,
                                               scrollDirection: Axis.horizontal,
                                               padding: EdgeInsets.symmetric(
                                                   horizontal: 5.w),
                                               itemBuilder: (context, index) =>
-                                                  Row(
-                                                children: [
-                                                  dropContainer(
-                                                      image:
-                                                          'assets/garage.png',
-                                                      text: 'Garage'),
-                                                  SizedBox(
-                                                    width: 2.w,
-                                                  )
-                                                ],
+                                                  InkWell(
+                                                onTap: () async {
+                                                  Position position =
+                                                      await requestLocation();
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (c) =>
+                                                              GoogleNearbySearch(
+                                                                latLng: LatLng(
+                                                                    position
+                                                                        .latitude,
+                                                                    position
+                                                                        .longitude),
+                                                                name:
+                                                                    '${list_of_suggestion[index]}',
+                                                              ))).then((value) {
+                                                    if (value != null) {
+                                                      selected_destination =
+                                                          value['as'];
+                                                      getLocationAddress(
+                                                          add_name: false,
+                                                          selected_name:
+                                                              value['name'],
+                                                          latLng:
+                                                              value['latlng']);
+                                                    }
+                                                  });
+                                                },
+                                                child: Row(
+                                                  children: [
+                                                    dropContainer(
+                                                        image:
+                                                            'assets/garage.png',
+                                                        text:
+                                                            '${list_of_suggestion[index]}'),
+                                                    SizedBox(
+                                                      width: 2.w,
+                                                    )
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),
-                                          // Row(
-                                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          //   children: [
-                                          //     dropContainer(image: 'assets/garage.png',text: 'Garage'),
-                                          //     dropContainer(image: 'assets/service.png',text: 'Service\nStation'),
-                                          //     dropContainer(image: 'assets/pump.png',text: 'Petrol\nPump'),
-                                          //   ],
-                                          // ),
                                           SizedBox(
                                             height: 1.h,
                                           ),
@@ -301,14 +335,14 @@ class _DropOffScreenState extends State<DropOffScreen> {
                                             child: ListView.builder(
                                               scrollDirection: Axis.horizontal,
                                               itemCount: provider
-                                                  .recovery_type_list.length,
+                                                  .recovery_type_model.length,
                                               padding: EdgeInsets.symmetric(
                                                   horizontal: 5.w),
                                               itemBuilder: (context, index) =>
                                                   InkWell(
                                                 onTap: () {
                                                   provider.selected_recovery_type =
-                                                      '${provider.recovery_type_list[index]}';
+                                                      '${provider.recovery_type_model[index].typeName}';
                                                   setState(() {});
                                                 },
                                                 child: Row(
@@ -323,7 +357,7 @@ class _DropOffScreenState extends State<DropOffScreen> {
                                                               width: 0.7,
                                                               color: provider
                                                                           .selected_recovery_type ==
-                                                                      '${provider.recovery_type_list[index]}'
+                                                                      '${provider.recovery_type_model[index].typeName}'
                                                                   ? Color(
                                                                       0xffFFCC1B)
                                                                   : Colors
@@ -336,11 +370,11 @@ class _DropOffScreenState extends State<DropOffScreen> {
                                                                   horizontal:
                                                                       18.0),
                                                           child: Text(
-                                                            '${provider.recovery_type_list[index]}',
+                                                            '${provider.recovery_type_model[index].typeName}',
                                                             style: TextStyle(
                                                                 color: provider
                                                                             .selected_recovery_type ==
-                                                                        '${provider.recovery_type_list[index]}'
+                                                                        '${provider.recovery_type_model[index].typeName}'
                                                                     ? Color(
                                                                         0xffFFCC1B)
                                                                     : Colors
@@ -369,46 +403,51 @@ class _DropOffScreenState extends State<DropOffScreen> {
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                CustomBottomButton(
-                                                  text: 'Schedule',
-                                                  buttonColor:
-                                                      Color(0xff181F30),
-                                                  textColor: Color(0xffFFCC1B),
-                                                  borderColor:
-                                                      Color(0xffFFCC1B),
-                                                ),
-                                                InkWell(
-                                                  onTap: () {
-                                                    if (pickup_latLng != null &&
-                                                        dropoff_latLng !=
-                                                            null) {
-                                                      provider.request_model =
-                                                          Request_Recovery_Model(
-                                                              lat1: pickup_latLng!
-                                                                  .latitude
-                                                                  .toString(),
-                                                              long1:
-                                                                  pickup_latLng!
-                                                                      .longitude
-                                                                      .toString(),
-                                                              lat2: dropoff_latLng!
-                                                                  .latitude
-                                                                  .toString(),
-                                                              long2:
-                                                                  dropoff_latLng!
-                                                                      .longitude
-                                                                      .toString(),
-                                                              plateNumber: 858,
-                                                              recoveryType: 3);
-                                                      provider.calculate_fare();
-                                                    }
-                                                  },
-                                                  child: CustomBottomButton(
-                                                    text: 'Continue',
-                                                    buttonColor:
-                                                        Color(0xffFFCC1B),
-                                                    textColor: Colors.black,
-                                                    borderColor: Colors.black,
+                                                Expanded(
+                                                  child: InkWell(
+                                                    onTap: () {
+                                                      if (pickup_latLng !=
+                                                              null &&
+                                                          dropoff_latLng !=
+                                                              null) {
+                                                        int index_recovery = provider
+                                                            .recovery_type_model
+                                                            .indexWhere((element) =>
+                                                                element
+                                                                    .typeName ==
+                                                                provider
+                                                                    .selected_recovery_type);
+                                                        provider.request_model = Request_Recovery_Model(
+                                                            lat1: pickup_latLng!
+                                                                .latitude
+                                                                .toString(),
+                                                            long1: pickup_latLng!
+                                                                .longitude
+                                                                .toString(),
+                                                            lat2:
+                                                                dropoff_latLng!
+                                                                    .latitude
+                                                                    .toString(),
+                                                            long2:
+                                                                dropoff_latLng!
+                                                                    .longitude
+                                                                    .toString(),
+                                                            plateNumber: 858,
+                                                            recoveryType: provider
+                                                                .recovery_type_model[
+                                                                    index_recovery]
+                                                                .id);
+                                                        provider
+                                                            .calculate_fare();
+                                                      }
+                                                    },
+                                                    child: CustomBottomButton(
+                                                      text: 'Continue',
+                                                      buttonColor:
+                                                          Color(0xffFFCC1B),
+                                                      textColor: Colors.black,
+                                                      borderColor: Colors.black,
+                                                    ),
                                                   ),
                                                 )
                                               ],
@@ -448,15 +487,14 @@ class _DropOffScreenState extends State<DropOffScreen> {
                                             height: 1.h,
                                           ),
                                           Container(
-                                            height: 5.5.h,
                                             child: Row(
                                               children: [
                                                 SizedBox(
                                                   width: 5.w,
                                                 ),
                                                 CustomDropContainer(
-                                                  height: 5.4.h,
-                                                  width: 20.w,
+                                                  height: 7.h,
+                                                  width: 28.w,
                                                   text: 'Time',
                                                   texxt: '35 mins',
                                                 ),
@@ -464,8 +502,8 @@ class _DropOffScreenState extends State<DropOffScreen> {
                                                   width: 2.w,
                                                 ),
                                                 CustomDropContainer(
-                                                  height: 5.4.h,
-                                                  width: 20.w,
+                                                  height: 7.h,
+                                                  width: 28.w,
                                                   text: 'Distance',
                                                   texxt:
                                                       '${provider.responce_fare_model!.distance} km',
@@ -474,144 +512,134 @@ class _DropOffScreenState extends State<DropOffScreen> {
                                                   width: 2.w,
                                                 ),
                                                 CustomDropContainer(
-                                                  height: 5.4.h,
-                                                  width: 20.w,
+                                                  height: 7.h,
+                                                  width: 28.w,
                                                   text: 'Price',
                                                   texxt:
                                                       '${provider.responce_fare_model!.totalCharges}',
                                                 ),
-                                                SizedBox(
-                                                  width: 2.w,
-                                                ),
-                                                CustomDropContainer(
-                                                  height: 5.4.h,
-                                                  width: 20.w,
-                                                  text: 'Type',
-                                                  texxt:
-                                                      '${provider.responce_fare_model!.recoveryTypeCharges}',
-                                                ),
                                               ],
                                             ),
                                           ),
+                                          // SizedBox(
+                                          //   height: 2.h,
+                                          // ),
+                                          // Padding(
+                                          //   padding: EdgeInsets.symmetric(
+                                          //       horizontal: 5.w),
+                                          //   child: Row(
+                                          //     crossAxisAlignment:
+                                          //         CrossAxisAlignment.start,
+                                          //     children: [
+                                          //       Padding(
+                                          //         padding: EdgeInsets.symmetric(
+                                          //             vertical: 0.5.h),
+                                          //         child: Text(
+                                          //           'Payment Method',
+                                          //           style: TextStyle(
+                                          //               color: Colors.white,
+                                          //               fontSize: 10.sp),
+                                          //         ),
+                                          //       ),
+                                          //       SizedBox(
+                                          //         width: 3.w,
+                                          //       ),
+                                          //       Container(
+                                          //         // height: 4.h,
+                                          //         width: 45.w,
+                                          //         padding: EdgeInsets.all(2),
+                                          //         decoration: BoxDecoration(
+                                          //             border: Border.all(
+                                          //                 width: 0.5,
+                                          //                 color: Colors.white),
+                                          //             borderRadius:
+                                          //                 BorderRadius.circular(
+                                          //                     7),
+                                          //             color: Colors.white),
+                                          //         child: Row(
+                                          //           children: [
+                                          //             Expanded(
+                                          //               child: GestureDetector(
+                                          //                 onTap: () {
+                                          //                   index = 1;
+                                          //                   setState(() {});
+                                          //                 },
+                                          //                 child: Container(
+                                          //                   height: 3.2.h,
+                                          //                   //width: 22.w,
+                                          //                   decoration: BoxDecoration(
+                                          //                       border: Border.all(
+                                          //                           width: 0.5,
+                                          //                           color: Colors
+                                          //                               .white),
+                                          //                       borderRadius:
+                                          //                           BorderRadius
+                                          //                               .circular(
+                                          //                                   7),
+                                          //                       color: index ==
+                                          //                               1
+                                          //                           ? Color(
+                                          //                               0xffFFD542)
+                                          //                           : Colors
+                                          //                               .white),
+                                          //                   child: Center(
+                                          //                     child: Text(
+                                          //                       'Cash',
+                                          //                       style: TextStyle(
+                                          //                           color: Colors
+                                          //                               .black,
+                                          //                           fontSize:
+                                          //                               9.sp),
+                                          //                     ),
+                                          //                   ),
+                                          //                 ),
+                                          //               ),
+                                          //             ),
+                                          //             Expanded(
+                                          //               child: GestureDetector(
+                                          //                 onTap: () {
+                                          //                   index = 2;
+                                          //                   setState(() {});
+                                          //                 },
+                                          //                 child: Container(
+                                          //                   height: 3.2.h,
+                                          //                   //width: 22.2.w,
+                                          //                   decoration: BoxDecoration(
+                                          //                       border: Border.all(
+                                          //                           width: 0.5,
+                                          //                           color: Colors
+                                          //                               .white),
+                                          //                       borderRadius:
+                                          //                           BorderRadius
+                                          //                               .circular(
+                                          //                                   7),
+                                          //                       color: index ==
+                                          //                               2
+                                          //                           ? Color(
+                                          //                               0xffFFD542)
+                                          //                           : Colors
+                                          //                               .white),
+                                          //                   child: Center(
+                                          //                     child: Text(
+                                          //                       'Card',
+                                          //                       style: TextStyle(
+                                          //                           color: Colors
+                                          //                               .black,
+                                          //                           fontSize:
+                                          //                               9.sp),
+                                          //                     ),
+                                          //                   ),
+                                          //                 ),
+                                          //               ),
+                                          //             )
+                                          //           ],
+                                          //         ),
+                                          //       ),
+                                          //     ],
+                                          //   ),
+                                          // ),
                                           SizedBox(
-                                            height: 2.h,
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 5.w),
-                                            child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsets.symmetric(
-                                                      vertical: 0.5.h),
-                                                  child: Text(
-                                                    'Payment Method',
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 10.sp),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 3.w,
-                                                ),
-                                                Container(
-                                                  // height: 4.h,
-                                                  width: 45.w,
-                                                  padding: EdgeInsets.all(2),
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          width: 0.5,
-                                                          color: Colors.white),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              7),
-                                                      color: Colors.white),
-                                                  child: Row(
-                                                    children: [
-                                                      Expanded(
-                                                        child: GestureDetector(
-                                                          onTap: () {
-                                                            index = 1;
-                                                            setState(() {});
-                                                          },
-                                                          child: Container(
-                                                            height: 3.2.h,
-                                                            //width: 22.w,
-                                                            decoration: BoxDecoration(
-                                                                border: Border.all(
-                                                                    width: 0.5,
-                                                                    color: Colors
-                                                                        .white),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            7),
-                                                                color: index ==
-                                                                        1
-                                                                    ? Color(
-                                                                        0xffFFD542)
-                                                                    : Colors
-                                                                        .white),
-                                                            child: Center(
-                                                              child: Text(
-                                                                'Cash',
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontSize:
-                                                                        9.sp),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        child: GestureDetector(
-                                                          onTap: () {
-                                                            index = 2;
-                                                            setState(() {});
-                                                          },
-                                                          child: Container(
-                                                            height: 3.2.h,
-                                                            //width: 22.2.w,
-                                                            decoration: BoxDecoration(
-                                                                border: Border.all(
-                                                                    width: 0.5,
-                                                                    color: Colors
-                                                                        .white),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            7),
-                                                                color: index ==
-                                                                        2
-                                                                    ? Color(
-                                                                        0xffFFD542)
-                                                                    : Colors
-                                                                        .white),
-                                                            child: Center(
-                                                              child: Text(
-                                                                'Card',
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontSize:
-                                                                        9.sp),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 2.h,
+                                            height: 7.h,
                                           ),
                                           Padding(
                                             padding: EdgeInsets.symmetric(
@@ -621,27 +649,21 @@ class _DropOffScreenState extends State<DropOffScreen> {
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                CustomBottomButton(
-                                                  text: 'Cancel',
-                                                  buttonColor:
-                                                      Color(0xff181F30),
-                                                  textColor: Color(0xffFFCC1B),
-                                                  borderColor:
-                                                      Color(0xffFFCC1B),
-                                                ),
-                                                InkWell(
-                                                  onTap: () {
-                                                    provider
-                                                        .charge_user(context);
-                                                  },
-                                                  child: CustomBottomButton(
-                                                    text: 'Confirm',
-                                                    buttonColor:
-                                                        Color(0xffFFCC1B),
-                                                    textColor:
-                                                        Color(0xff181F30),
-                                                    borderColor:
-                                                        Color(0xffFFCC1B),
+                                                Expanded(
+                                                  child: InkWell(
+                                                    onTap: () {
+                                                      provider
+                                                          .charge_user(context);
+                                                    },
+                                                    child: CustomBottomButton(
+                                                      text: 'Confirm',
+                                                      buttonColor:
+                                                          Color(0xffFFCC1B),
+                                                      textColor:
+                                                          Color(0xff181F30),
+                                                      borderColor:
+                                                          Color(0xffFFCC1B),
+                                                    ),
                                                   ),
                                                 )
                                               ],
@@ -663,7 +685,12 @@ class _DropOffScreenState extends State<DropOffScreen> {
                   left: 3.w,
                   child: GestureDetector(
                       onTap: () {
-                        Navigator.pop(context);
+                        if (provider.responce_fare_model == null) {
+                          Navigator.pop(context);
+                        } else {
+                          provider.responce_fare_model = null;
+                          setState(() {});
+                        }
                       },
                       child: Icon(
                         Icons.arrow_back_ios_new_outlined,
@@ -725,14 +752,15 @@ class _DropOffScreenState extends State<DropOffScreen> {
                         SizedBox(
                           width: 3.w,
                         ),
-                        InkWell(
-                          child: SvgPicture.asset('assets/remove.svg'),
-                          onTap: () {
-                            search_text = '';
-                            controller_pickup.text = '';
-                            setState(() {});
-                          },
-                        ),
+                        if (controller_pickup.text.isNotEmpty)
+                          InkWell(
+                            child: SvgPicture.asset('assets/remove.svg'),
+                            onTap: () {
+                              search_text = '';
+                              controller_pickup.text = '';
+                              setState(() {});
+                            },
+                          ),
                         SizedBox(
                           width: 2.w,
                         ),
@@ -794,14 +822,15 @@ class _DropOffScreenState extends State<DropOffScreen> {
                         SizedBox(
                           width: 3.w,
                         ),
-                        InkWell(
-                          child: SvgPicture.asset('assets/remove.svg'),
-                          onTap: () {
-                            search_text = '';
-                            controller_drop_off.text = '';
-                            setState(() {});
-                          },
-                        ),
+                        if (controller_drop_off.text.isNotEmpty)
+                          InkWell(
+                            child: SvgPicture.asset('assets/remove.svg'),
+                            onTap: () {
+                              search_text = '';
+                              controller_drop_off.text = '';
+                              setState(() {});
+                            },
+                          ),
                         SizedBox(
                           width: 2.w,
                         ),
@@ -859,7 +888,9 @@ class _DropOffScreenState extends State<DropOffScreen> {
   }
 
   void getLocationAddress(
-      {required LatLng latLng, required bool? add_name}) async {
+      {required LatLng latLng,
+      required bool? add_name,
+      String? selected_name}) async {
     final AddRequestProvider provider =
         Provider.of<AddRequestProvider>(context, listen: false);
     if (selected_destination == 1) {
@@ -868,16 +899,21 @@ class _DropOffScreenState extends State<DropOffScreen> {
     if (selected_destination == 2) {
       dropoff_latLng = latLng;
     }
+    String name = '';
     final Uint8List markerIcon =
         await getBytesFromAsset('assets/location_marker.png', 100);
-    List<Placemark> placemarks =
-        await placemarkFromCoordinates(latLng.latitude, latLng.longitude);
-    String name = '${placemarks[0].name ?? ''}';
+    if (selected_name == null) {
+      List<Placemark> placemarks =
+          await placemarkFromCoordinates(latLng.latitude, latLng.longitude);
+      name = '${placemarks[0].name ?? ''}';
+    }
     if (selected_destination == 1) {
-      provider.pickup_name = name;
+      provider.pickup_name = selected_name ?? name;
+      controller_pickup.text = selected_name ?? name;
     }
     if (selected_destination == 2) {
-      provider.dropoff_name = name;
+      provider.dropoff_name = selected_name ?? name;
+      controller_drop_off.text = selected_name ?? name;
     }
     if (selected_destination == 1) {
       markersList.remove('pickup_latLng');
@@ -923,11 +959,11 @@ class _DropOffScreenState extends State<DropOffScreen> {
   Widget dropContainer({String? image, String? text}) {
     return Container(
       height: 6.3.h,
-      width: 28.6.w,
       decoration: BoxDecoration(
         color: Color(0xff424755),
         borderRadius: BorderRadius.circular(5),
       ),
+      padding: EdgeInsets.symmetric(horizontal: 2.w),
       child: Center(
         child: Row(
           children: [
