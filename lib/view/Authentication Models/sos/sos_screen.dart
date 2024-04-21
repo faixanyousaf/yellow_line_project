@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SosScreen extends StatefulWidget {
   const SosScreen({super.key});
@@ -39,49 +40,89 @@ class _SosScreenState extends State<SosScreen> {
           width: 100.w,
           child: Column(
             children: [
+              SizedBox(
+                height: 3.h,
+              ),
               Row(
                 children: [
-                  Expanded(
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 14.h,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                  width: 1, color: Color(0xffFFCC1B))),
-                        ),
-                        SizedBox(height: 1.h,),
-                        Text(
-                          'Police',
-                          style: TextStyle(color: Colors.white),
-                        )
-                      ],
-                    ),
-                  ),
+                  box(
+                      name: 'Police',
+                      number: '999',
+                      onTap: () {
+                        launchUrl(Uri.parse("tel://999"));
+                      }),
                   SizedBox(
                     width: 3.w,
                   ),
-                  Expanded(
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 14.h,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                  width: 1, color: Color(0xffFFCC1B))),
-                        ),
-                        SizedBox(height: 1.h,),
-                        Text(
-                          'Police',
-                          style: TextStyle(color: Colors.white),
-                        )
-                      ],
-                    ),
-                  ),
+                  box(
+                      name: 'Ambulance',
+                      number: '998',
+                      onTap: () {
+                        launchUrl(Uri.parse("tel://998"));
+                      }),
                 ],
-              )
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+              Row(
+                children: [
+                  box(
+                      name: 'Fire Department',
+                      number: '997',
+                      onTap: () {
+                        launchUrl(Uri.parse("tel://997"));
+                      }),
+                  SizedBox(
+                    width: 3.w,
+                  ),
+                  box(
+                      name: 'Coastguard',
+                      number: '996',
+                      onTap: () {
+                        launchUrl(Uri.parse("tel://996"));
+                      }),
+                ],
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+              Row(
+                children: [
+                  box(
+                      name: 'Find and Rescue',
+                      number: '995',
+                      onTap: () {
+                        launchUrl(Uri.parse("tel://995"));
+                      }),
+                  SizedBox(
+                    width: 3.w,
+                  ),
+                  box(
+                      name: 'Electricity Failure',
+                      number: '991',
+                      onTap: () {
+                        launchUrl(Uri.parse("tel://991"));
+                      }),
+                ],
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+              Row(
+                children: [
+                  box(
+                      name: 'Water Failure',
+                      number: '995',
+                      onTap: () {
+                        launchUrl(Uri.parse("tel://995"));
+                      }),
+                  SizedBox(
+                    width: 3.w,
+                  ),
+                  Expanded(child: SizedBox())
+                ],
+              ),
             ],
           ),
         ),
@@ -89,22 +130,29 @@ class _SosScreenState extends State<SosScreen> {
     );
   }
 
-  box({required String name,required Function() onTap}){
+  box({required String name, required Function() onTap, String? number}) {
     return Expanded(
       child: InkWell(
-        onTap:onTap,
+        onTap: onTap,
         child: Column(
           children: [
             Container(
               height: 14.h,
+              child: Center(
+                child: Text(
+                  '$number',
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
+              ),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                      width: 1, color: Color(0xffFFCC1B))),
+                  border: Border.all(width: 1, color: Color(0xffFFCC1B))),
             ),
-            SizedBox(height: 1.h,),
+            SizedBox(
+              height: 1.h,
+            ),
             Text(
-              'Police',
+              '$name',
               style: TextStyle(color: Colors.white),
             )
           ],

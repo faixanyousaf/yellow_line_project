@@ -141,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 7.h,
+                    height: 6.h,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -151,29 +151,21 @@ class _HomeScreenState extends State<HomeScreen> {
                             _scaffoldKey.currentState!.openDrawer();
                           },
                           child: Image(image: AssetImage('assets/menu.png'))),
-                      // Row(
-                      //   children: [
-                      //     Image(
-                      //       image: AssetImage('assets/bells.png'),
-                      //       height: 5.h,
-                      //     ),
-                      //     SizedBox(
-                      //       width: 2.w,
-                      //     ),
-                      //     Container(
-                      //         height: 9.h,
-                      //         width: 9.w,
-                      //         decoration: BoxDecoration(
-                      //             shape: BoxShape.circle,
-                      //             color: Colors.black,
-                      //             border: Border.all(
-                      //                 color: Colors.white, width: 1)),
-                      //         child: Icon(
-                      //           Icons.person,
-                      //           color: Colors.white,
-                      //         ))
-                      //   ],
-                      // )
+                      if (loginResponceModel != null)
+                        InkWell(
+                          onTap: () {
+                            navigationService
+                                .navigateTo(RouterPath.UpdateUserProfileScreen)!
+                                .then((value) {
+                              get_user_data();
+                            });
+                          },
+                          child: CircleAvatar(
+                              radius: 2.0.h,
+                              backgroundColor: Colors.transparent,
+                              backgroundImage: NetworkImage(
+                                  '${loginResponceModel!.user!.profilePicture}')),
+                        )
                     ],
                   ),
                   SizedBox(
