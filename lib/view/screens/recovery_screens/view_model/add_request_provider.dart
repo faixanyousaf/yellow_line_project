@@ -47,6 +47,10 @@ class AddRequestProvider extends ChangeNotifier {
       update_state();
       SharedPrefs sf = SharedPrefs();
       var id = await sf.getid();
+      int index_recovery = recovery_type_model
+          .indexWhere((element) =>
+      element
+          .typeName == selected_recovery_type);
       ChargeUserRequestModel chargeUserRequestModel = ChargeUserRequestModel(
           amount: responce_fare_model!.totalCharges!.toInt(),
           userId: id.toString(),
@@ -56,6 +60,7 @@ class AddRequestProvider extends ChangeNotifier {
           pickUpLat: request_model.lat1,
           dropName: pickup_name,
           pickupName: dropoff_name,
+          recovery_type: recovery_type_model[index_recovery].id.toString(),
           pickUpLong: request_model.long1);
       print('step1');
       var data = await UserRepository.instance

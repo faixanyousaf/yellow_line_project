@@ -32,33 +32,80 @@ class _SosScreenState extends State<SosScreen> {
         ),
         centerTitle: false,
       ),
-      body: SizedBox(
-        height: 100.h,
-        width: 100.w,
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 5.w),
+        child: SizedBox(
+          height: 100.h,
+          width: 100.w,
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 14.h,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                  width: 1, color: Color(0xffFFCC1B))),
+                        ),
+                        SizedBox(height: 1.h,),
+                        Text(
+                          'Police',
+                          style: TextStyle(color: Colors.white),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: 3.w,
+                  ),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 14.h,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                  width: 1, color: Color(0xffFFCC1B))),
+                        ),
+                        SizedBox(height: 1.h,),
+                        Text(
+                          'Police',
+                          style: TextStyle(color: Colors.white),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  box({required String name,required Function() onTap}){
+    return Expanded(
+      child: InkWell(
+        onTap:onTap,
         child: Column(
           children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    height: 15.h,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(width: 1, color: Color(0xffFFCC1B))),
-                  ),
-                ),
-                SizedBox(
-                  width: 3.w,
-                ),
-                Expanded(
-                  child: Container(
-                    height: 15.h,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(width: 1, color: Color(0xffFFCC1B))),
-                  ),
-                ),
-              ],
+            Container(
+              height: 14.h,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                      width: 1, color: Color(0xffFFCC1B))),
+            ),
+            SizedBox(height: 1.h,),
+            Text(
+              'Police',
+              style: TextStyle(color: Colors.white),
             )
           ],
         ),

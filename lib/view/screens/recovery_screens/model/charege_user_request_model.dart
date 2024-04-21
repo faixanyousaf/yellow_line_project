@@ -8,6 +8,7 @@ class ChargeUserRequestModel {
   String? userId;
   String? pickupName;
   String? dropName;
+  String? recovery_type;
 
   ChargeUserRequestModel(
       {this.amount,
@@ -18,6 +19,7 @@ class ChargeUserRequestModel {
         this.dropLong,
         this.userId,
         this.pickupName,
+        this.recovery_type,
         this.dropName});
 
   ChargeUserRequestModel.fromJson(Map<String, dynamic> json) {
@@ -30,6 +32,7 @@ class ChargeUserRequestModel {
     userId = json['user_id'];
     pickupName = json['pickup_name'];
     dropName = json['drop_name'];
+    recovery_type = json['recovery_type'];
   }
 
   Map<String, dynamic> toJson() {
@@ -43,6 +46,7 @@ class ChargeUserRequestModel {
     data['user_id'] = this.userId;
     data['pickup_name'] = this.pickupName;
     data['drop_name'] = this.dropName;
+    data['recovery_type'] = this.recovery_type;
     return data;
   }
 }
