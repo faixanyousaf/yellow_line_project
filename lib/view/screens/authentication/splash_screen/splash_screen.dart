@@ -11,7 +11,6 @@ import '../../../../network_services/repository/authentication_repository/auth_r
 import '../../../Authentication Models/login/models/login_Responce_model.dart';
 import '../../../Authentication Models/login/models/login_request.dart';
 
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -20,7 +19,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
     get_sf_data();
@@ -33,20 +31,44 @@ class _SplashScreenState extends State<SplashScreen> {
     if (data != null) {
       var as_login = await sf.getaslogin();
       var password = await sf.get_password();
-      var data =await sf.getUser();
-      LoginResponceModel loginResponceModel=LoginResponceModel.fromJson(data);
-      Sign_In_Request request = Sign_In_Request(
-          password: password, email: loginResponceModel.user!.email, account_type: '2');
-      var result = await AuthRepository.instance.signIn(body: request.toJson());
-      LoginResponceModel responceModel = result;
-      print('${responceModel.toJson()}');
-      sf.saveUser(responceModel.toJson());
-      sf.saveToken(responceModel.accessToken);
-      sf.saveaslogin('1');
-      sf.saveid(responceModel.user!.id.toString());
-      Timer(const Duration(seconds: 1), () {
+      var data = await sf.getUser();
+      if (as_login == '1') {
+        LoginResponceModel loginResponceModel =
+            LoginResponceModel.fromJson(data);
+        Sign_In_Request request = Sign_In_Request(
+            password: password,
+            email: loginResponceModel.user!.email,
+            account_type: '2');
+        var result =
+            await AuthRepository.instance.signIn(body: request.toJson());
+        LoginResponceModel responceModel = result;
+        print('${responceModel.toJson()}');
+        sf.saveUser(responceModel.toJson());
+        sf.saveToken(responceModel.accessToken);
+        sf.saveaslogin('1');
+        sf.saveid(responceModel.user!.id.toString());
+        Timer(const Duration(seconds: 1), () {
+          navigationService.navigatePushReplace(RouterPath.Home_Screen);
+        });
+      } else {
+        LoginResponceModel loginResponceModel =
+            LoginResponceModel.fromJson(data);
+        Map<String, dynamic> map = {
+          'first_name': '${loginResponceModel.user!.firstName}',
+          'last_name': '${loginResponceModel.user!.lastName}',
+          'email': '${loginResponceModel.user!.email}',
+        };
+        var result = await AuthRepository.instance.social_signUp(body: map);
+        print('result....$result');
+        LoginResponceModel responceModel = LoginResponceModel.fromJson(result);
+        print('${responceModel.toJson()}');
+        SharedPrefs sf = SharedPrefs();
+        sf.saveUser(responceModel.toJson());
+        sf.saveToken(responceModel.accessToken);
+        sf.saveaslogin('2');
+        sf.saveid(responceModel.user!.id.toString());
         navigationService.navigatePushReplace(RouterPath.Home_Screen);
-      });
+      }
     } else {
       Timer(const Duration(seconds: 3), () {
         navigationService.navigatePushReplace(RouterPath.loginRout);
@@ -61,12 +83,16 @@ class _SplashScreenState extends State<SplashScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 15.h,),
+            SizedBox(
+              height: 15.h,
+            ),
             Container(
               height: 55.h,
               decoration: BoxDecoration(
                 color: Color(0xff181F30),
-                image: DecorationImage(image: AssetImage('assets/background.png'),fit: BoxFit.cover),
+                image: DecorationImage(
+                    image: AssetImage('assets/background.png'),
+                    fit: BoxFit.cover),
               ),
               child: Center(
                 child: Image(
@@ -75,8 +101,13 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
             ),
-            Image(image: AssetImage('assets/dot.png'),width: 15.w,),
-            SizedBox(height: 13.h,),
+            Image(
+              image: AssetImage('assets/dot.png'),
+              width: 15.w,
+            ),
+            SizedBox(
+              height: 13.h,
+            ),
             Text(
               'LOREM IPSUM LOREM',
               style: TextStyle(
@@ -84,7 +115,9 @@ class _SplashScreenState extends State<SplashScreen> {
                 fontSize: 15.sp,
               ),
             ),
-            SizedBox(height: 2.h,),
+            SizedBox(
+              height: 2.h,
+            ),
             Text(
               'Lorem ipsum lorem ipsum lorem ipsum\n      lorem ipsum lorem ipsum lorem',
               style: TextStyle(

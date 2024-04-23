@@ -67,7 +67,7 @@ class LoginProvider extends ChangeNotifier {
       SharedPrefs sf = SharedPrefs();
       sf.saveUser(responceModel.toJson());
       sf.saveToken(responceModel.accessToken);
-      sf.saveaslogin('1');
+      sf.saveaslogin('2');
       sf.saveid(responceModel.user!.id.toString());
       loading = false;
       updateState();

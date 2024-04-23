@@ -160,11 +160,22 @@ class _HomeScreenState extends State<HomeScreen> {
                               get_user_data();
                             });
                           },
-                          child: CircleAvatar(
-                              radius: 2.0.h,
-                              backgroundColor: Colors.transparent,
-                              backgroundImage: NetworkImage(
-                                  '${loginResponceModel!.user!.profilePicture}')),
+                          child: loginResponceModel!.user!.profilePicture ==
+                                  null
+                              ? CircleAvatar(
+                                  radius: 2.0.h,
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.person,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                )
+                              : CircleAvatar(
+                                  radius: 2.0.h,
+                                  backgroundColor: Colors.transparent,
+                                  backgroundImage: NetworkImage(
+                                      '${loginResponceModel!.user!.profilePicture}')),
                         )
                     ],
                   ),
@@ -181,8 +192,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       InkWell(
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (c) => SosScreen()));
+                          Navigator.of(context).push(
+                              MaterialPageRoute(builder: (c) => SosScreen()));
                         },
                         child: Container(
                           height: 4.h,

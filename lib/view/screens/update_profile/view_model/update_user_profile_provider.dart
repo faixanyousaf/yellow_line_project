@@ -43,16 +43,37 @@ class UpdateUserProfileProvider extends ChangeNotifier {
       'user_id': await sf.getid()
     });
     await AuthRepository.instance.update_user_profile_picture(body: data);
-    var password = await sf.get_password();
-    Sign_In_Request request = Sign_In_Request(
-        password: password, email: emailController.text, account_type: '2');
-    var responce = await AuthRepository.instance.signIn(body: request.toJson());
-    LoginResponceModel responceModel = responce;
-    print('${responceModel.toJson()}');
-    sf.saveUser(responceModel.toJson());
-    sf.saveToken(responceModel.accessToken);
-    sf.saveaslogin('1');
-    sf.saveid(responceModel.user!.id.toString());
+    var as_login = await sf.getaslogin();
+    if (as_login == '1') {
+      var password = await sf.get_password();
+      Sign_In_Request request = Sign_In_Request(
+          password: password, email: emailController.text, account_type: '2');
+      var responce =
+          await AuthRepository.instance.signIn(body: request.toJson());
+      LoginResponceModel responceModel = responce;
+      print('${responceModel.toJson()}');
+      sf.saveUser(responceModel.toJson());
+      sf.saveToken(responceModel.accessToken);
+      sf.saveaslogin('1');
+      sf.saveid(responceModel.user!.id.toString());
+    } else {
+      SharedPrefs sf = SharedPrefs();
+      var data = await sf.getUser();
+      LoginResponceModel loginResponceModel = LoginResponceModel.fromJson(data);
+      Map<String, dynamic> map = {
+        'first_name': '${loginResponceModel.user!.firstName}',
+        'last_name': '${loginResponceModel.user!.lastName}',
+        'email': '${loginResponceModel.user!.email}',
+      };
+      var result = await AuthRepository.instance.social_signUp(body: map);
+      print('result....$result');
+      LoginResponceModel responceModel = LoginResponceModel.fromJson(result);
+      print('${responceModel.toJson()}');
+      sf.saveUser(responceModel.toJson());
+      sf.saveToken(responceModel.accessToken);
+      sf.saveaslogin('2');
+      sf.saveid(responceModel.user!.id.toString());
+    }
   }
 
   updateState() {
