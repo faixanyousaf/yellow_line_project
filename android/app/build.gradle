@@ -1,6 +1,5 @@
 plugins {
     id "com.android.application"
-    id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
 }
 
@@ -23,26 +22,30 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace "com.example.yellowline"
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 34
     ndkVersion flutter.ndkVersion
-
+    //flutter.compileSdkVersion
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.yellowline"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion 21
-        targetSdkVersion flutter.targetSdkVersion
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+//    kotlinOptions {
+//        jvmTarget = '1.8'
+//    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
     }
 
+    defaultConfig {
+        applicationId "user.yellowline.app"
+        minSdkVersion 21
+        targetSdkVersion flutter.targetSdkVersion
+        versionCode 15
+        versionName flutterVersionName
+        multiDexEnabled true
+    }
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
@@ -55,3 +58,9 @@ android {
 flutter {
     source '../..'
 }
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:multidex:1.0.3'
+}
+apply plugin: 'com.google.gms.google-services'
