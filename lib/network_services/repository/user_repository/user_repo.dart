@@ -102,6 +102,22 @@ class UserRepository {
     }
   }
 
+  Future check_duplicate({required body}) async {
+    try {
+      log('body......$body', name: 'get_all_drivers | BusinessRepository');
+
+      var data = await _saryaAPI.check_duplicate(body: body);
+
+      log('data......$data', name: 'get_all_drivers | BusinessRepository');
+
+      return data;
+    } catch (e) {
+      log('catch error......${e.toString()}',
+          name: 'get_all_drivers | BusinessRepository');
+      rethrow;
+    }
+  }
+
   Future get_recovery_type() async {
     try {
       log('body......', name: 'add_vehicle | BusinessRepository');

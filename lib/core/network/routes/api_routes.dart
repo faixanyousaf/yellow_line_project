@@ -18,6 +18,7 @@ class ApiRoutes {
   static String update_payment_status = '${base_URL}user/update_payment_status';
   static String update_location = '${base_URL}user/update_location';
   static String get_vehicle = '${base_URL}vehicle/user/list/';
+  static String checkduplicate = '${base_URL}user/checkduplicate';
   static String update_user_profile = '${base_URL}authenticated/users/profile';
   static String update_user_profile_picture = '${base_URL}user/update/profile_picture';
   static String get_cites = '${base_URL}common/cities';

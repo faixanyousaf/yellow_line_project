@@ -138,6 +138,17 @@ class YellowLineAPI {
     }
   }
 
+  Future<dynamic> check_duplicate({required body}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.checkduplicate;
+      log('url......$url', name: 'get_all_drivers | YellowLineAPI');
+      return await _http.iPost_raw_data(url,data: body);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<dynamic> get_recovery_type() async {
     try {
       String url = '';

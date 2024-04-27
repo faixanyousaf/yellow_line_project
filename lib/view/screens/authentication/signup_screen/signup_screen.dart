@@ -9,6 +9,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:yellowline/global_widgets/custom_google_button.dart';
 import 'package:yellowline/global_widgets/data_loading.dart';
 import 'package:yellowline/view/screens/authentication/login_screen/login_screen.dart';
+import '../../../../network_services/repository/user_repository/user_repo.dart';
 import '../../../Authentication Models/signup/view_model/signup_provider.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -88,6 +89,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.deactivate();
   }
 
+  bool email_error = false;
   @override
   Widget build(BuildContext context) {
     final SingUpProvider provider = Provider.of<SingUpProvider>(context);
@@ -203,8 +205,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               return null;
                             }
                           },
+                          onChange: (v) async {
+                            var result = await UserRepository.instance
+                                .check_duplicate(
+                                    body: {"email": "$v", "account_type": 1});
+                            if (result['message'] ==
+                                "Account is not available") {
+                              email_error = true;
+                              setState(() {});
+                            } else {
+                              email_error = false;
+                              setState(() {});
+                            }
+                          },
                         ),
                       ),
+                      if (email_error)
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 8.w,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 2),
+                              child: Text(
+                                'Email is already exist.',
+                                style:
+                                    TextStyle(color: Colors.red, fontSize: 12),
+                              ),
+                            ),
+                          ],
+                        ),
                       SizedBox(
                         height: 2.h,
                       ),
@@ -304,7 +335,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               return null;
                             }
                           },
-                          //suffixIcon: 'assets/eyes.svg',
                         ),
                       ),
                       SizedBox(
@@ -312,7 +342,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          provider.call_sign_up(formKey);
+                          if (email_error == false) {
+                            provider.call_sign_up(formKey);
+                          }
                         },
                         child: CustomButton(
                           text: 'Next',
@@ -368,7 +400,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             Container(
                               height: 0.12.h,
-                              width: 30.w,
+                              width: 28.w,
                               color: Colors.white,
                             ),
                           ],

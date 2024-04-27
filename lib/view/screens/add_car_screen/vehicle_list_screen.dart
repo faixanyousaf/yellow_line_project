@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/view/screens/add_car_screen/vehicle_details.dart';
 import '../../../../../global_widgets/custom_button.dart';
 import '../../../global_widgets/data_loading.dart';
+import '../../../global_widgets/refresh_controller.dart';
 import '../../../helper/navigation/navigation_object.dart';
 import '../../../helper/navigation/router_path.dart';
 
@@ -27,6 +29,7 @@ class _BusinessVehicleListScreenState extends State<VehicleListScreen> {
     super.initState();
   }
 
+  var refreshController = RefreshController(initialRefresh: false);
   @override
   Widget build(BuildContext context) {
     var viewAllVehicleModel = Provider.of<ViewVehicleProvider>(context);
@@ -55,51 +58,6 @@ class _BusinessVehicleListScreenState extends State<VehicleListScreen> {
               fontSize: 12.sp,
             ),
           ),
-          // actions: [
-          //   // Padding(
-          //   //   padding:  EdgeInsets.only(right: 5.w),
-          //   //   child: Row(
-          //   //     children: [
-          //   //       Image(image: AssetImage('assets/bells.png')),
-          //   //       SizedBox(width: 3.w,),
-          //   //       Container(
-          //   //         height: 4.h,
-          //   //         width: 5.w,
-          //   //         decoration: BoxDecoration(
-          //   //             shape: BoxShape.circle,
-          //   //             color: Colors.black,
-          //   //             border: Border.all(width: 0.6,color: Colors.white)
-          //   //         ),
-          //   //         child: Center(
-          //   //           child: Icon(Icons.person,color: Colors.white,size: 3.w,),
-          //   //         ),
-          //   //       )
-          //   //     ],
-          //   //   ),
-          //   // ),
-          //   Image(image: AssetImage('assets/bells.png')),
-          //   SizedBox(
-          //     width: 3.w,
-          //   ),
-          //   Padding(
-          //     padding: EdgeInsets.only(right: 6.w),
-          //     child: Container(
-          //       height: 7.h,
-          //       width: 5.w,
-          //       decoration: BoxDecoration(
-          //           shape: BoxShape.circle,
-          //           color: Colors.black,
-          //           border: Border.all(width: 0.6, color: Colors.white)),
-          //       child: Center(
-          //         child: Icon(
-          //           Icons.person,
-          //           color: Colors.white,
-          //           size: 3.w,
-          //         ),
-          //       ),
-          //     ),
-          //   )
-          // ],
         ),
         body: Container(
           height: 100.h,
@@ -107,71 +65,122 @@ class _BusinessVehicleListScreenState extends State<VehicleListScreen> {
           child: Column(
             children: [
               Expanded(
-                  child: ListView.builder(
-                itemCount: viewAllVehicleModel.result!.length,
-                itemBuilder: (context, index) => InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (c) => VehicleDetails(
-                              vehicle: viewAllVehicleModel.result![index],
-                            )));
-                  },
-                  child: Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 5.w, vertical: 1.h),
-                    child: Column(
-                      children: [
-                        if (viewAllVehicleModel.result != null)
+                  child: RefreshControllerGlobal(
+                controller: refreshController,
+                onRefresh: () async {
+                  await viewAllVehicleModel.view_vehicle_api(context);
+                  ;
+                  refreshController.refreshCompleted();
+                },
+                onLoad: () async {
+                  refreshController.loadComplete();
+                },
+                child: viewAllVehicleModel.result!.length == 0 &&
+                        !viewAllVehicleModel.loading
+                    ? Column(
+                        children: [
                           Container(
-                            height: 9.h,
+                            height: 15.h,
+                            width: 30.w,
+                            child: Image.asset('assets/vehicle_car.png'),
+                            padding: EdgeInsets.all(15),
                             decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Center(
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Center(
-                                      child: Text(
-                                        '${viewAllVehicleModel.result![index].code}',
-                                        style: TextStyle(
-                                            color: Color(0xff181F30),
-                                            fontSize: 14.sp),
-                                      ),
+                                shape: BoxShape.circle,
+                                color: Colors.white.withOpacity(0.2)),
+                          ),
+                          SizedBox(
+                            height: 3.h,
+                          ),
+                          Text(
+                            'No Vehicles Added',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 1.h,
+                          ),
+                          Text(
+                            'Please click the below button',
+                            style: TextStyle(color: Colors.white, fontSize: 12),
+                          ),
+                          Text(
+                            'to add a Vehicle',
+                            style: TextStyle(color: Colors.white, fontSize: 12),
+                          ),
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                      )
+                    : ListView.builder(
+                        itemCount: viewAllVehicleModel.result!.length,
+                        itemBuilder: (context, index) => InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (c) => VehicleDetails(
+                                      vehicle:
+                                          viewAllVehicleModel.result![index],
+                                    )));
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 5.w, vertical: 1.h),
+                            child: Column(
+                              children: [
+                                if (viewAllVehicleModel.result != null)
+                                  Container(
+                                    height: 9.h,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(15),
                                     ),
-                                  ),
-                                  Expanded(
                                     child: Center(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(16.0),
-                                        child: Image(
-                                          image: NetworkImage(
-                                            '${viewAllVehicleModel.result![index].cityLogo}',
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Center(
+                                              child: Text(
+                                                '${viewAllVehicleModel.result![index].code}',
+                                                style: TextStyle(
+                                                    color: Color(0xff181F30),
+                                                    fontSize: 14.sp),
+                                              ),
+                                            ),
                                           ),
-                                          height: 7.5.h,
-                                        ),
+                                          Expanded(
+                                            child: Center(
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(16.0),
+                                                child: Image(
+                                                  image: NetworkImage(
+                                                    '${viewAllVehicleModel.result![index].cityLogo}',
+                                                  ),
+                                                  height: 7.5.h,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Center(
+                                              child: Text(
+                                                '${viewAllVehicleModel.result![index].plateNumber}',
+                                                style: TextStyle(
+                                                    color: Color(0xff181F30),
+                                                    fontSize: 14.sp),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
-                                  Expanded(
-                                    child: Center(
-                                      child: Text(
-                                        '${viewAllVehicleModel.result![index].plateNumber}',
-                                        style: TextStyle(
-                                            color: Color(0xff181F30),
-                                            fontSize: 14.sp),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                              ],
                             ),
                           ),
-                      ],
-                    ),
-                  ),
-                ),
+                        ),
+                      ),
               )),
               GestureDetector(
                 onTap: () {

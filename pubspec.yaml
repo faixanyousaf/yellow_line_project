@@ -76,6 +76,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   sliding_up_panel: ^2.0.0+1
   map_launcher: ^2.5.0+1
+  pull_to_refresh: ^2.0.0
 
 #  places_api:
 #    path: packages/places_api
