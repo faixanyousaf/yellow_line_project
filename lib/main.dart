@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -20,6 +21,7 @@ import 'view/screens/update_profile/view_model/update_user_profile_provider.dart
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   Stripe.publishableKey =
       'pk_test_51OuE8WAYqNfNZZ16r6VzHDbXs3VWNg98av26Ex4NP5RzuHzAXM67pWE4PZ0LWmb5U7DM2aYzZ86Yf5OwdNG1shLk00iiMKDW4y';
   // Stripe.publishableKey =
