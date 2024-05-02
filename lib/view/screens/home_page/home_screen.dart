@@ -115,6 +115,11 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 
+  List list_icon = [
+    'assets/truck_recovery.png',
+    'assets/truck_movers.png',
+    'assets/truck_equipment.png'
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -282,162 +287,160 @@ class _HomeScreenState extends State<HomeScreen> {
                       Container(
                         height: 20.h,
                         width: 100.w,
-                        child: Center(
-                          child: InkWell(
-                            onTap: () {
-                              navigationService.navigateTo(
-                                  RouterPath.add_request_screen_one);
-                            },
-                            child: Container(
-                              height: 20.h,
-                              width: 90.w,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Color(0xff181F30),
-                                //Colors.black
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 3.w),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    SizedBox(
-                                      height: 2.h,
-                                    ),
-                                    SizedBox(
-                                      height: 10.h,
-                                      width: 35.w,
-                                      child: Center(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Image(
-                                            image: AssetImage(
-                                                'assets/truck_4x.png'),
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 3.w,
-                                    ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Vehicle Recovery',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 13.sp,
-                                            fontWeight: FontWeight.w600,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 1.h,
-                                        ),
-                                        Text(
-                                          'Request a recovery now or',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 10.sp,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ),
-                                        Text(
-                                          'schedule for later!',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 10.sp,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        // child: ListView.builder(
-                        //   scrollDirection: Axis.horizontal,
-                        //   itemCount: service_list.length,
-                        //   padding: EdgeInsets.symmetric(horizontal: 5.w),
-                        //   itemBuilder: (context, index) {
-                        //     return InkWell(
-                        //       onTap: () {
-                        //         if (index == 0) {
-                        //           navigationService.navigateTo(
-                        //               RouterPath.add_request_screen_one);
-                        //         }
-                        //       },
-                        //       child: Row(
-                        //         children: [
-                        //           Container(
-                        //             height: 19.h,
-                        //             width: 28.w,
-                        //             decoration: BoxDecoration(
-                        //               borderRadius: BorderRadius.circular(10),
-                        //               color: Color(0xff181F30),
-                        //               //Colors.black
+                        // child: Center(
+                        //   child: InkWell(
+                        //     onTap: () {
+                        //       navigationService.navigateTo(
+                        //           RouterPath.add_request_screen_one);
+                        //     },
+                        //     child: Container(
+                        //       height: 20.h,
+                        //       width: 90.w,
+                        //       decoration: BoxDecoration(
+                        //         borderRadius: BorderRadius.circular(15),
+                        //         color: Color(0xff181F30),
+                        //         //Colors.black
+                        //       ),
+                        //       child: Padding(
+                        //         padding: EdgeInsets.symmetric(horizontal: 3.w),
+                        //         child: Row(
+                        //           crossAxisAlignment: CrossAxisAlignment.center,
+                        //           children: [
+                        //             SizedBox(
+                        //               height: 2.h,
                         //             ),
-                        //             child: Padding(
-                        //               padding:
-                        //                   EdgeInsets.symmetric(horizontal: 3.w),
-                        //               child: Column(
-                        //                 crossAxisAlignment:
-                        //                     CrossAxisAlignment.start,
-                        //                 children: [
-                        //                   SizedBox(
-                        //                     height: 2.h,
+                        //             SizedBox(
+                        //               height: 10.h,
+                        //               width: 35.w,
+                        //               child: Center(
+                        //                 child: Padding(
+                        //                   padding: const EdgeInsets.all(8.0),
+                        //                   child: Image(
+                        //                     image: AssetImage(
+                        //                         'assets/truck_4x.png'),
+                        //                     fit: BoxFit.cover,
                         //                   ),
-                        //                   Container(
-                        //                     height: 6.h,
-                        //                     width: 12.w,
-                        //                     decoration: BoxDecoration(
-                        //                       color: Colors.white,
-                        //                       borderRadius:
-                        //                           BorderRadius.circular(10),
-                        //                     ),
-                        //                     child: Center(
-                        //                       child: Image(
-                        //                         image: AssetImage(
-                        //                             'assets/truck.png'),
-                        //                       ),
-                        //                     ),
-                        //                   ),
-                        //                   SizedBox(
-                        //                     height: 3.h,
-                        //                   ),
-                        //                   Text(
-                        //                     '${service_list[index]}',
-                        //                     maxLines: 3,
-                        //                     overflow: TextOverflow.ellipsis,
-                        //                     style: TextStyle(
-                        //                       color: Colors.white,
-                        //                       fontSize: 11.sp,
-                        //                       overflow: TextOverflow.ellipsis,
-                        //                     ),
-                        //                   ),
-                        //                 ],
+                        //                 ),
                         //               ),
                         //             ),
-                        //           ),
-                        //           SizedBox(
-                        //             width: 2.5.w,
-                        //           ),
-                        //         ],
+                        //             SizedBox(
+                        //               height: 3.w,
+                        //             ),
+                        //             Column(
+                        //               mainAxisAlignment:
+                        //                   MainAxisAlignment.center,
+                        //               crossAxisAlignment:
+                        //                   CrossAxisAlignment.start,
+                        //               children: [
+                        //                 Text(
+                        //                   'Vehicle Recovery',
+                        //                   overflow: TextOverflow.ellipsis,
+                        //                   style: TextStyle(
+                        //                     color: Colors.white,
+                        //                     fontSize: 13.sp,
+                        //                     fontWeight: FontWeight.w600,
+                        //                     overflow: TextOverflow.ellipsis,
+                        //                   ),
+                        //                 ),
+                        //                 SizedBox(
+                        //                   height: 1.h,
+                        //                 ),
+                        //                 Text(
+                        //                   'Request a recovery now or',
+                        //                   overflow: TextOverflow.ellipsis,
+                        //                   style: TextStyle(
+                        //                     color: Colors.white,
+                        //                     fontSize: 10.sp,
+                        //                     overflow: TextOverflow.ellipsis,
+                        //                   ),
+                        //                 ),
+                        //                 Text(
+                        //                   'schedule for later!',
+                        //                   overflow: TextOverflow.ellipsis,
+                        //                   style: TextStyle(
+                        //                     color: Colors.white,
+                        //                     fontSize: 10.sp,
+                        //                     overflow: TextOverflow.ellipsis,
+                        //                   ),
+                        //                 ),
+                        //               ],
+                        //             ),
+                        //           ],
+                        //         ),
                         //       ),
-                        //     );
-                        //   },
+                        //     ),
+                        //   ),
                         // ),
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: service_list.length,
+                          padding: EdgeInsets.symmetric(horizontal: 5.w),
+                          itemBuilder: (context, index) {
+                            return InkWell(
+                              onTap: () {
+                                navigationService.navigateTo(
+                                    RouterPath.add_request_screen_one);
+                              },
+                              child: Row(
+                                children: [
+                                  Container(
+                                    height: 19.h,
+                                    width: 28.w,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Color(0xff181F30),
+                                      //Colors.black
+                                    ),
+                                    child: Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 3.w),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            height: 2.h,
+                                          ),
+                                          Container(
+                                            height: 6.h,
+                                            width: 12.w,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            child: Center(
+                                              child: Image(
+                                                image: AssetImage(
+                                                    '${list_icon[index]}'),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 3.h,
+                                          ),
+                                          Text(
+                                            '${service_list[index]}',
+                                            maxLines: 3,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 11.sp,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 2.5.w,
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
                       ),
                       SizedBox(
                         height: 4.h,

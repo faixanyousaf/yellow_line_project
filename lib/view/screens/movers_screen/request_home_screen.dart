@@ -231,7 +231,7 @@ class _RequestHomeScreenState extends State<RequestHomeScreen> {
                                             borderRadius: BorderRadius.circular(10),
                                           ),
                                           child: Center(
-                                            child: Image(image: AssetImage('assets/truck.png'),),
+                                            child: Image(image: AssetImage('assets/truck_recovery.png'),),
                                           ),
                                         ),
                                         SizedBox(height: 3.h,),

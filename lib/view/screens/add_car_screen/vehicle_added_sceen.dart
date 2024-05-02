@@ -30,7 +30,7 @@ class _VehicleAddedScreenState extends State<VehicleAddedScreen> {
                   color: Color(0xff424755),
                 ),
                 child: Center(
-                  child: Image(image: AssetImage('assets/truck.png'),height: 13.h,),
+                  child: Image(image: AssetImage('assets/truck_recovery.png'),height: 13.h,),
                 ),
               ),
               //SizedBox(height: 1.h,),

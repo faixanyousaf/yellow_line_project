@@ -17,7 +17,9 @@ import '../../../../helper/shared_prefs.dart';
 import '../../../../network_services/repository/authentication_repository/auth_repo.dart';
 import '../../../Authentication Models/login/models/login_Responce_model.dart';
 import '../../../Authentication Models/login/models/login_request.dart';
+
 FirebaseModel? firebaseModel;
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -26,8 +28,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  final Stream<QuerySnapshot> _usersStream =
-  FirebaseFirestore.instance.collection('appversion').snapshots();
   get_firebase_Data(BuildContext? context) {
     print('the firebaseModel data is =1');
     FirebaseFirestore.instance
@@ -40,10 +40,12 @@ class _SplashScreenState extends State<SplashScreen> {
         firebaseModel =
             FirebaseModel.fromJson(doc.data() as Map<String, dynamic>);
         print('the firebaseModel data is = ${firebaseModel!.toJson()}');
+        base_URL = '${firebaseModel!.baseUrl}';
         versionCheckApi(context);
       });
     });
   }
+
   appVersionCheck(BuildContext? context) async {
     if (firebaseModel!.androidAppOnMaintenance == false) {
       try {
@@ -103,8 +105,8 @@ class _SplashScreenState extends State<SplashScreen> {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     version = packageInfo.version;
     String v1 = Platform.isAndroid
-        ? '${firebaseModel!.androidVersion}'
-        : '${firebaseModel!.iosVersion}',
+            ? '${firebaseModel!.androidVersion}'
+            : '${firebaseModel!.iosVersion}',
         v2 = '${version}';
     print(
         'versions = ${firebaseModel!.androidVersion} and ${firebaseModel!.iosVersion}');
@@ -304,7 +306,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     get_firebase_Data(context);
-   // get_sf_data();
+    // get_sf_data();
     super.initState();
   }
 
@@ -391,23 +393,23 @@ class _SplashScreenState extends State<SplashScreen> {
             SizedBox(
               height: 13.h,
             ),
-            Text(
-              'LOREM IPSUM LOREM',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 15.sp,
-              ),
-            ),
-            SizedBox(
-              height: 2.h,
-            ),
-            Text(
-              'Lorem ipsum lorem ipsum lorem ipsum\n      lorem ipsum lorem ipsum lorem',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 10.sp,
-              ),
-            ),
+            // Text(
+            //   'LOREM IPSUM LOREM',
+            //   style: TextStyle(
+            //     color: Colors.white,
+            //     fontSize: 15.sp,
+            //   ),
+            // ),
+            // SizedBox(
+            //   height: 2.h,
+            // ),
+            // Text(
+            //   'Lorem ipsum lorem ipsum lorem ipsum\n      lorem ipsum lorem ipsum lorem',
+            //   style: TextStyle(
+            //     color: Colors.white,
+            //     fontSize: 10.sp,
+            //   ),
+            // ),
           ],
         ),
       ),

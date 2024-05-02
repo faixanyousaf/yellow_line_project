@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yellowline/view/screens/add_car_screen/vehicle_list_screen.dart';
 import 'package:yellowline/view/screens/authentication/login_screen/login_screen.dart';
+import '../../global_widgets/app_bar_colors.dart';
 import '../../view/screens/My Request/view/my_request_main_screen.dart';
 import '../../view/screens/add_car_screen/add_new_vehicle_screen.dart';
 import '../../view/screens/add_car_screen/vehicle_added_sceen.dart';
@@ -17,7 +18,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case RouterPath.Home_Screen:
       return MaterialPageRoute(
-        builder: (context) => HomeScreen(),
+        builder: (context) => statusBarStyle(child: HomeScreen()),
       );
 
     case RouterPath.loginRout:
