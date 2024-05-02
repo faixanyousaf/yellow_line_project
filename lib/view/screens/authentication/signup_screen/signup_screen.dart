@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
@@ -9,6 +12,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:yellowline/global_widgets/custom_google_button.dart';
 import 'package:yellowline/global_widgets/data_loading.dart';
 import 'package:yellowline/view/screens/authentication/login_screen/login_screen.dart';
+import '../../../../global_widgets/terms_and_conditions.dart';
 import '../../../../network_services/repository/user_repository/user_repo.dart';
 import '../../../Authentication Models/signup/view_model/signup_provider.dart';
 
@@ -90,6 +94,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   bool email_error = false;
+  ValueNotifier<bool> termAndConditionNotifier = ValueNotifier(false);
   @override
   Widget build(BuildContext context) {
     final SingUpProvider provider = Provider.of<SingUpProvider>(context);
@@ -338,12 +343,154 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: 8.h,
+                        height: 2.h,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 7.w),
+                        child: Row(
+                          children: [
+                            ValueListenableBuilder(
+                              valueListenable: termAndConditionNotifier,
+                              builder: (c, v, child) {
+                                if (termAndConditionNotifier.value) {
+                                  return InkWell(
+                                    onTap: () {
+                                      termAndConditionNotifier.value =
+                                          !termAndConditionNotifier.value;
+                                      setState(() {});
+                                    },
+                                    child: Container(
+                                      height: 2.5.h,
+                                      width: 5.w,
+                                      child: SvgPicture.asset(
+                                          color: Color(0xffFFD542),
+                                          'assets/svgs/check_circle.svg'),
+                                    ),
+                                  );
+                                }
+                                return InkWell(
+                                  onTap: () {
+                                    termAndConditionNotifier.value =
+                                        !termAndConditionNotifier.value;
+                                    setState(() {});
+                                  },
+                                  child: Container(
+                                    height: 2.5.h,
+                                    width: 5.w,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.transparent,
+                                        border: Border.all(
+                                          color: Color(0xffFFD542),
+                                        )),
+                                  ),
+                                );
+                              },
+                            ),
+                            SizedBox(
+                              width: 4.w,
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                  text: 'I herby accept all the  ',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 9.sp,
+                                      fontWeight: FontWeight.w500),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                        text: 'Terms & Condition',
+                                        style: TextStyle(
+                                            decoration:
+                                                TextDecoration.underline,
+                                            color: Color(0xffFFD542),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 9.5.sp),
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () async {
+                                            // final Uri url = Uri.parse(
+                                            //     'https://sarya.app/terms.html');
+                                            // if (!await launchUrl(url)) {
+                                            //   throw Exception(
+                                            //       'Could not launch');
+                                            // }
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      TermsAndConditions(
+                                                    isFromSignUp: false,
+                                                  ),
+                                                ));
+                                          }),
+                                    TextSpan(
+                                        text: ' \n& ',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 9.5.sp,
+                                            fontWeight: FontWeight.w500),
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () {}),
+                                    TextSpan(
+                                        text: 'Privacy Policy',
+                                        style: TextStyle(
+                                            decoration:
+                                                TextDecoration.underline,
+                                            color: Color(0xffFFD542),
+                                            fontSize: 9.5.sp,
+                                            fontWeight: FontWeight.bold),
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () async {
+                                            // //modelBottomSheet();
+                                            // final Uri url = Uri.parse(
+                                            //     'https://sarya.app/privacy.html');
+                                            // if (!await launchUrl(url)) {
+                                            //   throw Exception(
+                                            //       'Could not launch');
+                                            // }
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      TermsAndConditions(
+                                                    isFromSignUp: false,
+                                                  ),
+                                                ));
+                                          })
+                                  ]),
+                            ),
+                          ],
+                        ),
+                      ),
+                      if (provider.isVisible == true &&
+                          !termAndConditionNotifier.value)
+                        Align(
+                            alignment: Alignment.topLeft,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 8.w, vertical: 1.h),
+                              child: Text(
+                                'Accept Terms and Condition',
+                                style:
+                                    TextStyle(color: Colors.red, fontSize: 14),
+                              ),
+                            )),
+                      SizedBox(
+                        height: 4.h,
                       ),
                       GestureDetector(
                         onTap: () {
-                          if (email_error == false) {
-                            provider.call_sign_up(formKey);
+                          if (email_error == false &&
+                              termAndConditionNotifier.value) {
+                            terms_condition_dialog(
+                                context: context,
+                                on_done: () {
+                                  provider.call_sign_up(formKey);
+                                });
+                          } else {
+                            print('object1');
+                            provider.isVisible = true;
+                            setState(() {});
                           }
                         },
                         child: CustomButton(
@@ -428,7 +575,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: CustomGoogleButton(
                             image: 'assets/facebook.png',
                             text: 'Signup with Facebook'),
-                      )
+                      ),
+                      SizedBox(
+                        height: 4.h,
+                      ),
                     ],
                   ),
                 ],
@@ -442,6 +592,113 @@ class _SignUpScreenState extends State<SignUpScreen> {
           // ),
         ),
       ),
+    );
+  }
+
+  terms_condition_dialog({BuildContext? context, Function()? on_done}) {
+    showMaterialModalBottomSheet(
+      context: context!,
+      backgroundColor: Color(0xffFFD542).withOpacity(0.5),
+      builder: (context) => Container(
+          color: Color(0xffFFD542).withOpacity(0.5),
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                height: 35.h,
+                width: 100.w,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(40),
+                        topRight: Radius.circular(40))),
+                child: Column(children: [
+                  Container(
+                    height: 7.5.h,
+                    child: Center(
+                        child: Text(
+                      'Terms and Conditions',
+                      style: TextStyle(
+                          fontSize: 12.sp, fontWeight: FontWeight.bold),
+                    )),
+                    decoration: BoxDecoration(
+                        color: Color(0xffD1E3F4),
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(40),
+                            topRight: Radius.circular(40))),
+                  ),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  Center(
+                      child: Text(
+                    'I agree to share my details and i have read Terms\n and Condition, Privacy Policy.',
+                    style: TextStyle(
+                        fontSize: 11.sp,
+                        color: Colors.black54,
+                        fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.center,
+                  )),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  Container(
+                    height: 6.h,
+                    width: 100.w,
+                    padding: EdgeInsets.symmetric(horizontal: 35),
+                    child: Row(children: [
+                      Expanded(
+                          child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          Navigator.of(context).pop();
+                        },
+                        child: Container(
+                          child: Center(
+                              child: Text(
+                            'Cancel',
+                            style: TextStyle(
+                                fontSize: 12.sp,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                          )),
+                          decoration: BoxDecoration(
+                              border: Border.all(width: 1, color: Colors.black),
+                              borderRadius: BorderRadius.circular(40)),
+                        ),
+                      )),
+                      SizedBox(
+                        width: 13,
+                      ),
+                      Expanded(
+                          child: InkWell(
+                        onTap: () {
+                          on_done!.call();
+                        },
+                        child: Container(
+                          child: Center(
+                              child: Text(
+                            'Agree',
+                            style: TextStyle(
+                                fontSize: 12.sp,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                          )),
+                          decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(40)),
+                        ),
+                      )),
+                    ]),
+                  )
+                ]),
+              ),
+            ],
+          )),
     );
   }
 }

@@ -16,7 +16,7 @@ class WebViewGlobal extends StatefulWidget {
   const WebViewGlobal({
     Key? key,
     this.url,
-    this.title = 'Invoice',
+    this.title = '',
     this.download = false,
   }) : super(key: key);
 
