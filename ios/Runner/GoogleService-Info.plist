@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>82495305767-qhi7v4qhfo8qi3a6aqipo6070t302qm5.apps.googleusercontent.com</string>
+	<string>876537161505-00feg181hqinbt5em1ppmjhv09bbrf9m.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.82495305767-qhi7v4qhfo8qi3a6aqipo6070t302qm5</string>
+	<string>com.googleusercontent.apps.876537161505-00feg181hqinbt5em1ppmjhv09bbrf9m</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCTymQXsjSwhdnR_yrAi0LY8cC3AWTcjDw</string>
+	<string>AIzaSyAkNthArLfQV6uq7P8e6hj2_wYgXeWrStE</string>
 	<key>GCM_SENDER_ID</key>
-	<string>82495305767</string>
+	<string>876537161505</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>business.yellowline.app</string>
+	<string>com.yellowline.app</string>
 	<key>PROJECT_ID</key>
-	<string>yellow-line-business-418510</string>
+	<string>quantum-chemist-418510</string>
 	<key>STORAGE_BUCKET</key>
-	<string>yellow-line-business-418510.appspot.com</string>
+	<string>quantum-chemist-418510.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:82495305767:ios:28d82902e18dcdb4d37602</string>
+	<string>1:876537161505:ios:3a2865e60ca592ce8c8060</string>
 </dict>
 </plist>
