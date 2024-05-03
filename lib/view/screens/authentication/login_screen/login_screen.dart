@@ -317,44 +317,44 @@ class _LogInScreenState extends State<LogInScreen> {
                   SizedBox(
                     height: 3.h,
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 6.w),
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 0.12.h,
-                          width: 38.w,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          '  OR  ',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Container(
-                          height: 0.12.h,
-                          width: 39.w,
-                          color: Colors.white,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 3.h,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 6.w),
-                    child: InkWell(
-                      onTap: () {
-                        _handleSignIn();
-                      },
-                      child: CustomGoogleButton(
-                          image: 'assets/google.png',
-                          text: 'Signup with Google'),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 2.h,
-                  ),
+                  // Padding(
+                  //   padding: EdgeInsets.symmetric(horizontal: 6.w),
+                  //   child: Row(
+                  //     children: [
+                  //       Container(
+                  //         height: 0.12.h,
+                  //         width: 38.w,
+                  //         color: Colors.white,
+                  //       ),
+                  //       Text(
+                  //         '  OR  ',
+                  //         style: TextStyle(color: Colors.white),
+                  //       ),
+                  //       Container(
+                  //         height: 0.12.h,
+                  //         width: 39.w,
+                  //         color: Colors.white,
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 3.h,
+                  // ),
+                  // Padding(
+                  //   padding: EdgeInsets.symmetric(horizontal: 6.w),
+                  //   child: InkWell(
+                  //     onTap: () {
+                  //       _handleSignIn();
+                  //     },
+                  //     child: CustomGoogleButton(
+                  //         image: 'assets/google.png',
+                  //         text: 'Signup with Google'),
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 2.h,
+                  // ),
                   // Padding(
                   //   padding: EdgeInsets.symmetric(horizontal: 6.w),
                   //   child: CustomGoogleButton(
