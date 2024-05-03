@@ -22,10 +22,10 @@ import 'view/screens/update_profile/view_model/update_user_profile_provider.dart
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  Stripe.publishableKey =
-      'pk_test_51OuE8WAYqNfNZZ16r6VzHDbXs3VWNg98av26Ex4NP5RzuHzAXM67pWE4PZ0LWmb5U7DM2aYzZ86Yf5OwdNG1shLk00iiMKDW4y';
   // Stripe.publishableKey =
-  //     'pk_live_51MRcIPJItNj1PXVqstT4avRsMRv1ZoByuSMEvCgpjkfJbROHnEb9Rtb9CPf8oGwFVGq01ERcxr3x9YxeB43Mj8jx00MkMBQgg5';
+  //     'pk_test_51OuE8WAYqNfNZZ16r6VzHDbXs3VWNg98av26Ex4NP5RzuHzAXM67pWE4PZ0LWmb5U7DM2aYzZ86Yf5OwdNG1shLk00iiMKDW4y';
+  Stripe.publishableKey =
+      'pk_live_51P8EjkP1P6rcRJTiO3uUcjh565iD5I387vGVpDPuD65Al3JLhgtv1hBXozZPydWy6SMl0nfpwLsmywcqSOkfwdDy00JTJTrkZb';
   // Stripe.publishableKey =
   //     'pk_test_51OuE8WAYqNfNZZ16r6VzHDbXs3VWNg98av26Ex4NP5RzuHzAXM67pWE4PZ0LWmb5U7DM2aYzZ86Yf5OwdNG1shLk00iiMKDW4y';
   Stripe.merchantIdentifier = 'merchant.travel.sarya.app';
