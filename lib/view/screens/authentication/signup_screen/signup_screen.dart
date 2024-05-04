@@ -532,53 +532,53 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       SizedBox(
                         height: 4.h,
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 6.w),
-                        child: Row(
-                          children: [
-                            Container(
-                              height: 0.12.h,
-                              width: 30.w,
-                              color: Colors.white,
-                            ),
-                            Text(
-                              '  Or Sign in with  ',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            Container(
-                              height: 0.12.h,
-                              width: 28.w,
-                              color: Colors.white,
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5.h,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 6.w),
-                        child: InkWell(
-                          onTap: () {
-                            _handleSignIn();
-                          },
-                          child: CustomGoogleButton(
-                              image: 'assets/google.png',
-                              text: 'Signup with Google'),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 2.5.h,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 6.w),
-                        child: CustomGoogleButton(
-                            image: 'assets/facebook.png',
-                            text: 'Signup with Facebook'),
-                      ),
-                      SizedBox(
-                        height: 4.h,
-                      ),
+                      // Padding(
+                      //   padding: EdgeInsets.symmetric(horizontal: 6.w),
+                      //   child: Row(
+                      //     children: [
+                      //       Container(
+                      //         height: 0.12.h,
+                      //         width: 30.w,
+                      //         color: Colors.white,
+                      //       ),
+                      //       Text(
+                      //         '  Or Sign in with  ',
+                      //         style: TextStyle(color: Colors.white),
+                      //       ),
+                      //       Container(
+                      //         height: 0.12.h,
+                      //         width: 28.w,
+                      //         color: Colors.white,
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   height: 5.h,
+                      // ),
+                      // Padding(
+                      //   padding: EdgeInsets.symmetric(horizontal: 6.w),
+                      //   child: InkWell(
+                      //     onTap: () {
+                      //       _handleSignIn();
+                      //     },
+                      //     child: CustomGoogleButton(
+                      //         image: 'assets/google.png',
+                      //         text: 'Signup with Google'),
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   height: 2.5.h,
+                      // ),
+                      // Padding(
+                      //   padding: EdgeInsets.symmetric(horizontal: 6.w),
+                      //   child: CustomGoogleButton(
+                      //       image: 'assets/facebook.png',
+                      //       text: 'Signup with Facebook'),
+                      // ),
+                      // SizedBox(
+                      //   height: 4.h,
+                      // ),
                     ],
                   ),
                 ],
