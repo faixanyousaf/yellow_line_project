@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../global_widgets/bottom_sheets_selection.dart';
@@ -53,7 +54,7 @@ class _VehicleDetailState extends State<VehicleDetail> {
                 size: 5.w,
               )),
           title: Text(
-            'Add New Vehicles',
+            'Add New Vehicles'.tr,
             style: TextStyle(
               color: Colors.white,
               fontSize: 12.sp,
@@ -98,7 +99,7 @@ class _VehicleDetailState extends State<VehicleDetail> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 6.w),
                 child: Text(
-                  'Type (optional)',
+                  'Type (optional)'.tr,
                   style: TextStyle(color: Colors.white, fontSize: 10.sp),
                 ),
               ),
@@ -127,7 +128,7 @@ class _VehicleDetailState extends State<VehicleDetail> {
                               },
                               decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: 'Choose vehicle type',
+                                  hintText: 'Choose vehicle type'.tr,
                                   hintStyle: TextStyle(
                                       color: Color(0xff181F30),
                                       fontSize: 10.sp)),
@@ -161,7 +162,7 @@ class _VehicleDetailState extends State<VehicleDetail> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 6.w),
                 child: Text(
-                  'Make (optional)',
+                  'Make (optional)'.tr,
                   style: TextStyle(color: Colors.white, fontSize: 10.sp),
                 ),
               ),
@@ -190,7 +191,7 @@ class _VehicleDetailState extends State<VehicleDetail> {
                               },
                               decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: 'Choose company',
+                                  hintText: 'Choose company'.tr,
                                   hintStyle: TextStyle(
                                       color: Color(0xff181F30),
                                       fontSize: 10.sp)),
@@ -232,7 +233,7 @@ class _VehicleDetailState extends State<VehicleDetail> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 6.w),
                 child: Text(
-                  'Model (optional)',
+                  'Model (optional)'.tr,
                   style: TextStyle(color: Colors.white, fontSize: 10.sp),
                 ),
               ),
@@ -261,7 +262,7 @@ class _VehicleDetailState extends State<VehicleDetail> {
                               },
                               decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: 'Choose vehicle model',
+                                  hintText: 'Choose vehicle model'.tr,
                                   hintStyle: TextStyle(
                                       color: Color(0xff181F30),
                                       fontSize: 10.sp)),
@@ -294,7 +295,7 @@ class _VehicleDetailState extends State<VehicleDetail> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 6.w),
                 child: Text(
-                  'Year (optional)',
+                  'Year (optional)'.tr,
                   style: TextStyle(color: Colors.white, fontSize: 10.sp),
                 ),
               ),
@@ -323,7 +324,7 @@ class _VehicleDetailState extends State<VehicleDetail> {
                               },
                               decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: 'Choose Year',
+                                  hintText: 'Choose Year'.tr,
                                   hintStyle: TextStyle(
                                       color: Color(0xff181F30),
                                       fontSize: 10.sp)),
@@ -368,7 +369,7 @@ class _VehicleDetailState extends State<VehicleDetail> {
                 child: CustomButton(
                   buttonColor: Color(0xffFFD542),
                   borderColor: Color(0xffFFD542),
-                  text: 'Add',
+                  text: 'Add'.tr,
                   textColor: Color(0xff181F30),
                 ),
               ),

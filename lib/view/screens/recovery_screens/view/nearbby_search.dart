@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:google_api_headers/google_api_headers.dart';
@@ -145,7 +146,7 @@ class _GoogleNearbySearchState extends State<GoogleNearbySearch> {
                         });
                       },
                       child: CustomBottomButton(
-                        text: 'Pickup',
+                        text: 'Pickup'.tr,
                         height: 4.h,
                         buttonColor: Color(0xffFFCC1B),
                         textColor: Colors.black,
@@ -170,7 +171,7 @@ class _GoogleNearbySearchState extends State<GoogleNearbySearch> {
                         });
                       },
                       child: CustomBottomButton(
-                        text: 'Drop-off',
+                        text: 'Drop-off'.tr,
                         height: 4.h,
                         font_size: 9,
                         buttonColor: Color(0xffFFCC1B),

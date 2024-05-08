@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/helper/navigation/navigation_object.dart';
 import 'package:yellowline/helper/navigation/router_path.dart';
@@ -27,9 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   int activePage = 0;
   List<String> service_list = [
-    'Vehicle Recovery',
-    'Vehicle Movers',
-    'Rental Equipments'
+    'Vehicle Recovery'.tr,
+    'Vehicle Movers'.tr,
+    'Rental Equipments'.tr
   ];
   final List<Widget> pages = [
     Container(
@@ -192,7 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       if (loginResponceModel != null)
                         Text(
-                          'Welcome, ${loginResponceModel!.user!.firstName} ${loginResponceModel!.user!.lastName}',
+                          'Welcome, ${loginResponceModel!.user!.firstName} ${loginResponceModel!.user!.lastName}'.tr,
                           style: TextStyle(color: Colors.white),
                         ),
                       InkWell(
@@ -275,7 +276,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 2.h,
                       ),
                       Text(
-                        'Recover your Vehicle',
+                        'Recover your Vehicle'.tr,
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 13.sp,
@@ -420,7 +421,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             height: 3.h,
                                           ),
                                           Text(
-                                            '${service_list[index]}',
+                                            '${service_list[index]}'.tr,
                                             maxLines: 3,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(

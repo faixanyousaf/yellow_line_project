@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
 import 'package:yellowline/view/screens/authentication/signup_screen/signup_screen.dart';
@@ -40,7 +41,7 @@ class _SplashSignInScreenState extends State<SplashSignInScreen> {
                Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen(),));
               },
               child: CustomButton(
-                text: 'Sign up as a User',
+                text: 'Sign up as a User'.tr,
                 borderColor: Color(0xffFFD542),
                 textColor: Color(0xff181F30),
                 buttonColor: Color(0xffFFD542),
@@ -48,7 +49,7 @@ class _SplashSignInScreenState extends State<SplashSignInScreen> {
             ),
             SizedBox(height: 2.5.h,),
             CustomButton(
-              text: 'Sign up as a Business',
+              text: 'Sign up as a Business'.tr,
               borderColor: Color(0xffFFD542),
               textColor: Color(0xffFFD542),
               buttonColor: Color(0xff181F30),

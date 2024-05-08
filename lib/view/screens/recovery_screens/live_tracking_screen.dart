@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/bottom_button.dart';
 import 'package:yellowline/global_widgets/custom_drop_conatiner.dart';
@@ -50,7 +51,7 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 5.w),
                       child: Text(
-                        'Live Tracking:',
+                        'Live Tracking:'.tr,
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 10.sp
@@ -69,7 +70,7 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
                             CustomDropContainer(
                               height: 5.2.h,
                               width: 28.w,
-                              text: 'Reaching in',
+                              text: 'Reaching in'.tr,
                               texxt: '10 mins',
                             ),
                             SizedBox(width: 3.w,)
@@ -99,7 +100,7 @@ class _LiveTrackingScreenState extends State<LiveTrackingScreen> {
                             borderColor: Color(0xff0CC243),
                           ),
                           CustomBottomButton(
-                            text: 'Call',
+                            text: 'Call'.tr,
                             buttonColor: Color(0xffFFCC1B),
                             textColor: Color(0xff181F30),
                             borderColor: Color(0xffFFCC1B),

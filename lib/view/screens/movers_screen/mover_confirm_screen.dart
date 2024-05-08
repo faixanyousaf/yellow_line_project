@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
 import 'package:yellowline/view/screens/movers_screen/request_home_screen.dart';
@@ -34,7 +35,7 @@ class _MoverConfirmScreenState extends State<MoverConfirmScreen> {
               ),
               //SizedBox(height: 1.h,),
               Text(
-                'Mover Request Confirmed',
+                'Mover Request Confirmed'.tr,
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 16.sp
@@ -45,7 +46,7 @@ class _MoverConfirmScreenState extends State<MoverConfirmScreen> {
                 borderColor: Color(0xffFFCC1B),
                 buttonColor: Color(0xffFFCC1B),
                 textColor: Color(0xff181F30),
-                text: 'Track',
+                text: 'Track'.tr,
               ),
             ],
           ),

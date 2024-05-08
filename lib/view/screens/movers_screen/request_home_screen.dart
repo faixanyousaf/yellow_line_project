@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:yellowline/view/screens/home_page/drawer_screen.dart';
@@ -123,7 +124,7 @@ class _RequestHomeScreenState extends State<RequestHomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Welcome, Faizan Yousaf',
+                        'Welcome, Faizan Yousaf'.tr,
                         style: TextStyle(color: Colors.white),
                       ),
                       Container(
@@ -196,7 +197,7 @@ class _RequestHomeScreenState extends State<RequestHomeScreen> {
                     children: [
                       SizedBox(height: 2.h,),
                       Text(
-                        'Choose a Service',
+                        'Choose a Service'.tr,
                         style: TextStyle(color: Colors.black,fontSize: 13.sp,fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 3.h,),
@@ -237,7 +238,7 @@ class _RequestHomeScreenState extends State<RequestHomeScreen> {
                                         SizedBox(height: 3.h,),
                                         Expanded(
                                           child: Text(
-                                            'Vehicle Movers',
+                                            'Vehicle Movers'.tr,
                                             maxLines: 3,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
@@ -277,7 +278,7 @@ class _RequestHomeScreenState extends State<RequestHomeScreen> {
                                     Image(image: AssetImage('assets/act.png'),height: 3.h,),
                                     SizedBox(width: 4.w,),
                                     Text(
-                                      'Request',
+                                      'Request'.tr,
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 10.sp

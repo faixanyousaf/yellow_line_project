@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../global_widgets/image_finder.dart';
 import '../../../global_widgets/data_loading.dart';
@@ -33,7 +34,7 @@ class _VehicleDetailsState extends State<VehicleDetails> {
               size: 5.w,
             )),
         title: Text(
-          'Vehicles Details',
+          'Vehicles Details'.tr,
           style: TextStyle(
             color: Colors.white,
             fontSize: 12.sp,
@@ -126,7 +127,7 @@ class _VehicleDetailsState extends State<VehicleDetails> {
                 Row(
                   children: [
                     Text(
-                      'Code:',
+                      'Code:'.tr,
                       style: TextStyle(color: Colors.white, fontSize: 14),
                     ),
                     SizedBox(
@@ -144,7 +145,7 @@ class _VehicleDetailsState extends State<VehicleDetails> {
                 Row(
                   children: [
                     Text(
-                      'Plate Number:',
+                      'Plate Number:'.tr,
                       style: TextStyle(color: Colors.white, fontSize: 14),
                     ),
                     SizedBox(
@@ -162,7 +163,7 @@ class _VehicleDetailsState extends State<VehicleDetails> {
                 Row(
                   children: [
                     Text(
-                      'Type:',
+                      'Type:'.tr,
                       style: TextStyle(color: Colors.white, fontSize: 14),
                     ),
                     SizedBox(
@@ -180,7 +181,7 @@ class _VehicleDetailsState extends State<VehicleDetails> {
                 Row(
                   children: [
                     Text(
-                      'Make:',
+                      'Make:'.tr,
                       style: TextStyle(color: Colors.white, fontSize: 14),
                     ),
                     SizedBox(
@@ -198,7 +199,7 @@ class _VehicleDetailsState extends State<VehicleDetails> {
                 Row(
                   children: [
                     Text(
-                      'Model:',
+                      'Model:'.tr,
                       style: TextStyle(color: Colors.white, fontSize: 14),
                     ),
                     SizedBox(
@@ -216,7 +217,7 @@ class _VehicleDetailsState extends State<VehicleDetails> {
                 Row(
                   children: [
                     Text(
-                      'Year:',
+                      'Year:'.tr,
                       style: TextStyle(color: Colors.white, fontSize: 14),
                     ),
                     SizedBox(
@@ -232,7 +233,7 @@ class _VehicleDetailsState extends State<VehicleDetails> {
                   height: 2.h,
                 ),
                 Text(
-                  'Registration card',
+                  'Registration card'.tr,
                   style: TextStyle(
                       color:  Colors.white,
                       fontSize: 10.sp),

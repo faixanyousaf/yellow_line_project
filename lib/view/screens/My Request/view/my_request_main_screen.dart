@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'movers_screen.dart';
 
@@ -40,7 +41,7 @@ class _MyRequestMainScreenState extends State<MyRequestMainScreen>
         title: Padding(
           padding: EdgeInsets.symmetric(horizontal: 5.w),
           child: Text(
-            'My Requests',
+            'My Requests'.tr,
             style: TextStyle(color: Colors.white, fontSize: 12.sp),
           ),
         ),
@@ -68,7 +69,7 @@ class _MyRequestMainScreenState extends State<MyRequestMainScreen>
                   Padding(
                     padding: EdgeInsets.only(bottom: 0.8.h),
                     child: Text(
-                      'Active',
+                      'Active'.tr,
                       style: TextStyle(
                           //color: Color(0xffFFCC1B),
                           fontSize: 10.sp),
@@ -77,7 +78,7 @@ class _MyRequestMainScreenState extends State<MyRequestMainScreen>
                   Padding(
                     padding: EdgeInsets.only(bottom: 0.8.h),
                     child: Text(
-                      'Cancelled',
+                      'Cancelled'.tr,
                       style: TextStyle(
                           //color: Color(0xffFFCC1B),
                           fontSize: 10.sp),
@@ -86,7 +87,7 @@ class _MyRequestMainScreenState extends State<MyRequestMainScreen>
                   Padding(
                     padding: EdgeInsets.only(bottom: 0.8.h),
                     child: Text(
-                      'Completed',
+                      'Completed'.tr,
                       style: TextStyle(
                           //color: Color(0xffFFCC1B),
                           fontSize: 10.sp),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sizer/sizer.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 import '../../../helper/navigation/navigation_object.dart';
 import '../../../helper/navigation/router_path.dart';
@@ -120,7 +122,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   navigationService.navigateTo(RouterPath.Vehicle_List_Screen);
                 },
                 child: customListTile(
-                    text: 'My Vehicle', image: 'assets/vehicle.png')),
+                    text: 'My Vehicle'.tr, image: 'assets/vehicle.png')),
             InkWell(
               onTap: () {
                 navigationService.navigateTo(RouterPath.request_view_screen);
@@ -149,7 +151,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                           width: 6.w,
                         ),
                         Text(
-                          'My Request',
+                          'My Request'.tr,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 10.sp,
@@ -208,7 +210,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                       ),
                                       child: Center(
                                         child: Text(
-                                          'Delete account?',
+                                          'Delete account?'.tr,
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 11.sp,
@@ -220,7 +222,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                       height: 3.h,
                                     ),
                                     Text(
-                                      'Do you want to temporarily or permanently \ndelete your account?',
+                                      'Do you want to temporarily or permanently \ndelete your account?'.tr,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         color: Color(0xff261F21).withAlpha(150),
@@ -256,7 +258,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                                               0xffFFCC1B))),
                                                   child: Center(
                                                     child: Text(
-                                                      'Temporarily',
+                                                      'Temporarily'.tr,
                                                       style: TextStyle(
                                                           color:
                                                               Color(0xffFFCC1B),
@@ -287,7 +289,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                                       color: Color(0xffFFCC1B)),
                                                   child: Center(
                                                     child: Text(
-                                                      'Permanently',
+                                                      'Permanently'.tr,
                                                       style: TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 11.sp,
@@ -375,7 +377,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                                         ),
                                                       ),
                                                       Text(
-                                                        'Permanently delete',
+                                                        'Permanently delete'.tr,
                                                         style: TextStyle(
                                                             color: Color(
                                                                 0xffFFCC1B),
@@ -401,7 +403,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                                       keyboardType:
                                                           TextInputType.text,
                                                       initialValue:
-                                                          'If you permanently delete your account all your data will be deleted from our backend system and you will not be able to reactivate it again. You will need to register as a new user if you would like rejoin sarya app.However if other users have purchased any itineraries or lists designed by you it will still be available for the user to use.',
+                                                          'If you permanently delete your account all your data will be deleted from our backend system and you will not be able to reactivate it again. You will need to register as a new user if you would like rejoin sarya app.However if other users have purchased any itineraries or lists designed by you it will still be available for the user to use.'.tr,
                                                       textAlign: TextAlign.left,
                                                       maxLines: null,
                                                       enabled: false,
@@ -447,7 +449,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                                         ),
                                                         //isDense: true,
                                                         hintText:
-                                                            'Specify Reason',
+                                                            'Specify Reason'.tr,
                                                         //  labelText: 'Title',
                                                         labelStyle: TextStyle(
                                                             fontSize: 10.sp,
@@ -490,7 +492,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                                               0xffFFCC1B)),
                                                       child: Center(
                                                         child: Text(
-                                                          'Delete',
+                                                          'Delete'.tr,
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.white,
@@ -559,7 +561,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                               ),
                                               child: Center(
                                                 child: Text(
-                                                  'Account Deleted Successfully',
+                                                  'Account Deleted Successfully'.tr,
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 11.sp,
@@ -572,7 +574,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                               height: 3.h,
                                             ),
                                             Text(
-                                              'Your account has been \npermanently deleted from the platform.',
+                                              'Your account has been \npermanently deleted from the platform.'.tr,
                                               style: TextStyle(
                                                 color: Color(0xff261F21)
                                                     .withAlpha(150),
@@ -604,7 +606,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                                       color: Color(0xffFFCC1B)),
                                                   child: Center(
                                                     child: Text(
-                                                      'Okay',
+                                                      'Okay'.tr,
                                                       style: TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 13.sp,
@@ -685,7 +687,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                                         ),
                                                       ),
                                                       Text(
-                                                        'Temporary delete',
+                                                        'Temporary delete'.tr,
                                                         style: TextStyle(
                                                             color: Color(
                                                                 0xffFFCC1B),
@@ -711,7 +713,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                                       keyboardType:
                                                           TextInputType.text,
                                                       initialValue:
-                                                          'If you temporary delete your account, your profile, itineraries,and lists will be hidden from others until you reactivate it again by logging back in. However if other users have purchased any itineraries or lists designed by you it will still be available for the user to use.',
+                                                          'If you temporary delete your account, your profile, itineraries,and lists will be hidden from others until you reactivate it again by logging back in. However if other users have purchased any itineraries or lists designed by you it will still be available for the user to use.'.tr,
                                                       textAlign: TextAlign.left,
                                                       maxLines: null,
                                                       enabled: false,
@@ -757,7 +759,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                                         ),
                                                         //isDense: true,
                                                         hintText:
-                                                            'Specify Reason',
+                                                            'Specify Reason'.tr,
                                                         //  labelText: 'Title',
                                                         labelStyle: TextStyle(
                                                             fontSize: 10.sp,
@@ -796,7 +798,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                                               0xffFFCC1B)),
                                                       child: Center(
                                                         child: Text(
-                                                          'Delete',
+                                                          'Delete'.tr,
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.white,
@@ -865,7 +867,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                               ),
                                               child: Center(
                                                 child: Text(
-                                                  'Account Deleted Successfully',
+                                                  'Account Deleted Successfully'.tr,
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 11.sp,
@@ -878,7 +880,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                               height: 3.h,
                                             ),
                                             Text(
-                                              'Your account has been\ntemporary deleted from the platform.',
+                                              'Your account has been\ntemporary deleted from the platform.'.tr,
                                               style: TextStyle(
                                                 color: Color(0xff261F21)
                                                     .withAlpha(150),
@@ -961,7 +963,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                           width: 6.w,
                         ),
                         Text(
-                          'Delete Account',
+                          'Delete Account'.tr,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 10.sp,
@@ -978,6 +980,83 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 2.h,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 4.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        height: 3.8.h,
+                        width: 7.4.w,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(7),
+                            color: Color(0xffFFCC1B)),
+                        child: Center(
+                          child: Icon(
+                            Icons.login_outlined,
+                            size: 5.w,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 6.w,
+                      ),
+                      Text(
+                        'Language'.tr,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 10.sp,
+                        ),
+                      ),
+                    ],
+                  ),
+                  ToggleSwitch(
+                    minHeight: 3.h,
+                    minWidth: 12.w,
+                    initialLabelIndex: 0,
+                    cornerRadius: 4,
+                    totalSwitches: 2,
+                    labels: [
+                      'ENG',
+                      'العربية',
+                    ],
+                    //activeBgColor: Colors.grey,
+                    inactiveBgColor: Colors.grey.withOpacity(0.7),
+                    customTextStyles: [
+                      TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                      ),
+                      TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                      )
+                    ],
+                    onToggle: (index) async {
+                      print('switched to: $index');
+                      if (index == 0) {
+                        // await context.setLocale(Locale('en', 'US'));
+                        var locale = Locale('en', 'US');
+                        Get.updateLocale(locale);
+
+                      } else {
+                        // await context.setLocale(Locale('ar', 'IQ'));
+                        var locale = Locale('ar', 'IQ');
+                        Get.updateLocale(locale);
+                      }
+                    },
+
+                  ),
+                ],
+              ),
+            ),
+
           ],
         ),
         Positioned(
@@ -1011,7 +1090,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                           width: 4.w,
                         ),
                         Text(
-                          'Logout',
+                          'Logout'.tr,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 9.sp,

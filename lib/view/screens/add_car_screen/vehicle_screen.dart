@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
 import 'package:yellowline/view/screens/add_car_screen/vehicle_list_screen.dart';
@@ -24,7 +25,7 @@ class _VehicleScreenState extends State<VehicleScreen> {
             },
             child: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 5.w,)),
         title: Text(
-          'My Vehicles',
+          'My Vehicles'.tr,
           style: TextStyle(
             color: Colors.white,
             fontSize: 12.sp,
@@ -74,7 +75,7 @@ class _VehicleScreenState extends State<VehicleScreen> {
               ),
               //SizedBox(height: 1.h,),
               Text(
-                'No Vehicles Added',
+                'No Vehicles Added'.tr,
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.sp,
@@ -83,7 +84,7 @@ class _VehicleScreenState extends State<VehicleScreen> {
               ),
               SizedBox(height: 0.5.h,),
               Text(
-                'Please click the below button to\n          add your vehicle',
+                'Please click the below button to\n          add your vehicle'.tr,
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 11.sp,
@@ -98,7 +99,7 @@ class _VehicleScreenState extends State<VehicleScreen> {
                   borderColor: Color(0xffFFCC1B),
                   buttonColor: Color(0xffFFCC1B),
                   textColor: Color(0xff181F30),
-                  text: 'Add New Vehicle',
+                  text: 'Add New Vehicle'.tr,
                 ),
               )
             ],

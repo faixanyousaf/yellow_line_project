@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
@@ -46,7 +47,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                           child: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 2.h,)),
                       SizedBox(width: 3.w,),
                       Text(
-                        'Reset Password!',
+                        'Reset Password!'.tr,
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 17.sp,
@@ -62,7 +63,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   child: Row(
                     children: [
                       Text(
-                        'Reset your Account Password',
+                        'Reset your Account Password'.tr,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 12.sp,
@@ -78,11 +79,11 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   child: CustommTextField(
                     controller: provider.passwordController,
                     prefixIcon: 'assets/password.svg',
-                    hintText: 'Enter new password',
+                    hintText: 'Enter new password'.tr,
                     visible: !provider.isPasswordShow,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Please enter password';
+                        return 'Please enter password'.tr;
                       } else {
                         return null;
                       }
@@ -137,11 +138,11 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     //     //color: provider.!isPasswordShow ? Colors.grey[500] : blueGrey,
                     //   ),
                     // ),
-                    hintText: 'Confirm new password',
+                    hintText: 'Confirm new password'.tr,
                     visible: !provider.isPasswordShow1,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'Please enter password';
+                        return 'Please enter password'.tr;
                       } else {
                         return null;
                       }
@@ -172,7 +173,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                    // Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen(),));
                   },
                   child: CustomButton(
-                    text: 'Reset',
+                    text: 'Reset'.tr,
                     borderColor: Color(0xffFFD542),
                     textColor: Color(0xff181F30),
                     buttonColor: Color(0xffFFD542),

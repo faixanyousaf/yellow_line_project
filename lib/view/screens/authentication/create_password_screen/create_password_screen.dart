@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
 import 'package:yellowline/global_widgets/custom_textfield.dart';
@@ -36,7 +37,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                       child: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 2.h,)),
                   SizedBox(width: 3.w,),
                   Text(
-                    'Create Password!',
+                    'Create Password!'.tr,
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 17.sp,
@@ -52,7 +53,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
               child: Row(
                 children: [
                   Text(
-                    'Create your Account Password',
+                    'Create your Account Password'.tr,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 12.sp,
@@ -68,7 +69,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
               child: CustommTextField(
                 controller: passwordController,
                 prefixIcon: 'assets/password.svg',
-                hintText: 'Enter your password',
+                hintText: 'Enter your password'.tr,
                 // suffixIcon: IconButton(
                 //   onPressed: () {
                 //     if (provider.isPasswordShow) {
@@ -105,7 +106,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                 //     //color: provider.!isPasswordShow ? Colors.grey[500] : blueGrey,
                 //   ),
                 // ),
-                hintText: 'Confirm your password',
+                hintText: 'Confirm your password'.tr,
               ),
             ),
             SizedBox(height: 10.h,),
@@ -114,7 +115,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => CompleteProfileScreen(),));
               },
               child: CustomButton(
-                text: 'Create',
+                text: 'Create'.tr,
                 borderColor: Colors.black,
                 textColor: Colors.black,
                 buttonColor: Color(0xffFFD542),
@@ -126,7 +127,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Already have an account?',
+                    'Already have an account?'.tr,
                     style: TextStyle(
                         color: Colors.white
                     ),
@@ -136,7 +137,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen(),));
                     },
                     child: Text(
-                      ' Sign In',
+                      ' Sign In'.tr,
                       style: TextStyle(
                         color: Color(0xffFFD542),
                       ),

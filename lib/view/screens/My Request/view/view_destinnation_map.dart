@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:sizer/sizer.dart';
@@ -285,7 +286,7 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
                         height: 3.h,
                       ),
                       Text(
-                        'Live Tracking:',
+                        'Live Tracking:'.tr,
                         style: TextStyle(fontSize: 11.sp, color: Colors.white),
                       ),
                       SizedBox(
@@ -296,7 +297,7 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
                           CustomDropContainer(
                             height: 5.4.h,
                             width: 30.w,
-                            text: 'Reaching in',
+                            text: 'Reaching in'.tr,
                             texxt: '10 min',
                           ),
                           SizedBox(
@@ -305,7 +306,7 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
                           CustomDropContainer(
                             height: 5.4.h,
                             width: 30.w,
-                            text: 'Distance',
+                            text: 'Distance'.tr,
                             texxt: '10 km',
                           ),
                         ],
@@ -314,7 +315,7 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
                         height: 2.h,
                       ),
                       Text(
-                        'Driver detail:',
+                        'Driver detail:'.tr,
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
                       ),

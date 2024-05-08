@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -27,7 +28,7 @@ class DropOffScreen extends StatefulWidget {
 }
 
 class _DropOffScreenState extends State<DropOffScreen> {
-  List list_of_suggestion = ['Garage', 'Service Station', 'Petrol Pump'];
+  List list_of_suggestion = ['Garage'.tr, 'Service Station'.tr, 'Petrol Pump'.tr];
   TextEditingController controller_pickup = TextEditingController();
   TextEditingController controller_drop_off = TextEditingController();
   GoogleMapController? _controller;
@@ -252,7 +253,7 @@ class _DropOffScreenState extends State<DropOffScreen> {
                                             padding: EdgeInsets.symmetric(
                                                 horizontal: 5.w),
                                             child: Text(
-                                              'Drop-off Suggestions:',
+                                              'Drop-off Suggestions:'.tr,
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 10.sp),
@@ -321,7 +322,7 @@ class _DropOffScreenState extends State<DropOffScreen> {
                                             padding: EdgeInsets.symmetric(
                                                 horizontal: 5.w),
                                             child: Text(
-                                              'Recovery Type',
+                                              'Recovery Type'.tr,
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 10.sp),
@@ -442,7 +443,7 @@ class _DropOffScreenState extends State<DropOffScreen> {
                                                       }
                                                     },
                                                     child: CustomBottomButton(
-                                                      text: 'Continue',
+                                                      text: 'Continue'.tr,
                                                       buttonColor:
                                                           Color(0xffFFCC1B),
                                                       textColor: Colors.black,
@@ -477,7 +478,7 @@ class _DropOffScreenState extends State<DropOffScreen> {
                                             padding: EdgeInsets.symmetric(
                                                 horizontal: 5.w),
                                             child: Text(
-                                              'Booking Details:',
+                                              'Booking Details:'.tr,
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 10.sp),
@@ -504,7 +505,7 @@ class _DropOffScreenState extends State<DropOffScreen> {
                                                 CustomDropContainer(
                                                   height: 7.h,
                                                   width: 28.w,
-                                                  text: 'Distance',
+                                                  text: 'Distance'.tr,
                                                   texxt:
                                                       '${provider.responce_fare_model!.distance} km',
                                                 ),
@@ -514,7 +515,7 @@ class _DropOffScreenState extends State<DropOffScreen> {
                                                 CustomDropContainer(
                                                   height: 7.h,
                                                   width: 28.w,
-                                                  text: 'Price',
+                                                  text: 'Price'.tr,
                                                   texxt:
                                                       '${provider.responce_fare_model!.totalCharges}',
                                                 ),
@@ -656,7 +657,7 @@ class _DropOffScreenState extends State<DropOffScreen> {
                                                           .charge_user(context);
                                                     },
                                                     child: CustomBottomButton(
-                                                      text: 'Confirm',
+                                                      text: 'Confirm'.tr,
                                                       buttonColor:
                                                           Color(0xffFFCC1B),
                                                       textColor:
@@ -741,7 +742,7 @@ class _DropOffScreenState extends State<DropOffScreen> {
                                 getNearbyPlaces(v);
                               },
                               decoration: InputDecoration(
-                                  hintText: 'Pickup Location',
+                                  hintText: 'Pickup Location'.tr,
                                   isDense: true,
                                   border: InputBorder.none,
                                   hintStyle: TextStyle(
@@ -811,7 +812,7 @@ class _DropOffScreenState extends State<DropOffScreen> {
                                 getNearbyPlaces(v);
                               },
                               decoration: InputDecoration(
-                                  hintText: 'Drop-off Location',
+                                  hintText: 'Drop-off Location'.tr,
                                   isDense: true,
                                   border: InputBorder.none,
                                   hintStyle: TextStyle(

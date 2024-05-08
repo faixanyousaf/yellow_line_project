@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
 
@@ -35,7 +36,7 @@ class _VehicleAddedScreenState extends State<VehicleAddedScreen> {
               ),
               //SizedBox(height: 1.h,),
               Text(
-                'Vehicle Added Successfully',
+                'Vehicle Added Successfully'.tr,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 15.sp,
@@ -53,7 +54,7 @@ class _VehicleAddedScreenState extends State<VehicleAddedScreen> {
                   borderColor: Color(0xffFFCC1B),
                   buttonColor: Color(0xffFFCC1B),
                   textColor: Color(0xff181F30),
-                  text: 'Ok',
+                  text: 'Ok'.tr,
                 ),
               )
             ],

@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
@@ -133,7 +134,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           width: 3.w,
                         ),
                         Text(
-                          'Create Account!',
+                          'Create Account!'.tr,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 17.sp,
@@ -146,7 +147,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Padding(
                     padding: EdgeInsets.only(left: 6.w),
                     child: Text(
-                      'Enter the information to create an Account',
+                      'Enter the information to create an Account'.tr,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 12.sp,
@@ -165,10 +166,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: CustommTextField(
                           controller: provider.firstNameController,
                           prefixIcon: 'assets/email.svg',
-                          hintText: 'First name',
+                          hintText: 'First name'.tr,
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Please enter First name';
+                              return 'Please enter First name'.tr;
                             } else {
                               return null;
                             }
@@ -183,10 +184,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: CustommTextField(
                           controller: provider.lastNameController,
                           prefixIcon: 'assets/email.svg',
-                          hintText: 'Last name',
+                          hintText: 'Last name'.tr,
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Please enter Last name';
+                              return 'Please enter Last name'.tr;
                             } else {
                               return null;
                             }
@@ -201,11 +202,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: CustommTextField(
                           controller: provider.emailController,
                           prefixIcon: 'assets/email.svg',
-                          hintText: 'Email',
+                          hintText: 'Email'.tr,
                           validator: (value) {
                             bool? v = provider.validate_email_phone(value);
                             if (v == false) {
-                              return 'Please enter email';
+                              return 'Please enter email'.tr;
                             } else {
                               return null;
                             }
@@ -234,7 +235,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             Padding(
                               padding: const EdgeInsets.only(top: 2),
                               child: Text(
-                                'Email is already exist.',
+                                'Email is already exist.'.tr,
                                 style:
                                     TextStyle(color: Colors.red, fontSize: 12),
                               ),
@@ -293,13 +294,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 child: Padding(
                               padding: EdgeInsets.only(top: 0.5.h),
                               child: CustommTextField(
-                                hintText: 'Mobile Number',
+                                hintText: 'Mobile Number'.tr,
                                 controller: provider.phoneController,
                                 validator: (value) {
                                   provider.isPending = true;
                                   provider.updateState();
                                   if (value!.isEmpty) {
-                                    return 'Please enter mobile number';
+                                    return 'Please enter mobile number'.tr;
                                   } else {
                                     return null;
                                   }
@@ -317,7 +318,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: CustommTextField(
                           controller: provider.passwordController,
                           prefixIcon: 'assets/lock.svg',
-                          hintText: 'password',
+                          hintText: 'password'.tr,
                           visible: !provider.isPasswordShow,
                           suffixIcon: IconButton(
                             onPressed: () {
@@ -335,7 +336,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Please enter password';
+                              return 'Please enter password'.tr;
                             } else {
                               return null;
                             }
@@ -392,14 +393,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             RichText(
                               text: TextSpan(
-                                  text: 'I herby accept all the  ',
+                                  text: 'I herby accept all the  '.tr,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 9.sp,
                                       fontWeight: FontWeight.w500),
                                   children: <TextSpan>[
                                     TextSpan(
-                                        text: 'Terms & Condition',
+                                        text: 'Terms & Condition'.tr,
                                         style: TextStyle(
                                             decoration:
                                                 TextDecoration.underline,
@@ -432,7 +433,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         recognizer: TapGestureRecognizer()
                                           ..onTap = () {}),
                                     TextSpan(
-                                        text: 'Privacy Policy',
+                                        text: 'Privacy Policy'.tr,
                                         style: TextStyle(
                                             decoration:
                                                 TextDecoration.underline,
@@ -470,7 +471,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: 8.w, vertical: 1.h),
                               child: Text(
-                                'Accept Terms and Condition',
+                                'Accept Terms and Condition'.tr,
                                 style:
                                     TextStyle(color: Colors.red, fontSize: 14),
                               ),
@@ -508,7 +509,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Already have an account?',
+                              'Already have an account?'.tr,
                               style: TextStyle(color: Colors.white),
                             ),
                             GestureDetector(
@@ -520,7 +521,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     ));
                               },
                               child: Text(
-                                ' Sign In',
+                                ' Sign In'.tr,
                                 style: TextStyle(
                                   color: Color(0xffFFD542),
                                 ),
@@ -619,7 +620,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 7.5.h,
                     child: Center(
                         child: Text(
-                      'Terms and Conditions',
+                      'Terms and Conditions'.tr,
                       style: TextStyle(
                           fontSize: 12.sp, fontWeight: FontWeight.bold),
                     )),
@@ -634,7 +635,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   Center(
                       child: Text(
-                    'I agree to share my details and i have read Terms\n and Condition, Privacy Policy.',
+                    'I agree to share my details and i have read Terms\n and Condition, Privacy Policy.'.tr,
                     style: TextStyle(
                         fontSize: 11.sp,
                         color: Colors.black54,
@@ -658,7 +659,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: Container(
                           child: Center(
                               child: Text(
-                            'Cancel',
+                            'Cancel'.tr,
                             style: TextStyle(
                                 fontSize: 12.sp,
                                 color: Colors.black,
@@ -681,7 +682,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: Container(
                           child: Center(
                               child: Text(
-                            'Agree',
+                            'Agree'.tr,
                             style: TextStyle(
                                 fontSize: 12.sp,
                                 color: Colors.white,

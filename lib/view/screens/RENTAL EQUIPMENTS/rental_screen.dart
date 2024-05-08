@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class RentalEquipments extends StatefulWidget {
@@ -33,7 +34,7 @@ class _RentalEquipmentsState extends State<RentalEquipments> {
                     context, index) => Column(
                   children: [
                     ExpansionTile(
-                      title: Text("Backhoe"),
+                      title: Text("Backhoe".tr),
                       leading: Container(
                         height: 6.h,
                         width: 14.w,

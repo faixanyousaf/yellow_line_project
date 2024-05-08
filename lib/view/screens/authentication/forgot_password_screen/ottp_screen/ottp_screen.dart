@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
@@ -44,7 +45,7 @@ class _OttpScreenState extends State<OttpScreen> {
                     width: 3.w,
                   ),
                   Text(
-                    'Verify OTP',
+                    'Verify OTP'.tr,
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 17.sp,
@@ -57,7 +58,7 @@ class _OttpScreenState extends State<OttpScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 13.w),
               child: Text(
-                'Enter OTP verification code received at your ‘’+971 555066435’’',
+                'Enter OTP verification code received at your ‘’+971 555066435’’'.tr,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 12.sp,
@@ -157,7 +158,7 @@ class _OttpScreenState extends State<OttpScreen> {
                 }
               },
               child: CustomButton(
-                text: 'Verify',
+                text: 'Verify'.tr,
                 borderColor: Colors.black,
                 textColor: Colors.black,
                 buttonColor: Color(0xffFFD542),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
 import 'package:yellowline/view/screens/movers_screen/mover_confirm_screen.dart';
@@ -13,14 +14,14 @@ class ApartmentDetailScreen extends StatefulWidget {
 
 class _ApartmentDetailScreenState extends State<ApartmentDetailScreen> {
   List<String>? list = [
-    'Sofa',
-    'Bed',
-    'Dining Table',
-    'Cupboards',
-    'Refrigerator',
-    'LED',
-    'Air Conditioner',
-    'Washing Machine'
+    'Sofa'.tr,
+    'Bed'.tr,
+    'Dining Table'.tr,
+    'Cupboards'.tr,
+    'Refrigerator'.tr,
+    'LED'.tr,
+    'Air Conditioner'.tr,
+    'Washing Machine'.tr
   ];
   @override
   Widget build(BuildContext context) {
@@ -71,7 +72,7 @@ class _ApartmentDetailScreenState extends State<ApartmentDetailScreen> {
                                     SvgPicture.asset('assets/ellipse.svg',height: 1.4.h,),
                                     SizedBox(width: 2.w,),
                                     Text(
-                                      'Select Pickup Location',
+                                      'Select Pickup Location'.tr,
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 8.2.sp
@@ -104,7 +105,7 @@ class _ApartmentDetailScreenState extends State<ApartmentDetailScreen> {
                                     SvgPicture.asset('assets/locate.svg',height: 1.5.h,),
                                     SizedBox(width: 2.w,),
                                     Text(
-                                      'Select Drop-off Location',
+                                      'Select Drop-off Location'.tr,
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 8.2.sp
@@ -145,7 +146,7 @@ class _ApartmentDetailScreenState extends State<ApartmentDetailScreen> {
             Padding(
               padding:  EdgeInsets.symmetric(horizontal: 5.w) ,
               child: Text(
-                'Apartment Details:',
+                'Apartment Details:'.tr,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 9.sp
@@ -176,7 +177,7 @@ class _ApartmentDetailScreenState extends State<ApartmentDetailScreen> {
                           child: Padding(
                             padding:  EdgeInsets.symmetric(horizontal: 5.w),
                             child: Text(
-                              'Studio',
+                              'Studio'.tr,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 7.5.sp
@@ -279,7 +280,7 @@ class _ApartmentDetailScreenState extends State<ApartmentDetailScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'General items to be Moved:',
+                    'General items to be Moved:'.tr,
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 9.sp
@@ -319,7 +320,7 @@ class _ApartmentDetailScreenState extends State<ApartmentDetailScreen> {
                     ),
                     child: Center(
                       child: Text(
-                        'Air Conditioner',
+                        'Air Conditioner'.tr,
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 8.sp
@@ -361,7 +362,7 @@ class _ApartmentDetailScreenState extends State<ApartmentDetailScreen> {
                     ),
                     child: Center(
                       child: Text(
-                        'Washing Machine',
+                        'Washing Machine'.tr,
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 8.sp
@@ -466,7 +467,7 @@ class _ApartmentDetailScreenState extends State<ApartmentDetailScreen> {
             CustomButton(
               buttonColor: Color(0xffFFD542),
               borderColor: Color(0xffFFD542),
-              text: 'Confirm',
+              text: 'Confirm'.tr,
               textColor: Color(0xff181F30),
             ),
             SizedBox(height: 2.h,)

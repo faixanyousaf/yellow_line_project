@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
 import 'package:yellowline/view/screens/movers_screen/quotations_screen.dart';
@@ -34,7 +35,7 @@ class _MoverWaitingScreenState extends State<MoverWaitingScreen> {
               ),
               //SizedBox(height: 1.h,),
               Text(
-                'Waiting for Quotations',
+                'Waiting for Quotations'.tr,
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 16.sp
@@ -45,7 +46,7 @@ class _MoverWaitingScreenState extends State<MoverWaitingScreen> {
                 borderColor: Color(0xffFFCC1B),
                 buttonColor: Color(0xffFFCC1B),
                 textColor: Colors.black,
-                text: 'View',
+                text: 'View'.tr,
               )
             ],
           ),

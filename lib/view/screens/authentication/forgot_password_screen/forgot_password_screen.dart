@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -56,7 +57,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         width: 3.w,
                       ),
                       Text(
-                        'Forgot Password!',
+                        'Forgot Password!'.tr,
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 17.sp,
@@ -69,7 +70,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 13.w),
                   child: Text(
-                    'Enter your Phone Number to get OTP Verification Code',
+                    'Enter your Phone Number to get OTP Verification Code'.tr,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 12.sp,
@@ -85,11 +86,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   child: CustommTextField(
                     controller: provider.emailController,
                     prefixIcon: 'assets/email.svg',
-                    hintText: 'Email',
+                    hintText: 'Email'.tr,
                     validator: (value) {
                       bool? v = provider.validate_email_phone(value);
                       if (v == false) {
-                        return 'Please enter email';
+                        return 'Please enter email'.tr;
                       } else {
                         return null;
                       }
@@ -162,7 +163,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     }
                   },
                   child: CustomButton(
-                    text: 'Next',
+                    text: 'Next'.tr,
                     borderColor: Colors.black,
                     textColor: Colors.black,
                     buttonColor: Color(0xffFFD542),

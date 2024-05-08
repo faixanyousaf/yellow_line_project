@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -167,7 +168,7 @@ class _SplashScreenState extends State<SplashScreen> {
               title: Column(
                 children: <Widget>[
                   Text(
-                    "Update required",
+                    "Update required".tr,
                     style: TextStyle(color: Colors.black),
                   ),
                   SizedBox(
@@ -176,11 +177,11 @@ class _SplashScreenState extends State<SplashScreen> {
                 ],
               ),
               content: new Text(
-                  "We have rolled our some enhancements for a better experience. Please update to the latest version to continue.",
+                  "We have rolled our some enhancements for a better experience. Please update to the latest version to continue.".tr,
                   style: TextStyle(color: Colors.black)),
               actions: <Widget>[
                 CupertinoDialogAction(
-                  child: Text("UPDATE", style: TextStyle(color: Colors.blue)),
+                  child: Text("UPDATE".tr, style: TextStyle(color: Colors.blue)),
                   onPressed: () async {
                     if (Platform.isAndroid) {
                       String? url = '${firebaseModel!.androidAppUrl}';
@@ -196,7 +197,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   },
                 ),
                 CupertinoDialogAction(
-                  child: Text("LATER", style: TextStyle(color: Colors.blue)),
+                  child: Text("LATER".tr, style: TextStyle(color: Colors.blue)),
                   onPressed: () async {
                     get_sf_data();
                     // GioJson.getGio();
@@ -235,7 +236,7 @@ class _SplashScreenState extends State<SplashScreen> {
               title: Column(
                 children: <Widget>[
                   Text(
-                    "Update required",
+                    "Update required".tr,
                     style: TextStyle(color: Colors.black),
                   ),
                   SizedBox(
@@ -244,11 +245,11 @@ class _SplashScreenState extends State<SplashScreen> {
                 ],
               ),
               content: new Text(
-                  "We have rolled our some enhancements for a better experience. Please update to the latest version to continue.",
+                  "We have rolled our some enhancements for a better experience. Please update to the latest version to continue.".tr,
                   style: TextStyle(color: Colors.black)),
               actions: <Widget>[
                 CupertinoDialogAction(
-                  child: Text("UPDATE", style: TextStyle(color: Colors.blue)),
+                  child: Text("UPDATE".tr, style: TextStyle(color: Colors.blue)),
                   onPressed: () async {
                     if (Platform.isAndroid) {
                       String? url = '${firebaseModel!.androidAppUrl}';
@@ -279,7 +280,7 @@ class _SplashScreenState extends State<SplashScreen> {
               title: Column(
                 children: <Widget>[
                   Text(
-                    "App is on maintenance",
+                    "App is on maintenance".tr,
                     style: TextStyle(color: Colors.black),
                   ),
                   SizedBox(
@@ -288,11 +289,11 @@ class _SplashScreenState extends State<SplashScreen> {
                 ],
               ),
               content: new Text(
-                  "Sarya app is on maintenance, We will be back soon.",
+                  "yellow line app is on maintenance, We will be back soon.".tr,
                   style: TextStyle(color: Colors.black)),
               actions: <Widget>[
                 CupertinoDialogAction(
-                  child: Text("Ok", style: TextStyle(color: Colors.blue)),
+                  child: Text("Ok".tr, style: TextStyle(color: Colors.blue)),
                   onPressed: () async {
                     SystemNavigator.pop();
                   },

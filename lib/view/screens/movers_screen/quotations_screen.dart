@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../RENTAL EQUIPMENTS/rental_screen.dart';
@@ -29,7 +30,7 @@ class _QuotationsScreenState extends State<QuotationsScreen> {
             },
             child: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 4.w,)),
         title: Text(
-          'Quotations',
+          'Quotations'.tr,
           style: TextStyle(
             color: Colors.white,
             fontSize: 12.sp
@@ -57,7 +58,7 @@ class _QuotationsScreenState extends State<QuotationsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'ABC Movers',
+                          'ABC Movers'.tr,
                           style: TextStyle(
                               color: Color(0xff181F30),
                               fontSize: 10.sp
@@ -75,7 +76,7 @@ class _QuotationsScreenState extends State<QuotationsScreen> {
                     ),
                     //SizedBox(height: 1.h,),
                     Text(
-                      '2 hours to reach',
+                      '2 hours to reach'.tr,
                       style: TextStyle(
                           color: Color(0xff5A5A5A),
                           fontSize: 8.5.sp
@@ -94,7 +95,7 @@ class _QuotationsScreenState extends State<QuotationsScreen> {
                             ),
                             child: Center(
                               child: Text(
-                                'Reject',
+                                'Reject'.tr,
                                 style: TextStyle(
                                     color: Color(0xff181F30),
                                     fontSize: 9.sp
@@ -113,7 +114,7 @@ class _QuotationsScreenState extends State<QuotationsScreen> {
                             ),
                             child: Center(
                               child: Text(
-                                'Accept & Pay',
+                                'Accept & Pay'.tr,
                                 style: TextStyle(
                                     color: Color(0xff181F30),
                                     fontSize: 9.sp

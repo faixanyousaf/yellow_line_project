@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/bottom_button.dart';
 import 'package:yellowline/global_widgets/custom_drop_conatiner.dart';
@@ -55,7 +56,7 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
                     Image(image: AssetImage('assets/location.png'),height: 2.h,),
                     SizedBox(width: 3.w,),
                     Text(
-                      'Pickup Location',
+                      'Pickup Location'.tr,
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 8.sp
@@ -85,7 +86,7 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
                     Image(image: AssetImage('assets/location.png'),height: 2.h,),
                     SizedBox(width: 3.w,),
                     Text(
-                      'Drop-off Location',
+                      'Drop-off Location'.tr,
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 8.sp
@@ -113,7 +114,7 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 5.w),
                       child: Text(
-                        'Booking Details:',
+                        'Booking Details:'.tr,
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 10.sp
@@ -132,7 +133,7 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
                             CustomDropContainer(
                               height: 5.4.h,
                               width: 20.w,
-                              text: 'Time',
+                              text: 'Time'.tr,
                               texxt: '35 mins',
                             ),
                             SizedBox(width: 2.w,)
@@ -157,7 +158,7 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
                           Padding(
                             padding:  EdgeInsets.symmetric(vertical: 0.5.h),
                             child: Text(
-                              'Payment Method',
+                              'Payment Method'.tr,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 10.sp
@@ -194,7 +195,7 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
                                       ),
                                       child: Center(
                                         child: Text(
-                                          'Cash',
+                                          'Cash'.tr,
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 9.sp
@@ -222,7 +223,7 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
                                       ),
                                       child: Center(
                                         child: Text(
-                                          'Card',
+                                          'Card'.tr,
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 9.sp
@@ -245,13 +246,13 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CustomBottomButton(
-                            text: 'Cancel',
+                            text: 'Cancel'.tr,
                             buttonColor: Color(0xff181F30),
                             textColor: Color(0xffFFCC1B),
                             borderColor: Color(0xffFFCC1B),
                           ),
                           CustomBottomButton(
-                            text: 'Confirm',
+                            text: 'Confirm'.tr,
                             buttonColor: Color(0xffFFCC1B),
                             textColor: Color(0xff181F30),
                             borderColor: Color(0xffFFCC1B),

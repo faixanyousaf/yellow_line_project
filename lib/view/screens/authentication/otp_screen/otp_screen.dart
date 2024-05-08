@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -42,7 +43,7 @@ bool isVisible = false;
                         child: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 2.h,)),
                     SizedBox(width: 3.w,),
                     Text(
-                      'Verify OTP',
+                      'Verify OTP'.tr,
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 17.sp,
@@ -56,7 +57,7 @@ bool isVisible = false;
               Padding(
                 padding:EdgeInsets.symmetric(horizontal: 13.w),
                 child: Text(
-                  'Enter OTP verification code received at your ‘’+971 555066435’’',
+                  'Enter OTP verification code received at your ‘’+971 555066435’’'.tr,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 12.sp,
@@ -120,7 +121,7 @@ bool isVisible = false;
                   alignment: Alignment.topLeft,
                   child: Padding(
                     padding:  EdgeInsets.symmetric(horizontal: 8.w),
-                    child: Text('Please set Otp',style: TextStyle(color: Colors.red,fontSize: 14),),
+                    child: Text('Please set Otp'.tr,style: TextStyle(color: Colors.red,fontSize: 14),),
                   ),
                 ),
               SizedBox(height: 16.h,),
@@ -137,7 +138,7 @@ bool isVisible = false;
                   //Navigator.push(context, MaterialPageRoute(builder: (context) => CreatePasswordScreen(),));
                 },
                 child: CustomButton(
-                  text: 'Verify',
+                  text: 'Verify'.tr,
                   borderColor: Colors.black,
                   textColor: Colors.black,
                   buttonColor: Color(0xffFFD542),
@@ -149,7 +150,7 @@ bool isVisible = false;
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Already have an account?',
+                      'Already have an account?'.tr,
                       style: TextStyle(
                           color: Colors.white
                       ),
@@ -159,7 +160,7 @@ bool isVisible = false;
                         Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen(),));
                       },
                       child: Text(
-                        ' Sign In',
+                        ' Sign In'.tr,
                         style: TextStyle(
                           color: Color(0xffFFD542),
                         ),

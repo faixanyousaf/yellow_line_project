@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
 import 'package:yellowline/global_widgets/custom_textfield.dart';
@@ -36,7 +37,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                       child: Icon(Icons.arrow_back_ios_new_outlined,color: Colors.white,size: 2.h,)),
                   SizedBox(width: 3.w,),
                   Text(
-                    'Complete Profile!',
+                    'Complete Profile!'.tr,
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 17.sp,
@@ -52,7 +53,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
               child: Row(
                 children: [
                   Text(
-                    'We need some more information to\ncomplete your profile',
+                    'We need some more information to\ncomplete your profile'.tr,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 12.sp,
@@ -127,7 +128,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                         ),
                         child: Center(
                           child: Text(
-                            'Male',
+                            'Male'.tr,
                             style: TextStyle(
                                 color: Color(0xff181F30),
                                 fontSize: 10.sp
@@ -155,7 +156,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                         ),
                         child: Center(
                           child: Text(
-                            'Female',
+                            'Female'.tr,
                             style: TextStyle(
                                 color: Color(0xff181F30),
                                 fontSize: 10.sp
@@ -174,7 +175,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
               child: CustommTextField(
                 controller: firstNameController,
                 prefixIcon: 'assets/name.svg',
-                hintText: 'First Name',
+                hintText: 'First Name'.tr,
               ),
             ),
             SizedBox(height: 1.h,),
@@ -183,7 +184,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
               child: CustommTextField(
                 controller: lastNameController,
                 prefixIcon: 'assets/name.svg',
-                hintText: 'Last Name',
+                hintText: 'Last Name'.tr,
               ),
             ),
             SizedBox(height: 12.h,),
@@ -192,7 +193,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen(),));
               },
               child: CustomButton(
-                text: 'Finish',
+                text: 'Finish'.tr,
                 borderColor: Color(0xffFFD542),
                 textColor: Color(0xff181F30),
                 buttonColor: Color(0xffFFD542),

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:mime/mime.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -78,7 +79,7 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                   size: 5.w,
                 )),
             title: Text(
-              'Add New Vehicles',
+              'Add New Vehicles'.tr,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 12.sp,
@@ -169,7 +170,7 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                                   },
                                   decoration: InputDecoration(
                                       border: InputBorder.none,
-                                      hintText: 'Code',
+                                      hintText: 'Code'.tr,
                                       hintStyle: TextStyle(
                                           color: Color(0xff181F30),
                                           fontSize: 13.sp)),
@@ -200,7 +201,7 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                                   },
                                   decoration: InputDecoration(
                                       border: InputBorder.none,
-                                      hintText: 'Number',
+                                      hintText: 'Number'.tr,
                                       hintStyle: TextStyle(
                                           color: Color(0xff181F30),
                                           fontSize: 13.sp)),
@@ -219,7 +220,7 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 5.w),
                           child: Text(
-                            'Please enter code and number',
+                            'Please enter code and number'.tr,
                             style: TextStyle(color: Colors.red, fontSize: 13),
                           ),
                         )),
@@ -229,7 +230,7 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 6.w),
                     child: Text(
-                      'Select City',
+                      'Select City'.tr,
                       style: TextStyle(color: Colors.white, fontSize: 10.sp),
                     ),
                   ),
@@ -340,7 +341,7 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                                     ),
                                     Text(
                                       provider.RecoveryTypeId!.isEmpty
-                                          ? 'Select Recovery Type'
+                                          ? 'Select Recovery Type'.tr
                                           : '${provider.RecoveryTypeId}',
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 10.sp),
@@ -366,7 +367,7 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 5.w),
                           child: Text(
-                            'Please select recovery type',
+                            'Please select recovery type'.tr,
                             style: TextStyle(color: Colors.red, fontSize: 12),
                           ),
                         )),
@@ -376,7 +377,7 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 6.w),
                     child: Text(
-                      'Registration card',
+                      'Registration card'.tr,
                       style: TextStyle(
                           color: provider.isVisible == true &&
                                   provider.drivingLicense == null
@@ -466,7 +467,7 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
                     },
                     child: CustomButton(
                       textColor: Color(0xff181F30),
-                      text: 'Next',
+                      text: 'Next'.tr,
                       borderColor: Color(0xffFFCC1B),
                       buttonColor: Color(0xffFFCC1B),
                     ),

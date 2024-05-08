@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -104,7 +105,7 @@ class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
                           width: 5.w,
                         ),
                         Text(
-                          'Update Profile!',
+                          'Update Profile!'.tr,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 17.sp,
@@ -199,10 +200,10 @@ class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
                     child: CustommTextField(
                       controller: provider.first_name_Controller,
                       prefixIcon: 'assets/svgs/company_icon.svg',
-                      hintText: 'Company Name',
+                      hintText: 'Company Name'.tr,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please enter company name';
+                          return 'Please enter company name'.tr;
                         } else {
                           return null;
                         }
@@ -218,10 +219,10 @@ class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
                     child: CustommTextField(
                       controller: provider.last_name_Controller,
                       prefixIcon: 'assets/svgs/company_icon.svg',
-                      hintText: 'Company Name',
+                      hintText: 'Company Name'.tr,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please enter company name';
+                          return 'Please enter company name'.tr;
                         } else {
                           return null;
                         }
@@ -237,11 +238,11 @@ class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
                     child: CustommTextField(
                       controller: provider.emailController,
                       prefixIcon: 'assets/email.svg',
-                      hintText: 'Email',
+                      hintText: 'Email'.tr,
                       validator: (value) {
                         bool? v = provider.validate_email_phone(value);
                         if (v == false) {
-                          return 'Please enter email';
+                          return 'Please enter email'.tr;
                         } else {
                           return null;
                         }
@@ -308,7 +309,7 @@ class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
                             //keyboaredType: TextInputType.phone,
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return 'Please enter phone no';
+                                return 'Please enter phone no'.tr;
                               } else {
                                 return null;
                               }
@@ -329,7 +330,7 @@ class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
                       }
                     },
                     child: CustomButton(
-                      text: 'Update',
+                      text: 'Update'.tr,
                       borderColor: Color(0xffFFD542),
                       textColor: Color(0xff181F30),
                       buttonColor: Color(0xffFFD542),

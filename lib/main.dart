@@ -2,9 +2,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sizer/sizer.dart';
 import 'package:provider/provider.dart';
+import 'package:yellowline/translation/translation_model.dart';
 import 'package:yellowline/view/Authentication%20Models/login/view_model/login_provider.dart';
 import 'package:yellowline/view/Authentication%20Models/signup/view_model/signup_provider.dart';
 import 'package:yellowline/view/screens/add_car_screen/Providers/add_vehicle_provider.dart';
@@ -15,9 +17,13 @@ import 'package:yellowline/view/screens/authentication/splash_screen/splash_scre
 import 'helper/navigation/router.dart' as routes;
 import 'helper/navigation/locator.dart';
 import 'helper/navigation/navigation_service.dart';
+import 'language/language_class.dart';
 import 'view/screens/My Request/view_model/view_request_provider.dart';
 import 'view/screens/recovery_screens/view_model/add_request_provider.dart';
 import 'view/screens/update_profile/view_model/update_user_profile_provider.dart';
+
+final ValueNotifier<LanguageModel> language = ValueNotifier<LanguageModel>(
+    LanguageModel(fromLanguage: Locale('ar'), toLanguage: Locale('en')));
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,20 +57,89 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Sizer(
-      builder: (context, orientation, deviceType) {
-        return MaterialApp(
-          title: 'Flutter Demo',
-          navigatorKey: locator<NavigationService>().navigatorKey,
-          onGenerateRoute: routes.generateRoute,
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          home: SplashScreen(),
-          debugShowCheckedModeBanner: false,
-        );
+    final String apiKey = "AIzaSyCxVDrGwK3_-wlauORHJ1HuJkoZ5LNAdIQ";
+    return ValueListenableBuilder<LanguageModel>(
+      builder: (BuildContext context, LanguageModel value, Widget? child) {
+        return  Sizer(
+            builder: (context, orientation, deviceType) {
+              return GetMaterialApp(
+                  title: 'Flutter Demo',
+                  navigatorKey: locator<NavigationService>().navigatorKey,
+              onGenerateRoute: routes.generateRoute,
+              translations: LocaleString(),
+              locale: Locale('en', 'US'),
+              theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              useMaterial3: true,),
+                // theme: ThemeData(
+                //   primarySwatch: Colors.blue,
+                //   hoverColor: Colors.blue,
+                //   indicatorColor: Colors.blue,
+                //   colorScheme: ColorScheme(
+                //     brightness: Brightness.light,
+                //     primary: Colors.white,
+                //     onPrimary: Colors.white,
+                //     secondary: Colors.green,
+                //     onSecondary: Colors.white,
+                //     primaryContainer: Colors.greenAccent,
+                //     error: Colors.black,
+                //     onError: Colors.white,
+                //     background: Colors.white,
+                //     onBackground: Colors.white,
+                //     surface: Colors.white,
+                //     onSurface: Colors.white,
+                //   ),
+                // ),
+                // darkTheme: ThemeData.dark(),
+
+                // color:  Theme.of(context).colorScheme.secondary,
+
+                // theme: theme.copyWith(
+                //   colorScheme: theme.colorScheme.copyWith(secondary: myColor),
+                // ),
+
+                // theme: theme.copyWith(
+                //   colorScheme: theme.colorScheme.copyWith(
+                //     brightness: Brightness.dark,
+                //         primary: Colors.red,
+                //         onPrimary: Colors.white,
+                //         secondary: Colors.green,
+                //         onSecondary: Colors.white,
+                //         primaryContainer: Colors.pink,
+                //         error: Colors.black,
+                //         onError: Colors.white,
+                //         background: Colors.blue,
+                //         onBackground: Colors.white,
+                //         surface: Colors.pink,
+                //         onSurface: Colors.white,
+                //   ),
+                // ),
+
+                // darkTheme: ThemeData.dark(
+                //   //useMaterial3: true,
+                //   // colorScheme: const ColorScheme(
+                //   //   brightness: Brightness.dark,
+                //   //   primary: Colors.red,
+                //   //   onPrimary: Colors.white,
+                //   //   secondary: Colors.green,
+                //   //   onSecondary: Colors.white,
+                //   //   primaryContainer: Colors.pink,
+                //   //   error: Colors.black,
+                //   //   onError: Colors.white,
+                //   //   background: Colors.blue,
+                //   //   onBackground: Colors.white,
+                //   //   surface: Colors.pink,
+                //   //   onSurface: Colors.white,
+                //   // ),
+                // ),
+                home:  SplashScreen(),
+                debugShowCheckedModeBanner: false,
+              );
+            },
+          );
+
       },
+      valueListenable: language,
     );
   }
 }

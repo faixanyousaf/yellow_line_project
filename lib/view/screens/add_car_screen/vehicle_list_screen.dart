@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sizer/sizer.dart';
@@ -52,7 +53,7 @@ class _BusinessVehicleListScreenState extends State<VehicleListScreen> {
                 size: 5.w,
               )),
           title: Text(
-            'My Vehicles',
+            'My Vehicles'.tr,
             style: TextStyle(
               color: Colors.white,
               fontSize: 12.sp,
@@ -92,7 +93,7 @@ class _BusinessVehicleListScreenState extends State<VehicleListScreen> {
                             height: 3.h,
                           ),
                           Text(
-                            'No Vehicles Added',
+                            'No Vehicles Added'.tr,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -102,11 +103,11 @@ class _BusinessVehicleListScreenState extends State<VehicleListScreen> {
                             height: 1.h,
                           ),
                           Text(
-                            'Please click the below button',
+                            'Please click the below button'.tr,
                             style: TextStyle(color: Colors.white, fontSize: 12),
                           ),
                           Text(
-                            'to add a Vehicle',
+                            'to add a Vehicle'.tr,
                             style: TextStyle(color: Colors.white, fontSize: 12),
                           ),
                         ],
@@ -197,7 +198,7 @@ class _BusinessVehicleListScreenState extends State<VehicleListScreen> {
                 child: CustomButton(
                   buttonColor: Color(0xffFFD542),
                   borderColor: Color(0xffFFD542),
-                  text: 'Add New Vehicle',
+                  text: 'Add New Vehicle'.tr,
                   textColor: Color(0xff181F30),
                 ),
               ),

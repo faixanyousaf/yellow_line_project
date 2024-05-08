@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
 import 'package:yellowline/global_widgets/custom_google_button.dart';
 import 'package:yellowline/global_widgets/custom_textfield.dart';
@@ -90,12 +92,12 @@ class _LogInScreenState extends State<LogInScreen> {
                     child: Row(
                       children: [
                         Text(
-                          'Welcome Back!',
+                          'Welcome Back!'.tr,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 17.sp,
                               fontWeight: FontWeight.bold),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -105,7 +107,7 @@ class _LogInScreenState extends State<LogInScreen> {
                     child: Row(
                       children: [
                         Text(
-                          'Enter your credentials to continue',
+                          'Enter your credentials to continue'.tr,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 12.sp,
@@ -196,11 +198,11 @@ class _LogInScreenState extends State<LogInScreen> {
                     child: CustommTextField(
                       controller: provider.emailController,
                       prefixIcon: 'assets/emails.svg',
-                      hintText: 'Email',
+                      hintText: 'Email'.tr,
                       validator: (value) {
                         bool? v = provider.validate_email_phone(value);
                         if (v == false) {
-                          return 'Please enter email';
+                          return 'Please enter email'.tr;
                         } else {
                           return null;
                         }
@@ -218,7 +220,7 @@ class _LogInScreenState extends State<LogInScreen> {
                       visible: !provider.isPasswordShow,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please enter password';
+                          return 'Please enter password'.tr;
                         } else {
                           return null;
                         }
@@ -237,7 +239,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           //color: provider.!isPasswordShow ? Colors.grey[500] : blueGrey,
                         ),
                       ),
-                      hintText: 'Password',
+                      hintText: 'Password'.tr,
                     ),
                   ),
                   SizedBox(
@@ -258,7 +260,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                 ));
                           },
                           child: Text(
-                            'Forgot Password?',
+                            'Forgot Password?'.tr,
                             style: TextStyle(
                               color: Color(0xffFFD542),
                             ),
@@ -279,7 +281,7 @@ class _LogInScreenState extends State<LogInScreen> {
                       //Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(),));
                     },
                     child: CustomButton(
-                      text: 'Sign In',
+                      text: 'Sign In'.tr,
                       borderColor: Colors.black,
                       textColor: Colors.black,
                       buttonColor: Color(0xffFFD542),
@@ -293,7 +295,7 @@ class _LogInScreenState extends State<LogInScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Do not have an account?',
+                          'Do not have an account?'.tr,
                           style: TextStyle(color: Colors.white),
                         ),
                         GestureDetector(
@@ -305,7 +307,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                 ));
                           },
                           child: Text(
-                            ' Signup',
+                            ' Signup'.tr,
                             style: TextStyle(
                               color: Color(0xffFFD542),
                             ),
