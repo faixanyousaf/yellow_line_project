@@ -185,7 +185,7 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
         icon: BitmapDescriptor.fromBytes(markerIcon2),
         markerId: MarkerId(UniqueKey().toString()),
         position: LatLng(
-            double.parse('${map['lat']}'), double.parse('${map['lat']}')),
+            double.parse('${map['lat']}'), double.parse('${map['lng']}')),
       );
       final iceGiants3 = {markerId3: marker3};
       markersList.addEntries(iceGiants3.entries);
