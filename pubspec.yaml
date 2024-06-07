@@ -83,6 +83,7 @@ dependencies:
   flutter_html: ^3.0.0-beta.2
   get: any
   toggle_switch: ^2.3.0
+  web_socket_channel: ^3.0.0
 
 #  places_api:
 #    path: packages/places_api

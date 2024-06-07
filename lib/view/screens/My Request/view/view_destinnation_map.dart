@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,6 +10,7 @@ import 'package:map_launcher/map_launcher.dart';
 import 'package:sizer/sizer.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 import 'package:yellowline/global_widgets/maps_sheet.dart';
 import 'package:yellowline/network_services/repository/user_repository/user_repo.dart';
@@ -40,9 +42,8 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
   LatLng? dropoff_latLng;
   void onMapCreated(GoogleMapController controller) async {
     _controller = controller;
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    add_poly_line(position);
+    add_poly_line(LatLng(double.parse('${widget.driverRequestModel.driverLat}'),
+        double.parse('${widget.driverRequestModel.driverLong}')));
   }
 
   LatLngBounds _bounds(Map<MarkerId, Marker> markers) {
@@ -55,7 +56,7 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
     return _createBounds(positions);
   }
 
-  add_poly_line(Position position) async {
+  add_poly_line(LatLng position) async {
     List<LatLng> polylineCoordinates = [];
     PolylinePoints polylinePoints = PolylinePoints();
     PolylineResult result1 = await polylinePoints.getRouteBetweenCoordinates(
@@ -107,7 +108,7 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
         northeast: LatLng(northeastLat, northeastLon));
   }
 
-  add_Marker(Position position) async {
+  add_Marker(LatLng position) async {
     final Uint8List markerIcon1 =
         await getBytesFromAsset('assets/location_marker.png', 100);
     final Uint8List markerIcon2 =
@@ -163,7 +164,33 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
       panelcontroller.animatePanelToPosition(1,
           duration: Duration(milliseconds: 600));
     });
+    connect_web_socket();
     super.initState();
+  }
+
+  WebSocketChannel? channel;
+  connect_web_socket() async {
+    final wsUrl = Uri.parse(
+        'wss://mustfeel-4b0821af-a13c-4a27-947d-e2b75ad8eebe.socketxp.com');
+    channel = WebSocketChannel.connect(wsUrl);
+    await channel!.ready;
+    channel!.stream.listen((message) async {
+      print('${message}');
+      Map map = jsonDecode(message);
+      final Uint8List markerIcon2 =
+          await getBytesFromAsset('assets/location_marker2.png', 100);
+      markersList.remove('driver_coordinate');
+      final markerId3 = MarkerId('driver_coordinate');
+      final marker3 = Marker(
+        icon: BitmapDescriptor.fromBytes(markerIcon2),
+        markerId: MarkerId(UniqueKey().toString()),
+        position: LatLng(
+            double.parse('${map['lat']}'), double.parse('${map['lat']}')),
+      );
+      final iceGiants3 = {markerId3: marker3};
+      markersList.addEntries(iceGiants3.entries);
+      setState(() {});
+    });
   }
 
   get_current_location() async {
@@ -295,7 +322,7 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
                       Row(
                         children: [
                           CustomDropContainer(
-                            height: 5.4.h,
+                            height: 5.6.h,
                             width: 30.w,
                             text: 'Reaching in'.tr,
                             texxt: '10 min',
@@ -304,7 +331,7 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
                             width: 3.w,
                           ),
                           CustomDropContainer(
-                            height: 5.4.h,
+                            height: 5.6.h,
                             width: 30.w,
                             text: 'Distance'.tr,
                             texxt: '10 km',
