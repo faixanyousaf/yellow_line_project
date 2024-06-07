@@ -234,6 +234,13 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
   final double initFabHeight = 50.h;
   final PanelController panelcontroller = PanelController();
   bool load = false;
+
+  @override
+  void dispose() {
+    channel!.sink.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
