@@ -10,6 +10,7 @@ import '../../view/screens/authentication/otp_screen/otp_screen.dart';
 import '../../view/screens/home_page/home_screen.dart';
 import '../../view/screens/recovery_screens/view/drop_off_screen.dart';
 import '../../view/screens/recovery_screens/recovery_confirmed_screen.dart';
+import '../../view/screens/update_profile/view/driver_profile.dart';
 import '../../view/screens/update_profile/view/update_user_profile.dart';
 import 'router_path.dart';
 
@@ -60,6 +61,13 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case RouterPath.UpdateUserProfileScreen:
       return MaterialPageRoute(
         builder: (context) => UpdateUserProfileScreen(),
+      );
+    case RouterPath.DriverProfileScreen:
+      dynamic id = settings.arguments;
+      return MaterialPageRoute(
+        builder: (context) => DriverProfileScreen(
+          id: id,
+        ),
       );
     // case RouterPath.business_home_Rout:
     //   return MaterialPageRoute(

@@ -34,4 +34,20 @@ class ViewRequestProvider extends ChangeNotifier {
   update_state() {
     notifyListeners();
   }
+
+  rate_driver({body, status}) async {
+    loading = true;
+    update_state();
+    await UserRepository.instance.rate_driver(body: body);
+    viewRequestModel = [];
+    SharedPrefs sf = SharedPrefs();
+    var id = await sf.getid();
+    List data = await UserRepository.instance
+        .get_view_request(body: {"user_id": id, "request_status": status});
+    for (var i in data) {
+      viewRequestModel.add(ViewRequestModel.fromJson(i));
+    }
+    loading = false;
+    update_state();
+  }
 }

@@ -19,6 +19,8 @@ class ViewRequestModel {
   dynamic driverDialCode;
   dynamic driverMobile;
   dynamic driverPlatNumber;
+  dynamic averageRating;
+  dynamic rated;
   dynamic companyName;
   dynamic companyType;
   dynamic companyDialCode;
@@ -40,43 +42,45 @@ class ViewRequestModel {
 
   ViewRequestModel(
       {this.id,
-        this.customerId,
-        this.recoveryType,
-        this.plateNumber,
-        this.pickUpLat,
-        this.pickUpLong,
-        this.pickupName,
-        this.dropName,
-        this.dropLat,
-        this.dropLong,
-        this.amount,
-        this.status,
-        this.driverLat,
-        this.acceptedbydriver,
-        this.driverLong,
-        this.driverId,
-        this.driverName,
-        this.driverDialCode,
-        this.driverMobile,
-        this.driverPlatNumber,
-        this.companyName,
-        this.companyType,
-        this.companyDialCode,
-        this.companyMobile,
-        this.companyId,
-        this.companyEmail,
-        this.reasonToReject,
-        this.customerEmail,
-        this.customerName,
-        this.customerDialCode,
-        this.customerMobile,
-        this.driverEmail,
-        this.isDriverVerified,
-        this.isDriverEmailVerified,
-        this.vehicleAssignedToDriver,
-        this.companyLogo,
-        this.createdAt,
-        this.updatedAt});
+      this.customerId,
+      this.recoveryType,
+      this.plateNumber,
+      this.pickUpLat,
+      this.pickUpLong,
+      this.pickupName,
+      this.dropName,
+      this.dropLat,
+      this.dropLong,
+      this.amount,
+      this.status,
+      this.driverLat,
+      this.acceptedbydriver,
+      this.driverLong,
+      this.driverId,
+      this.driverName,
+      this.driverDialCode,
+      this.driverMobile,
+      this.driverPlatNumber,
+      this.companyName,
+      this.companyType,
+      this.companyDialCode,
+      this.companyMobile,
+      this.companyId,
+      this.companyEmail,
+      this.reasonToReject,
+      this.customerEmail,
+      this.customerName,
+      this.customerDialCode,
+      this.customerMobile,
+      this.driverEmail,
+      this.isDriverVerified,
+      this.isDriverEmailVerified,
+      this.vehicleAssignedToDriver,
+      this.companyLogo,
+      this.createdAt,
+      this.averageRating,
+      this.rated,
+      this.updatedAt});
 
   ViewRequestModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -99,6 +103,8 @@ class ViewRequestModel {
     driverDialCode = json['driver_dial_code'];
     driverMobile = json['driver_mobile'];
     driverPlatNumber = json['driver_plat_number'];
+    averageRating = json['averageRating'];
+    rated = json['rated'];
     companyName = json['company_name'];
     companyType = json['company_type'];
     companyDialCode = json['company_dial_code'];
@@ -136,6 +142,8 @@ class ViewRequestModel {
     data['driver_lat'] = this.driverLat;
     data['acceptedbydriver'] = this.acceptedbydriver;
     data['driver_long'] = this.driverLong;
+    data['averageRating'] = this.averageRating;
+    data['rated'] = this.rated;
     data['driver_id'] = this.driverId;
     data['driver_name'] = this.driverName;
     data['driver_dial_code'] = this.driverDialCode;

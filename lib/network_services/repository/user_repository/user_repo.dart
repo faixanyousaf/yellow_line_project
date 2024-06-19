@@ -149,4 +149,36 @@ class UserRepository {
       rethrow;
     }
   }
+
+  Future get_driver_profile({required id}) async {
+    try {
+      log('body......', name: 'get_driver_profile | BusinessRepository');
+
+      var data = await _saryaAPI.get_driver_profile(id: id);
+
+      log('data......$data', name: 'get_driver_profile | BusinessRepository');
+
+      return data;
+    } catch (e) {
+      log('catch error......${e.toString()}',
+          name: 'get_driver_profile | BusinessRepository');
+      rethrow;
+    }
+  }
+
+  Future rate_driver({required body}) async {
+    try {
+      log('body......', name: 'rate_driver | BusinessRepository');
+
+      var data = await _saryaAPI.rate_driver(body: body);
+
+      log('data......$data', name: 'rate_driver | BusinessRepository');
+
+      return data;
+    } catch (e) {
+      log('catch error......${e.toString()}',
+          name: 'add_drivers | BusinessRepository');
+      rethrow;
+    }
+  }
 }

@@ -143,7 +143,7 @@ class YellowLineAPI {
       String url = '';
       url = ApiRoutes.checkduplicate;
       log('url......$url', name: 'get_all_drivers | YellowLineAPI');
-      return await _http.iPost_raw_data(url,data: body);
+      return await _http.iPost_raw_data(url, data: body);
     } catch (e) {
       rethrow;
     }
@@ -166,6 +166,28 @@ class YellowLineAPI {
       url = ApiRoutes.get_cites;
       log('url......$url', name: 'add_drivers | YellowLineAPI');
       return await _http.iGet(url);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> get_driver_profile({required id}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.driver_profile + id;
+      log('url......$url', name: 'add_drivers | YellowLineAPI');
+      return await _http.iGet(url);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> rate_driver({required body}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.rate_driver;
+      log('url......$url', name: 'rate_driver | YellowLineAPI');
+      return await _http.iPost_raw_data(url, data: body);
     } catch (e) {
       rethrow;
     }

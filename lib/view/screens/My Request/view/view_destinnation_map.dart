@@ -3,16 +3,21 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:map_launcher/map_launcher.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sizer/sizer.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 import 'package:yellowline/global_widgets/maps_sheet.dart';
+import 'package:yellowline/helper/navigation/navigation_object.dart';
+import 'package:yellowline/helper/navigation/router_path.dart';
 import 'package:yellowline/network_services/repository/user_repository/user_repo.dart';
 import '../../../../../global_widgets/asset_to_unit8list.dart';
 import '../../../../../global_widgets/custom_drop_conatiner.dart';
@@ -155,6 +160,7 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
 
   @override
   void initState() {
+    print('${widget.driverRequestModel.toJson()}');
     pickup_latLng = widget.pickup_latLng;
     dropoff_latLng = widget.dropoff_latLng;
     if (widget.driverRequestModel.status == 4) {
@@ -170,8 +176,7 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
 
   WebSocketChannel? channel;
   connect_web_socket() async {
-    final wsUrl = Uri.parse(
-        'wss://mustfeel-4b0821af-a13c-4a27-947d-e2b75ad8eebe.socketxp.com');
+    final wsUrl = Uri.parse('ws://vmi1922462.contaboserver.net:8080/');
     channel = WebSocketChannel.connect(wsUrl);
     await channel!.ready;
     channel!.stream.listen((message) async {
@@ -358,17 +363,25 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
                       ),
                       Row(
                         children: [
-                          CircleAvatar(
-                            radius: 3.0.h,
-                            backgroundColor: Colors.transparent,
-                            child: Container(
-                              child: Icon(
-                                Icons.person,
-                                size: 35,
-                              ),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white,
+                          InkWell(
+                            onTap: () {
+                              navigationService.navigateTo(
+                                  RouterPath.DriverProfileScreen,
+                                  arguments:
+                                      '${widget.driverRequestModel.driverId}');
+                            },
+                            child: CircleAvatar(
+                              radius: 3.0.h,
+                              backgroundColor: Colors.transparent,
+                              child: Container(
+                                child: Icon(
+                                  Icons.person,
+                                  size: 35,
+                                ),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),

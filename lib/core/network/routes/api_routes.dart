@@ -20,6 +20,9 @@ class ApiRoutes {
   static String get_vehicle = '${base_URL}vehicle/user/list/';
   static String checkduplicate = '${base_URL}user/checkduplicate';
   static String update_user_profile = '${base_URL}authenticated/users/profile';
-  static String update_user_profile_picture = '${base_URL}user/update/profile_picture';
+  static String update_user_profile_picture =
+      '${base_URL}user/update/profile_picture';
   static String get_cites = '${base_URL}common/cities';
+  static String rate_driver = '${base_URL}user/rate_driver';
+  static String driver_profile = '${base_URL}driver/profile/';
 }
