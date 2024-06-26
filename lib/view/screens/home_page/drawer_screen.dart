@@ -168,61 +168,61 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 3.h,
-            ),
-            InkWell(
-              onTap: () {
-                navigationService
-                    .navigateTo(RouterPath.SalesScreen,arguments: true);
-              },
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 4.w),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: Color(0xffFFCC1B),
-                                  borderRadius: BorderRadius.circular(7)),
-                              child: Center(
-                                  child: Icon(
-                                    Icons.monetization_on,
-                                    size: 20,
-                                  )),
-                              height: 3.8.h,
-                              width: 3.8.h,
-                            ),
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            Text(
-                              'Sales',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 10.sp,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          size: 4.w,
-                          color: Colors.white,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 3.h,
-                  )
-                ],
-              ),
-            ),
+            // SizedBox(
+            //   height: 3.h,
+            // ),
+            // InkWell(
+            //   onTap: () {
+            //     navigationService
+            //         .navigateTo(RouterPath.SalesScreen,arguments: true);
+            //   },
+            //   child: Column(
+            //     children: [
+            //       Padding(
+            //         padding: EdgeInsets.symmetric(horizontal: 4.w),
+            //         child: Row(
+            //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //           children: [
+            //             Row(
+            //               children: [
+            //                 Container(
+            //                   decoration: BoxDecoration(
+            //                       color: Color(0xffFFCC1B),
+            //                       borderRadius: BorderRadius.circular(7)),
+            //                   child: Center(
+            //                       child: Icon(
+            //                         Icons.monetization_on,
+            //                         size: 20,
+            //                       )),
+            //                   height: 3.8.h,
+            //                   width: 3.8.h,
+            //                 ),
+            //                 SizedBox(
+            //                   width: 5.w,
+            //                 ),
+            //                 Text(
+            //                   'Sales',
+            //                   style: TextStyle(
+            //                     color: Colors.white,
+            //                     fontSize: 10.sp,
+            //                   ),
+            //                 ),
+            //               ],
+            //             ),
+            //             Icon(
+            //               Icons.arrow_forward_ios_rounded,
+            //               size: 4.w,
+            //               color: Colors.white,
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //       SizedBox(
+            //         height: 3.h,
+            //       )
+            //     ],
+            //   ),
+            // ),
             SizedBox(
               height: 3.h,
             ),
@@ -1036,7 +1036,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
               ),
             ),
             SizedBox(
-              height: 2.h,
+              height: 3.h,
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 4.w),

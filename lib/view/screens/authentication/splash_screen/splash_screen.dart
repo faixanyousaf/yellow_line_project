@@ -177,11 +177,13 @@ class _SplashScreenState extends State<SplashScreen> {
                 ],
               ),
               content: new Text(
-                  "We have rolled our some enhancements for a better experience. Please update to the latest version to continue.".tr,
+                  "We have rolled our some enhancements for a better experience. Please update to the latest version to continue."
+                      .tr,
                   style: TextStyle(color: Colors.black)),
               actions: <Widget>[
                 CupertinoDialogAction(
-                  child: Text("UPDATE".tr, style: TextStyle(color: Colors.blue)),
+                  child:
+                      Text("UPDATE".tr, style: TextStyle(color: Colors.blue)),
                   onPressed: () async {
                     if (Platform.isAndroid) {
                       String? url = '${firebaseModel!.androidAppUrl}';
@@ -245,11 +247,13 @@ class _SplashScreenState extends State<SplashScreen> {
                 ],
               ),
               content: new Text(
-                  "We have rolled our some enhancements for a better experience. Please update to the latest version to continue.".tr,
+                  "We have rolled our some enhancements for a better experience. Please update to the latest version to continue."
+                      .tr,
                   style: TextStyle(color: Colors.black)),
               actions: <Widget>[
                 CupertinoDialogAction(
-                  child: Text("UPDATE".tr, style: TextStyle(color: Colors.blue)),
+                  child:
+                      Text("UPDATE".tr, style: TextStyle(color: Colors.blue)),
                   onPressed: () async {
                     if (Platform.isAndroid) {
                       String? url = '${firebaseModel!.androidAppUrl}';
@@ -306,8 +310,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    //get_firebase_Data(context);
-     get_sf_data();
+    get_firebase_Data(context);
+    //get_sf_data();
     super.initState();
   }
 
@@ -319,15 +323,15 @@ class _SplashScreenState extends State<SplashScreen> {
       var password = await sf.get_password();
       var data = await sf.getUser();
       if (as_login == '1') {
-        try{
+        try {
           LoginResponceModel loginResponceModel =
-          LoginResponceModel.fromJson(data);
+              LoginResponceModel.fromJson(data);
           Sign_In_Request request = Sign_In_Request(
               password: password,
               email: loginResponceModel.user!.email,
               account_type: '2');
           var result =
-          await AuthRepository.instance.signIn(body: request.toJson());
+              await AuthRepository.instance.signIn(body: request.toJson());
           LoginResponceModel responceModel = result;
           print('${responceModel.toJson()}');
           sf.saveUser(responceModel.toJson());
@@ -337,7 +341,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Timer(const Duration(seconds: 1), () {
             navigationService.navigatePushReplace(RouterPath.Home_Screen);
           });
-        }catch (e){
+        } catch (e) {
           Timer(const Duration(seconds: 3), () {
             navigationService.navigatePushReplace(RouterPath.loginRout);
           });
