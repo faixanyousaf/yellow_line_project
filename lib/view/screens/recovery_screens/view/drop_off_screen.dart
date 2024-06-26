@@ -172,9 +172,25 @@ class _DropOffScreenState extends State<DropOffScreen> {
     provider.dropoff_name = '';
     super.deactivate();
   }
+  String map_style = '';
+  Future getMapStyle() async {
+    map_style = await rootBundle.loadString('assets/map_style/dark_map.json');
+    print('loaded map style');
+  }
 
+  bool? isDaytime;
   @override
   void initState() {
+    final now = DateTime.now();
+    final hour = now.hour;
+    if (hour >= 6 && hour < 18) {
+      isDaytime = true;
+      print('It is daytime.');
+    } else {
+      isDaytime = false;
+      print('It is nighttime.');
+    }
+    getMapStyle();
     final AddRequestProvider provider =
         Provider.of<AddRequestProvider>(context, listen: false);
     provider.get_recovery_type();
@@ -207,14 +223,17 @@ class _DropOffScreenState extends State<DropOffScreen> {
                         Container(
                           height: 69.h,
                           width: 100.w,
-                          child: GoogleMap(
+                          child: map_style.isEmpty
+                              ? SizedBox()
+                              : GoogleMap(
                             initialCameraPosition: CameraPosition(
                               target: LatLng(19.0760, 72.8777),
                               zoom: 15.7,
                             ),
-                            cloudMapId: Platform.isIOS
-                                ? 'cdc202aae147cab1'
-                                : '36cc3485cd8467ed',
+                            style: isDaytime == true ? null : map_style,
+                            // cloudMapId: Platform.isIOS
+                            //     ? 'cdc202aae147cab1'
+                            //     : '36cc3485cd8467ed',
                             polylines: Set<Polyline>.of(polylines.values),
                             onMapCreated: (controller) {
                               onMapCreated(controller);

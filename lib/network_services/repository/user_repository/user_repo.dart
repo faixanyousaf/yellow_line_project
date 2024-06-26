@@ -181,4 +181,74 @@ class UserRepository {
       rethrow;
     }
   }
+
+  Future<dynamic> business_all_requests_by_years({required body}) async {
+    try {
+      log('body......$body',
+          name: 'driver_all_requests_by_years | AuthRepository');
+
+      var data = await _saryaAPI.business_all_requests_by_years(body: body);
+
+      log('data......$data',
+          name: 'driver_all_requests_by_years | AuthRepository');
+
+      return data;
+    } catch (e) {
+      log('catch error......${e.toString()}',
+          name: 'driver_all_requests | AuthRepository');
+      rethrow;
+    }
+  }
+
+  Future<dynamic> business_all_requests_by_month({required body}) async {
+    try {
+      log('body......$body',
+          name: 'driver_all_requests_by_years | AuthRepository');
+
+      var data = await _saryaAPI.business_all_requests_by_month(body: body);
+
+      log('data......$data',
+          name: 'driver_all_requests_by_years | AuthRepository');
+
+      return data;
+    } catch (e) {
+      log('catch error......${e.toString()}',
+          name: 'driver_all_requests | AuthRepository');
+      rethrow;
+    }
+  }
+
+  Future<dynamic> business_all_requests_by_week({required body}) async {
+    try {
+      log('body......$body',
+          name: 'driver_all_requests_by_years | AuthRepository');
+
+      var data = await _saryaAPI.business_all_requests_by_week(body: body);
+
+      log('data......$data',
+          name: 'driver_all_requests_by_years | AuthRepository');
+
+      return data;
+    } catch (e) {
+      log('catch error......${e.toString()}',
+          name: 'driver_all_requests | AuthRepository');
+      rethrow;
+    }
+  }
+
+  Future business_all_requests({required body}) async {
+    try {
+      log('body......$body', name: 'driver_all_requests | AuthRepository');
+
+      var data = await _saryaAPI.business_all_requests(body: body);
+
+      log('data......$data', name: 'driver_all_requests | AuthRepository');
+
+      return data;
+    } catch (e) {
+      log('catch error......${e.toString()}',
+          name: 'driver_all_requests | AuthRepository');
+      rethrow;
+    }
+  }
 }

@@ -45,6 +45,7 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
   var markersList = <MarkerId, Marker>{};
   LatLng? pickup_latLng;
   LatLng? dropoff_latLng;
+
   void onMapCreated(GoogleMapController controller) async {
     _controller = controller;
     add_poly_line(LatLng(double.parse('${widget.driverRequestModel.driverLat}'),
@@ -158,8 +159,25 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
     setState(() {});
   }
 
+  String map_style = '';
+  Future getMapStyle() async {
+    map_style = await rootBundle.loadString('assets/map_style/dark_map.json');
+    print('loaded map style');
+  }
+
+  bool? isDaytime;
   @override
   void initState() {
+    final now = DateTime.now();
+    final hour = now.hour;
+    if (hour >= 6 && hour < 18) {
+      isDaytime = true;
+      print('It is daytime.');
+    } else {
+      isDaytime = false;
+      print('It is nighttime.');
+    }
+    getMapStyle();
     print('${widget.driverRequestModel.toJson()}');
     pickup_latLng = widget.pickup_latLng;
     dropoff_latLng = widget.dropoff_latLng;
@@ -259,30 +277,33 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
               Container(
                 height: 100.h,
                 width: 100.w,
-                child: GoogleMap(
-                  initialCameraPosition: CameraPosition(
-                    target: LatLng(19.0760, 72.8777),
-                    zoom: 15.7,
-                  ),
-                  cloudMapId:
-                      Platform.isIOS ? '9ade47e7d53ff36d' : '8cc3ed800b9e0615',
-                  polylines: Set<Polyline>.of(polylines.values),
-                  onMapCreated: (controller) {
-                    //customInfoWindowController.googleMapController = controller;
-                    // if (markers.isNotEmpty) {
-                    //   print('total markers = ${markers.length}');
-                    //   controller.animateCamera(CameraUpdate.newLatLngBounds(
-                    //       _bounds(markers), 50.0));
-                    // }
-                    onMapCreated(controller);
-                  },
-                  onCameraMove: (position) {
-                    //customInfoWindowController.onCameraMove!();
-                  },
-                  myLocationButtonEnabled: false,
-                  myLocationEnabled: false,
-                  markers: Set<Marker>.of(markersList.values),
-                ),
+                child: map_style.isEmpty
+                    ? SizedBox()
+                    : GoogleMap(
+                        initialCameraPosition: CameraPosition(
+                          target: LatLng(19.0760, 72.8777),
+                          zoom: 15.7,
+                        ),
+                        style: isDaytime == true ? null : map_style,
+                        // cloudMapId:
+                        //     Platform.isIOS ? '9ade47e7d53ff36d' : '8cc3ed800b9e0615',
+                        polylines: Set<Polyline>.of(polylines.values),
+                        onMapCreated: (controller) {
+                          //customInfoWindowController.googleMapController = controller;
+                          // if (markers.isNotEmpty) {
+                          //   print('total markers = ${markers.length}');
+                          //   controller.animateCamera(CameraUpdate.newLatLngBounds(
+                          //       _bounds(markers), 50.0));
+                          // }
+                          onMapCreated(controller);
+                        },
+                        onCameraMove: (position) {
+                          //customInfoWindowController.onCameraMove!();
+                        },
+                        myLocationButtonEnabled: false,
+                        myLocationEnabled: false,
+                        markers: Set<Marker>.of(markersList.values),
+                      ),
               ),
               Positioned(
                   bottom: 10.h,

@@ -98,6 +98,44 @@ class YellowLineAPI {
     }
   }
 
+  Future<dynamic> business_all_requests_by_years({required body}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.business_all_requests_by_years;
+      return await _http.iPost_raw_data(url, data: body);
+    } catch (e) {
+      rethrow;
+    }
+  }
+  Future<dynamic> business_all_requests_by_month({required body}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.business_all_requests_by_month;
+      return await _http.iPost_raw_data(url, data: body);
+    } catch (e) {
+      rethrow;
+    }
+  }
+  Future<dynamic> business_all_requests_by_week({required body}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.business_all_requests_by_week;
+      return await _http.iPost_raw_data(url, data: body);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> business_all_requests({required body}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.company_all_requests;
+      return await _http.iPost_raw_data(url, data: body);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<dynamic> update_payment_status({required body}) async {
     try {
       String url = '';

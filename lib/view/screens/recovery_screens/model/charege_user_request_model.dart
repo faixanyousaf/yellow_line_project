@@ -1,6 +1,6 @@
 class ChargeUserRequestModel {
-  int? amount;
-  int? plateNumber;
+  String? amount;
+  String? plateNumber;
   String? pickUpLat;
   String? pickUpLong;
   String? dropLat;

@@ -25,4 +25,11 @@ class ApiRoutes {
   static String get_cites = '${base_URL}common/cities';
   static String rate_driver = '${base_URL}user/rate_driver';
   static String driver_profile = '${base_URL}driver/profile/';
+  static String company_all_requests = '${base_URL}user/all_requests';
+  static String business_all_requests_by_years =
+      '${base_URL}user/company_all_requests_by_years';
+  static String business_all_requests_by_month =
+      '${base_URL}user/company_monthly_revnue_by_year';
+  static String business_all_requests_by_week =
+      '${base_URL}user/company_weekly_revnue_by_month';
 }

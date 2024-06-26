@@ -3,6 +3,7 @@ class RouterPath {
   static const String loginRout = "Login Screen";
   static const String Home_Screen = "Home Screen";
   static const String Vehicle_List_Screen = "Vehicle List Screen";
+  static const String SalesScreen = "SalesScreen";
   static const String Add_New_Vehicle_Screen = "Add New Vehicle Screen";
   static const String Vehicle_Added_Screen = "Vehicle Added Screen";
   static const String Vehicle_Detail = "Vehicle Detail";

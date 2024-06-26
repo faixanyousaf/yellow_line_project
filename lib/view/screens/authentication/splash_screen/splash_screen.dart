@@ -319,23 +319,29 @@ class _SplashScreenState extends State<SplashScreen> {
       var password = await sf.get_password();
       var data = await sf.getUser();
       if (as_login == '1') {
-        LoginResponceModel loginResponceModel =
-            LoginResponceModel.fromJson(data);
-        Sign_In_Request request = Sign_In_Request(
-            password: password,
-            email: loginResponceModel.user!.email,
-            account_type: '2');
-        var result =
-            await AuthRepository.instance.signIn(body: request.toJson());
-        LoginResponceModel responceModel = result;
-        print('${responceModel.toJson()}');
-        sf.saveUser(responceModel.toJson());
-        sf.saveToken(responceModel.accessToken);
-        sf.saveaslogin('1');
-        sf.saveid(responceModel.user!.id.toString());
-        Timer(const Duration(seconds: 1), () {
-          navigationService.navigatePushReplace(RouterPath.Home_Screen);
-        });
+        try{
+          LoginResponceModel loginResponceModel =
+          LoginResponceModel.fromJson(data);
+          Sign_In_Request request = Sign_In_Request(
+              password: password,
+              email: loginResponceModel.user!.email,
+              account_type: '2');
+          var result =
+          await AuthRepository.instance.signIn(body: request.toJson());
+          LoginResponceModel responceModel = result;
+          print('${responceModel.toJson()}');
+          sf.saveUser(responceModel.toJson());
+          sf.saveToken(responceModel.accessToken);
+          sf.saveaslogin('1');
+          sf.saveid(responceModel.user!.id.toString());
+          Timer(const Duration(seconds: 1), () {
+            navigationService.navigatePushReplace(RouterPath.Home_Screen);
+          });
+        }catch (e){
+          Timer(const Duration(seconds: 3), () {
+            navigationService.navigatePushReplace(RouterPath.loginRout);
+          });
+        }
       } else {
         LoginResponceModel loginResponceModel =
             LoginResponceModel.fromJson(data);

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,14 +26,20 @@ import 'view/screens/update_profile/view_model/update_user_profile_provider.dart
 
 final ValueNotifier<LanguageModel> language = ValueNotifier<LanguageModel>(
     LanguageModel(fromLanguage: Locale('ar'), toLanguage: Locale('en')));
-
+class MyHttpOverrides extends HttpOverrides{
+  @override
+  HttpClient createHttpClient(SecurityContext? context){
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+  }
+}
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  // Stripe.publishableKey =
-  //     'pk_test_51OuE8WAYqNfNZZ16r6VzHDbXs3VWNg98av26Ex4NP5RzuHzAXM67pWE4PZ0LWmb5U7DM2aYzZ86Yf5OwdNG1shLk00iiMKDW4y';
   Stripe.publishableKey =
-      'pk_live_51P8EjkP1P6rcRJTiO3uUcjh565iD5I387vGVpDPuD65Al3JLhgtv1hBXozZPydWy6SMl0nfpwLsmywcqSOkfwdDy00JTJTrkZb';
+      'pk_test_51OuE8WAYqNfNZZ16r6VzHDbXs3VWNg98av26Ex4NP5RzuHzAXM67pWE4PZ0LWmb5U7DM2aYzZ86Yf5OwdNG1shLk00iiMKDW4y';
+  // Stripe.publishableKey =
+  //     'pk_live_51P8EjkP1P6rcRJTiO3uUcjh565iD5I387vGVpDPuD65Al3JLhgtv1hBXozZPydWy6SMl0nfpwLsmywcqSOkfwdDy00JTJTrkZb';
   // Stripe.publishableKey =
   //     'pk_test_51OuE8WAYqNfNZZ16r6VzHDbXs3VWNg98av26Ex4NP5RzuHzAXM67pWE4PZ0LWmb5U7DM2aYzZ86Yf5OwdNG1shLk00iiMKDW4y';
   Stripe.merchantIdentifier = 'merchant.travel.sarya.app';
@@ -39,6 +47,7 @@ void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   setupLocator();
+  HttpOverrides.global = MyHttpOverrides();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => LoginProvider()),
     ChangeNotifierProvider(create: (_) => SingUpProvider()),

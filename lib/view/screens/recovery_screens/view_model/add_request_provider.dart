@@ -52,9 +52,9 @@ class AddRequestProvider extends ChangeNotifier {
       element
           .typeName == selected_recovery_type);
       ChargeUserRequestModel chargeUserRequestModel = ChargeUserRequestModel(
-          amount: responce_fare_model!.totalCharges!.toInt(),
+          amount: responce_fare_model!.totalCharges!.toInt().toString(),
           userId: id.toString(),
-          plateNumber: 1097,
+          plateNumber: 1097.toString(),
           dropLat: request_model.lat2,
           dropLong: request_model.long2,
           pickUpLat: request_model.lat1,
@@ -65,7 +65,7 @@ class AddRequestProvider extends ChangeNotifier {
       print('step1');
       var data = await UserRepository.instance
           .charge_user(body: chargeUserRequestModel.toJson());
-      print('step2');
+      print('step2 ${data}');
       chargeUserResponceModel = ChargeUserResponceModel.fromJson(data);
       print('step3');
       loading = false;

@@ -10,6 +10,7 @@ import '../../view/screens/authentication/otp_screen/otp_screen.dart';
 import '../../view/screens/home_page/home_screen.dart';
 import '../../view/screens/recovery_screens/view/drop_off_screen.dart';
 import '../../view/screens/recovery_screens/recovery_confirmed_screen.dart';
+import '../../view/screens/sales/sales_screen.dart';
 import '../../view/screens/update_profile/view/driver_profile.dart';
 import '../../view/screens/update_profile/view/update_user_profile.dart';
 import 'router_path.dart';
@@ -29,6 +30,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case RouterPath.Vehicle_List_Screen:
       return MaterialPageRoute(
         builder: (context) => VehicleListScreen(),
+      );
+    case RouterPath.SalesScreen:
+      return MaterialPageRoute(
+        builder: (context) => SalesScreen(),
       );
     case RouterPath.Add_New_Vehicle_Screen:
       return MaterialPageRoute(
