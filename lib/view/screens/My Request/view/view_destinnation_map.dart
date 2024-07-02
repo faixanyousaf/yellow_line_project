@@ -194,7 +194,7 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
 
   WebSocketChannel? channel;
   connect_web_socket() async {
-    final wsUrl = Uri.parse('ws://vmi1922462.contaboserver.net:8080/');
+    final wsUrl = Uri.parse('wss://yellowline.codeels.pro:4000/');
     channel = WebSocketChannel.connect(wsUrl);
     await channel!.ready;
     channel!.stream.listen((message) async {
