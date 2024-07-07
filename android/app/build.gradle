@@ -48,8 +48,8 @@ android {
         applicationId "user.yellowline.app"
         minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
-        versionCode 6
-        versionName "1.0.6"
+        versionCode 10
+        versionName "1.0.10"
         multiDexEnabled true
     }
     signingConfigs {

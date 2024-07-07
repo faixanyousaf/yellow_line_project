@@ -28,7 +28,7 @@ class _CustomDropContainerState extends State<CustomDropContainer> {
         borderRadius: BorderRadius.circular(5),
       ),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 0.5.h),
+        padding: EdgeInsets.symmetric(horizontal: 1.w,),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,7 +40,6 @@ class _CustomDropContainerState extends State<CustomDropContainer> {
             ),
             Text(
               widget.texxt!,
-              //maxLines: 2,
               style: TextStyle(color: Color(0xffFFCC1B), fontSize: 10.sp),
             )
           ],

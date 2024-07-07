@@ -213,6 +213,8 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
       final iceGiants3 = {markerId3: marker3};
       markersList.addEntries(iceGiants3.entries);
       setState(() {});
+      add_poly_line(
+          LatLng(double.parse('${map['lat']}'), double.parse('${map['lng']}')));
     });
   }
 
