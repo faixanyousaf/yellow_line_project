@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -7,11 +6,8 @@ import 'package:sizer/sizer.dart';
 import 'package:yellowline/helper/navigation/navigation_object.dart';
 import 'package:yellowline/helper/navigation/router_path.dart';
 import 'package:yellowline/view/screens/home_page/drawer_screen.dart';
-import 'package:yellowline/view/screens/home_page/tracking_home_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../../../helper/shared_prefs.dart';
-import '../../../helper/stripe_payment_methods.dart';
 import '../../../network_services/repository/user_repository/user_repo.dart';
 import '../../Authentication Models/login/models/login_Responce_model.dart';
 import '../../Authentication Models/sos/sos_screen.dart';

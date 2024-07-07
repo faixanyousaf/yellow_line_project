@@ -10,6 +10,7 @@ class FirebaseModel {
   bool? iosAppOnMaintenance;
   bool? registration;
   bool? screenshot;
+  String? socket_url;
 
   FirebaseModel(
       {this.iosMatchVersion,
@@ -22,6 +23,7 @@ class FirebaseModel {
         this.androidMatchVersion,
         this.registration,
         this.screenshot,
+        this.socket_url,
         this.iosAppOnMaintenance});
 
   FirebaseModel.fromJson(Map<String, dynamic> json) {
@@ -36,6 +38,7 @@ class FirebaseModel {
     iosAppOnMaintenance = json['ios-app-on-maintenance'];
     registration = json['registration'];
     screenshot = json['screenshot'];
+    socket_url = json['socket_url'];
   }
 
   Map<String, dynamic> toJson() {
@@ -51,6 +54,7 @@ class FirebaseModel {
     data['ios-app-on-maintenance'] = this.iosAppOnMaintenance;
     data['registration'] = this.registration;
     data['screenshot'] = this.screenshot;
+    data['socket_url'] = this.socket_url;
     return data;
   }
 }

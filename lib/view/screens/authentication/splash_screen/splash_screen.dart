@@ -40,8 +40,10 @@ class _SplashScreenState extends State<SplashScreen> {
         print('the firebaseModel data is =3');
         firebaseModel =
             FirebaseModel.fromJson(doc.data() as Map<String, dynamic>);
-        print('the firebaseModel data is = ${firebaseModel!.toJson()}');
+        // print('the firebaseModel data is = ${firebaseModel!.toJson()}');
+        // print('the socket_url data is = ${'${firebaseModel!.socket_url}'}');
         base_URL = '${firebaseModel!.baseUrl}';
+        socket_url = '${firebaseModel!.socket_url}';
         versionCheckApi(context);
       });
     });
