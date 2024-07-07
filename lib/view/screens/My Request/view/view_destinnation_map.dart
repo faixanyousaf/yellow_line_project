@@ -41,8 +41,10 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
 
   void onMapCreated(GoogleMapController controller) async {
     _controller = controller;
-    add_poly_line(LatLng(double.parse('${widget.driverRequestModel.driverLat}'),
-        double.parse('${widget.driverRequestModel.driverLong}')));
+    add_poly_line(
+        LatLng(double.parse('${widget.driverRequestModel.driverLat}'),
+            double.parse('${widget.driverRequestModel.driverLong}')),
+        animate_camera: true);
   }
 
   LatLngBounds _bounds(Map<MarkerId, Marker> markers) {
@@ -55,7 +57,7 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
     return _createBounds(positions);
   }
 
-  add_poly_line(LatLng position) async {
+  add_poly_line(LatLng position, {bool? animate_camera}) async {
     List<LatLng> polylineCoordinates = [];
     PolylinePoints polylinePoints = PolylinePoints();
     PolylineResult result1 = await polylinePoints.getRouteBetweenCoordinates(
@@ -88,7 +90,7 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
         width: 4);
     polylines[id] = polyline;
     setState(() {});
-    add_Marker(position);
+    add_Marker(position, animate_camera: animate_camera);
   }
 
   LatLngBounds _createBounds(List<LatLng> positions) {
@@ -107,7 +109,7 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
         northeast: LatLng(northeastLat, northeastLon));
   }
 
-  add_Marker(LatLng position) async {
+  add_Marker(LatLng position, {bool? animate_camera}) async {
     final Uint8List markerIcon1 =
         await getBytesFromAsset('assets/location_marker.png', 100);
     final Uint8List markerIcon2 =
@@ -147,8 +149,13 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
     );
     final iceGiants3 = {markerId3: marker3};
     markersList.addEntries(iceGiants3.entries);
-    _controller!
-        .animateCamera(CameraUpdate.newLatLngBounds(_bounds(markersList), 150));
+    if (animate_camera == true) {
+      _controller!.animateCamera(
+          CameraUpdate.newLatLngBounds(_bounds(markersList), 50));
+    } else {
+      _controller!.animateCamera(CameraUpdate.newLatLng(
+          LatLng(position.latitude, position.longitude)));
+    }
     setState(() {});
   }
 
