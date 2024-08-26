@@ -26,22 +26,23 @@ import 'view/screens/update_profile/view_model/update_user_profile_provider.dart
 
 final ValueNotifier<LanguageModel> language = ValueNotifier<LanguageModel>(
     LanguageModel(fromLanguage: Locale('ar'), toLanguage: Locale('en')));
-class MyHttpOverrides extends HttpOverrides{
+
+class MyHttpOverrides extends HttpOverrides {
   @override
-  HttpClient createHttpClient(SecurityContext? context){
+  HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)
-      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   // Stripe.publishableKey =
-  //     'pk_test_51OuE8WAYqNfNZZ16r6VzHDbXs3VWNg98av26Ex4NP5RzuHzAXM67pWE4PZ0LWmb5U7DM2aYzZ86Yf5OwdNG1shLk00iiMKDW4y';
+  //     'pk_live_51P8EjkP1P6rcRJTiO3uUcjh565iD5I387vGVpDPuD65Al3JLhgtv1hBXozZPydWy6SMl0nfpwLsmywcqSOkfwdDy00JTJTrkZb';
   Stripe.publishableKey =
-      'pk_live_51P8EjkP1P6rcRJTiO3uUcjh565iD5I387vGVpDPuD65Al3JLhgtv1hBXozZPydWy6SMl0nfpwLsmywcqSOkfwdDy00JTJTrkZb';
-  // Stripe.publishableKey =
-  //     'pk_test_51OuE8WAYqNfNZZ16r6VzHDbXs3VWNg98av26Ex4NP5RzuHzAXM67pWE4PZ0LWmb5U7DM2aYzZ86Yf5OwdNG1shLk00iiMKDW4y';
+      'pk_test_51OuE8WAYqNfNZZ16r6VzHDbXs3VWNg98av26Ex4NP5RzuHzAXM67pWE4PZ0LWmb5U7DM2aYzZ86Yf5OwdNG1shLk00iiMKDW4y';
   Stripe.merchantIdentifier = 'merchant.travel.sarya.app';
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -69,84 +70,84 @@ class MyApp extends StatelessWidget {
     final String apiKey = "AIzaSyCxVDrGwK3_-wlauORHJ1HuJkoZ5LNAdIQ";
     return ValueListenableBuilder<LanguageModel>(
       builder: (BuildContext context, LanguageModel value, Widget? child) {
-        return  Sizer(
-            builder: (context, orientation, deviceType) {
-              return GetMaterialApp(
-                  title: 'Flutter Demo',
-                  navigatorKey: locator<NavigationService>().navigatorKey,
+        return Sizer(
+          builder: (context, orientation, deviceType) {
+            return GetMaterialApp(
+              title: 'Flutter Demo',
+              navigatorKey: locator<NavigationService>().navigatorKey,
               onGenerateRoute: routes.generateRoute,
               translations: LocaleString(),
               locale: Locale('en', 'US'),
               theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-              useMaterial3: true,),
-                // theme: ThemeData(
-                //   primarySwatch: Colors.blue,
-                //   hoverColor: Colors.blue,
-                //   indicatorColor: Colors.blue,
-                //   colorScheme: ColorScheme(
-                //     brightness: Brightness.light,
-                //     primary: Colors.white,
-                //     onPrimary: Colors.white,
-                //     secondary: Colors.green,
-                //     onSecondary: Colors.white,
-                //     primaryContainer: Colors.greenAccent,
-                //     error: Colors.black,
-                //     onError: Colors.white,
-                //     background: Colors.white,
-                //     onBackground: Colors.white,
-                //     surface: Colors.white,
-                //     onSurface: Colors.white,
-                //   ),
-                // ),
-                // darkTheme: ThemeData.dark(),
+                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                useMaterial3: true,
+              ),
+              // theme: ThemeData(
+              //   primarySwatch: Colors.blue,
+              //   hoverColor: Colors.blue,
+              //   indicatorColor: Colors.blue,
+              //   colorScheme: ColorScheme(
+              //     brightness: Brightness.light,
+              //     primary: Colors.white,
+              //     onPrimary: Colors.white,
+              //     secondary: Colors.green,
+              //     onSecondary: Colors.white,
+              //     primaryContainer: Colors.greenAccent,
+              //     error: Colors.black,
+              //     onError: Colors.white,
+              //     background: Colors.white,
+              //     onBackground: Colors.white,
+              //     surface: Colors.white,
+              //     onSurface: Colors.white,
+              //   ),
+              // ),
+              // darkTheme: ThemeData.dark(),
 
-                // color:  Theme.of(context).colorScheme.secondary,
+              // color:  Theme.of(context).colorScheme.secondary,
 
-                // theme: theme.copyWith(
-                //   colorScheme: theme.colorScheme.copyWith(secondary: myColor),
-                // ),
+              // theme: theme.copyWith(
+              //   colorScheme: theme.colorScheme.copyWith(secondary: myColor),
+              // ),
 
-                // theme: theme.copyWith(
-                //   colorScheme: theme.colorScheme.copyWith(
-                //     brightness: Brightness.dark,
-                //         primary: Colors.red,
-                //         onPrimary: Colors.white,
-                //         secondary: Colors.green,
-                //         onSecondary: Colors.white,
-                //         primaryContainer: Colors.pink,
-                //         error: Colors.black,
-                //         onError: Colors.white,
-                //         background: Colors.blue,
-                //         onBackground: Colors.white,
-                //         surface: Colors.pink,
-                //         onSurface: Colors.white,
-                //   ),
-                // ),
+              // theme: theme.copyWith(
+              //   colorScheme: theme.colorScheme.copyWith(
+              //     brightness: Brightness.dark,
+              //         primary: Colors.red,
+              //         onPrimary: Colors.white,
+              //         secondary: Colors.green,
+              //         onSecondary: Colors.white,
+              //         primaryContainer: Colors.pink,
+              //         error: Colors.black,
+              //         onError: Colors.white,
+              //         background: Colors.blue,
+              //         onBackground: Colors.white,
+              //         surface: Colors.pink,
+              //         onSurface: Colors.white,
+              //   ),
+              // ),
 
-                // darkTheme: ThemeData.dark(
-                //   //useMaterial3: true,
-                //   // colorScheme: const ColorScheme(
-                //   //   brightness: Brightness.dark,
-                //   //   primary: Colors.red,
-                //   //   onPrimary: Colors.white,
-                //   //   secondary: Colors.green,
-                //   //   onSecondary: Colors.white,
-                //   //   primaryContainer: Colors.pink,
-                //   //   error: Colors.black,
-                //   //   onError: Colors.white,
-                //   //   background: Colors.blue,
-                //   //   onBackground: Colors.white,
-                //   //   surface: Colors.pink,
-                //   //   onSurface: Colors.white,
-                //   // ),
-                // ),
-                home:  SplashScreen(),
-                debugShowCheckedModeBanner: false,
-              );
-            },
-          );
-
+              // darkTheme: ThemeData.dark(
+              //   //useMaterial3: true,
+              //   // colorScheme: const ColorScheme(
+              //   //   brightness: Brightness.dark,
+              //   //   primary: Colors.red,
+              //   //   onPrimary: Colors.white,
+              //   //   secondary: Colors.green,
+              //   //   onSecondary: Colors.white,
+              //   //   primaryContainer: Colors.pink,
+              //   //   error: Colors.black,
+              //   //   onError: Colors.white,
+              //   //   background: Colors.blue,
+              //   //   onBackground: Colors.white,
+              //   //   surface: Colors.pink,
+              //   //   onSurface: Colors.white,
+              //   // ),
+              // ),
+              home: SplashScreen(),
+              debugShowCheckedModeBanner: false,
+            );
+          },
+        );
       },
       valueListenable: language,
     );

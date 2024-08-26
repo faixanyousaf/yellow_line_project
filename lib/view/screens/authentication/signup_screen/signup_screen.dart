@@ -255,7 +255,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       provider.isPending == true ? 2.2.h : 0),
                               child: Container(
                                 height: 6.2.h,
-                                width: 26.w,
+                                width: 20.w,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(17)),
                                 child: IntlPhoneField(
@@ -635,7 +635,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   Center(
                       child: Text(
-                    'I agree to share my details and i have read Terms\n and Condition, Privacy Policy.'.tr,
+                    'I agree to share my details and i have read Terms\n and Condition, Privacy Policy.'
+                        .tr,
                     style: TextStyle(
                         fontSize: 11.sp,
                         color: Colors.black54,

@@ -38,7 +38,7 @@ dependencies:
   sizer: any
   flutter_svg: ^2.0.9
   intl_phone_field: ^3.2.0
-  pin_code_fields: ^7.4.0
+  pin_code_fields: ^8.0.1
   dotted_border: ^2.1.0
   smooth_page_indicator: ^1.1.0
   flutter_advanced_switch: ^3.0.1
@@ -85,6 +85,7 @@ dependencies:
   toggle_switch: ^2.3.0
   web_socket_channel: ^3.0.0
   fl_chart: ^0.67.0
+  google_map_marker_animation: ^0.0.1
 
 #  places_api:
 #    path: packages/places_api
@@ -92,6 +93,7 @@ dependencies:
 #    path: packages/google_maps_directions
   flutter_google_places:
     path: packages/flutter_google_places-master
+
 
 #dependency_overrides:
 #  alice: ^0.4.1

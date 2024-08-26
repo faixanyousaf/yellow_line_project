@@ -45,24 +45,29 @@ class _MoversScreenState extends State<MoversScreen> {
           padding: EdgeInsets.only(top: 2.h),
           itemBuilder: (context, index) => InkWell(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (c) => ViewDestinationMap(
-                        driverRequestModel: provider.viewRequestModel[index],
-                        dropoff_latLng: LatLng(
-                            double.parse(
-                                provider.viewRequestModel[index].dropLat ??
+              Navigator.of(context)
+                  .push(MaterialPageRoute(
+                      builder: (c) => ViewDestinationMap(
+                            driverRequestModel:
+                                provider.viewRequestModel[index],
+                            dropoff_latLng: LatLng(
+                                double.parse(
+                                    provider.viewRequestModel[index].dropLat ??
+                                        '0.0'),
+                                double.parse(
+                                    provider.viewRequestModel[index].dropLong ??
+                                        '0.0')),
+                            pickup_latLng: LatLng(
+                                double.parse(provider
+                                        .viewRequestModel[index].pickUpLat ??
                                     '0.0'),
-                            double.parse(
-                                provider.viewRequestModel[index].dropLong ??
+                                double.parse(provider
+                                        .viewRequestModel[index].pickUpLong ??
                                     '0.0')),
-                        pickup_latLng: LatLng(
-                            double.parse(
-                                provider.viewRequestModel[index].pickUpLat ??
-                                    '0.0'),
-                            double.parse(
-                                provider.viewRequestModel[index].pickUpLong ??
-                                    '0.0')),
-                      )));
+                          )))
+                  .then((v) {
+                provider.get_request_data(status: widget.status);
+              });
             },
             child: Column(
               children: [

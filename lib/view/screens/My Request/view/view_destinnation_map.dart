@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -33,6 +34,8 @@ class ViewDestinationMap extends StatefulWidget {
 }
 
 class _ViewDestinationMapState extends State<ViewDestinationMap> {
+  late Animation<Offset> _animation;
+
   Map<PolylineId, Polyline> polylines = {};
   GoogleMapController? _controller;
   var markersList = <MarkerId, Marker>{};
@@ -41,9 +44,13 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
 
   void onMapCreated(GoogleMapController controller) async {
     _controller = controller;
+    print('${'driverLat...${widget.driverRequestModel.driverLat}'}');
+    print('${'driverLong...${widget.driverRequestModel.driverLong}'}');
     add_poly_line(
-        LatLng(double.parse('${widget.driverRequestModel.driverLat}'),
-            double.parse('${widget.driverRequestModel.driverLong}')),
+        widget.driverRequestModel.driverLat == null
+            ? null
+            : LatLng(double.parse('${widget.driverRequestModel.driverLat}'),
+                double.parse('${widget.driverRequestModel.driverLong}')),
         animate_camera: true);
   }
 
@@ -57,40 +64,67 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
     return _createBounds(positions);
   }
 
-  add_poly_line(LatLng position, {bool? animate_camera}) async {
-    List<LatLng> polylineCoordinates = [];
-    PolylinePoints polylinePoints = PolylinePoints();
-    PolylineResult result1 = await polylinePoints.getRouteBetweenCoordinates(
-        'AIzaSyAoknLjF2XNcjPDW25O5QOQFLgdVKc6GgU',
-        PointLatLng(position.latitude, position.longitude),
-        PointLatLng(pickup_latLng!.latitude, pickup_latLng!.longitude));
-    PolylineResult result2 = await polylinePoints.getRouteBetweenCoordinates(
-        'AIzaSyAoknLjF2XNcjPDW25O5QOQFLgdVKc6GgU',
-        PointLatLng(pickup_latLng!.latitude, pickup_latLng!.longitude),
-        PointLatLng(dropoff_latLng!.latitude, dropoff_latLng!.longitude));
-    if (result1.points.isNotEmpty) {
-      result1.points.forEach((PointLatLng point) {
-        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-      });
+  add_poly_line(LatLng? position, {bool? animate_camera = false}) async {
+    if (position == null) {
+      List<LatLng> polylineCoordinates = [];
+      PolylinePoints polylinePoints = PolylinePoints();
+      PolylineResult result1 = await polylinePoints.getRouteBetweenCoordinates(
+          'AIzaSyAoknLjF2XNcjPDW25O5QOQFLgdVKc6GgU',
+          PointLatLng(pickup_latLng!.latitude, pickup_latLng!.longitude),
+          PointLatLng(dropoff_latLng!.latitude, dropoff_latLng!.longitude));
+      if (result1.points.isNotEmpty) {
+        result1.points.forEach((PointLatLng point) {
+          polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+        });
+      }
+      PolylineId id = PolylineId("mdlDm");
+      Polyline polyline = Polyline(
+          polylineId: id,
+          color: Color(0xffFFCC1B),
+          points: polylineCoordinates,
+          patterns: [
+            PatternItem.dash(8),
+            PatternItem.gap(15),
+          ],
+          width: 4);
+      polylines[id] = polyline;
+      setState(() {});
+      add_Marker(position, animate_camera: animate_camera);
+    } else {
+      List<LatLng> polylineCoordinates = [];
+      PolylinePoints polylinePoints = PolylinePoints();
+      PolylineResult result1 = await polylinePoints.getRouteBetweenCoordinates(
+          'AIzaSyAoknLjF2XNcjPDW25O5QOQFLgdVKc6GgU',
+          PointLatLng(position.latitude, position.longitude),
+          PointLatLng(pickup_latLng!.latitude, pickup_latLng!.longitude));
+      PolylineResult result2 = await polylinePoints.getRouteBetweenCoordinates(
+          'AIzaSyAoknLjF2XNcjPDW25O5QOQFLgdVKc6GgU',
+          PointLatLng(pickup_latLng!.latitude, pickup_latLng!.longitude),
+          PointLatLng(dropoff_latLng!.latitude, dropoff_latLng!.longitude));
+      if (result1.points.isNotEmpty) {
+        result1.points.forEach((PointLatLng point) {
+          polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+        });
+      }
+      if (result2.points.isNotEmpty) {
+        result2.points.forEach((PointLatLng point) {
+          polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+        });
+      }
+      PolylineId id = PolylineId("mdlDm");
+      Polyline polyline = Polyline(
+          polylineId: id,
+          color: Color(0xffFFCC1B),
+          points: polylineCoordinates,
+          patterns: [
+            PatternItem.dash(8),
+            PatternItem.gap(15),
+          ],
+          width: 4);
+      polylines[id] = polyline;
+      setState(() {});
+      add_Marker(position, animate_camera: animate_camera);
     }
-    if (result2.points.isNotEmpty) {
-      result2.points.forEach((PointLatLng point) {
-        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-      });
-    }
-    PolylineId id = PolylineId("mdlDm");
-    Polyline polyline = Polyline(
-        polylineId: id,
-        color: Color(0xffFFCC1B),
-        points: polylineCoordinates,
-        patterns: [
-          PatternItem.dash(8),
-          PatternItem.gap(15),
-        ],
-        width: 4);
-    polylines[id] = polyline;
-    setState(() {});
-    add_Marker(position, animate_camera: animate_camera);
   }
 
   LatLngBounds _createBounds(List<LatLng> positions) {
@@ -109,11 +143,17 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
         northeast: LatLng(northeastLat, northeastLon));
   }
 
-  add_Marker(LatLng position, {bool? animate_camera}) async {
+  int numDeltas = 50;
+  double? deltaLat;
+  double? deltaLng;
+  var driver_position;
+  var i = 0;
+  Uint8List? markerIcon2;
+  bool add_action = false;
+  add_Marker(LatLng? position, {bool? animate_camera}) async {
     final Uint8List markerIcon1 =
         await getBytesFromAsset('assets/location_marker.png', 100);
-    final Uint8List markerIcon2 =
-        await getBytesFromAsset('assets/location_marker2.png', 100);
+    markerIcon2 = await getBytesFromAsset('assets/location_marker2.png', 100);
     final Uint8List markerIcon3 =
         await getBytesFromAsset('assets/car_icon.png', 150);
 
@@ -121,42 +161,73 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
     markersList.remove('pickup_latLng');
     final markerId1 = MarkerId('pickup_latLng');
     final marker1 = Marker(
-      icon: BitmapDescriptor.fromBytes(markerIcon3),
-      markerId: MarkerId(UniqueKey().toString()),
-      position: LatLng(pickup_latLng!.latitude, pickup_latLng!.longitude),
-    );
+        icon: BitmapDescriptor.fromBytes(markerIcon3),
+        markerId: markerId1,
+        position: LatLng(pickup_latLng!.latitude, pickup_latLng!.longitude));
     final iceGiants1 = {markerId1: marker1};
     markersList.addEntries(iceGiants1.entries);
-    markersList.remove('dropoff_latLng');
 
     ///2
+    markersList.remove('dropoff_latLng');
     final markerId2 = MarkerId('dropoff_latLng');
     final marker2 = Marker(
-      icon: BitmapDescriptor.fromBytes(markerIcon1),
-      markerId: MarkerId(UniqueKey().toString()),
-      position: LatLng(dropoff_latLng!.latitude, dropoff_latLng!.longitude),
-    );
+        icon: BitmapDescriptor.fromBytes(markerIcon1),
+        markerId: markerId2,
+        position: LatLng(dropoff_latLng!.latitude, dropoff_latLng!.longitude));
     final iceGiants2 = {markerId2: marker2};
     markersList.addEntries(iceGiants2.entries);
 
     ///3
-    markersList.remove('driver_coordinate');
-    final markerId3 = MarkerId('driver_coordinate');
-    final marker3 = Marker(
-      icon: BitmapDescriptor.fromBytes(markerIcon2),
-      markerId: MarkerId(UniqueKey().toString()),
-      position: LatLng(position.latitude, position.longitude),
-    );
-    final iceGiants3 = {markerId3: marker3};
-    markersList.addEntries(iceGiants3.entries);
-    if (animate_camera == true) {
-      _controller!.animateCamera(
-          CameraUpdate.newLatLngBounds(_bounds(markersList), 50));
+    if (position != null) {
+      if (!markersList.containsKey(MarkerId('driver_coordinate'))) {
+        print('has coordiate');
+        driver_position = [position.latitude, position.longitude];
+        final markerId3 = MarkerId('driver_coordinate');
+        final marker3 = Marker(
+          icon: BitmapDescriptor.fromBytes(markerIcon2!),
+          markerId: markerId3,
+          position: LatLng(position.latitude, position.longitude),
+        );
+        final iceGiants3 = {markerId3: marker3};
+        markersList.addEntries(iceGiants3.entries);
+        print('animate_camera call');
+        _controller!.animateCamera(
+            CameraUpdate.newLatLngBounds(_bounds(markersList), 150));
+      }
+      if (animate_camera == true) {
+        print('animate_camera call');
+        add_action = true;
+        _controller!.animateCamera(
+            CameraUpdate.newLatLngBounds(_bounds(markersList), 150));
+      }
     } else {
-      _controller!.animateCamera(CameraUpdate.newLatLng(
-          LatLng(position.latitude, position.longitude)));
+      print('animate_camera call');
+      add_action = true;
+      _controller!.animateCamera(
+          CameraUpdate.newLatLngBounds(_bounds(markersList), 150));
     }
     setState(() {});
+  }
+
+  void _animateMarker(LatLng start, LatLng end) async {
+    print('call animate');
+    const int steps = 60;
+    const Duration duration = Duration(milliseconds: 1);
+    final double deltaLat = (end.latitude - start.latitude) / steps;
+    final double deltaLng = (end.longitude - start.longitude) / steps;
+    for (int i = 1; i <= steps; i++) {
+      print('animate');
+      final double newLat = start.latitude + deltaLat * i;
+      final double newLng = start.longitude + deltaLng * i;
+      setState(() {
+        LatLng position = LatLng(newLat, newLng);
+        Marker? m = markersList[MarkerId('driver_coordinate')];
+        markersList[MarkerId('driver_coordinate')] = m!.copyWith(
+          positionParam: position,
+        );
+      });
+      await Future.delayed(duration ~/ steps);
+    }
   }
 
   String map_style = '';
@@ -198,30 +269,32 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
     channel = WebSocketChannel.connect(wsUrl);
     await channel!.ready;
     channel!.stream.listen((message) async {
-      print('${message}');
-      Map map = jsonDecode(message);
-      final Uint8List markerIcon2 =
-          await getBytesFromAsset('assets/location_marker2.png', 100);
-      markersList.remove('driver_coordinate');
-      final markerId3 = MarkerId('driver_coordinate');
-      final marker3 = Marker(
-        icon: BitmapDescriptor.fromBytes(markerIcon2),
-        markerId: MarkerId(UniqueKey().toString()),
-        position: LatLng(
-            double.parse('${map['lat']}'), double.parse('${map['lng']}')),
-      );
-      final iceGiants3 = {markerId3: marker3};
-      markersList.addEntries(iceGiants3.entries);
-      setState(() {});
-      add_poly_line(
-          LatLng(double.parse('${map['lat']}'), double.parse('${map['lng']}')));
+      if (add_action) {
+        print('call socket');
+        print('${message}');
+        Map map = jsonDecode(message);
+        if ('${map['driver_id']}' ==
+            widget.driverRequestModel.driverId.toString()) {
+          if (markersList.containsKey(MarkerId('driver_coordinate'))) {
+            _animateMarker(
+                LatLng(driver_position[0], driver_position[1]),
+                LatLng(double.parse('${map['lat']}'),
+                    double.parse('${map['lng']}')));
+            driver_position = [
+              double.parse('${map['lat']}'),
+              double.parse('${map['lng']}')
+            ];
+          }
+          add_poly_line(LatLng(
+              double.parse('${map['lat']}'), double.parse('${map['lng']}')));
+        }
+      }
     });
   }
 
   get_current_location() async {
     Position position = await requestLocation();
-    await _controller!
-        .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+    _controller!.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
       target: LatLng(position.latitude, position.longitude),
       zoom: 15.7,
     )));
@@ -287,24 +360,13 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
                           zoom: 15.7,
                         ),
                         style: isDaytime == true ? null : map_style,
-                        // cloudMapId:
-                        //     Platform.isIOS ? '9ade47e7d53ff36d' : '8cc3ed800b9e0615',
                         polylines: Set<Polyline>.of(polylines.values),
                         onMapCreated: (controller) {
-                          //customInfoWindowController.googleMapController = controller;
-                          // if (markers.isNotEmpty) {
-                          //   print('total markers = ${markers.length}');
-                          //   controller.animateCamera(CameraUpdate.newLatLngBounds(
-                          //       _bounds(markers), 50.0));
-                          // }
                           onMapCreated(controller);
                         },
-                        onCameraMove: (position) {
-                          //customInfoWindowController.onCameraMove!();
-                        },
+                        markers: markersList.values.toSet(),
                         myLocationButtonEnabled: false,
                         myLocationEnabled: false,
-                        markers: Set<Marker>.of(markersList.values),
                       ),
               ),
               Positioned(
@@ -384,6 +446,7 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
                       SizedBox(
                         height: 1.h,
                       ),
+                      if(widget.driverRequestModel.driverLat != null)
                       Row(
                         children: [
                           InkWell(
@@ -449,82 +512,12 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
                           ),
                         ],
                       ),
-                      // SizedBox(
-                      //   height: 2.h,
-                      // ),
-                      // Row(
-                      //   children: [
-                      //     Expanded(
-                      //       child: InkWell(
-                      //         onTap: () {
-                      //           MapsSheet.show(
-                      //             context: context,
-                      //             onMapTap: (map) {
-                      //               map.showMarker(
-                      //                 coords: Coords(
-                      //                     double.parse(widget
-                      //                         .driverRequestModel.pickUpLat),
-                      //                     double.parse(widget
-                      //                         .driverRequestModel.pickUpLong)),
-                      //                 title:
-                      //                     '${widget.driverRequestModel.pickupName}',
-                      //                 zoom: 15,
-                      //               );
-                      //             },
-                      //           );
-                      //         },
-                      //         child: Container(
-                      //           height: 6.h,
-                      //           child: Center(
-                      //             child: Text(
-                      //               'Pickup Location',
-                      //               style: TextStyle(color: Colors.black),
-                      //             ),
-                      //           ),
-                      //           decoration: BoxDecoration(
-                      //               color: Color(0xffFFD542),
-                      //               borderRadius: BorderRadius.circular(15)),
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     SizedBox(
-                      //       width: 5.w,
-                      //     ),
-                      //     Expanded(
-                      //       child: InkWell(
-                      //         onTap: () {
-                      //           MapsSheet.show(
-                      //             context: context,
-                      //             onMapTap: (map) {
-                      //               map.showMarker(
-                      //                 coords: Coords(
-                      //                     double.parse(widget
-                      //                         .driverRequestModel.dropLat),
-                      //                     double.parse(widget
-                      //                         .driverRequestModel.dropLong)),
-                      //                 title:
-                      //                     '${widget.driverRequestModel.dropName}',
-                      //                 zoom: 15,
-                      //               );
-                      //             },
-                      //           );
-                      //         },
-                      //         child: Container(
-                      //           height: 6.h,
-                      //           child: Center(
-                      //             child: Text(
-                      //               'Drop-off Location',
-                      //               style: TextStyle(color: Colors.black),
-                      //             ),
-                      //           ),
-                      //           decoration: BoxDecoration(
-                      //               color: Color(0xffFFD542),
-                      //               borderRadius: BorderRadius.circular(15)),
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
+                      if(widget.driverRequestModel.driverLat == null)
+                        Text(
+                          'Driver did not assign!'.tr,
+                          style: TextStyle(
+                              color: Colors.red, fontWeight: FontWeight.bold),
+                        ),
                       SizedBox(
                         height: 2.h,
                       ),
@@ -556,6 +549,63 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class RippleAnimation extends StatefulWidget {
+  final double size;
+  final LatLng position;
+  final Color color;
+
+  RippleAnimation({
+    required this.position,
+    this.size = 80.0,
+    this.color = Colors.blue,
+  });
+
+  @override
+  _RippleAnimationState createState() => _RippleAnimationState();
+}
+
+class _RippleAnimationState extends State<RippleAnimation>
+    with SingleTickerProviderStateMixin {
+  AnimationController? _controller;
+  Animation<double>? _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    )..repeat(reverse: false);
+    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+      parent: _controller!,
+      curve: Curves.easeOut,
+    ));
+  }
+
+  @override
+  void dispose() {
+    _controller?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _animation!,
+      builder: (context, child) {
+        return Container(
+          width: widget.size * _animation!.value,
+          height: widget.size * _animation!.value,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: widget.color.withOpacity(1 - _animation!.value),
+          ),
+        );
+      },
     );
   }
 }
