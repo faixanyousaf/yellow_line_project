@@ -34,7 +34,6 @@ class ViewDestinationMap extends StatefulWidget {
 }
 
 class _ViewDestinationMapState extends State<ViewDestinationMap> {
-  late Animation<Offset> _animation;
 
   Map<PolylineId, Polyline> polylines = {};
   GoogleMapController? _controller;
@@ -446,73 +445,73 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
                       SizedBox(
                         height: 1.h,
                       ),
-                      if(widget.driverRequestModel.driverLat != null)
-                      Row(
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              navigationService.navigateTo(
-                                  RouterPath.DriverProfileScreen,
-                                  arguments:
-                                      '${widget.driverRequestModel.driverId}');
-                            },
-                            child: CircleAvatar(
-                              radius: 3.0.h,
-                              backgroundColor: Colors.transparent,
-                              child: Container(
-                                child: Icon(
-                                  Icons.person,
-                                  size: 35,
-                                ),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
+                      if (widget.driverRequestModel.driverLat != null)
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                navigationService.navigateTo(
+                                    RouterPath.DriverProfileScreen,
+                                    arguments:
+                                        '${widget.driverRequestModel.driverId}');
+                              },
+                              child: CircleAvatar(
+                                radius: 3.0.h,
+                                backgroundColor: Colors.transparent,
+                                child: Container(
+                                  child: Icon(
+                                    Icons.person,
+                                    size: 35,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            width: 3.w,
-                          ),
-                          Text(
-                            '${widget.driverRequestModel.driverName}',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Expanded(
-                            child: SizedBox(),
-                          ),
-                          InkWell(
-                            onTap: () async {
-                              final link = WhatsAppUnilink(
-                                phoneNumber:
-                                    '${widget.driverRequestModel.driverDialCode}${widget.driverRequestModel.driverMobile}',
-                                text: "",
-                              );
-                              await launchUrl(link.asUri());
-                            },
-                            child: SizedBox(
-                              child: Image.asset('assets/whats_app.png'),
-                              height: 4.h,
-                              width: 8.w,
+                            SizedBox(
+                              width: 3.w,
                             ),
-                          ),
-                          SizedBox(
-                            width: 4.w,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              launchUrl(Uri.parse(
-                                  "tel://${widget.driverRequestModel.driverDialCode}${widget.driverRequestModel.driverMobile}"));
-                            },
-                            child: SizedBox(
-                              child: Image.asset('assets/call_icon.png'),
-                              height: 4.h,
-                              width: 8.w,
+                            Text(
+                              '${widget.driverRequestModel.driverName}',
+                              style: TextStyle(color: Colors.white),
                             ),
-                          ),
-                        ],
-                      ),
-                      if(widget.driverRequestModel.driverLat == null)
+                            Expanded(
+                              child: SizedBox(),
+                            ),
+                            InkWell(
+                              onTap: () async {
+                                final link = WhatsAppUnilink(
+                                  phoneNumber:
+                                      '${widget.driverRequestModel.driverDialCode}${widget.driverRequestModel.driverMobile}',
+                                  text: "",
+                                );
+                                await launchUrl(link.asUri());
+                              },
+                              child: SizedBox(
+                                child: Image.asset('assets/whats_app.png'),
+                                height: 4.h,
+                                width: 8.w,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 4.w,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                launchUrl(Uri.parse(
+                                    "tel://${widget.driverRequestModel.driverDialCode}${widget.driverRequestModel.driverMobile}"));
+                              },
+                              child: SizedBox(
+                                child: Image.asset('assets/call_icon.png'),
+                                height: 4.h,
+                                width: 8.w,
+                              ),
+                            ),
+                          ],
+                        ),
+                      if (widget.driverRequestModel.driverLat == null)
                         Text(
                           'Driver did not assign!'.tr,
                           style: TextStyle(
@@ -549,63 +548,6 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class RippleAnimation extends StatefulWidget {
-  final double size;
-  final LatLng position;
-  final Color color;
-
-  RippleAnimation({
-    required this.position,
-    this.size = 80.0,
-    this.color = Colors.blue,
-  });
-
-  @override
-  _RippleAnimationState createState() => _RippleAnimationState();
-}
-
-class _RippleAnimationState extends State<RippleAnimation>
-    with SingleTickerProviderStateMixin {
-  AnimationController? _controller;
-  Animation<double>? _animation;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: Duration(seconds: 2),
-    )..repeat(reverse: false);
-    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-      parent: _controller!,
-      curve: Curves.easeOut,
-    ));
-  }
-
-  @override
-  void dispose() {
-    _controller?.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _animation!,
-      builder: (context, child) {
-        return Container(
-          width: widget.size * _animation!.value,
-          height: widget.size * _animation!.value,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: widget.color.withOpacity(1 - _animation!.value),
-          ),
-        );
-      },
     );
   }
 }
