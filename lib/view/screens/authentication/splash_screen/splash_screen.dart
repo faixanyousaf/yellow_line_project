@@ -312,8 +312,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    //get_firebase_Data(context);
-    get_sf_data();
+    get_firebase_Data(context);
+    //get_sf_data();
     super.initState();
   }
 
