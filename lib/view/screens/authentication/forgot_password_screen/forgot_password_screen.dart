@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/global_widgets/custom_button.dart';
 import 'package:yellowline/global_widgets/custom_textfield.dart';
 import 'package:yellowline/global_widgets/data_loading.dart';
 
+import '../../../../helper/navigation/navigation_object.dart';
 import 'Forget Provider/forget_provider.dart';
 import 'ottp_screen/ottp_screen.dart';
 
@@ -97,69 +97,34 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     },
                   ),
                 ),
-                // Padding(
-                //   padding: EdgeInsets.symmetric(horizontal: 6.w),
-                //   child: Row(
-                //     children: [
-                //       Container(
-                //         height: 6.2.h,
-                //         width: 26.w,
-                //         decoration: BoxDecoration(
-                //             borderRadius: BorderRadius.circular(17)
-                //         ),
-                //         child: IntlPhoneField(
-                //           controller: phoneController,
-                //           focusNode: focusNode,
-                //           disableAutoFillHints: false,
-                //           disableLengthCheck: true,
-                //           showDropdownIcon: false,
-                //           //enabled: false,
-                //           flagsButtonMargin: EdgeInsets.only(left: 3.w,top: 0.3.h),
-                //
-                //           decoration: InputDecoration(
-                //             // hintText: 'Phone Number',
-                //             // hintStyle: TextStyle(fontSize: 10.sp,color: Color(0xff181F30)),
-                //             border: OutlineInputBorder(borderRadius: BorderRadius.circular(17)),
-                //             fillColor: Colors.white,
-                //             filled: true,
-                //             disabledBorder: InputBorder.none,
-                //             //contentPadding: EdgeInsets.only(bottom: 2.h),
-                //           ),
-                //
-                //           languageCode: "en",
-                //           onChanged: (phone) {
-                //             print(phone.completeNumber);
-                //           },
-                //           onCountryChanged: (country) {
-                //             print('Country changed to: ' + country.name);
-                //           },
-                //         ),
-                //       ),
-                //       SizedBox(width: 2.w,),
-                //       Expanded(
-                //           child: Padding(
-                //             padding:  EdgeInsets.only(top: 0.5.h),
-                //             child: CustommTextField(
-                //               hintText: 'Mobile Number',
-                //               controller: phoneController,
-                //             ),
-                //           ))
-                //     ],
-                //   ),
-                // ),
                 SizedBox(
                   height: 3.h,
                 ),
                 GestureDetector(
                   onTap: () async {
                     if (provider.formKey.currentState!.validate()) {
-                      await provider.call_forget_api();
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => OttpScreen(
-                                email: provider.emailController.text),
-                          ));
+                      try {
+                        await provider.call_forget_api();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => OttpScreen(
+                                  email: provider.emailController.text),
+                            ));
+                      } catch (e) {
+                        provider.loading = false;
+                        setState(() {});
+                        var snackBar = SnackBar(
+                          content: Text(
+                            'Email is not valid',
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          backgroundColor: Colors.white,
+                        );
+                        ScaffoldMessenger.of(navigationService
+                                .navigatorKey.currentState!.context)
+                            .showSnackBar(snackBar);
+                      }
                     }
                   },
                   child: CustomButton(

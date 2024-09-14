@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:http/http.dart' as http;
+import '../../../../../core/network/routes/base_url.dart';
 import '../../../../../helper/shared_prefs.dart';
 
 dynamic baseUrl = 'http://yellowline.codeels.pro/';
@@ -11,7 +12,7 @@ Future forget_mail_send_api({required Map<String, dynamic> map}) async {
   SharedPrefs sf = SharedPrefs();
   var tocken = await sf.getToken();
   final response =
-      await dio.Dio().post('http://yellowline.codeels.pro/auth/code/users',
+      await dio.Dio().post('${base_URL}auth/code/users',
           options: dio.Options(
             headers: {'Content-Type': "application/x-www-form-urlencoded"},
           ),
@@ -25,7 +26,7 @@ Future reset_password_api({required Map<String, dynamic> map}) async {
   SharedPrefs sf = SharedPrefs();
   var tocken = await sf.getToken();
   final response =
-      await dio.Dio().post('http://yellowline.codeels.pro/auth/reset/users',
+      await dio.Dio().post('${base_URL}auth/reset/users',
           options: dio.Options(
             headers: {'Content-Type': "application/x-www-form-urlencoded"},
           ),

@@ -75,7 +75,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     color: Colors.black,
                     shape: BoxShape.circle,
                     border: Border.all(width: 0.8, color: Colors.white)),
-                child: loginResponceModel!.user!.profilePicture != null &&
+                child: loginResponceModel?.user?.profilePicture != null &&
                         loginResponceModel!.user!.profilePicture
                             .toString()
                             .isNotEmpty

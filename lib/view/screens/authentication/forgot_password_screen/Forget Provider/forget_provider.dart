@@ -28,8 +28,5 @@ class ForgetProvider extends ChangeNotifier {
       loading = false;
       updateState();
       print('result.....$result');
-      // navigationService.navigatePushReplace(RouterPath.loginRout);
-      //navigationService.navigateTo(RouterPath.Otp_Screen);
-
   }
 }

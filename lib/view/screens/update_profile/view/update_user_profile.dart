@@ -136,7 +136,7 @@ class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
                                 child: Stack(
                                   children: [
                                     provider.logo == null
-                                        ? Center(
+                                        ?loginResponceModel==null?SizedBox() :Center(
                                             child: Container(
                                               height: 11.h,
                                               width: 25.w,

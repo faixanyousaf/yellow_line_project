@@ -134,22 +134,22 @@ class _VehicleDetailState extends State<VehicleDetail> {
                                       fontSize: 10.sp)),
                             ),
                           ),
-                          InkWell(
-                            child: Icon(Icons.keyboard_arrow_down, size: 22),
-                            onTap: () {
-                              listBottomSheet(
-                                  context: context,
-                                  add_new: () {},
-                                  selected_values: (v) {
-                                    provider.vehicleName = v[0];
-                                    type_controller.text = v[0];
-                                    provider.updateState();
-                                  },
-                                  hide_add_new: true,
-                                  pre_selected_all_values: [],
-                                  all_values: provider.vehiclesList);
-                            },
-                          )
+                          // InkWell(
+                          //   child: Icon(Icons.keyboard_arrow_down, size: 22),
+                          //   onTap: () {
+                          //     listBottomSheet(
+                          //         context: context,
+                          //         add_new: () {},
+                          //         selected_values: (v) {
+                          //           provider.vehicleName = v[0];
+                          //           type_controller.text = v[0];
+                          //           provider.updateState();
+                          //         },
+                          //         hide_add_new: true,
+                          //         pre_selected_all_values: [],
+                          //         all_values: provider.vehiclesList);
+                          //   },
+                          // )
                         ],
                       ),
                     ),
@@ -197,30 +197,23 @@ class _VehicleDetailState extends State<VehicleDetail> {
                                       fontSize: 10.sp)),
                             ),
                           ),
-                          // Text(
-                          //   provider.chooseCompanyName == null
-                          //       ? 'Choose company'
-                          //       : '${provider.chooseCompanyName}',
-                          //   style: TextStyle(
-                          //       color: Colors.black, fontSize: 10.sp),
-                          // ),
-                          InkWell(
-                              onTap: () {
-                                listBottomSheet(
-                                    context: context,
-                                    add_new: () {},
-                                    selected_values: (v) {
-                                      provider.modelName = null;
-                                      provider.chooseCompanyName = v[0];
-                                      make_controller.text = v[0];
-                                      provider.updateState();
-                                      provider.get_make_model();
-                                    },
-                                    hide_add_new: true,
-                                    pre_selected_all_values: [],
-                                    all_values: provider.car_make_list);
-                              },
-                              child: Icon(Icons.keyboard_arrow_down, size: 22))
+                          // InkWell(
+                          //     onTap: () {
+                          //       listBottomSheet(
+                          //           context: context,
+                          //           add_new: () {},
+                          //           selected_values: (v) {
+                          //             provider.modelName = null;
+                          //             provider.chooseCompanyName = v[0];
+                          //             make_controller.text = v[0];
+                          //             provider.updateState();
+                          //             provider.get_make_model();
+                          //           },
+                          //           hide_add_new: true,
+                          //           pre_selected_all_values: [],
+                          //           all_values: provider.car_make_list);
+                          //     },
+                          //     child: Icon(Icons.keyboard_arrow_down, size: 22))
                         ],
                       ),
                     ),
@@ -268,21 +261,21 @@ class _VehicleDetailState extends State<VehicleDetail> {
                                       fontSize: 10.sp)),
                             ),
                           ),
-                          InkWell(
-                              onTap: () {
-                                listBottomSheet(
-                                    context: context,
-                                    add_new: () {},
-                                    selected_values: (v) {
-                                      provider.modelName = v[0];
-                                      model_controller.text = v[0];
-                                      provider.updateState();
-                                    },
-                                    hide_add_new: true,
-                                    pre_selected_all_values: [],
-                                    all_values: provider.car_model_list);
-                              },
-                              child: Icon(Icons.keyboard_arrow_down, size: 22))
+                          // InkWell(
+                          //     onTap: () {
+                          //       listBottomSheet(
+                          //           context: context,
+                          //           add_new: () {},
+                          //           selected_values: (v) {
+                          //             provider.modelName = v[0];
+                          //             model_controller.text = v[0];
+                          //             provider.updateState();
+                          //           },
+                          //           hide_add_new: true,
+                          //           pre_selected_all_values: [],
+                          //           all_values: provider.car_model_list);
+                          //     },
+                          //     child: Icon(Icons.keyboard_arrow_down, size: 22))
                         ],
                       ),
                     ),
@@ -330,22 +323,22 @@ class _VehicleDetailState extends State<VehicleDetail> {
                                       fontSize: 10.sp)),
                             ),
                           ),
-                          InkWell(
-                            child: Icon(Icons.keyboard_arrow_down, size: 22),
-                            onTap: () {
-                              listBottomSheet(
-                                  context: context,
-                                  add_new: () {},
-                                  selected_values: (v) {
-                                    provider.yearName = v[0];
-                                    year_controller.text = v[0];
-                                    provider.updateState();
-                                  },
-                                  hide_add_new: true,
-                                  pre_selected_all_values: [],
-                                  all_values: provider.chooseYearList);
-                            },
-                          )
+                          // InkWell(
+                          //   child: Icon(Icons.keyboard_arrow_down, size: 22),
+                          //   onTap: () {
+                          //     listBottomSheet(
+                          //         context: context,
+                          //         add_new: () {},
+                          //         selected_values: (v) {
+                          //           provider.yearName = v[0];
+                          //           year_controller.text = v[0];
+                          //           provider.updateState();
+                          //         },
+                          //         hide_add_new: true,
+                          //         pre_selected_all_values: [],
+                          //         all_values: provider.chooseYearList);
+                          //   },
+                          // )
                         ],
                       ),
                     ),
