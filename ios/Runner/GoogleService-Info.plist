@@ -17,7 +17,7 @@
 	<key>PROJECT_ID</key>
 	<string>quantum-chemist-418510</string>
 	<key>STORAGE_BUCKET</key>
-	<string>quantum-chemist-418510.appspot.com</string>
+	<string>quantum-chemist-418510.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>

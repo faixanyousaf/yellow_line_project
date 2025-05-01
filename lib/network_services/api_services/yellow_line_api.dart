@@ -28,10 +28,30 @@ class YellowLineAPI {
     }
   }
 
+  Future<dynamic> my_pending_requests({required id}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.my_pending_requests + id;
+      return await _http.iGet(url);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<dynamic> signup({required body}) async {
     try {
       String url = '';
       url = ApiRoutes.signup;
+      return await _http.iPost_form_data(url, data: body);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> cancel_ride({required body}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.cancel_ride;
       return await _http.iPost_form_data(url, data: body);
     } catch (e) {
       rethrow;
@@ -107,6 +127,7 @@ class YellowLineAPI {
       rethrow;
     }
   }
+
   Future<dynamic> business_all_requests_by_month({required body}) async {
     try {
       String url = '';
@@ -116,6 +137,7 @@ class YellowLineAPI {
       rethrow;
     }
   }
+
   Future<dynamic> business_all_requests_by_week({required body}) async {
     try {
       String url = '';

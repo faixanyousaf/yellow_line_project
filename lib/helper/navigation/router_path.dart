@@ -15,6 +15,7 @@ class RouterPath {
   static const String add_request_screen_one = "add request screen one";
   static const String complete_request_screen = "complete request screen";
   static const String request_view_screen = "request view screen";
+  static const String AllSocketDriversView = "AllSocketDriversView";
 
   // static const String loginRout = "Login Screen";
   // static const String onboardRout = "On board Screen";

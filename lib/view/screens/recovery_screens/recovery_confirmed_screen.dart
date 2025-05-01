@@ -44,7 +44,7 @@ class _RecoveryConfirmedScreenState extends State<RecoveryConfirmedScreen> {
               ),
               //SizedBox(height: 1.h,),
               Text(
-                'Recovery Request Confirmed'.tr,
+                'Ride completed'.tr,
                 style: TextStyle(color: Colors.white, fontSize: 16.sp),
               ),
               SizedBox(

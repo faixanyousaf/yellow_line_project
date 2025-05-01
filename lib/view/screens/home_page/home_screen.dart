@@ -2,15 +2,23 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/helper/navigation/navigation_object.dart';
 import 'package:yellowline/helper/navigation/router_path.dart';
 import 'package:yellowline/view/screens/home_page/drawer_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../helper/shared_prefs.dart';
+import '../../../network_services/repository/authentication_repository/auth_repo.dart';
 import '../../../network_services/repository/user_repository/user_repo.dart';
 import '../../Authentication Models/login/models/login_Responce_model.dart';
 import '../../Authentication Models/sos/sos_screen.dart';
+import '../recovery_screens/model/my_pending_request_model.dart';
+import '../recovery_screens/view/my_pending_request_screen.dart';
+import '../recovery_screens/view_model/add_request_provider.dart';
+
+bool stop_pending_request_routing = false;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -53,27 +61,61 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     )),
   ];
-
+  Timer? timer;
   @override
   void initState() {
     get_user_data();
-    _timer = Timer.periodic(const Duration(seconds: 10), (Timer timer) async {
-      print('update_location');
-      SharedPrefs sf = SharedPrefs();
-      var id = await sf.getid();
-      Position position = await requestLocation();
-      UserRepository.instance.update_location(body: {
-        "lat": position.latitude,
-        "lng": position.longitude,
-        "user_id": id
-      });
+    timer = Timer.periodic(Duration(seconds: 5), (Timer t) {
+      call_pending_request();
     });
+    // _timer = Timer.periodic(const Duration(seconds: 10), (Timer timer) async {
+    //   print('update_location');
+    //   SharedPrefs sf = SharedPrefs();
+    //   var id = await sf.getid();
+    //   Position position = await requestLocation();
+    //   UserRepository.instance.update_location(body: {
+    //     "lat": position.latitude,
+    //     "lng": position.longitude,
+    //     "user_id": id
+    //   });
+    // });
     super.initState();
+  }
+
+  call_pending_request() async {
+    SharedPrefs sf = SharedPrefs();
+    var id = await sf.getid();
+    //final player = AudioPlayer();
+    //await player.setAsset('assets/audio/Alert_Sound.mp3');
+    List result = await AuthRepository.instance.my_pending_requests(id: id);
+    if (result.isNotEmpty && stop_pending_request_routing == false) {
+      // await player.play();
+      PendingRequestModel model = PendingRequestModel.fromJson(result[0]);
+      Navigator.of(navigationService.navigatorKey.currentState!.context)
+          .push(MaterialPageRoute(
+              builder: (c) => MyPendingRequestMapView(
+                    driverRequestModel: model,
+                    dropoff_latLng: LatLng(double.parse(model.dropLat),
+                        double.parse(model.dropLong)),
+                    pickup_latLng: LatLng(double.parse(model.driverLat),
+                        double.parse(model.dropLong)),
+                    cancel_request: () {
+                      AuthRepository.instance.cancel_ride(body: {
+                        'request_id': model.id,
+                        'driver_id': '${id}',
+                      });
+                    },
+                  )));
+    }
+    if (result.isEmpty && stop_pending_request_routing == true) {
+      Navigator.of(navigationService.navigatorKey.currentState!.context).pop();
+    }
   }
 
   Timer? _timer;
   @override
   void dispose() {
+    timer!.cancel();
     _timer!.cancel();
     super.dispose();
   }

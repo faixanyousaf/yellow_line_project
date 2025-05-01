@@ -10,6 +10,8 @@ class ApiRoutes {
   static String login = '${base_URL}auth/users/customer';
   static String cities = '${base_URL}common/cities';
   static String get_all_drivers = '${base_URL}driver/list/';
+  static String my_pending_requests = '${base_URL}user/my_active_requests/';
+  static String cancel_ride = '${base_URL}user/cancel_ride';
   static String delete_drivers = '${base_URL}driver/delete/';
   static String get_fare = '${base_URL}common/getFare';
   static String myrequests_by_status = '${base_URL}user/myrequests_by_status';

@@ -8,6 +8,7 @@ import '../../view/screens/add_car_screen/vehicle_added_sceen.dart';
 import '../../view/screens/add_car_screen/vehicle_detail_screen.dart';
 import '../../view/screens/authentication/otp_screen/otp_screen.dart';
 import '../../view/screens/home_page/home_screen.dart';
+import '../../view/screens/recovery_screens/view/all_socket_drivers_view.dart';
 import '../../view/screens/recovery_screens/view/drop_off_screen.dart';
 import '../../view/screens/recovery_screens/recovery_confirmed_screen.dart';
 import '../../view/screens/sales/sales_screen.dart';
@@ -53,7 +54,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
     case RouterPath.add_request_screen_one:
       return MaterialPageRoute(
-        builder: (context) => DropOffScreen(),
+        builder: (context) => DropOffScreen(key: UniqueKey(),),
+      );    case RouterPath.AllSocketDriversView:
+      return MaterialPageRoute(
+        fullscreenDialog: true,
+        builder: (context) => AllSocketDriversView(),
       );
     case RouterPath.complete_request_screen:
       return MaterialPageRoute(

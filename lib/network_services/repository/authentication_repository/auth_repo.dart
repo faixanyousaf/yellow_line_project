@@ -26,11 +26,40 @@ class AuthRepository {
     }
   }
 
+  Future<dynamic> my_pending_requests({required id}) async {
+    try {
+      log('body......$id', name: 'get_view_request | AuthRepository');
+      var data = await _saryaAPI.my_pending_requests(id: id);
+      log('data......$data', name: 'get_view_request | AuthRepository');
+      return data;
+    } catch (e) {
+      log('catch error......${e.toString()}',
+          name: 'get_view_request | AuthRepository');
+      rethrow;
+    }
+  }
+
   Future signUp({required body}) async {
     try {
       log('body......$body', name: 'signIn | AuthRepository');
 
       var data = await _saryaAPI.signup(body: body);
+
+      log('data......$data', name: 'signIn | AuthRepository');
+
+      return data;
+    } catch (e) {
+      log('catch......${e.toString()}', name: 'signUn | AuthRepository');
+
+      rethrow;
+    }
+  }
+
+  Future cancel_ride({required body}) async {
+    try {
+      log('body......$body', name: 'signIn | AuthRepository');
+
+      var data = await _saryaAPI.cancel_ride(body: body);
 
       log('data......$data', name: 'signIn | AuthRepository');
 

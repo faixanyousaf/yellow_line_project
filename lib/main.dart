@@ -1,6 +1,6 @@
 import 'dart:io';
-
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -16,6 +16,7 @@ import 'package:yellowline/view/screens/add_car_screen/Providers/view_list_vehic
 import 'package:yellowline/view/screens/authentication/forgot_password_screen/Forget%20Provider/forget_provider.dart';
 import 'package:yellowline/view/screens/authentication/forgot_password_screen/Forget%20Provider/reset_password_provider.dart';
 import 'package:yellowline/view/screens/authentication/splash_screen/splash_screen.dart';
+import 'core/network/routes/base_url.dart';
 import 'helper/navigation/router.dart' as routes;
 import 'helper/navigation/locator.dart';
 import 'helper/navigation/navigation_service.dart';
@@ -37,18 +38,28 @@ class MyHttpOverrides extends HttpOverrides {
 }
 
 void main() async {
+  HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  final remoteConfig = FirebaseRemoteConfig.instance;
+  await remoteConfig.setConfigSettings(RemoteConfigSettings(
+    fetchTimeout: const Duration(seconds: 5),
+    minimumFetchInterval: const Duration(seconds: 0),
+  ));
+  await remoteConfig.fetchAndActivate();
   // Stripe.publishableKey =
   //     'pk_live_51P8EjkP1P6rcRJTiO3uUcjh565iD5I387vGVpDPuD65Al3JLhgtv1hBXozZPydWy6SMl0nfpwLsmywcqSOkfwdDy00JTJTrkZb';
+  // Stripe.publishableKey =
+  //     'pk_test_51OuE8WAYqNfNZZ16r6VzHDbXs3VWNg98av26Ex4NP5RzuHzAXM67pWE4PZ0LWmb5U7DM2aYzZ86Yf5OwdNG1shLk00iiMKDW4y';
   Stripe.publishableKey =
-      'pk_test_51OuE8WAYqNfNZZ16r6VzHDbXs3VWNg98av26Ex4NP5RzuHzAXM67pWE4PZ0LWmb5U7DM2aYzZ86Yf5OwdNG1shLk00iiMKDW4y';
+      await remoteConfig.getString('Stripe_publishable_Key');
+  base_URL = await remoteConfig.getString('base_url');
+  socket_url = await remoteConfig.getString('socket_url');
   Stripe.merchantIdentifier = 'merchant.travel.sarya.app';
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   setupLocator();
-  HttpOverrides.global = MyHttpOverrides();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => LoginProvider()),
     ChangeNotifierProvider(create: (_) => SingUpProvider()),

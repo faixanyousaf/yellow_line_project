@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,9 @@ import 'package:yellowline/global_widgets/data_loading.dart';
 import 'package:yellowline/view/screens/authentication/forgot_password_screen/forgot_password_screen.dart';
 import 'package:yellowline/view/screens/authentication/signup_screen/signup_screen.dart';
 import '../../../Authentication Models/login/view_model/login_provider.dart';
+import '../../new_desig/page_1.dart';
+import '../../new_desig/page_2.dart';
+import '../../new_desig/page_3.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({Key? key}) : super(key: key);
@@ -66,6 +70,20 @@ class _LogInScreenState extends State<LogInScreen> {
   }
 
   Future<void> _handleSignOut() => _googleSignIn.disconnect();
+
+  void testApi() async {
+    try {
+      var response = await Dio()
+          .post("https://yellowlineapp.com/auth/users/customer", data: {
+        "email": "faizan.yousaf@outlook.com",
+        "password": "123456",
+        "account_type": 2
+      });
+      print("Response: ${response.data}");
+    } catch (e) {
+      print("Dio Error: $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -253,10 +271,15 @@ class _LogInScreenState extends State<LogInScreen> {
                       children: [
                         GestureDetector(
                           onTap: () {
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) => ForgotPasswordScreen(),
+                            //     ));
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => ForgotPasswordScreen(),
+                                  builder: (context) => Page_3(),
                                 ));
                           },
                           child: Text(
@@ -275,10 +298,13 @@ class _LogInScreenState extends State<LogInScreen> {
                   GestureDetector(
                     onTap: () {
                       provider.login_api(context);
+
                       // if(provider.formKey.currentState!.validate()){
                       //   print('object');
                       // }
                       //Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(),));
+
+                      //testApi();
                     },
                     child: CustomButton(
                       text: 'Sign In'.tr,
