@@ -260,7 +260,7 @@ class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
                       children: [
                         Container(
                           height: 6.h,
-                          width: 26.w,
+                          width: 21.w,
                           // margin: EdgeInsets.only(
                           //     bottom: provider.isVisible &&
                           //             provider.phoneController.text.isEmpty

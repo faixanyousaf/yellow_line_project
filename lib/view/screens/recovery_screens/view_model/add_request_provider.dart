@@ -318,7 +318,8 @@ class AddRequestProvider extends ChangeNotifier {
       Navigator.of(context).pop();
     });
   }
-  cancel_ride_request(BuildContext context,Map<String, dynamic>? data) {
+
+  cancel_ride_request(BuildContext context, Map<String, dynamic>? data) {
     print('cancel_ride ...${data}');
     socket!.emit('cancelRideByUser', data);
   }

@@ -18,7 +18,7 @@ class _MyRequestMainScreenState extends State<MyRequestMainScreen>
   @override
   void initState() {
     super.initState();
-    _controller = TabController(length: 3, vsync: this);
+    _controller = TabController(length: 2, vsync: this);
   }
 
   @override
@@ -66,10 +66,19 @@ class _MyRequestMainScreenState extends State<MyRequestMainScreen>
                 dividerHeight: 0.2.h,
                 indicatorSize: TabBarIndicatorSize.tab,
                 tabs: [
+                  // Padding(
+                  //   padding: EdgeInsets.only(bottom: 0.8.h),
+                  //   child: Text(
+                  //     'Active'.tr,
+                  //     style: TextStyle(
+                  //         //color: Color(0xffFFCC1B),
+                  //         fontSize: 10.sp),
+                  //   ),
+                  // ),
                   Padding(
                     padding: EdgeInsets.only(bottom: 0.8.h),
                     child: Text(
-                      'Active'.tr,
+                      'Completed'.tr,
                       style: TextStyle(
                           //color: Color(0xffFFCC1B),
                           fontSize: 10.sp),
@@ -84,15 +93,6 @@ class _MyRequestMainScreenState extends State<MyRequestMainScreen>
                           fontSize: 10.sp),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 0.8.h),
-                    child: Text(
-                      'Completed'.tr,
-                      style: TextStyle(
-                          //color: Color(0xffFFCC1B),
-                          fontSize: 10.sp),
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -101,13 +101,10 @@ class _MyRequestMainScreenState extends State<MyRequestMainScreen>
               controller: _controller,
               children: const [
                 MoversScreen(
-                  status: 1,
-                ),
-                MoversScreen(
-                  status: 2,
-                ),
-                MoversScreen(
                   status: 4,
+                ),
+                MoversScreen(
+                  status: 0,
                 ),
               ],
             ))
