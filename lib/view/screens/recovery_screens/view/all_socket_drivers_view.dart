@@ -57,6 +57,7 @@ class _AllSocketDriversViewState extends State<AllSocketDriversView> {
                                   yes_title: "Yes",
                                   on_done: () async {
                                     Navigator.of(context).pop();
+                                    Navigator.of(context).pop();
                                   });
                             },
                             child: Text(
@@ -192,6 +193,14 @@ class _AllSocketDriversViewState extends State<AllSocketDriversView> {
                                                   no_subtitle: 'No',
                                                   yes_title: "Yes",
                                                   on_done: () async {
+                                                    provider.reject_offer(
+                                                        data: {
+                                                          'bid_id': provider
+                                                              .newBidDriverModel?[
+                                                                  index]
+                                                              .bid_id
+                                                        },
+                                                        index: index);
                                                     // widget.reject_ride!.call(widget
                                                     //     .socketUsersListModel!
                                                     //     .data![index]
@@ -267,9 +276,13 @@ class _AllSocketDriversViewState extends State<AllSocketDriversView> {
                                             animation: true,
                                             lineHeight: 1.5.h,
                                             onAnimationEnd: () {
-                                              print('End animation');
+                                              provider.reject_offer(data: {
+                                                'bid_id': provider
+                                                    .newBidDriverModel?[index]
+                                                    .bid_id
+                                              }, index: index);
                                             },
-                                            animationDuration: 25000,
+                                            animationDuration: 40000,
                                             percent: 1,
                                             barRadius: Radius.circular(30),
                                             progressColor: Colors.blue,
