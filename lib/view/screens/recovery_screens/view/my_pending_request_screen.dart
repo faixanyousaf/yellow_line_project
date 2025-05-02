@@ -8,6 +8,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:sizer/sizer.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../../../../../global_widgets/asset_to_unit8list.dart';
 import '../../../../../global_widgets/cupertino_alert_dialog.dart';
 import '../../../../../global_widgets/custom_drop_conatiner.dart';
@@ -294,10 +296,40 @@ class _MyPendingRequestMapViewState extends State<MyPendingRequestMapView> {
                         SizedBox(
                           height: 3.h,
                         ),
-                        Text(
-                          'Live Tracking:'.tr,
-                          style:
-                              TextStyle(fontSize: 11.sp, color: Colors.white),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Live Tracking:'.tr,
+                              style: TextStyle(
+                                  fontSize: 11.sp, color: Colors.white),
+                            ),
+                            InkWell(
+                              onTap: () async {
+                                final Uri launchUri = Uri(
+                                    scheme: 'tel',
+                                    path:
+                                        '${widget.driverRequestModel.driverDialCode}${widget.driverRequestModel.driverMobile}');
+                                if (await canLaunchUrl(launchUri)) {
+                                  await launchUrl(launchUri);
+                                } else {
+                                  throw 'Could not launch $launchUri';
+                                }
+                              },
+                              child: Container(
+                                height: 4.h,
+                                width: 12.w,
+                                decoration: BoxDecoration(
+                                    color: Color(0xffFFD542),
+                                    borderRadius: BorderRadius.circular(5)),
+                                child: Center(
+                                  child: Icon(
+                                    Icons.call,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
                         ),
                         SizedBox(
                           height: 2.h,

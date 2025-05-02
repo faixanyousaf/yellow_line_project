@@ -70,7 +70,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 13.w),
                   child: Text(
-                    'Enter your Phone Number to get OTP Verification Code'.tr,
+                    'Enter your Email to get OTP Verification Code'.tr,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 12.sp,

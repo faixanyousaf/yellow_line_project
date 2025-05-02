@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../helper/navigation/navigation_object.dart';
 import '../../../../../helper/navigation/router_path.dart';
+import '../../login_screen/login_screen.dart';
 import '../Network call/forget_api.dart';
 
 class ResetPasswordProvider extends ChangeNotifier {
@@ -15,25 +16,22 @@ class ResetPasswordProvider extends ChangeNotifier {
   updateState() {
     notifyListeners();
   }
+
   final formKey = GlobalKey<FormState>();
-  reset_password_api_function({String? email,String? otp}) async {
-    if(formKey.currentState!.validate()){
+  reset_password_api_function({String? email, String? otp}) async {
+    if (formKey.currentState!.validate()) {
       loading = true;
       updateState();
-      var result = await reset_password_api(
-          map: {
-            'password': passwordController.text,
-            'token': otp,
-            'email': email,
-          }
-      );
+      var result = await reset_password_api(map: {
+        'password': passwordController.text,
+        'token': otp,
+        'email': email,
+      });
       loading = false;
       updateState();
       print('result.....$result');
-       navigationService.navigatePushReplace(RouterPath.loginRout);
-     // navigationService.navigateTo(RouterPath.Otp_Screen);
+      navigationService.pushAndRemoveUntil(LogInScreen());
+      // navigationService.navigateTo(RouterPath.Otp_Screen);
     }
-
-
   }
 }

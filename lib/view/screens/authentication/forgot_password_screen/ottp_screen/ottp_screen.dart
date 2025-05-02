@@ -54,11 +54,11 @@ class _OttpScreenState extends State<OttpScreen> {
                 ],
               ),
             ),
-            //SizedBox(height: 1.h,),
+            SizedBox(height: 3.h,),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 13.w),
+              padding: EdgeInsets.symmetric(horizontal: 5.w),
               child: Text(
-                'Enter OTP verification code received at your ‘’+971 555066435’’'.tr,
+                'Enter OTP verification code.'.tr,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 12.sp,
