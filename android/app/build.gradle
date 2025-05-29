@@ -1,5 +1,6 @@
 plugins {
     id "com.android.application"
+    id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
 }
 
@@ -28,17 +29,18 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    compileSdkVersion 34
+    namespace "user.yellowline.app"
+    compileSdkVersion 35
     ndkVersion flutter.ndkVersion
-    //flutter.compileSdkVersion
+    flutter.compileSdkVersion
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_18
+        targetCompatibility JavaVersion.VERSION_18
     }
 
-//    kotlinOptions {
-//        jvmTarget = '1.8'
-//    }
+    kotlinOptions {
+        jvmTarget = '18'
+    }
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -46,10 +48,10 @@ android {
 
     defaultConfig {
         applicationId "user.yellowline.app"
-        minSdkVersion 21
-        targetSdkVersion 34
-        versionCode 9
-        versionName "1.0.9"
+        minSdkVersion 23
+        targetSdkVersion 35
+        versionCode 12
+        versionName "1.0.12"
         multiDexEnabled true
     }
     signingConfigs {
@@ -60,8 +62,12 @@ android {
             storePassword keystoreProperties['storePassword']
         }
     }
+
     buildTypes {
         release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
     }

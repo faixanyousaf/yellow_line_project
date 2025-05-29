@@ -6,6 +6,7 @@ import 'package:yellowline/view/screens/recovery_screens/live_tracking_screen.da
 
 import '../../../helper/navigation/navigation_object.dart';
 import '../home_page/home_screen.dart';
+import 'view/drop_off_screen.dart';
 
 class RecoveryConfirmedScreen extends StatefulWidget {
   const RecoveryConfirmedScreen({Key? key}) : super(key: key);
@@ -52,7 +53,7 @@ class _RecoveryConfirmedScreenState extends State<RecoveryConfirmedScreen> {
               ),
               InkWell(
                 onTap: () {
-                  navigationService.pushAndRemoveUntil(HomeScreen());
+                  navigationService.pushAndRemoveUntil(DropOffScreen());
                 },
                 child: CustomButton(
                   borderColor: Color(0xffFFCC1B),

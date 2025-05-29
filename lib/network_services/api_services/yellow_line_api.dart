@@ -38,11 +38,31 @@ class YellowLineAPI {
     }
   }
 
+  Future<dynamic> check_review({required id}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.check_review + id;
+      return await _http.iGet(url);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<dynamic> signup({required body}) async {
     try {
       String url = '';
       url = ApiRoutes.signup;
       return await _http.iPost_form_data(url, data: body);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> submit_review({required body}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.submit_review;
+      return await _http.iPost_raw_data(url, data: body);
     } catch (e) {
       rethrow;
     }

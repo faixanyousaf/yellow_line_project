@@ -14,7 +14,7 @@
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCjvFcgA8e3VDgOpSAhXoItWQqUkMAkRIA"/>
+            android:value="AIzaSyAoknLjF2XNcjPDW25O5QOQFLgdVKc6GgU"/>
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"

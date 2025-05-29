@@ -38,12 +38,40 @@ class AuthRepository {
       rethrow;
     }
   }
+  Future<dynamic> check_review({required id}) async {
+    try {
+      log('body......$id', name: 'get_view_request | AuthRepository');
+      var data = await _saryaAPI.check_review(id: id);
+      log('data......$data', name: 'get_view_request | AuthRepository');
+      return data;
+    } catch (e) {
+      log('catch error......${e.toString()}',
+          name: 'get_view_request | AuthRepository');
+      rethrow;
+    }
+  }
 
   Future signUp({required body}) async {
     try {
       log('body......$body', name: 'signIn | AuthRepository');
 
       var data = await _saryaAPI.signup(body: body);
+
+      log('data......$data', name: 'signIn | AuthRepository');
+
+      return data;
+    } catch (e) {
+      log('catch......${e.toString()}', name: 'signUn | AuthRepository');
+
+      rethrow;
+    }
+  }
+
+  Future submit_review({required body}) async {
+    try {
+      log('body......$body', name: 'signIn | AuthRepository');
+
+      var data = await _saryaAPI.submit_review(body: body);
 
       log('data......$data', name: 'signIn | AuthRepository');
 

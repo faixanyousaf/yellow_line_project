@@ -48,7 +48,7 @@ class LoginProvider extends ChangeNotifier {
         sf.save_password(passwordController.text);
         loading = false;
         updateState();
-        navigationService.navigatePushReplace(RouterPath.Home_Screen);
+        navigationService.navigateTo(RouterPath.add_request_screen_one);
       } catch (e) {
         loading = false;
         updateState();
@@ -71,7 +71,7 @@ class LoginProvider extends ChangeNotifier {
       sf.saveid(responceModel.user!.id.toString());
       loading = false;
       updateState();
-      navigationService.navigatePushReplace(RouterPath.Home_Screen);
+      navigationService.navigateTo(RouterPath.add_request_screen_one);
     } catch (e) {
       print('Exception.....$e');
       loading = false;

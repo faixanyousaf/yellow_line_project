@@ -78,7 +78,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String apiKey = "AIzaSyCxVDrGwK3_-wlauORHJ1HuJkoZ5LNAdIQ";
+    final String apiKey = "AIzaSyAoknLjF2XNcjPDW25O5QOQFLgdVKc6GgU";
     return ValueListenableBuilder<LanguageModel>(
       builder: (BuildContext context, LanguageModel value, Widget? child) {
         return Sizer(

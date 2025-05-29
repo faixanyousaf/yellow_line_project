@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/helper/navigation/navigation_object.dart';
@@ -97,12 +99,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     driverRequestModel: model,
                     dropoff_latLng: LatLng(double.parse(model.dropLat),
                         double.parse(model.dropLong)),
-                    pickup_latLng: LatLng(double.parse(model.driverLat),
-                        double.parse(model.dropLong)),
-                    cancel_request: () {
+                    pickup_latLng: LatLng(double.parse(model.pickUpLat),
+                        double.parse(model.pickUpLong)),
+                    cancel_request: (String reason) {
                       AuthRepository.instance.cancel_ride(body: {
                         'request_id': model.id,
                         'driver_id': '${id}',
+                        'reason': '${reason}'
                       });
                     },
                   )));
@@ -110,8 +113,42 @@ class _HomeScreenState extends State<HomeScreen> {
     if (result.isEmpty && stop_pending_request_routing == true) {
       Navigator.of(navigationService.navigatorKey.currentState!.context).pop();
     }
+    if (show_rating == false) {
+      AuthRepository.instance.check_review(id: id).then((v) {
+        if (v['data'] != null) {
+          print('in submit');
+          tripId = v['data']['tripId'];
+          show_rating = true;
+          // showRatingDialog(
+          //     context: context,
+          //     rating_info: (v) {
+          //       AuthRepository.instance.submit_review(body: {
+          //         "user_id": int.parse("${id}"),
+          //         "tripId": tripId,
+          //         "rating": v['rating'],
+          //         "comment": v['comment'],
+          //         "reviewType": "user_to_rider"
+          //       });
+          //     });
+          rate_dialog(
+              context: context,
+              rating_info: (v) {
+                AuthRepository.instance.submit_review(body: {
+                  "user_id": int.parse("${id}"),
+                  "tripId": tripId,
+                  "rating": v['rating'],
+                  "comment": v['comment'],
+                  "reviewType": "user_to_rider"
+                });
+              });
+        }
+        print('check_review...${v}');
+      });
+    }
   }
 
+  var tripId;
+  bool show_rating = false;
   Timer? _timer;
   @override
   void dispose() {
@@ -575,5 +612,278 @@ class _HomeScreenState extends State<HomeScreen> {
         )
       ],
     );
+  }
+
+  void showRatingDialog(
+      {required BuildContext context,
+      required Function(Map<String, dynamic>) rating_info}) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        double rating = 0;
+        TextEditingController commentController = TextEditingController();
+
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          contentPadding: EdgeInsets.symmetric(horizontal: 5.w),
+          title: Center(
+              child: Text("Rate Your Ride",
+                  style: TextStyle(fontWeight: FontWeight.bold))),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                height: 2.h,
+              ),
+              RatingBar.builder(
+                initialRating: 0,
+                minRating: 1,
+                direction: Axis.horizontal,
+                allowHalfRating: true,
+                itemCount: 5,
+                itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                itemBuilder: (context, _) =>
+                    Icon(Icons.star, color: Colors.amber),
+                onRatingUpdate: (value) {
+                  rating = value;
+                },
+              ),
+              SizedBox(
+                height: 4.h,
+              ),
+              TextField(
+                controller: commentController,
+                decoration: InputDecoration(
+                  hintText: "Write a comment...",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12)),
+                ),
+                maxLines: 3,
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close dialog
+              },
+              child: Text("Skip"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (rating == 0) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("Please select a rating")),
+                  );
+                } else {
+                  String comment = commentController.text.trim();
+                  // Submit rating and comment to your backend
+                  print("Rating: $rating");
+                  print("Comment: $comment");
+                  rating_info.call({'rating': rating, 'comment': '$comment'});
+                  Navigator.of(context).pop(); // Close dialog
+                }
+              },
+              child: Text("Submit"),
+            ),
+          ],
+        );
+      },
+    ).then((v) {
+      Future.delayed(Duration(seconds: 5), () {
+        show_rating = false;
+      });
+    });
+  }
+
+  Future rate_dialog(
+      {required BuildContext context,
+      required Function(Map<String, dynamic>) rating_info}) async {
+    double rating = 0;
+    TextEditingController commentController = TextEditingController();
+    await showMaterialModalBottomSheet(
+      context: context,
+      enableDrag: false,
+      backgroundColor: Color(0xffFFCC1B).withOpacity(0.5),
+      builder: (context) => StatefulBuilder(
+        builder: (BuildContext context, StateSetter setState) => Container(
+            color: Color(0xffFFCC1B).withOpacity(0.5),
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  height: 45.h,
+                  width: 100.w,
+                  decoration: BoxDecoration(
+                      color: Color(0xff181F30),
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(40),
+                          topRight: Radius.circular(40))),
+                  child: Column(children: [
+                    Container(
+                      height: 7.5.h,
+                      child: Center(
+                          child: Text(
+                        'Rate Your Ride',
+                        style: TextStyle(
+                            fontSize: 12.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      )),
+                      decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(40),
+                              topRight: Radius.circular(40))),
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(
+                          height: 2.h,
+                        ),
+                        RatingBar.builder(
+                          initialRating: 0,
+                          minRating: 1,
+                          direction: Axis.horizontal,
+                          allowHalfRating: true,
+                          itemCount: 5,
+                          unratedColor: Colors.white,
+                          itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                          itemBuilder: (context, _) =>
+                              Icon(Icons.star, color: Colors.amber),
+                          onRatingUpdate: (value) {
+                            rating = value;
+                          },
+                        ),
+                        SizedBox(
+                          height: 2.h,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 5.w),
+                          child: TextField(
+                            style: TextStyle(
+                              color: Colors.white, // Text color
+                            ),
+                            controller: commentController,
+                            decoration: InputDecoration(
+                              hintText: "Write a comment...",
+                              hintStyle: TextStyle(color: Colors.white),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.circular(12)),
+                            ),
+                            maxLines: 3,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 2.h,
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 100.w,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              if (rating == 0) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text("Please select a rating")),
+                                );
+                              } else {
+                                String comment = commentController.text.trim();
+                                // Submit rating and comment to your backend
+                                print("Rating: $rating");
+                                print("Comment: $comment");
+                                rating_info.call(
+                                    {'rating': rating, 'comment': '$comment'});
+                                Navigator.of(context).pop(); // Close dialog
+                              }
+                            },
+                            child: Container(
+                              margin: EdgeInsets.symmetric(horizontal: 5.w),
+                              decoration: BoxDecoration(
+                                  color: Color(0xffFFCC1B),
+                                  borderRadius: BorderRadius.circular(30)),
+                              height: 5.h,
+                              width: 100.w,
+                              child: Center(
+                                child: Text(
+                                  "Submit",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 2.h,
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop(); // Close dialog
+                            },
+                            child: Text(
+                              "Skip",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 2.h,
+                          ),
+                          // ElevatedButton(
+                          //   onPressed: () {
+                          //     if (rating == 0) {
+                          //       ScaffoldMessenger.of(context).showSnackBar(
+                          //         SnackBar(
+                          //             content: Text("Please select a rating")),
+                          //       );
+                          //     } else {
+                          //       String comment = commentController.text.trim();
+                          //       // Submit rating and comment to your backend
+                          //       print("Rating: $rating");
+                          //       print("Comment: $comment");
+                          //       rating_info.call(
+                          //           {'rating': rating, 'comment': '$comment'});
+                          //       Navigator.of(context).pop(); // Close dialog
+                          //     }
+                          //   },
+                          //   style: ElevatedButton.styleFrom(
+                          //     backgroundColor:
+                          //         Color(0xffFFCC1B), // Background color
+                          //     padding: EdgeInsets.symmetric(
+                          //         horizontal: 24, vertical: 12),
+                          //     shape: RoundedRectangleBorder(
+                          //       borderRadius: BorderRadius.circular(
+                          //           10), // Optional: Rounded corners
+                          //     ),
+                          //   ),
+                          //   child: Text(
+                          //     "Submit",
+                          //     style: TextStyle(color: Colors.black),
+                          //   ),
+                          // ),
+                        ],
+                      ),
+                    )
+                  ]),
+                ),
+              ],
+            )),
+      ),
+    ).then((v) {
+      Future.delayed(Duration(seconds: 5), () {
+        show_rating = false;
+      });
+    });
   }
 }

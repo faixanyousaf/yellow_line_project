@@ -16,6 +16,7 @@ import 'package:yellowline/global_widgets/asset_to_unit8list.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 
 import '../../../../global_widgets/custom_drop_conatiner.dart';
+import '../../home_page/drawer_screen.dart';
 import '../model/request_recovery_model.dart';
 import '../view_model/add_request_provider.dart';
 import 'nearbby_search.dart';
@@ -84,9 +85,16 @@ class _DropOffScreenState extends State<DropOffScreen> {
   PlacesAutocompleteResponse? placesAutocompleteResponse;
   var kGoogleApiKey = 'AIzaSyAoknLjF2XNcjPDW25O5QOQFLgdVKc6GgU';
   getNearbyPlaces(String keyword) async {
-    GoogleMapsPlaces places = GoogleMapsPlaces(
+    late GoogleMapsPlaces places;
+    if (Platform.isAndroid) {
+      places = GoogleMapsPlaces(
         apiKey: kGoogleApiKey,
-        apiHeaders: await const GoogleApiHeaders().getHeaders());
+      );
+    } else {
+      places = GoogleMapsPlaces(
+          apiKey: kGoogleApiKey,
+          apiHeaders: await const GoogleApiHeaders().getHeaders());
+    }
     placesAutocompleteResponse = await places.autocomplete('$keyword');
     setState(() {});
   }
@@ -218,12 +226,37 @@ class _DropOffScreenState extends State<DropOffScreen> {
     super.initState();
   }
 
+  double _currentZoom = 15.5;
+  void _zoomIn() {
+    setState(() {
+      _currentZoom += 1;
+      _controller!.animateCamera(
+        CameraUpdate.zoomTo(_currentZoom),
+      );
+    });
+  }
+
+  void _zoomOut() {
+    setState(() {
+      _currentZoom -= 1;
+      _controller!.animateCamera(
+        CameraUpdate.zoomTo(_currentZoom),
+      );
+    });
+  }
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     final AddRequestProvider provider =
         Provider.of<AddRequestProvider>(context);
     return Scaffold(
       backgroundColor: Color(0xff181F30),
+      key: _scaffoldKey,
+      drawer: Drawer(
+        backgroundColor: Color(0xff181F30),
+        child: DrawerScreen(),
+      ),
       body: GestureDetector(
         onTap: () {
           FocusManager.instance.primaryFocus?.unfocus();
@@ -720,12 +753,74 @@ class _DropOffScreenState extends State<DropOffScreen> {
                     ),
                   ),
                 ),
+                Positioned(
+                    top: 22.h,
+                    right: 3.w,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            _zoomIn();
+                          },
+                          child: Container(
+                            height: 4.8.h,
+                            width: 9.8.w,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                            ),
+                            child: Center(
+                                child: Icon(Icons.zoom_in,
+                                    size: 35, color: Color(0xff345eff))),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 0.5.h,
+                        ),
+                        InkWell(
+                          onTap: () async {
+                            _zoomOut();
+                          },
+                          child: Container(
+                            height: 4.8.h,
+                            width: 9.8.w,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                            ),
+                            child: Center(
+                                child: Icon(Icons.zoom_out_sharp,
+                                    size: 35, color: Color(0xff345eff))),
+                          ),
+                        ),
+                      ],
+                    )),
+                Positioned(
+                    top: 35.h,
+                    right: 3.w,
+                    child: InkWell(
+                      onTap: () async {
+                        final position = await requestLocation();
+                        await _controller!.animateCamera(
+                            CameraUpdate.newCameraPosition(CameraPosition(
+                          target: LatLng(position.latitude, position.longitude),
+                          zoom: 15.5,
+                        )));
+                      },
+                      child: Container(
+                        height: 4.8.h,
+                        width: 9.8.w,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(3)),
+                        child: Center(
+                            child: Icon(Icons.my_location_sharp,
+                                size: 25, color: Color(0xff345eff))),
+                      ),
+                    )),
                 if (provider.totalFareModel != null)
                   Positioned(
-                    bottom: 5.h,
+                    bottom: 0.h,
                     child: Container(
                       width: 100.w,
-                      padding: EdgeInsets.symmetric(horizontal: 5.w),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
@@ -734,7 +829,9 @@ class _DropOffScreenState extends State<DropOffScreen> {
                             width: 100.w,
                             decoration: BoxDecoration(
                                 color: Colors.black,
-                                borderRadius: BorderRadius.circular(10)),
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(30),
+                                    topRight: Radius.circular(30))),
                             child: Column(
                               children: [
                                 SizedBox(
@@ -848,17 +945,12 @@ class _DropOffScreenState extends State<DropOffScreen> {
                   left: 3.w,
                   child: GestureDetector(
                       onTap: () {
-                        if (provider.responce_fare_model == null) {
-                          Navigator.pop(context);
-                        } else {
-                          provider.responce_fare_model = null;
-                          setState(() {});
-                        }
+                        _scaffoldKey.currentState!.openDrawer();
                       },
                       child: Icon(
-                        Icons.arrow_back_ios_new_outlined,
+                        Icons.dehaze_rounded,
                         color: Color(0xffFFCC1B),
-                        size: 5.w,
+                        size: 30,
                       )),
                 ),
                 Positioned(
@@ -1043,24 +1135,192 @@ class _DropOffScreenState extends State<DropOffScreen> {
                         decoration: BoxDecoration(color: Colors.white),
                       )),
                 if (provider.load_find_driver)
-                  Center(
-                      child: Container(
-                    height: 15.h,
-                    width: 35.w,
-                    decoration: BoxDecoration(
-                        color: Color(0xffFFCC1B),
-                        borderRadius: BorderRadius.circular(7)),
-                    child: Column(
-                      children: [
-                        CircularProgressIndicator(),
-                        SizedBox(
-                          height: 2.h,
-                        ),
-                        Text('Finding Drivers ...')
-                      ],
-                      mainAxisAlignment: MainAxisAlignment.center,
+                  Positioned(
+                    bottom: 0.h,
+                    child: Container(
+                      width: 100.w,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 5.w),
+                            width: 100.w,
+                            decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(30),
+                                    topRight: Radius.circular(30))),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 2.h,
+                                ),
+                                Container(
+                                  width: 10.w,
+                                  height: 0.7.h,
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey,
+                                      borderRadius: BorderRadius.circular(30)),
+                                ),
+                                SizedBox(
+                                  height: 2.h,
+                                ),
+                                Text(
+                                  'Finding Drivers...',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                      color: Colors.white),
+                                ),
+                                SizedBox(
+                                  height: 3.h,
+                                ),
+                                Text(
+                                  'Your Fare',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                      color: Colors.grey),
+                                ),
+                                SizedBox(
+                                  height: 0.5.h,
+                                ),
+                                Text(
+                                  'AED ${provider.totalFareModel?.data?.totalCharges}',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 30,
+                                      color: Colors.white),
+                                ),
+                                Text(
+                                  'Travel Time : ${provider.totalFareModel?.data?.time}',
+                                  style: TextStyle(
+                                      fontSize: 13, color: Colors.white),
+                                ),
+                                SizedBox(
+                                  height: 4.h,
+                                ),
+                                Container(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 5.w),
+                                  width: 100.w,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.arrow_circle_right_outlined,
+                                            color: Color(0xffFFD542),
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Text(
+                                            'Pickup Location',
+                                            style: TextStyle(
+                                                fontSize: 13,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 7.w),
+                                        child: Text(
+                                          '${provider.pickup_name}',
+                                          style: TextStyle(
+                                              fontSize: 13,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 2.h,
+                                ),
+                                Container(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 5.w),
+                                  width: 100.w,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.arrow_circle_right_outlined,
+                                            color: Color(0xffFFD542),
+                                          ),
+                                          SizedBox(
+                                            width: 2.w,
+                                          ),
+                                          Text(
+                                            'Drop_Off Location',
+                                            style: TextStyle(
+                                                fontSize: 13,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 7.w),
+                                        child: Text(
+                                          '${provider.dropoff_name}',
+                                          style: TextStyle(
+                                              fontSize: 13,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 2.h,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Container(
+                                    height: 6.h,
+                                    width: 100.w,
+                                    child: Center(
+                                      child: Text(
+                                        'Cancel Request',
+                                        style: TextStyle(
+                                            fontSize: 17,
+                                            color: Colors.red,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                            width: 1, color: Colors.red)),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 2.h,
+                                ),
+                                SizedBox(
+                                  height: 4.h,
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ))
+                  ),
               ],
             ),
           ),

@@ -8,6 +8,7 @@ import '../../../../../network_services/repository/authentication_repository/aut
 import '../../../Authentication Models/login/models/login_Responce_model.dart';
 import '../../../Authentication Models/login/models/login_request.dart';
 import '../../home_page/home_screen.dart';
+import '../../recovery_screens/view/drop_off_screen.dart';
 
 class UpdateUserProfileProvider extends ChangeNotifier {
   TextEditingController emailController = TextEditingController();
@@ -115,7 +116,7 @@ class UpdateUserProfileProvider extends ChangeNotifier {
       sf.saveToken(responceModel.accessToken);
       sf.saveaslogin('1');
       sf.saveid(responceModel.user!.id.toString());
-      navigationService.pushAndRemoveUntil(HomeScreen());
+      navigationService.pushAndRemoveUntil(DropOffScreen());
       loading = false;
       updateState();
     } catch (e) {

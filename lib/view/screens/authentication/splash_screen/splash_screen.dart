@@ -341,7 +341,8 @@ class _SplashScreenState extends State<SplashScreen> {
           sf.saveaslogin('1');
           sf.saveid(responceModel.user!.id.toString());
           Timer(const Duration(seconds: 1), () {
-            navigationService.navigatePushReplace(RouterPath.Home_Screen);
+            navigationService.navigateTo(
+                                  RouterPath.add_request_screen_one);
           });
         } catch (e) {
           Timer(const Duration(seconds: 3), () {
@@ -365,7 +366,8 @@ class _SplashScreenState extends State<SplashScreen> {
         sf.saveToken(responceModel.accessToken);
         sf.saveaslogin('2');
         sf.saveid(responceModel.user!.id.toString());
-        navigationService.navigatePushReplace(RouterPath.Home_Screen);
+        navigationService.navigateTo(
+                                  RouterPath.add_request_screen_one);
       }
     } else {
       Timer(const Duration(seconds: 3), () {

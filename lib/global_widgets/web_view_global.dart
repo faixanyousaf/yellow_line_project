@@ -25,11 +25,34 @@ class WebViewGlobal extends StatefulWidget {
 }
 
 class _WebViewGlobalState extends State<WebViewGlobal> {
-  final Completer<WebViewController> _controller =
-      Completer<WebViewController>();
+  WebViewController _controller = WebViewController();
   @override
   void initState() {
     print('url invoice = ${widget.url}');
+    _controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onProgress: (int progress) {
+            // Update loading bar.
+          },
+          onPageStarted: (String url) {},
+          onPageFinished: (String url) {
+            print('completed');
+            load = true;
+            setState(() {});
+          },
+          onHttpError: (HttpResponseError error) {},
+          onWebResourceError: (WebResourceError error) {},
+          onNavigationRequest: (NavigationRequest request) {
+            if (request.url.startsWith('https://www.youtube.com/')) {
+              return NavigationDecision.prevent;
+            }
+            return NavigationDecision.navigate;
+          },
+        ),
+      )
+      ..loadRequest(Uri.parse('${widget.url}'));
     super.initState();
   }
 
@@ -75,7 +98,10 @@ class _WebViewGlobalState extends State<WebViewGlobal> {
                           filename: '${widget.title}.pdf');
                       if (file != null) {
                         print(file.path);
-                        await Share.shareFiles(['${file.path}']);
+                        await SharePlus.instance.share(ShareParams(
+                          text: '',
+                          files: [XFile('${file.path}')],
+                        ));
                       }
                     },
                     icon: Icon(
@@ -90,18 +116,19 @@ class _WebViewGlobalState extends State<WebViewGlobal> {
           color: Colors.white,
           child: Stack(
             children: [
-              WebView(
-                initialUrl: Uri.parse('${widget.url}').toString(),
-                javascriptMode: JavascriptMode.unrestricted,
-                onWebViewCreated: (WebViewController webViewController) {
-                  _controller.complete(webViewController);
-                },
-                onPageFinished: (v) {
-                  print('completed');
-                  load = true;
-                  setState(() {});
-                },
-              ),
+              WebViewWidget(controller: _controller),
+              // WebView(
+              //   initialUrl: Uri.parse('${widget.url}').toString(),
+              //   javascriptMode: JavascriptMode.unrestricted,
+              //   onWebViewCreated: (WebViewController webViewController) {
+              //     _controller.complete(webViewController);
+              //   },
+              //   onPageFinished: (v) {
+              //     print('completed');
+              //     load = true;
+              //     setState(() {});
+              //   },
+              // ),
               if (!load)
                 Center(
                   child: CircularProgressIndicator(),

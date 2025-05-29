@@ -87,7 +87,8 @@ class SingUpProvider extends ChangeNotifier {
         sf.saveid(responceModel.user!.id.toString());
         loading = false;
         updateState();
-        navigationService.navigatePushReplace(RouterPath.Home_Screen);
+        navigationService.navigateTo(
+                                  RouterPath.add_request_screen_one);
       } catch (e) {
         loading = false;
         updateState();
@@ -109,7 +110,8 @@ class SingUpProvider extends ChangeNotifier {
       sf.saveid(responceModel.user!.id.toString());
       loading = false;
       updateState();
-      navigationService.navigatePushReplace(RouterPath.Home_Screen);
+      navigationService.navigateTo(
+                                  RouterPath.add_request_screen_one);
     } catch (e) {
       loading = false;
       updateState();

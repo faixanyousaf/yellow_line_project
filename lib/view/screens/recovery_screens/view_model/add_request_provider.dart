@@ -147,7 +147,7 @@ class AddRequestProvider extends ChangeNotifier {
       socket!.onConnect((_) {
         print('connect socket');
         drivers_list(context);
-        //update_location(context);
+        update_location(context);
         find_nearby_drivers(context);
         total_fare(context);
         accept_ride_request(context);
@@ -181,6 +181,7 @@ class AddRequestProvider extends ChangeNotifier {
         final Uint8List markerIcon =
             await getBytesFromAsset('assets/driver_icon.png', 100);
         final markerId = MarkerId('${v.id}');
+        print('lat......${v.lat.toString()}');
         final marker = Marker(
           icon: BitmapDescriptor.fromBytes(markerIcon),
           markerId: MarkerId(UniqueKey().toString()),

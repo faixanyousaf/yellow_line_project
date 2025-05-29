@@ -11,6 +11,7 @@ class ApiRoutes {
   static String cities = '${base_URL}common/cities';
   static String get_all_drivers = '${base_URL}driver/list/';
   static String my_pending_requests = '${base_URL}user/my_active_requests/';
+  static String check_review = '${base_URL}user/last_ride_reviewed/';
   static String cancel_ride = '${base_URL}user/cancel_ride';
   static String delete_drivers = '${base_URL}driver/delete/';
   static String get_fare = '${base_URL}common/getFare';
@@ -21,6 +22,7 @@ class ApiRoutes {
   static String update_location = '${base_URL}user/update_location';
   static String get_vehicle = '${base_URL}vehicle/user/list/';
   static String checkduplicate = '${base_URL}user/checkduplicate';
+  static String submit_review = '${base_URL}user/submit_review';
   static String update_user_profile = '${base_URL}authenticated/users/profile';
   static String update_user_profile_picture =
       '${base_URL}user/update/profile_picture';

@@ -22,7 +22,7 @@ class MyPendingRequestMapView extends StatefulWidget {
   final LatLng pickup_latLng;
   final LatLng dropoff_latLng;
   final PendingRequestModel driverRequestModel;
-  final Function() cancel_request;
+  final Function(String) cancel_request;
   const MyPendingRequestMapView(
       {super.key,
       required this.pickup_latLng,
@@ -215,6 +215,25 @@ class _MyPendingRequestMapViewState extends State<MyPendingRequestMapView> {
     super.dispose();
   }
 
+  double _currentZoom = 15.5;
+  void _zoomIn() {
+    setState(() {
+      _currentZoom += 1;
+      _controller!.animateCamera(
+        CameraUpdate.zoomTo(_currentZoom),
+      );
+    });
+  }
+
+  void _zoomOut() {
+    setState(() {
+      _currentZoom -= 1;
+      _controller!.animateCamera(
+        CameraUpdate.zoomTo(_currentZoom),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -257,13 +276,67 @@ class _MyPendingRequestMapViewState extends State<MyPendingRequestMapView> {
                   ),
                 ),
                 Positioned(
-                    bottom: 10.h,
-                    right: 5.w,
-                    child: FloatingActionButton(
-                      onPressed: () {
-                        get_current_location();
+                    top: 15.h,
+                    right: 3.w,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            _zoomIn();
+                          },
+                          child: Container(
+                            height: 4.8.h,
+                            width: 9.8.w,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                            ),
+                            child: Center(
+                                child: Icon(Icons.zoom_in,
+                                    size: 35, color: Color(0xff345eff))),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 0.5.h,
+                        ),
+                        InkWell(
+                          onTap: () async {
+                            _zoomOut();
+                          },
+                          child: Container(
+                            height: 4.8.h,
+                            width: 9.8.w,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                            ),
+                            child: Center(
+                                child: Icon(Icons.zoom_out_sharp,
+                                    size: 35, color: Color(0xff345eff))),
+                          ),
+                        ),
+                      ],
+                    )),
+                Positioned(
+                    top: 28.h,
+                    right: 3.w,
+                    child: InkWell(
+                      onTap: () async {
+                        final position = await requestLocation();
+                        await _controller!.animateCamera(
+                            CameraUpdate.newCameraPosition(CameraPosition(
+                          target: LatLng(position.latitude, position.longitude),
+                          zoom: 15.5,
+                        )));
                       },
-                      child: Icon(Icons.my_location),
+                      child: Container(
+                        height: 4.8.h,
+                        width: 9.8.w,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(3)),
+                        child: Center(
+                            child: Icon(Icons.my_location_sharp,
+                                size: 25, color: Color(0xff345eff))),
+                      ),
                     )),
                 SlidingUpPanel(
                   controller: panelcontroller,
@@ -460,30 +533,31 @@ class _MyPendingRequestMapViewState extends State<MyPendingRequestMapView> {
                             Expanded(
                               child: InkWell(
                                 onTap: () {
-                                  show_cupertinoDialog(
-                                      context: context,
-                                      title: 'Cancel Request?'.tr,
-                                      subtitle:
-                                          'Are you sure you want to cancel the request'
-                                              .tr,
-                                      no_subtitle: 'No',
-                                      yes_title: "Yes",
-                                      on_done: () async {
-                                        widget.cancel_request.call();
-                                        load = true;
-                                        setState(() {});
-                                        // await DriverRepository.instance
-                                        //     .update_request_status(body: {
-                                        //   "driver_id":
-                                        //       '${widget.driverRequestModel.driverId}',
-                                        //   "request_id":
-                                        //       '${widget.driverRequestModel.id}',
-                                        //   "request_status": "1"
-                                        // });
-                                        // load = false;
-                                        // setState(() {});
-                                        // Navigator.of(context).pop();
-                                      });
+                                  // show_cupertinoDialog(
+                                  //     context: context,
+                                  //     title: 'Cancel Request?'.tr,
+                                  //     subtitle:
+                                  //         'Are you sure you want to cancel the request'
+                                  //             .tr,
+                                  //     no_subtitle: 'No',
+                                  //     yes_title: "Yes",
+                                  //     on_done: () async {
+                                  //       widget.cancel_request.call();
+                                  //       load = true;
+                                  //       setState(() {});
+                                  //       // await DriverRepository.instance
+                                  //       //     .update_request_status(body: {
+                                  //       //   "driver_id":
+                                  //       //       '${widget.driverRequestModel.driverId}',
+                                  //       //   "request_id":
+                                  //       //       '${widget.driverRequestModel.id}',
+                                  //       //   "request_status": "1"
+                                  //       // });
+                                  //       // load = false;
+                                  //       // setState(() {});
+                                  //       // Navigator.of(context).pop();
+                                  //     });
+                                  showCancelRideDialog(context);
                                 },
                                 child: Container(
                                   height: 6.h,
@@ -520,6 +594,78 @@ class _MyPendingRequestMapViewState extends State<MyPendingRequestMapView> {
           ),
         ),
       ),
+    );
+  }
+
+  void showCancelRideDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        String? selectedReason;
+        List<String> reasons = [
+          "Driver is taking too long",
+          "Changed my mind",
+          "Wrong pickup location",
+          "Booked by mistake",
+          "Driver asked to cancel",
+          "Other"
+        ];
+
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              title: Text("Cancel Ride",
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              content: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ...reasons.map((reason) => RadioListTile<String>(
+                          title: Text(reason),
+                          value: reason,
+                          groupValue: selectedReason,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedReason = value;
+                            });
+                          },
+                        )),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(); // Close dialog
+                  },
+                  child: Text("Close"),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    if (selectedReason != null) {
+                      // Call your cancel ride function here
+                      print("Ride cancelled for reason: $selectedReason");
+                      Navigator.of(context).pop();
+                      widget.cancel_request.call("$selectedReason");
+                      load = true;
+                      setState(() {});
+                    } else {
+                      // Optionally show a warning to select a reason
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Please select a reason")),
+                      );
+                    }
+                  },
+                  child: Text("Submit"),
+                ),
+              ],
+            );
+          },
+        );
+      },
     );
   }
 }
