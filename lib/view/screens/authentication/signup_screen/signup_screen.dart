@@ -254,8 +254,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   bottom:
                                       provider.isPending == true ? 2.2.h : 0),
                               child: Container(
-                                height: 6.2.h,
-                                width: 20.w,
+                                height: 5.2.h,
+                                width: 18.w,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(17)),
                                 child: IntlPhoneField(

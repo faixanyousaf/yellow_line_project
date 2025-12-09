@@ -26,6 +26,7 @@ import '../model/responce_fare_model.dart';
 import 'package:geolocator/geolocator.dart';
 import '../model/total_fare_model.dart';
 import '../view/all_socket_drivers_view.dart';
+import '../view/drop_off_screen.dart';
 import '../view/my_pending_request_screen.dart';
 
 class AddRequestProvider extends ChangeNotifier {
@@ -258,7 +259,12 @@ class AddRequestProvider extends ChangeNotifier {
     socket!.on("newBid", (data) {
       print('new bid.... ${data}');
       if (newBidDriverModel!.isEmpty) {
-        navigationService.navigateTo(RouterPath.AllSocketDriversView);
+        navigationService
+            .navigateTo(RouterPath.AllSocketDriversView)!
+            .then((v) {
+          clear_info();
+          navigationService.pushAndRemoveUntil(DropOffScreen());
+        });
       }
       List list = jsonDecode(data);
       list.forEach((v) {
@@ -284,7 +290,6 @@ class AddRequestProvider extends ChangeNotifier {
       backgroundColor: Colors.white,
     );
     ScaffoldMessenger.of(context!).showSnackBar(snackBar);
-    Navigator.of(context).pop();
     Navigator.of(context).pop();
   }
 
@@ -353,6 +358,23 @@ class AddRequestProvider extends ChangeNotifier {
     if (timer != null) {
       timer!.cancel();
     }
+  }
+
+  clear_info() {
+    loading = false;
+    request_model = Request_Recovery_Model();
+    chargeUserResponceModel = null;
+    responce_fare_model = null;
+    selected_recovery_type = 'Normal';
+    pickup_name = '';
+    dropoff_name = '';
+    close_all_function();
+    markersList.clear();
+    totalFareModel = null;
+    allAvailableDrivers = null;
+    newBidDriverModel = [];
+    load_find_driver = false;
+    update_state();
   }
 }
 

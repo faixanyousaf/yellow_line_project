@@ -276,7 +276,7 @@ class _MyPendingRequestMapViewState extends State<MyPendingRequestMapView> {
                   ),
                 ),
                 Positioned(
-                    top: 15.h,
+                    top: 22.h,
                     right: 3.w,
                     child: Column(
                       children: [
@@ -285,14 +285,14 @@ class _MyPendingRequestMapViewState extends State<MyPendingRequestMapView> {
                             _zoomIn();
                           },
                           child: Container(
-                            height: 4.8.h,
-                            width: 9.8.w,
+                            height: 6.h,
+                            width: 12.w,
                             decoration: BoxDecoration(
-                              color: Colors.white,
-                            ),
+                                color: Colors.black.withOpacity(0.5),
+                                shape: BoxShape.circle),
                             child: Center(
                                 child: Icon(Icons.zoom_in,
-                                    size: 35, color: Color(0xff345eff))),
+                                    size: 35, color: Colors.grey)),
                           ),
                         ),
                         SizedBox(
@@ -303,39 +303,39 @@ class _MyPendingRequestMapViewState extends State<MyPendingRequestMapView> {
                             _zoomOut();
                           },
                           child: Container(
-                            height: 4.8.h,
-                            width: 9.8.w,
+                            height: 6.h,
+                            width: 12.w,
                             decoration: BoxDecoration(
-                              color: Colors.white,
-                            ),
+                                color: Colors.black.withOpacity(0.5),
+                                shape: BoxShape.circle),
                             child: Center(
                                 child: Icon(Icons.zoom_out_sharp,
-                                    size: 35, color: Color(0xff345eff))),
+                                    size: 35, color: Colors.grey)),
                           ),
                         ),
                       ],
                     )),
                 Positioned(
-                    top: 28.h,
+                    top: 35.h,
                     right: 3.w,
                     child: InkWell(
                       onTap: () async {
                         final position = await requestLocation();
                         await _controller!.animateCamera(
                             CameraUpdate.newCameraPosition(CameraPosition(
-                          target: LatLng(position.latitude, position.longitude),
-                          zoom: 15.5,
-                        )));
+                              target: LatLng(position.latitude, position.longitude),
+                              zoom: 15.5,
+                            )));
                       },
                       child: Container(
-                        height: 4.8.h,
-                        width: 9.8.w,
+                        height: 6.h,
+                        width: 12.w,
                         decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(3)),
+                            color: Colors.black.withOpacity(0.5),
+                            shape: BoxShape.circle),
                         child: Center(
                             child: Icon(Icons.my_location_sharp,
-                                size: 25, color: Color(0xff345eff))),
+                                size: 25, color: Colors.grey)),
                       ),
                     )),
                 SlidingUpPanel(

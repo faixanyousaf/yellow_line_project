@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,8 +30,14 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  get_firebase_Data(BuildContext? context) {
+  get_firebase_Data(BuildContext? context) async {
     print('the firebaseModel data is =1');
+    final remoteConfig = FirebaseRemoteConfig.instance;
+    await remoteConfig.setConfigSettings(RemoteConfigSettings(
+      fetchTimeout: const Duration(seconds: 5),
+      minimumFetchInterval: const Duration(seconds: 0),
+    ));
+    await remoteConfig.fetchAndActivate();
     FirebaseFirestore.instance
         .collection('appversion')
         .get()
@@ -40,10 +47,12 @@ class _SplashScreenState extends State<SplashScreen> {
         print('the firebaseModel data is =3');
         firebaseModel =
             FirebaseModel.fromJson(doc.data() as Map<String, dynamic>);
-        // print('the firebaseModel data is = ${firebaseModel!.toJson()}');
-        // print('the socket_url data is = ${'${firebaseModel!.socket_url}'}');
-        base_URL = '${firebaseModel!.baseUrl}';
-        socket_url = '${firebaseModel!.socket_url}';
+        print('the firebaseModel data is = ${firebaseModel!.toJson()}');
+        print('the splash baseUrl data is = ${'${firebaseModel!.baseUrl}'}');
+        print(
+            'the splash socket_url data is = ${'${firebaseModel!.socket_url}'}');
+        // base_URL = '${firebaseModel!.baseUrl}';
+        // socket_url = '${firebaseModel!.socket_url}';
         versionCheckApi(context);
       });
     });
@@ -78,7 +87,7 @@ class _SplashScreenState extends State<SplashScreen> {
         // }
       } on Exception catch (_) {
         if (firebaseModel!.baseUrl!.isNotEmpty) {
-          base_URL = '${firebaseModel!.baseUrl}';
+          //base_URL = '${firebaseModel!.baseUrl}';
           print('object of url=${base_URL}');
           versionCheckApi(context);
         }
@@ -341,8 +350,7 @@ class _SplashScreenState extends State<SplashScreen> {
           sf.saveaslogin('1');
           sf.saveid(responceModel.user!.id.toString());
           Timer(const Duration(seconds: 1), () {
-            navigationService.navigateTo(
-                                  RouterPath.add_request_screen_one);
+            navigationService.navigateTo(RouterPath.add_request_screen_one);
           });
         } catch (e) {
           Timer(const Duration(seconds: 3), () {
@@ -366,8 +374,7 @@ class _SplashScreenState extends State<SplashScreen> {
         sf.saveToken(responceModel.accessToken);
         sf.saveaslogin('2');
         sf.saveid(responceModel.user!.id.toString());
-        navigationService.navigateTo(
-                                  RouterPath.add_request_screen_one);
+        navigationService.navigateTo(RouterPath.add_request_screen_one);
       }
     } else {
       Timer(const Duration(seconds: 3), () {

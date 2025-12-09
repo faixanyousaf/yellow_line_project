@@ -57,7 +57,6 @@ class _AllSocketDriversViewState extends State<AllSocketDriversView> {
                                   yes_title: "Yes",
                                   on_done: () async {
                                     Navigator.of(context).pop();
-                                    Navigator.of(context).pop();
                                   });
                             },
                             child: Text(
