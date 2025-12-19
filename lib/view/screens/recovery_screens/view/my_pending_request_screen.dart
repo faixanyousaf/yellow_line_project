@@ -379,6 +379,7 @@ class _MyPendingRequestMapViewState extends State<MyPendingRequestMapView> {
                             ),
                             InkWell(
                               onTap: () async {
+                                print('${widget.driverRequestModel.driverDialCode}${widget.driverRequestModel.driverMobile}');
                                 final Uri launchUri = Uri(
                                     scheme: 'tel',
                                     path:
