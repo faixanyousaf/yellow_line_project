@@ -2,7 +2,7 @@ import 'package:dio/dio.dart' as dio;
 import '../../../../helper/shared_prefs.dart';
 import '../Models/car_model.dart';
 
-dynamic baseUrl = 'https://yellowline.codeels.pro/';
+dynamic baseUrl = 'https://api.yellowlineapp.com/';
 const addNewDriverUrl = 'driver/create';
 const viewNewDriverUrl = 'driver/list/';
 const viewNewVehicleUrl = 'vehicle/add';

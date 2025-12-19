@@ -232,7 +232,7 @@ class YellowLineAPI {
   Future<dynamic> get_recovery_type() async {
     try {
       String url = '';
-      url = 'https://yellowline.codeels.pro/admin/recoverytypes';
+      url = ApiRoutes.recoverytypes;
       log('url......$url', name: 'add_drivers | YellowLineAPI');
       return await _http.iGet(url);
     } catch (e) {

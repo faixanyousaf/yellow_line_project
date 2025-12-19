@@ -1991,6 +1991,7 @@ class _DropOffScreenState extends State<DropOffScreen> {
             color: Color(0xffFFCC1B).withOpacity(0.5),
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [

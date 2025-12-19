@@ -28,6 +28,8 @@ class _AddNewVehicleScreenState extends State<AddNewVehicleScreen> {
     var provider = Provider.of<AddVehicleProvider>(context, listen: false);
     provider.get_cites().then((value) {
       load = false;
+      provider.selectCityName =
+          provider.cityModel[0].name;
       provider.updateState();
     });
     super.initState();

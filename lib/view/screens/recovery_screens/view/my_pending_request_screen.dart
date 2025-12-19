@@ -202,7 +202,7 @@ class _MyPendingRequestMapViewState extends State<MyPendingRequestMapView> {
     return position;
   }
 
-  double panelHeightOpen = 45.h;
+  double panelHeightOpen = 50.h;
   double panelHeightClosed = 6.h;
   double fabHeight = 0;
   final double initFabHeight = 50.h;

@@ -53,8 +53,8 @@ void main() async {
   //     'pk_test_51OuE8WAYqNfNZZ16r6VzHDbXs3VWNg98av26Ex4NP5RzuHzAXM67pWE4PZ0LWmb5U7DM2aYzZ86Yf5OwdNG1shLk00iiMKDW4y';
   Stripe.publishableKey =
       await remoteConfig.getString('Stripe_publishable_Key');
-  // base_URL = await remoteConfig.getString('base_url');
-  // socket_url = await remoteConfig.getString('socket_url');
+  base_URL = await remoteConfig.getString('base_url');
+  socket_url = await remoteConfig.getString('socket_url');
   Stripe.merchantIdentifier = 'merchant.travel.sarya.app';
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   WidgetsFlutterBinding.ensureInitialized();

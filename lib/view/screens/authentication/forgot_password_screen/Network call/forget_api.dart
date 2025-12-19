@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import '../../../../../core/network/routes/base_url.dart';
 import '../../../../../helper/shared_prefs.dart';
 
-dynamic baseUrl = 'http://yellowline.codeels.pro/';
 const forgetCodeUrl = 'auth/code/users';
 const resetPasswordUrl = 'auth/reset/users';
 

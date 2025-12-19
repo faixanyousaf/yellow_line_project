@@ -255,7 +255,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       provider.isPending == true ? 2.2.h : 0),
                               child: Container(
                                 height: 5.2.h,
-                                width: 18.w,
+                                width: 17.w,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(17)),
                                 child: IntlPhoneField(
@@ -263,7 +263,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   focusNode: provider.focusNode,
                                   disableAutoFillHints: false,
                                   disableLengthCheck: true,
-                                  showDropdownIcon: false,
+                                  showDropdownIcon: false,showCountryFlag: false,
                                   //enabled: false,
                                   flagsButtonMargin:
                                       EdgeInsets.only(left: 3.w, top: 0.3.h),

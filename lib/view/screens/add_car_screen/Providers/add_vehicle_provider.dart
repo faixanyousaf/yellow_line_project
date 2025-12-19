@@ -93,6 +93,21 @@ class AddVehicleProvider extends ChangeNotifier {
     var id = await sf.getid();
     loading = true;
     updateState();
+    print('${{
+      'account_type': '2',
+      'city': '${selectCityName}',
+      'code': '${codeController.text}',
+      'plate_number': '${numberController.text}',
+      'type': '${vehicleName}',
+      'make': '${chooseCompanyName}',
+      'model': '${modelName}',
+      'year': '${yearName}',
+      'registration_card':
+      await dio.MultipartFile.fromFile(drivingLicense!.path),
+      'city_logo': cityModel[indexx].logoUrl,
+      'account_id': '$id',
+      'recovery_type': recovery_type_model[RecoveryTypeIndex!].id
+    }}');
     var result = await dataProvider.add_new_vehicle_api(map: {
       'account_type': '2',
       'city': '${selectCityName}',
@@ -123,12 +138,17 @@ class AddVehicleProvider extends ChangeNotifier {
     car_make_list = [];
     loading = true;
     updateState();
-    List<CarModel>? carModel = await dataProvider.get_make();
-    for (var i in carModel!) {
-      car_make_list.add(i.make!);
+    try{
+      List<CarModel>? carModel = await dataProvider.get_make();
+      for (var i in carModel!) {
+        car_make_list.add(i.make!);
+      }
+      loading = false;
+      updateState();
+    }catch (e){
+      loading = false;
+      updateState();
     }
-    loading = false;
-    updateState();
   }
 
   Future get_make_model() async {
