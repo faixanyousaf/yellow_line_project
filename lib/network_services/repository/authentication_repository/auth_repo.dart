@@ -83,6 +83,21 @@ class AuthRepository {
       rethrow;
     }
   }
+  Future accept_offer({required body}) async {
+    try {
+      log('body......$body', name: 'accept_offer | AuthRepository');
+
+      var data = await _saryaAPI.accept_offer(body: body);
+
+      log('data......$data', name: 'accept_offer | AuthRepository');
+
+      return data;
+    } catch (e) {
+      log('catch......${e.toString()}', name: 'signUn | AuthRepository');
+
+      rethrow;
+    }
+  }
 
   Future cancel_ride({required body}) async {
     try {

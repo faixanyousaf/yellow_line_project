@@ -13,6 +13,7 @@ import '../../../../helper/navigation/navigation_object.dart';
 import '../../../../helper/navigation/router_path.dart';
 import '../../../../helper/shared_prefs.dart';
 import '../../../../helper/stripe_payment_methods.dart';
+import '../../../../network_services/repository/authentication_repository/auth_repo.dart';
 import '../../../../network_services/repository/user_repository/user_repo.dart';
 import '../model/UpdatePaymentRequest.dart';
 import '../model/all_available_drivers.dart';
@@ -281,7 +282,9 @@ class AddRequestProvider extends ChangeNotifier {
 
   accept_offer({Map<String, dynamic>? data, BuildContext? context}) {
     print('acceptOffer.....$data');
-    socket!.emit('acceptOffer', data);
+    // socket!.emit('acceptOffer', data);
+    AuthRepository.instance
+        .accept_offer(body: data);
     var snackBar = SnackBar(
       content: Text(
         'Offer Accepted',

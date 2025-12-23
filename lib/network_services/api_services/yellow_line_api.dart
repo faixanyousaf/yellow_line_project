@@ -67,6 +67,15 @@ class YellowLineAPI {
       rethrow;
     }
   }
+  Future<dynamic> accept_offer({required body}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.accept_offer;
+      return await _http.iPost_raw_data(url, data: body);
+    } catch (e) {
+      rethrow;
+    }
+  }
 
   Future<dynamic> cancel_ride({required body}) async {
     try {

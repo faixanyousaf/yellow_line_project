@@ -24,6 +24,7 @@ class ApiRoutes {
   static String checkduplicate = '${base_URL}user/checkduplicate';
   static String recoverytypes = '${base_URL}admin/recoverytypes';
   static String submit_review = '${base_URL}user/submit_review';
+  static String accept_offer = '${base_URL}user/accept_offer';
   static String update_user_profile = '${base_URL}authenticated/users/profile';
   static String update_user_profile_picture =
       '${base_URL}user/update/profile_picture';
