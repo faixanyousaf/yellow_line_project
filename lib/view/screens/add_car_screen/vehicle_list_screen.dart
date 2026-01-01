@@ -7,11 +7,13 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sizer/sizer.dart';
 import 'package:yellowline/view/screens/add_car_screen/vehicle_details.dart';
 import '../../../../../global_widgets/custom_button.dart';
+import '../../../global_widgets/cupertino_alert_dialog.dart';
 import '../../../global_widgets/data_loading.dart';
 import '../../../global_widgets/refresh_controller.dart';
 import '../../../helper/navigation/navigation_object.dart';
 import '../../../helper/navigation/router_path.dart';
 
+import '../../../network_services/repository/user_repository/user_repo.dart';
 import 'Providers/view_list_vehicle_provider.dart';
 
 class VehicleListScreen extends StatefulWidget {
@@ -123,6 +125,37 @@ class _BusinessVehicleListScreenState extends State<VehicleListScreen> {
                                       vehicle:
                                           viewAllVehicleModel.result![index],
                                     )));
+                          },
+                          onLongPress: (){
+                            show_cupertinoDialog(
+                                context: context,
+                                title: 'Delete'.tr,
+                                subtitle:
+                                'Are you sure you want to delete?'
+                                    .tr,
+                                no_subtitle: 'No',
+                                yes_title: "Yes",
+                                on_done: () {
+                                  Future.delayed(
+                                    Duration(
+                                        milliseconds:
+                                        100),
+                                        () {
+                                          UserRepository.instance
+                                          .delete_vehicle(
+                                          id: viewAllVehicleModel
+                                              .result![
+                                          index]
+                                              .id
+                                              .toString());
+                                      viewAllVehicleModel
+                                          .result!
+                                          .removeAt(
+                                          index);
+                                      setState(() {});
+                                    },
+                                  );
+                                });
                           },
                           child: Padding(
                             padding: EdgeInsets.symmetric(

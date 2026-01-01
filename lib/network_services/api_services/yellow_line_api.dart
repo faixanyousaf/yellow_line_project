@@ -227,6 +227,16 @@ class YellowLineAPI {
     }
   }
 
+  Future<dynamic> delete_vehicle({required id}) async {
+    try {
+      String url = '';
+      url = ApiRoutes.delete_vehicle + id;
+      return await _http.iDelete(url);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<dynamic> check_duplicate({required body}) async {
     try {
       String url = '';

@@ -15,12 +15,13 @@ class ApiRoutes {
   static String cancel_ride = '${base_URL}user/cancel_ride';
   static String delete_drivers = '${base_URL}driver/delete/';
   static String get_fare = '${base_URL}common/getFare';
-  static String myrequests_by_status = '${base_URL}user/myrequests_by_status';
+  static String myrequests_by_status = '${base_URL}user/myrequests';
   static String charge_user = '${base_URL}user/charge';
   static String update_charge_user = '${base_URL}user/update_payment_status';
   static String update_payment_status = '${base_URL}user/update_payment_status';
   static String update_location = '${base_URL}user/update_location';
   static String get_vehicle = '${base_URL}vehicle/user/list/';
+  static String delete_vehicle = '${base_URL}vehicle/delete/';
   static String checkduplicate = '${base_URL}user/checkduplicate';
   static String recoverytypes = '${base_URL}admin/recoverytypes';
   static String submit_review = '${base_URL}user/submit_review';

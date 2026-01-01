@@ -102,6 +102,19 @@ class UserRepository {
     }
   }
 
+  Future<dynamic> delete_vehicle({required id}) async {
+    try {
+      log('body......$id', name: 'get_vehicle | AuthRepository');
+      var data = await _saryaAPI.delete_vehicle(id: id);
+      log('data......$data', name: 'get_vehicle | AuthRepository');
+      return data;
+    } catch (e) {
+      log('catch error......${e.toString()}',
+          name: 'get_vehicle | AuthRepository');
+      rethrow;
+    }
+  }
+
   Future check_duplicate({required body}) async {
     try {
       log('body......$body', name: 'get_all_drivers | BusinessRepository');

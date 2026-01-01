@@ -39,6 +39,7 @@ class ViewRequestModel {
   dynamic companyLogo;
   dynamic createdAt;
   dynamic updatedAt;
+  dynamic total_amount;
 
   ViewRequestModel(
       {this.id,
@@ -80,6 +81,7 @@ class ViewRequestModel {
       this.createdAt,
       this.averageRating,
       this.rated,
+      this.total_amount,
       this.updatedAt});
 
   ViewRequestModel.fromJson(Map<String, dynamic> json) {
@@ -123,6 +125,7 @@ class ViewRequestModel {
     companyLogo = json['company_logo'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
+    total_amount = json['total_amount'];
   }
 
   Map<String, dynamic> toJson() {
@@ -167,6 +170,7 @@ class ViewRequestModel {
     data['company_logo'] = this.companyLogo;
     data['createdAt'] = this.createdAt;
     data['updatedAt'] = this.updatedAt;
+    data['total_amount'] = this.total_amount;
     return data;
   }
 }

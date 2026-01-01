@@ -35,7 +35,6 @@ import 'nearbby_search.dart';
 
 class DropOffScreen extends StatefulWidget {
   const DropOffScreen({Key? key}) : super(key: key);
-
   @override
   State<DropOffScreen> createState() => _DropOffScreenState();
 }
@@ -109,7 +108,8 @@ class _DropOffScreenState extends State<DropOffScreen> {
           apiKey: kGoogleApiKey,
           apiHeaders: await const GoogleApiHeaders().getHeaders());
     }
-    placesAutocompleteResponse = await places.autocomplete('$keyword');
+    placesAutocompleteResponse = await places.autocomplete('$keyword',
+        components: [Component(Component.country, "ae")]);
     setState(() {});
   }
 
@@ -282,6 +282,7 @@ class _DropOffScreenState extends State<DropOffScreen> {
   Timer? timer;
   @override
   void initState() {
+    print('call init');
     final now = DateTime.now();
     final hour = now.hour;
     if (hour >= 6 && hour < 18) {
@@ -902,6 +903,28 @@ class _DropOffScreenState extends State<DropOffScreen> {
                                 size: 25, color: Colors.grey)),
                       ),
                     )),
+                Positioned(
+                    top: 48.h,
+                    right: 3.w,
+                    child: InkWell(
+                      onTap: () async {
+                        final position = await requestLocation();
+                        await _controller!.animateCamera(
+                            CameraUpdate.newCameraPosition(CameraPosition(
+                          target: LatLng(position.latitude, position.longitude),
+                          zoom: 15.5,
+                        )));
+                      },
+                      child: Container(
+                        height: 6.h,
+                        width: 12.w,
+                        decoration: BoxDecoration(
+                            color: Color(0xffFFCC1B), shape: BoxShape.circle),
+                        child: Center(
+                            child: Icon(Icons.refresh,
+                                size: 25, color: Colors.black)),
+                      ),
+                    )),
                 // provider.totalFareModel != null
                 //     ? Positioned(
                 //         bottom: 0.h,
@@ -1190,6 +1213,28 @@ class _DropOffScreenState extends State<DropOffScreen> {
                                         ),
                                       )),
                           ),
+                          if (provider.totalFareModel != null)
+                          SizedBox(height: 10),
+                          if (provider.totalFareModel != null)
+                          SizedBox(width: 100.w,
+                            child: Row(mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                SizedBox(width: 8.w,),
+                                Text(
+                                    'Distance :  ${provider.totalFareModel?.data?.distance} KM',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold)),
+                                Text(
+                                    ' (${provider.totalFareModel?.data?.time})',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold)),
+                              ],
+                            ),
+                          ),
                           SizedBox(height: 10),
                           _buildInputField(
                             prefix: Text(
@@ -1202,76 +1247,79 @@ class _DropOffScreenState extends State<DropOffScreen> {
                             hint: provider.totalFareModel == null
                                 ? 'Your fare'
                                 : '',
-                            suffix: Icon(Icons.edit, color: Colors.white),
+                            suffix: null,
                           ),
                           SizedBox(height: 3.h),
-                          SizedBox(
-                            width: 100.w,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                if (pickup_latLng != null &&
-                                    dropoff_latLng != null) {
-                                  provider.find_driver_request(data: {
-                                    "amount": provider
-                                        .totalFareModel?.data?.totalCharges
-                                        .toString(),
-                                    "pick_up_lat":
-                                        pickup_latLng!.latitude.toString(),
-                                    "pick_up_long":
-                                        pickup_latLng!.longitude.toString(),
-                                    "drop_lat":
-                                        dropoff_latLng!.latitude.toString(),
-                                    "drop_long":
-                                        dropoff_latLng!.longitude.toString(),
-                                    "pickup_name": "${controller_pickup.text}",
-                                    "drop_name": "${controller_drop_off.text}",
-                                    "recovery_type": 2,
-                                    'time':
-                                        provider.totalFareModel?.data?.time ??
-                                            '0',
-                                    'distance': provider
-                                            .totalFareModel?.data?.distance ??
-                                        '0'
-                                  });
-                                  // int index_recovery = provider.recovery_type_model
-                                  //     .indexWhere((element) =>
-                                  //         element.typeName ==
-                                  //         provider.selected_recovery_type);
-                                  // provider.request_model = Request_Recovery_Model(
-                                  //     lat1: pickup_latLng!.latitude.toString(),
-                                  //     long1: pickup_latLng!.longitude.toString(),
-                                  //     lat2: dropoff_latLng!.latitude.toString(),
-                                  //     long2: dropoff_latLng!.longitude.toString(),
-                                  //     plateNumber: 858,
-                                  //     recoveryType: provider
-                                  //         .recovery_type_model[index_recovery].id);
-                                  // provider.calculate_fare();
-                                } else {
-                                  _showRouteModal(context);
-                                }
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: neonGreen,
-                                padding: EdgeInsets.symmetric(vertical: 16),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
+                          if (provider.totalFareModel != null)
+                            SizedBox(
+                              width: 100.w,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  if (pickup_latLng != null &&
+                                      dropoff_latLng != null) {
+                                    provider.find_driver_request(data: {
+                                      "amount": provider
+                                          .totalFareModel?.data?.totalCharges
+                                          .toString(),
+                                      "pick_up_lat":
+                                          pickup_latLng!.latitude.toString(),
+                                      "pick_up_long":
+                                          pickup_latLng!.longitude.toString(),
+                                      "drop_lat":
+                                          dropoff_latLng!.latitude.toString(),
+                                      "drop_long":
+                                          dropoff_latLng!.longitude.toString(),
+                                      "pickup_name":
+                                          "${controller_pickup.text}",
+                                      "drop_name":
+                                          "${controller_drop_off.text}",
+                                      "recovery_type": 2,
+                                      'time':
+                                          provider.totalFareModel?.data?.time ??
+                                              '0',
+                                      'distance': provider
+                                              .totalFareModel?.data?.distance ??
+                                          '0'
+                                    });
+                                    // int index_recovery = provider.recovery_type_model
+                                    //     .indexWhere((element) =>
+                                    //         element.typeName ==
+                                    //         provider.selected_recovery_type);
+                                    // provider.request_model = Request_Recovery_Model(
+                                    //     lat1: pickup_latLng!.latitude.toString(),
+                                    //     long1: pickup_latLng!.longitude.toString(),
+                                    //     lat2: dropoff_latLng!.latitude.toString(),
+                                    //     long2: dropoff_latLng!.longitude.toString(),
+                                    //     plateNumber: 858,
+                                    //     recoveryType: provider
+                                    //         .recovery_type_model[index_recovery].id);
+                                    // provider.calculate_fare();
+                                  } else {
+                                    _showRouteModal(context);
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: neonGreen,
+                                  padding: EdgeInsets.symmetric(vertical: 16),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Find a driver',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Find a driver',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
                             ),
-                          ),
                           SizedBox(
                             height: 6.h,
                           )
@@ -1991,7 +2039,8 @@ class _DropOffScreenState extends State<DropOffScreen> {
             color: Color(0xffFFCC1B).withOpacity(0.5),
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [

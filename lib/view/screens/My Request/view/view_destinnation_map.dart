@@ -258,7 +258,7 @@ class _ViewDestinationMapState extends State<ViewDestinationMap> {
       panelcontroller.animatePanelToPosition(1,
           duration: Duration(milliseconds: 600));
     });
-    connect_web_socket();
+    // connect_web_socket();
     super.initState();
   }
 

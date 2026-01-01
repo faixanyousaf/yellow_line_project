@@ -357,7 +357,7 @@ class AddRequestProvider extends ChangeNotifier {
 
   close_all_function() {
     print('call dispose');
-    socket!.dispose();
+    // socket!.disconnect();
     if (timer != null) {
       timer!.cancel();
     }

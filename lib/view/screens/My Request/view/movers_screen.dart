@@ -101,7 +101,7 @@ class _MoversScreenState extends State<MoversScreen> {
                                             fontWeight: FontWeight.w500,
                                             color: Colors.white)),
                                     Text(
-                                        'ID: ${provider.viewRequestModel[index].id} | AED${provider.viewRequestModel[index].amount}',
+                                        'ID: ${provider.viewRequestModel[index].id} | AED${provider.viewRequestModel[index].total_amount}',
                                         style: TextStyle(
                                             fontSize: 10.sp,
                                             color: Color(0xff13F01C))),
@@ -139,48 +139,48 @@ class _MoversScreenState extends State<MoversScreen> {
                                       ],
                                     ),
                                     SizedBox(
-                                      height: 1.3.h,
+                                      height: 1.h,
                                     ),
-                                    if (widget.status == 4 &&
-                                        provider.viewRequestModel[index]
-                                                .rated !=
-                                            'true')
-                                      Center(
-                                        child: InkWell(
-                                          onTap: () {
-                                            Rating_dialog(
-                                                context: context,
-                                                no_call: () {},
-                                                done_call: (v) {
-                                                  provider.rate_driver(body: {
-                                                    "driver_id": provider
-                                                        .viewRequestModel[index]
-                                                        .driverId,
-                                                    "request_id": provider
-                                                        .viewRequestModel[index]
-                                                        .id,
-                                                    "rating": v
-                                                  }, status: widget.status);
-                                                });
-                                          },
-                                          child: Container(
-                                            height: 3.h,
-                                            width: 20.w,
-                                            decoration: BoxDecoration(
-                                                color: Color(0xffFFCC1B),
-                                                borderRadius:
-                                                    BorderRadius.circular(30)),
-                                            child: Center(
-                                              child: Text(
-                                                'Add Rating',
-                                                style: TextStyle(
-                                                    fontSize: 10,
-                                                    color: Colors.black),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
+                                    // if (widget.status == 4 &&
+                                    //     provider.viewRequestModel[index]
+                                    //             .rated !=
+                                    //         'true')
+                                    //   Center(
+                                    //     child: InkWell(
+                                    //       onTap: () {
+                                    //         Rating_dialog(
+                                    //             context: context,
+                                    //             no_call: () {},
+                                    //             done_call: (v) {
+                                    //               provider.rate_driver(body: {
+                                    //                 "driver_id": provider
+                                    //                     .viewRequestModel[index]
+                                    //                     .driverId,
+                                    //                 "request_id": provider
+                                    //                     .viewRequestModel[index]
+                                    //                     .id,
+                                    //                 "rating": v
+                                    //               }, status: widget.status);
+                                    //             });
+                                    //       },
+                                    //       child: Container(
+                                    //         height: 3.h,
+                                    //         width: 20.w,
+                                    //         decoration: BoxDecoration(
+                                    //             color: Color(0xffFFCC1B),
+                                    //             borderRadius:
+                                    //                 BorderRadius.circular(30)),
+                                    //         child: Center(
+                                    //           child: Text(
+                                    //             'Add Rating',
+                                    //             style: TextStyle(
+                                    //                 fontSize: 10,
+                                    //                 color: Colors.black),
+                                    //           ),
+                                    //         ),
+                                    //       ),
+                                    //     ),
+                                    //   ),
                                     if (widget.status == 4 &&
                                         provider.viewRequestModel[index]
                                                 .rated ==
